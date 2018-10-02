@@ -30,9 +30,9 @@ public class ControllerBenutzerWindow {
 	
 	
 	public void handleSpeichern() {
-		String benutzer = fieldBenutzer.getText();
-		String passwort = fieldPasswort.getText();
-		String gruppe = fieldGruppe.getText();
+		String benutzer = fieldBenutzer.getText().toString();
+		String passwort = fieldPasswort.getText().toString();
+		String gruppe = fieldGruppe.getText().toString();
 		int berechtigung =  (int) choiceBoxBerechtigung.getSelectionModel().getSelectedItem();
 		
 		try {
