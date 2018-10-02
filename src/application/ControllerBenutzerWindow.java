@@ -13,15 +13,20 @@ public class ControllerBenutzerWindow {
 	
 	ObservableList<Integer> choiceBoxBerechtigungListe = FXCollections.observableArrayList(0,1,2);
 	
+	ObservableList<String> choiceBoxGruppeListe = FXCollections.observableArrayList("IT","Consulting (nicht benutzen)",
+			"BobDerBaumeister (nicht benutzen)");
+	
 	@FXML private javafx.scene.control.Button cancelButton;
 	
 	//View
 	@FXML public TextField fieldBenutzer;
 	@FXML public TextField fieldPasswort;
-	@FXML public TextField fieldGruppe;
+	@FXML public ChoiceBox choiceBoxGruppe;
 	@FXML public ChoiceBox choiceBoxBerechtigung;
 	
 	public void initialize() {
+		choiceBoxGruppe.setValue("IT");
+		choiceBoxGruppe.setItems(choiceBoxGruppeListe);
 		choiceBoxBerechtigung.setValue(0);
 		choiceBoxBerechtigung.setItems(choiceBoxBerechtigungListe);
 		
@@ -32,8 +37,10 @@ public class ControllerBenutzerWindow {
 	public void handleSpeichern() {
 		String benutzer = fieldBenutzer.getText().toString();
 		String passwort = fieldPasswort.getText().toString();
-		String gruppe = fieldGruppe.getText().toString();
+		String gruppe = (String) choiceBoxGruppe.getSelectionModel().getSelectedItem();
 		int berechtigung =  (int) choiceBoxBerechtigung.getSelectionModel().getSelectedItem();
+		
+		System.out.println(gruppe);
 		
 		try {
 			Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
