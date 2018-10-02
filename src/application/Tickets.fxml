@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerTickets">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="656.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab fx:id="Gruppentickets" text="Gruppentickets">
+               <content>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="656.0">
+                     <children>
+                        <TableView fx:id="tvGruppentickets" prefHeight="480.0" prefWidth="656.0">
+                           <columns>
+                              <TableColumn fx:id="select_ColGr" prefWidth="107.0" text="Select" />
+                              <TableColumn fx:id="auftragsID_ColGr" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
+                              <TableColumn fx:id="titel_ColGr" minWidth="0.0" prefWidth="290.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColGr" minWidth="0.0" prefWidth="150.0" text="Fertigstellung" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="BtnBearbeiten" layoutX="442.0" layoutY="496.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBtnBearbeiten" prefHeight="40.0" prefWidth="200.0" text="bearbeiten" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="TicketsPrüfen" text="Tickets prüfen">
+               <content>
+                  <AnchorPane prefHeight="550.0" prefWidth="656.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="656.0">
+                           <children>
+                              <Button fx:id="BtnPrüfen" layoutX="442.0" layoutY="496.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBtnPrüfen" prefHeight="40.0" prefWidth="200.0" text="prüfen" />
+                           </children>
+                        </AnchorPane>
+                        <TableView fx:id="tvTicketsPrüfen" prefHeight="480.0" prefWidth="656.0">
+                           <columns>
+                              <TableColumn fx:id="select_ColP" prefWidth="107.0" text="Select" />
+                              <TableColumn fx:id="auftragsID_ColP" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
+                              <TableColumn fx:id="titel_ColP" minWidth="0.0" prefWidth="290.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColP" minWidth="0.0" prefWidth="150.0" text="Fertigstellung" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="eigeneTickets" text="eigene Tickets">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvTicketsGenehmigen11" prefHeight="550.0" prefWidth="656.0">
+                           <columns>
+                              <TableColumn fx:id="select_ColET" prefWidth="107.0" text="Select" />
+                              <TableColumn fx:id="auftragsID_ColET" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
+                              <TableColumn fx:id="titel_ColET" minWidth="0.0" prefWidth="290.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColET" minWidth="0.0" prefWidth="150.0" text="Fertigstellung" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="abgeschlosseneTickets" text="abgeschlossene Tickets">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvTicketsGenehmigen12" prefHeight="550.0" prefWidth="656.0">
+                           <columns>
+                              <TableColumn fx:id="select_ColAT" prefWidth="107.0" text="Select" />
+                              <TableColumn fx:id="auftragsID_ColAT" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
+                              <TableColumn fx:id="titel_ColAT" minWidth="0.0" prefWidth="290.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColAT" minWidth="0.0" prefWidth="150.0" text="Fertigstellung" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="TicketsGenehmigen" text="Tickets genehmigen">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="656.0">
+                           <children>
+                              <TableView fx:id="tvTicketsGenehmigen" prefHeight="480.0" prefWidth="656.0">
+                                 <columns>
+                                    <TableColumn fx:id="select_ColGe" prefWidth="107.0" text="Select" />
+                                    <TableColumn fx:id="auftragsID_ColGe" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
+                                    <TableColumn fx:id="titel_ColGe" minWidth="0.0" prefWidth="290.0" text="Titel" />
+                                    <TableColumn fx:id="datum_ColGe" minWidth="0.0" prefWidth="150.0" text="Fertigstellung" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="BtnGenehmigen" layoutX="442.0" layoutY="496.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBtnGenehmigen" prefHeight="40.0" prefWidth="200.0" text="genehmigen" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="AlleTickets" text="Alle Tickets">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvTicketsGenehmigen1" prefHeight="550.0" prefWidth="656.0">
+                           <columns>
+                              <TableColumn fx:id="select_ColA" prefWidth="107.0" text="Select" />
+                              <TableColumn fx:id="auftragsID_ColA" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
+                              <TableColumn fx:id="titel_ColA" minWidth="0.0" prefWidth="290.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColA" minWidth="0.0" prefWidth="150.0" text="Fertigstellung" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

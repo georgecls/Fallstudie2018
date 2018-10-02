@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerMain">
+   <left>
+      <AnchorPane prefHeight="600.0" prefWidth="231.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutY="91.0" prefHeight="600.0" prefWidth="231.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="600.0" prefWidth="20.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                  <VBox alignment="CENTER" prefHeight="600.0" prefWidth="210.0" style="-fx-background-color: grey;">
+                     <children>
+                        <VBox prefHeight="243.0" prefWidth="210.0" />
+                        <Button fx:id="neuesTicket" mnemonicParsing="false" onAction="#handleNeuesTicket" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Neues Ticket">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="tickets" mnemonicParsing="false" onAction="#handleTickets" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Tickets">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="auswertung" mnemonicParsing="false" onAction="#handleAuswertung" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Auswertung">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                        <VBox alignment="BOTTOM_LEFT" prefHeight="209.0" prefWidth="210.0">
+                           <children>
+                              <Button fx:id="benutzerverwaltung" mnemonicParsing="false" onAction="#handleBenutzerverwaltung" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Benutzerverwaltung">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="abmelden" mnemonicParsing="false" onAction="#handleAbmelden" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Abmelden">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="656.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

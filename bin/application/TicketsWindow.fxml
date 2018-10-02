@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerTicketsWindow">
+   <children>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="660.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="656.0">
+               <children>
+                  <Label prefWidth="150.0" text="Auftrags-ID:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fieldTicketart1" editable="false" prefWidth="300.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="656.0">
+               <children>
+                  <Label prefWidth="150.0" text="Ticketart:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fieldTicketart" editable="false" prefWidth="300.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="656.0">
+               <children>
+                  <Label prefWidth="150.0" text="Ersteller:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fieldErsteller" editable="false" prefWidth="300.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
+               <children>
+                  <Label prefWidth="150.0" text="Erstelldatum:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="fieldErstelldatum" editable="false" prefHeight="30.0" prefWidth="300.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
+               <children>
+                  <Label prefWidth="150.0" text="Zieldatum:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="fieldZieldatum" editable="false" prefHeight="30.0" prefWidth="300.0" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="656.0">
+               <children>
+                  <Label prefWidth="150.0" text="Text:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="fieldText" editable="false" prefHeight="100.0" prefWidth="300.0" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="656.0">
+               <children>
+                  <Label prefWidth="150.0" text="Kommentar:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="fieldText1" prefHeight="100.0" prefWidth="300.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="30.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <Button fx:id="speichern" alignment="TOP_LEFT" mnemonicParsing="false" text="Speichern">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="cancelButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleCancel" text="Cancel">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

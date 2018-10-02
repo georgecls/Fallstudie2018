@@ -1,0 +1,94 @@
+package application;
+
+import java.io.IOException;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+public class ControllerMain {
+	
+	//View
+	@FXML private AnchorPane rootPane;
+	
+	
+	public Main main;
+	public AnchorPane pane;
+	
+	public void setMain(Main main) {
+		this.main = main;
+	}
+		
+	@FXML
+	public void handleNeuesTicket() {
+		try {
+			rootPane.getChildren().remove(pane);
+			pane = FXMLLoader.load(getClass().getResource("NeuesTicket.fxml"));
+			rootPane.getChildren().add(pane);
+						
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void handleTickets() {
+		try {
+			rootPane.getChildren().remove(pane);
+			pane = FXMLLoader.load(getClass().getResource("Tickets.fxml"));
+			rootPane.getChildren().add(pane);
+			
+			
+//			Parent root;
+//			Stage window = new Stage();
+//			Scene scene;
+//			root = FXMLLoader.load(getClass().getResource("ticket1234.fxml"));
+//			scene = new Scene(root);
+//			window.setScene(scene);
+//			window.show();
+									
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void handleAuswertung() {
+		try {
+			rootPane.getChildren().remove(pane);
+			pane = FXMLLoader.load(getClass().getResource("Auswertung.fxml"));
+			rootPane.getChildren().add(pane);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@FXML
+	public void handleBenutzerverwaltung() {
+		try {
+			rootPane.getChildren().remove(pane);
+			pane = FXMLLoader.load(getClass().getResource("Benutzerverwaltung.fxml"));
+			rootPane.getChildren().add(pane);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@FXML
+	public void handleAbmelden() {
+		main.primaryStage.close();
+		main.primaryStage.setHeight(0);
+		main.primaryStage.setWidth(0);
+		main.loginWindow();
+	}
+
+}
