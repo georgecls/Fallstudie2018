@@ -109,9 +109,9 @@ public class Benutzer {
 	{
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
-		String ps = "INSERT INTO benutzer "
-				+ "(benutzername, passwort, blevel, ag_fk) " + "VALUES " + "('" + benutzer 
-				+ "', '" + passwort + "', '" + berechtigung + "','" + gruppe +"', '" + "')";
+		String ps = "INSERT INTO benutzer"
+				+ "(benutzername, passwort, blevel, ag_fk) VALUES ('" + benutzer 
+				+ "', '" + passwort + "', '" + berechtigung + "','" + gruppe +"')";
 		db.insert(ps);
 	}
 	
