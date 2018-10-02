@@ -1,5 +1,25 @@
 package application;
 
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+
 import java.sql.*;
 import java.util.Date;
 
@@ -132,7 +152,7 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public static ResultSet getAntraegeByErsteller(String ersteller) throws SQLException
+	public static ResultSet getAntraegeByErsteller(Benutzer ersteller) throws SQLException
 	{
 		
 		MysqlCon db = new MysqlCon();
@@ -142,6 +162,26 @@ public class Antrag {
 	}
 	
 
+	public static ObservableList getAntraege() {
+	    ObservableList data = FXCollections.observableArrayList();
+	    try {
+	    	MysqlCon db = new MysqlCon();
+			db.getDbCon();
+			ResultSet rs = db.query("SELECT * FROM antrag");
+	        while(rs.next()) {
+
+	            data.add(new Antrag(rs.getInt("idantrag")));
+	        }
+
+	    } catch(SQLException e) {
+	        System.out.println(e);
+	    }
+
+	    return data;
+	}
+	
+	
+	
 	
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "bearbeiter" stellt den Antragsersteller des auszugebenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.

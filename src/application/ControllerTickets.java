@@ -56,19 +56,11 @@ public class ControllerTickets implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
     	
     	//Daten kommen aus BackEnd - Klasse Antrag
-    	//    	
-/*    	ResultSet rs = Antrag.getAntraegeByErsteller(ersteller); //ersteller = angemeldeter Nutzer
+    	//    
+    	Benutzer ersteller;
+    	ResultSet rs;
     	
-    	while (rs.next()) {
-            ObservableList row = FXCollections.observableArrayList();
-
-            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                row.add(rs.getString(i));
-                System.out.println(row);
-            }
-            
-        data.add(rs);
-    */
+    	data = Antrag.getAntraege();
     	
 		//Verknüpfen der Daten mit den Spalten
 		//In die Klammer immer den Variablennamen der Auftrag-Klasse!!		
@@ -106,6 +98,8 @@ public class ControllerTickets implements Initializable{
 //		tvTicketsPrüfen.setItems(data);
 //		tvTicketsGenehmigen.setItems(data);
 //		tvAlleTickets.setItems(data);
+    	
+    	
 	}
     
     	
