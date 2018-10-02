@@ -41,9 +41,7 @@ public class ControllerBenutzerWindow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(berechtigung);
-		
+				
 	}
 	
 	public void handleCancel() {
