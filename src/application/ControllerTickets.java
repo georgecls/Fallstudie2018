@@ -56,7 +56,7 @@ public class ControllerTickets implements Initializable{
     	
     	//Daten kommen aus BackEnd - Klasse Antrag
     	//    
-    	String benutzername = ControllerLogin.Benutzer;
+    	String benutzername = ControllerLogin.user;
 
     	try {
 			data_EigT = Antrag.getAntraegeByBenutzer(benutzername);
