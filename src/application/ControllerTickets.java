@@ -64,7 +64,7 @@ public class ControllerTickets implements Initializable{
     	});
 	
 //    	select_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
+		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
 

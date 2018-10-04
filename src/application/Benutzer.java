@@ -174,7 +174,7 @@ public class Benutzer {
 		{	
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
-			this.gruppe = (Gruppe)rs.getObject("gruppe");
+			this.gruppe = (String)rs.getObject("gruppe");
 
 		}
 		return this;
