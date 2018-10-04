@@ -1,5 +1,7 @@
 package application;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,8 +15,8 @@ public class ControllerLogin {
 	@FXML public Label labelFehler;
 	
 	//Hiermit kann in in anderen Fenstern die Visibility gesetzt werden
-	public static String Benutzer;
-	public int Berechtigung;
+	public static String user;
+	public static int Berechtigung;
 	
 	public boolean berechtigt;
 	
@@ -32,10 +34,15 @@ public class ControllerLogin {
 		
 		berechtigt = Benutzer.anmelden(benutzerName, benutzerKennwort);
 		System.out.println(berechtigt);
-		//Int admin = login.istadmin (benutzerName);
-		
+		/*try {
+			int admin = Benutzer.berechtigungPrüfen(benutzerName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 		if (berechtigt == true) {
-			Benutzer = benutzerName;
+			user = benutzerName;
 			main.primaryStage.close();
 			main.primaryStage.setHeight(0);
 			main.primaryStage.setWidth(0);

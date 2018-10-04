@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,17 +71,16 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public void insertAntrag() throws SQLException
-	{
+	public void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text) throws SQLException
+	{	
+		antragzaehler = antragzaehler + 1;
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		String ps = "INSERT INTO antrag "
 				+ "(idantrag, titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-				+ "VALUES "+ "('"+this.getAntragid()+"', '"+this.getName()+"', '"+this.getBeschreibung()+"','"+this.getFertigstellungsdatum()+"', '"
-		 		+this.getAntragsdatum()+"', '"+this.getStatus()+"', '"+this.getAblehnungsgrund()+"', '"+this.getAnmerkung()+"', '"+this.getErsteller()+"', '"
-		 		+this.getBearbeiter()+"', '"+this.getErstGruppe()+"', '"+this.getBearbeiterGruppe()+"')";
+				+ "VALUES "+ "('"+this.antragzaehler+"', '"+name+"', '"+text+"','"+zieldatum+"', '"
+		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', 'NULL', '"+this.getErstGruppe()+"', '')";
 		db.insert(ps);
-		
 	}
 	
 	/**Methode, um einen Antrag in der DB zu überschreiben bzw. zu korrigieren. Der Übergabewert "id" stellt die AntragsID des zu korrigierenden Antrags dar.
