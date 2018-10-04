@@ -30,17 +30,14 @@ public class ControllerNeuesTicket {
 		//get Methoden
 		String ticketart = fieldTicketart.getText();
 		String ersteller = fieldErsteller.getText();
-		Date date = java.util.Calendar.getInstance().getTime();
-		SimpleDateFormat dateFormatter = 
-		          new SimpleDateFormat("yyyy-MM-dd");
-		String dateString = dateFormatter.format(date);
+		LocalDate erstelldatum = fieldErstelldatum.getValue();
 		LocalDate zieldatum = fieldZieldatum.getValue();
 		String beschreibung = fieldText.getText();
 		
 		//transfer Methoden
 		System.out.println(ticketart);
 		System.out.println(ersteller);
-		System.out.println(dateString);
+		System.out.println(erstelldatum);
 		System.out.println(zieldatum);
 		System.out.println(beschreibung);
 	}
