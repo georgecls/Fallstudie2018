@@ -159,7 +159,7 @@ public class Antrag {
 	    try {
 	    	MysqlCon db = new MysqlCon();
 	    	db.getDbCon();
-	    	ResultSet rs = db.query("select idantrag, name, fertigstellungsdatum from antrag WHERE ersteller='"+ benutzer +"'");
+	    	ResultSet rs = db.query("select idantrag, titel, fertigstellungsdatum from antrag WHERE ersteller_fk='"+ benutzer +"'");
 	    	while(rs.next()) {
 	    		
 	    		data.add(new Antrag(rs.getInt("idantrag")));
@@ -172,11 +172,11 @@ public class Antrag {
 	
 
 	public static ObservableList getAntraege() {
-	    ObservableList data = FXCollections.observableArrayList();
+	    ObservableList<Antrag> data = FXCollections.observableArrayList();
 	    try {
 	    	MysqlCon db = new MysqlCon();
 			db.getDbCon();
-			ResultSet rs = db.query("SELECT idantrag, name, fertigstellungsdatum FROM antrag");
+			ResultSet rs = db.query("SELECT idantrag, titel, fertigstellungsdatum FROM antrag");
 	        while(rs.next()) {
 
 	            data.add(new Antrag(rs.getInt("idantrag")));
