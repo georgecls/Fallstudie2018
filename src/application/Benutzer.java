@@ -9,8 +9,8 @@ import javafx.collections.ObservableList;
 public class Benutzer {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
-	private static String benutzername;
-	private static String passwort;
+	private String benutzername;
+	private String passwort;
 	private int berechtigung;
 	private String gruppe;
 	
@@ -97,19 +97,19 @@ public class Benutzer {
 	    }
 	 
 	 
-	 public static int berechtigungPrüfen(String benN) throws SQLException{
-	        benutzername = benN;
-	        
-	        MysqlCon db = new MysqlCon();
-	        db.getDbCon();
-	        ResultSet rs = db.query("select blevel from benutzer WHERE benutzername ='"+benN);
-	        this.berechtigung = (Integer) rs.getObject("blevel");
-	        if(anmelden==true){
-	            return berechtigung;
-	        } else {
-	            return (Integer) null;
-	        }
-	    }
+//	 public static int berechtigungPrüfen(String benN) throws SQLException{
+//	        benutzername = benN;
+//	        
+//	        MysqlCon db = new MysqlCon();
+//	        db.getDbCon();
+//	        ResultSet rs = db.query("select blevel from benutzer WHERE benutzername ='"+benN);
+//	        this.berechtigung = (Integer) rs.getObject("blevel");
+//	        if(anmelden==true){
+//	            return berechtigung;
+//	        } else {
+//	            return (Integer) null;
+//	        }
+//	    }
 
 
 	
@@ -184,7 +184,7 @@ public class Benutzer {
 	// Methode um TableView Benutzerverwaltung zu befüllen
 	public static ObservableList getBenutzerverwaltung() throws SQLException {
 		
-	    ObservableList data = FXCollections.observableArrayList();
+	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
@@ -193,6 +193,7 @@ public class Benutzer {
 		{
 			data.add(new Benutzer(rs.getString("benutzername")));
 		}
+		
 		return data;
 	}
 	
@@ -201,7 +202,7 @@ public class Benutzer {
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		ResultSet rs = db.query("select * from benutzer WHERE benutzername='"+ BName +"'");
-		if(rs.first())
+		if(rs.next())
 		{
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");

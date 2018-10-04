@@ -41,7 +41,6 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 				
 		data.forEach((benutzer) -> {
 			Benutzer b1 = (Benutzer) benutzer;
-			System.out.println(b1.getBenutzername());
 		});
 				
 //		select_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("select"));
