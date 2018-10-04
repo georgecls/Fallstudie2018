@@ -59,7 +59,7 @@ public class ControllerTickets implements Initializable{
     	String benutzername = ControllerLogin.Benutzer;
 
     	try {
-			data_EigT = Antrag.getAntraegeByErsteller(benutzername);
+			data_EigT = Antrag.getAntraegeByBenutzer(benutzername);
 //	    	data_gr = Antrag.;
 //  	  	data_prüfen = Antrag.;
 //	    	data_AbgT = Antrag.;

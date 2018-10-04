@@ -152,14 +152,14 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public static ObservableList getAntraegeByErsteller(String ersteller) throws SQLException
+	public static ObservableList getAntraegeByBenutzer(String benutzer) throws SQLException
 	{
 		//Was macht denn rs.getInt("idantrag")?
 	    ObservableList data = FXCollections.observableArrayList();
 	    try {
 	    	MysqlCon db = new MysqlCon();
 	    	db.getDbCon();
-	    	ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ ersteller +"'");
+	    	ResultSet rs = db.query("select idantrag, name, fertigstellungsdatum from antrag WHERE ersteller='"+ benutzer +"'");
 	    	while(rs.next()) {
 	    		
 	    		data.add(new Antrag(rs.getInt("idantrag")));
@@ -176,7 +176,7 @@ public class Antrag {
 	    try {
 	    	MysqlCon db = new MysqlCon();
 			db.getDbCon();
-			ResultSet rs = db.query("SELECT * FROM antrag");
+			ResultSet rs = db.query("SELECT idantrag, name, fertigstellungsdatum FROM antrag");
 	        while(rs.next()) {
 
 	            data.add(new Antrag(rs.getInt("idantrag")));
@@ -189,23 +189,6 @@ public class Antrag {
 	    return data;
 	}
 	
-	
-	
-	
-	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "bearbeiter" stellt den Antragsersteller des auszugebenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 *  
-	 * @throws SQLException
-	 */
-	public static ResultSet getAntragByBearbeiter(String bearbeiter) throws SQLException
-	{
-		
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ bearbeiter +"'");
-		return rs;
-	}
 	
 	
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "status" stellt den Antragsersteller des auszugebenden Antrags dar.
