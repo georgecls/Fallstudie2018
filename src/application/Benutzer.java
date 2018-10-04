@@ -200,7 +200,7 @@ public class Benutzer {
 	{
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE idantrag='"+ BName +"'");
+		ResultSet rs = db.query("select * from benutzer WHERE benutzername='"+ BName +"'");
 		if(rs.first())
 		{
 			this.benutzername = rs.getString("benutzername");
