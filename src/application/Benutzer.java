@@ -12,7 +12,7 @@ public class Benutzer {
 	private static String benutzername;
 	private static String passwort;
 	private int berechtigung;
-	private Gruppe gruppe;
+	private String gruppe;
 	
 	
 	private static boolean anmelden;
@@ -36,11 +36,11 @@ public class Benutzer {
 
 	
 
-	public Benutzer(String int1) {
+/*	public Benutzer(String int1) {
 		this.benutzername="admin";
 		this.passwort="pw123";
 	}
-
+*/
 
 	/*public BenutzerMethode(String pBenutzer, String pPasswort) throws SQLException
 	{
@@ -174,7 +174,7 @@ public class Benutzer {
 		{	
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
-			this.gruppe = (Gruppe) rs.getObject("gruppe");
+			this.gruppe = rs.getString("gruppe");
 
 		}
 		return this;
@@ -205,8 +205,8 @@ public class Benutzer {
 		{
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
-			this.gruppe = (Gruppe)rs.getObject("gruppe");
-			this.berechtigung = rs.getInt("berechtigung");		    
+			this.gruppe = rs.getString("ag_fk");
+			this.berechtigung = rs.getInt("blevel");		    
 		}
 		
 		return this;

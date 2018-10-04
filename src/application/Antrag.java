@@ -152,7 +152,6 @@ public class Antrag {
 	 */
 	public static ObservableList getAntraegeByBenutzer(String benutzer) throws SQLException
 	{
-		//Was macht denn rs.getInt("idantrag")?
 	    ObservableList data = FXCollections.observableArrayList();
 	    try {
 	    	MysqlCon db = new MysqlCon();

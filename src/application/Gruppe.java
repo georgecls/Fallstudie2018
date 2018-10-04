@@ -2,7 +2,7 @@ package application;
 
 public class Gruppe {
 
-	public Gruppe()
+	public Gruppe(String string)
 	{
 		
 	}
