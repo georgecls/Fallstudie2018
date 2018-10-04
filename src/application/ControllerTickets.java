@@ -60,11 +60,13 @@ public class ControllerTickets implements Initializable{
 
     	try {
 			data_EigT = Antrag.getAntraegeByBenutzer(benutzername);
+			System.out.println(data_EigT);
 //	    	data_gr = Antrag.;
 //  	  	data_prüfen = Antrag.;
 //	    	data_AbgT = Antrag.;
 //	 	   	data_genehmigen = Antrag.;
 			data_AlleT = Antrag.getAntraege();
+			System.out.println(data_AlleT);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
