@@ -1,6 +1,10 @@
 package application;
 
 import java.sql.*;
+import java.util.Observable;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Benutzer {
 	
@@ -24,6 +28,12 @@ public class Benutzer {
 	{
 		
 	}
+	
+	public Benutzer(String BName) throws SQLException
+	{
+		this.getAntragByBenutzername(BName);
+	}
+
 	
 
 	/*public BenutzerMethode(String pBenutzer, String pPasswort) throws SQLException
@@ -162,10 +172,39 @@ public class Benutzer {
 
 		}
 		return this;
-		
-		
+			
 	}
 	
+	// Methode um TableView Benutzerverwaltung zu befüllen
+	public static ObservableList getBenutzerverwaltung() throws SQLException {
+		
+	    ObservableList data = FXCollections.observableArrayList();
+
+		MysqlCon db = new MysqlCon();
+		db.getDbCon();
+		ResultSet rs = db.query("select * from benutzer");
+		while(rs.next())
+		{
+			data.add(new Benutzer(rs.getString("benutzername")));
+		}
+		return data;
+	}
+	
+	public Benutzer getAntragByBenutzername(String BName) throws SQLException
+	{
+		MysqlCon db = new MysqlCon();
+		db.getDbCon();
+		ResultSet rs = db.query("select * from antrag WHERE idantrag='"+ BName +"'");
+		if(rs.first())
+		{
+			this.benutzername = rs.getString("benutzername");
+			this.passwort = rs.getString("passwort");
+			this.gruppe = (Gruppe)rs.getObject("gruppe");
+			this.berechtigung = rs.getInt("berechtigung");		    
+		}
+		
+		return this;
+	}
 	
 	
 	/** ***************************************************************************************************************************************************
