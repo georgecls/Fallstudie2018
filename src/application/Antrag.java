@@ -170,11 +170,12 @@ public class Antrag {
 	
 
 	public static ObservableList getAntraege() {
-	    ObservableList data = FXCollections.observableArrayList();
+	    ObservableList<Antrag> data = FXCollections.observableArrayList();
 	    try {
 	    	MysqlCon db = new MysqlCon();
 			db.getDbCon();
 			ResultSet rs = db.query("SELECT * FROM antrag");
+
 	        while(rs.next()) {
 
 	            data.add(new Antrag(rs.getInt("idantrag")));

@@ -43,7 +43,7 @@ public class ControllerTickets implements Initializable{
 
 	@FXML private Button btnBearbeiten, btnPrüfen, btnGenehmigen;
 	
-    private ObservableList data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
+    private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
 	
 	public Main main;
     public void setMain(Main main) {
