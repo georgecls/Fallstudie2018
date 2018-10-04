@@ -53,9 +53,7 @@ public class ControllerTickets implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	
-    	//Daten kommen aus BackEnd - Klasse Antrag
-    	//    
+    	    
 //    	String benutzername = ControllerLogin.user;
     	data_AlleT = Antrag.getAntraege();
 
@@ -66,11 +64,11 @@ public class ControllerTickets implements Initializable{
     	});
 	
 //    	select_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
-		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
+		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
+		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
 
-		tvGruppentickets.setItems(data_AlleT);
+		tvAlleTickets.setItems(data_AlleT);
 
 	}
     
