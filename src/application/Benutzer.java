@@ -174,7 +174,7 @@ public class Benutzer {
 		{	
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
-			this.gruppe = rs.getString("gruppe");
+			this.gruppe = (Gruppe)rs.getObject("gruppe");
 
 		}
 		return this;
@@ -235,10 +235,10 @@ public class Benutzer {
 	public void setPasswort(int berechtigung) {
 		this.berechtigung = berechtigung;
 	}
-	public Gruppe getGruppe() {
+	public String getGruppe() {
 		return gruppe;
 	}
-	public void setGruppe(Gruppe gruppe) {
+	public void setGruppe(String gruppe) {
 		this.gruppe = gruppe;
 	}
 	
