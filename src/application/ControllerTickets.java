@@ -56,61 +56,22 @@ public class ControllerTickets implements Initializable{
     	
     	//Daten kommen aus BackEnd - Klasse Antrag
     	//    
-    	String benutzername = ControllerLogin.user;
+//    	String benutzername = ControllerLogin.user;
+    	data_AlleT = Antrag.getAntraege();
 
-    	try {
-			data_EigT = Antrag.getAntraegeByBenutzer(benutzername);
-			System.out.println(data_EigT);
-//	    	data_gr = Antrag.;
-//  	  	data_prüfen = Antrag.;
-//	    	data_AbgT = Antrag.;
-//	 	   	data_genehmigen = Antrag.;
-			data_AlleT = Antrag.getAntraege();
-			System.out.println(data_AlleT);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	data_AlleT.forEach((antrag) -> { 
 
-    	
-		//Verknüpfen der Daten mit den Spalten
-		//In die Klammer immer den Variablennamen der Auftrag-Klasse!!		
-    	
-    	select_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		select_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		select_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		select_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		select_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		select_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-
-		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("auftragsID"));	
-		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("auftragsID"));	
-		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("auftragsID"));	
-		auftragsID_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("auftragsID"));
-		auftragsID_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("auftragsID"));
-		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("auftragsID"));
-		
-		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("titel"));
-		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("titel"));
-		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("titel"));
-		titel_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("titel"));
-		titel_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("titel"));
-		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("titel"));
-
+        	Antrag a1 = (Antrag) antrag;
+    	    System.out.println(a1.getName());
+    	});
+	
+//    	select_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
+		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
+		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
-		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
-		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
-		datum_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
-		datum_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
-		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
 
-		//Daten zu Tabelle hinzufügen - per ObservableList
-		tvGruppentickets.setItems(data_gr);
-		tvTicketsPrüfen.setItems(data_prüfen);
-		tvTicketsGenehmigen.setItems(data_genehmigen);
-		tvAlleTickets.setItems(data_AlleT);
-		tvEigeneTickets.setItems(data_EigT);
-		tvAbgTickets.setItems(data_AbgT);
+		tvGruppentickets.setItems(data_AlleT);
+
 	}
     
     	

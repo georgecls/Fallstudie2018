@@ -18,7 +18,7 @@ public class ControllerLogin {
 	public static String user;
 	public static int Berechtigung;
 	
-	public boolean berechtigt;
+	public boolean berechtigt = false;
 	
 	
 	public Main main;

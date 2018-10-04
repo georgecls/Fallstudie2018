@@ -1,14 +1,44 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class ControllerBenutzerverwaltung {
+public class ControllerBenutzerverwaltung  implements Initializable {
 	
+	@FXML private TableView<Benutzer> tvBenutzerverwaltung;
+	
+	@FXML private TableColumn<Benutzer, String> select_Col;
+	@FXML private TableColumn<Benutzer, String> benutzer_Col;
+	@FXML private TableColumn<Benutzer, String> passwort_Col;
+	@FXML private TableColumn<Benutzer, String> gruppe_Col;
+	@FXML private TableColumn<Benutzer, String> berechtigung_Col;
+	
+	private ObservableList<Benutzer> data;
+	
+	@Override
+	public void initialize (URL url, ResourceBundle rb){
+		
+		select_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("select"));
+		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
+		passwort_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("passwort"));
+		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppe"));
+		berechtigung_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("berechtigung"));
+		
+		tvBenutzerverwaltung.setItems(data);
+		
+	}
 	
 	
 	
