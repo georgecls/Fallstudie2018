@@ -81,7 +81,7 @@ public class Benutzer {
 	    }
 	 
 	 
-	 public int berechtigungPrüfen(String benN) throws SQLException{
+	 public static int berechtigungPrüfen(String benN) throws SQLException{
 	        benutzername = benN;
 	        
 	        MysqlCon db = new MysqlCon();
