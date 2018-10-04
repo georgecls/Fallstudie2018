@@ -135,10 +135,8 @@ public class Antrag {
 			this.status = rs.getString("status");
 			this.ablehnungsgrund = rs.getString("ablehnungsgrund");
 			this.anmerkung = rs.getString("anmerkung");
-			this.ersteller = (Benutzer) rs.getObject("ersteller_fk");
+			this.ersteller = new Benutzer(rs.getString("ersteller_fk"));
 			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-			this.erstGruppe = (Gruppe) rs.getObject("ag_ersteller_fk");
-			this.bearGruppe = (Gruppe) rs.getObject("ag_bearbeiter_fk");
 		    
 		}
 		
@@ -159,7 +157,7 @@ public class Antrag {
 	    try {
 	    	MysqlCon db = new MysqlCon();
 	    	db.getDbCon();
-	    	ResultSet rs = db.query("select idantrag, name, fertigstellungsdatum from antrag WHERE ersteller='"+ benutzer +"'");
+	    	ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ benutzer +"'");
 	    	while(rs.next()) {
 	    		
 	    		data.add(new Antrag(rs.getInt("idantrag")));
@@ -176,7 +174,7 @@ public class Antrag {
 	    try {
 	    	MysqlCon db = new MysqlCon();
 			db.getDbCon();
-			ResultSet rs = db.query("SELECT idantrag, name, fertigstellungsdatum FROM antrag");
+			ResultSet rs = db.query("SELECT * FROM antrag");
 	        while(rs.next()) {
 
 	            data.add(new Antrag(rs.getInt("idantrag")));

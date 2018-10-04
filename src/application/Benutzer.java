@@ -26,6 +26,12 @@ public class Benutzer {
 	}
 	
 
+	public Benutzer(String int1) {
+		this.benutzername="admin";
+		this.passwort="pw123";
+	}
+
+
 	/*public BenutzerMethode(String pBenutzer, String pPasswort) throws SQLException
 	{
 		this.getBenutzerByBenutzerAndPassword(pBenutzer,pPasswort);
