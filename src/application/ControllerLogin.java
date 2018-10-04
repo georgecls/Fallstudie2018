@@ -12,6 +12,10 @@ public class ControllerLogin {
 	@FXML public TextField fieldKennwort;
 	@FXML public Label labelFehler;
 	
+	//Hiermit kann in in anderen Fenstern die Visibility gesetzt werden
+	public String Benutzer;
+	public int Berechtigung;
+	
 	public boolean berechtigt;
 	
 	
@@ -31,26 +35,17 @@ public class ControllerLogin {
 		//Int admin = login.istadmin (benutzerName);
 		
 		if (berechtigt == true) {
+			Benutzer = benutzerName;
 			main.primaryStage.close();
 			main.primaryStage.setHeight(0);
 			main.primaryStage.setWidth(0);
 			main.mainWindow();
 		} else {
-			labelFehler.setText("Benutzer oder Passwort falsch");
+			labelFehler.setText("Benutzer/Passwort falsch");
 		}
 		
 //		if (admin = 1){
 		
-	/*
-		if ((benutzerName.equals("Wolfgang")) && (benutzerKennwort.equals("1234"))
-				|| (benutzerName.equals("Nicolassi")) && (benutzerKennwort.equals("4711"))) {
-			main.primaryStage.close();
-			main.primaryStage.setHeight(0);
-			main.primaryStage.setWidth(0);
-			main.mainWindow();
-		} else {
-			labelFehler.setText("Falsch");
-		}*/
 		
 	}
 
