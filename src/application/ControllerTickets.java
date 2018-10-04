@@ -1,6 +1,7 @@
 package application;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,12 +14,16 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ControllerTickets implements Initializable{
 	
@@ -72,20 +77,44 @@ public class ControllerTickets implements Initializable{
 
 	}
     
-    	
+    	//neue FXML - abwandlung von "TicketsWindow.fxml"
     	public void handleBtnBearbeiten()
     	{
-    		//neue Scene öffnen mit Bearbeiten-Fenster
+    		
     	}
     	
+    	//Button umbenennen in GUI - FXML anpassen
     	public void handleBtnPrüfen()
     	{
-    		//neue Scene öffnen mit Prüfen-Fenster
+    		try {
+        		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TicketsWindow.fxml"));
+        		Parent root1 = (Parent) fxmlLoader.load();
+        		Stage stage = new Stage();
+        		stage.setScene(new Scene(root1));
+        		stage.show();
+        		
+    			} 
+        		catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}    	
     	}
     	
+    	//Button wieder umbenennen + Kommentar füllen - neue FXML - abwandlung von "TicketsWindow.fxml"
     	public void handleBtnGenehmigen()
     	{
-    		//neue Scene öffnen mit Genehmigen-Fenster
+    		try {
+        		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TicketsWindow.fxml"));
+        		Parent root1 = (Parent) fxmlLoader.load();
+        		Stage stage = new Stage();
+        		stage.setScene(new Scene(root1));
+        		stage.show();
+        		
+    			} 
+        		catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				e.printStackTrace();
+    			}    	    
     	}
     
 }
