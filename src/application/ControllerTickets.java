@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +64,6 @@ public class ControllerTickets implements Initializable{
     	data_AlleT = Antrag.getAntraege();
 
     	data_AlleT.forEach((antrag) -> { 
-
         	Antrag a1 = (Antrag) antrag;
     	    System.out.println(a1.getName());
     	});
@@ -73,7 +73,12 @@ public class ControllerTickets implements Initializable{
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
 
-		tvAlleTickets.setItems(data_AlleT);
+		tvGruppentickets.setItems(data_AlleT); 
+		
+
+		select_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		tvTicketsPrüfen.setItems(data_AlleT);
+		
 
 	}
     
