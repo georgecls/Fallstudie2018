@@ -15,17 +15,14 @@ public class ControllerNeuesTicket {
 	//View
 	@FXML public TextField fieldTicketart;
 	@FXML public Label fieldErsteller;
-	@FXML public Label fieldErstelldatum;
+	@FXML public DatePicker fieldErstelldatum;
 	@FXML public DatePicker fieldZieldatum;
 	@FXML public TextArea fieldText;
 	
+	
 	public void initialize() {
 		fieldErsteller.setText("Wolfgang");
-		Date date = java.util.Calendar.getInstance().getTime();
-		SimpleDateFormat dateFormatter = 
-		          new SimpleDateFormat("dd.MM.yyyy");
-		String dateString = dateFormatter.format(date);
-		fieldErstelldatum.setText(dateString);
+		fieldErstelldatum.setValue(LocalDate.now());
 	}
 	
 	@FXML

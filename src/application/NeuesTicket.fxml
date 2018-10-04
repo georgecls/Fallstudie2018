@@ -45,11 +45,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fieldErstelldatum" prefHeight="30.0" prefWidth="300.0" style="-fx-border-color: black;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
+                  <DatePicker fx:id="fieldErstelldatum" disable="true" editable="false" prefHeight="30.0" prefWidth="300.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
