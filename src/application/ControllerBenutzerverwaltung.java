@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
@@ -30,7 +31,20 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
 		
-		select_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("select"));
+		
+		try {
+			data = Benutzer.getBenutzerverwaltung();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		data.forEach((benutzer) -> {
+			Benutzer b1 = (Benutzer) benutzer;
+			System.out.println(b1.getBenutzername());
+		});
+				
+//		select_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("select"));
 		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
 		passwort_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("passwort"));
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppe"));
