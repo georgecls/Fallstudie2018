@@ -26,6 +26,8 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableView<Antrag> tvTicketsPrüfen;
 	@FXML private TableView<Antrag> tvTicketsGenehmigen;
 	@FXML private TableView<Antrag> tvAlleTickets;
+	@FXML private TableView<Antrag> tvAbgTickets;
+	@FXML private TableView<Antrag> tvEigeneTickets;
 	
 	@FXML private Tab Gruppentickets;
 	@FXML private Tab TicketsPrüfen;
@@ -35,16 +37,13 @@ public class ControllerTickets implements Initializable{
 	@FXML private Tab AlleTickets;
 	
 	@FXML private TableColumn<Antrag, String> select_ColGr, select_ColP, select_ColGe, select_ColA, select_ColET, select_ColAT;
-
 	@FXML private TableColumn<Antrag, String> auftragsID_ColGr,auftragsID_ColP, auftragsID_ColGe, auftragsID_ColA, auftragsID_ColET, auftragsID_ColAT;
-
 	@FXML private TableColumn<Antrag, String> titel_ColGr, titel_ColP, titel_ColGe, titel_ColA, titel_ColET, titel_ColAT;
-
 	@FXML private TableColumn<Antrag, String> datum_ColGr, datum_ColP, datum_ColGe, datum_ColA, datum_ColET, datum_ColAT;
 
 	@FXML private Button btnBearbeiten, btnPrüfen, btnGenehmigen;
 	
-    private ObservableList data;
+    private ObservableList data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
 	
 	public Main main;
     public void setMain(Main main) {
@@ -57,10 +56,20 @@ public class ControllerTickets implements Initializable{
     	
     	//Daten kommen aus BackEnd - Klasse Antrag
     	//    
-    	Benutzer ersteller;
-    	ResultSet rs;
-    	
-    	data = Antrag.getAntraege();
+    	String benutzername = ControllerLogin.Benutzer;
+
+    	try {
+			data_EigT = Antrag.getAntraegeByErsteller(benutzername);
+//	    	data_gr = Antrag.;
+//  	  	data_prüfen = Antrag.;
+//	    	data_AbgT = Antrag.;
+//	 	   	data_genehmigen = Antrag.;
+			data_AlleT = Antrag.getAntraege();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     	
 		//Verknüpfen der Daten mit den Spalten
 		//In die Klammer immer den Variablennamen der Auftrag-Klasse!!		
@@ -94,12 +103,12 @@ public class ControllerTickets implements Initializable{
 		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
 
 		//Daten zu Tabelle hinzufügen - per ObservableList
-		tvGruppentickets.setItems(data);
-//		tvTicketsPrüfen.setItems(data);
-//		tvTicketsGenehmigen.setItems(data);
-//		tvAlleTickets.setItems(data);
-    	
-    	
+		tvGruppentickets.setItems(data_gr);
+		tvTicketsPrüfen.setItems(data_prüfen);
+		tvTicketsGenehmigen.setItems(data_genehmigen);
+		tvAlleTickets.setItems(data_AlleT);
+		tvEigeneTickets.setItems(data_EigT);
+		tvAbgTickets.setItems(data_AbgT);
 	}
     
     	

@@ -51,7 +51,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tvTicketsGenehmigen11" prefHeight="550.0" prefWidth="656.0">
+                        <TableView fx:id="tvEigeneTickets" prefHeight="550.0" prefWidth="656.0">
                            <columns>
                               <TableColumn fx:id="select_ColET" prefWidth="107.0" text="Select" />
                               <TableColumn fx:id="auftragsID_ColET" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
@@ -67,7 +67,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tvTicketsGenehmigen12" prefHeight="550.0" prefWidth="656.0">
+                        <TableView fx:id="tvAbgTickets" prefHeight="550.0" prefWidth="656.0">
                            <columns>
                               <TableColumn fx:id="select_ColAT" prefWidth="107.0" text="Select" />
                               <TableColumn fx:id="auftragsID_ColAT" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />

@@ -152,13 +152,22 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public static ResultSet getAntraegeByErsteller(Benutzer ersteller) throws SQLException
+	public static ObservableList getAntraegeByErsteller(String ersteller) throws SQLException
 	{
-		
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ ersteller +"'");
-		return rs;
+		//Was macht denn rs.getInt("idantrag")?
+	    ObservableList data = FXCollections.observableArrayList();
+	    try {
+	    	MysqlCon db = new MysqlCon();
+	    	db.getDbCon();
+	    	ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ ersteller +"'");
+	    	while(rs.next()) {
+	    		
+	    		data.add(new Antrag(rs.getInt("idantrag")));
+	    	}
+	    } catch(SQLException e) {
+	    	System.out.println(e);
+	    }
+	    	return data;
 	}
 	
 
@@ -196,7 +205,6 @@ public class Antrag {
 		db.getDbCon();
 		ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ bearbeiter +"'");
 		return rs;
-		
 	}
 	
 	

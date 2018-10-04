@@ -13,7 +13,7 @@ public class ControllerLogin {
 	@FXML public Label labelFehler;
 	
 	//Hiermit kann in in anderen Fenstern die Visibility gesetzt werden
-	public String Benutzer;
+	public static String Benutzer;
 	public int Berechtigung;
 	
 	public boolean berechtigt;
