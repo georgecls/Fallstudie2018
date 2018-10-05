@@ -9,14 +9,17 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ControllerBenutzerWindow {
+public class ControllerBenutzerWindowHinzufuegen {
 	
 	ObservableList<Integer> choiceBoxBerechtigungListe = FXCollections.observableArrayList(0,1,2);
 	
-	ObservableList<String> choiceBoxGruppeListe = FXCollections.observableArrayList("IT","Consulting (nicht benutzen)",
-			"BobDerBaumeister (nicht benutzen)");
+	ObservableList<String> choiceBoxGruppeListe = FXCollections.observableArrayList
+			("Controlling","Finanzen","Geschäftsführung","Hausverwaltung","IT","Kundenberatung",
+					"Marketingabteilung","Materialwirtschaft","Personalabteilung","Rechnungswesen",
+					"Rechtsabteilung","Vertrieb");
 	
 	@FXML private javafx.scene.control.Button cancelButton;
+	@FXML private javafx.scene.control.Button speichern;
 	
 	//View
 	@FXML public TextField fieldBenutzer;
@@ -25,7 +28,7 @@ public class ControllerBenutzerWindow {
 	@FXML public ChoiceBox choiceBoxBerechtigung;
 	
 	public void initialize() {
-		choiceBoxGruppe.setValue("IT");
+		choiceBoxGruppe.setValue("Controlling");
 		choiceBoxGruppe.setItems(choiceBoxGruppeListe);
 		choiceBoxBerechtigung.setValue(0);
 		choiceBoxBerechtigung.setItems(choiceBoxBerechtigungListe);
@@ -40,10 +43,10 @@ public class ControllerBenutzerWindow {
 		String gruppe = (String) choiceBoxGruppe.getSelectionModel().getSelectedItem();
 		int berechtigung =  (int) choiceBoxBerechtigung.getSelectionModel().getSelectedItem();
 		
-		System.out.println(gruppe);
-		
 		try {
 			Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
+			Stage stage = (Stage) speichern.getScene().getWindow();
+			stage.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

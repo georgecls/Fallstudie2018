@@ -57,7 +57,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	public void handleHinzufügen() {
 		try {
-    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BenutzerWindow.fxml"));
+    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BenutzerWindowHinzufuegen.fxml"));
     		Parent root1 = (Parent) fxmlLoader.load();
     		Stage stage = new Stage();
     		stage.setScene(new Scene(root1));
@@ -70,5 +70,23 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			}
 	}
 	
+	public void handleBearbeiten() {
+		//Auswahl der zu bearbeitenden Spalte
+		//Übergabe der bereits vorhandenen Dateien
+		
+		try {
+    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BenutzerWindowBearbeiten.fxml"));
+    		Parent root1 = (Parent) fxmlLoader.load();
+    		Stage stage = new Stage();
+    		stage.setScene(new Scene(root1));
+    		stage.show();
+    		
+			} 
+    		catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
 
 }
