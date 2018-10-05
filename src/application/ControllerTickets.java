@@ -59,25 +59,92 @@ public class ControllerTickets implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	    
-//    	String benutzername = ControllerLogin.user;
-    	data_AlleT = Antrag.getAntraege();
+    	    	
+    	
+    	try {
+			data_EigT = Antrag.getAntraegeByBenutzer("Admin");
+			data_prüfen = Antrag.getAntraegebyStatus("erstellt",ControllerLogin.user);//noch die falsche Methode, da der ersteller seine eigenen Tickets nicht prüfen darf
+			data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
+			data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
+    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
+			data_AlleT = Antrag.getAntraege();
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	data_prüfen.forEach((antrag) -> {
+    		Antrag a1 = (Antrag) antrag;
+    		System.out.println(a1.getName());
+    	}); 
+    	
+    	data_AbgT.forEach((antrag) -> {
+    		Antrag a1 = (Antrag) antrag;
+    		System.out.println(a1.getName());
+    	}); 
+    	
+    	data_EigT.forEach((antrag) -> {
+    		Antrag a1 = (Antrag) antrag;
+    		System.out.println(a1.getName());
+    	}); 
+    	
+    	data_gr.forEach((antrag) -> {
+    		Antrag a1 = (Antrag) antrag;
+    		System.out.println(a1.getName());
+    	});    	
+    	
     	data_AlleT.forEach((antrag) -> { 
         	Antrag a1 = (Antrag) antrag;
     	    System.out.println(a1.getName());
     	});
+    	
+    	data_genehmigen.forEach((antrag) -> {
+    		Antrag a1 = (Antrag) antrag;
+    		System.out.println(a1.getName());
+    	}); 
 	
+    	
 //    	select_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
+		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
+		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));    	
+    	
+//		select_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
+		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
+		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		
+//		select_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
+		auftragsID_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		titel_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
+		datum_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		
+//		select_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
+		auftragsID_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		titel_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
+		datum_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		
+//		select_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
+		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
+		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+    	
+//    	select_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
 		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
-
-		tvGruppentickets.setItems(data_AlleT); 
 		
+		
+		tvGruppentickets.setItems(data_gr);
+		tvTicketsPrüfen.setItems(data_prüfen);
+		tvTicketsGenehmigen.setItems(data_genehmigen);
+		tvAbgTickets.setItems(data_AbgT);
+		tvEigeneTickets.setItems(data_EigT);
+		tvAlleTickets.setItems(data_AlleT);
 
-		select_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
-		tvTicketsPrüfen.setItems(data_AlleT);
+//		select_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		
 		
 
 	}

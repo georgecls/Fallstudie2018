@@ -119,7 +119,15 @@ public class Antrag {
 		
 	}
 	
-	
+	/**Methode zieht sich Antrag mit im Parameter angegebener ID.
+	 *Zuerst wird die Datenbankverbindung hergestellt.
+	 *Im ResultSet wird der ausgeführte SELECT gespeichert. 
+	 *in der IF-Abfrage werden die Daten in die jeweiligen Variablen gespeichert und zurückgegeben. 
+	 * @param pID
+	 * @return
+	 * @throws SQLException
+	 * #Robin
+	 */
 	public Antrag getAntragById(int pID) throws SQLException
 	{
 		MysqlCon db = new MysqlCon();
@@ -156,7 +164,7 @@ public class Antrag {
 	    try {
 	    	MysqlCon db = new MysqlCon();
 	    	db.getDbCon();
-	    	ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ benutzer +"'");
+	    	ResultSet rs = db.query("select * from antrag WHERE ersteller_fk='"+ benutzer +"'");
 	    	while(rs.next()) {
 	    		
 	    		data.add(new Antrag(rs.getInt("idantrag")));
@@ -167,7 +175,14 @@ public class Antrag {
 	    	return data;
 	}
 	
-
+/**Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
+ *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
+ *Anschließend wird die Datenbankverbindung hergestellt.
+ *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
+ *Diese Daten sind in ObservableList data gespeichert.
+ *#Robin
+ * @return
+ */
 	public static ObservableList getAntraege() {
 	    ObservableList<Antrag> data = FXCollections.observableArrayList();
 	    try {
@@ -194,12 +209,14 @@ public class Antrag {
 	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
 	 *  
 	 * @throws SQLException
+	 * 
+	 * Ich vermute, dass die Methode nicht mehr benötigt wird, da die Methode getAntraegeByStatus diese ersetzt #Robin
 	 */
 	public ResultSet getAntragByStatus(String status) throws SQLException
 	{
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE status='"+ status +"'");
+		ResultSet rs = db.query("select * from antrag WHERE status='"+ status+"'");
 		while(rs.next())
 		{
 			this.antragid = rs.getInt("idantrag");
@@ -212,12 +229,41 @@ public class Antrag {
 		return rs;
 	}
 	
-	
+	/**Methode um alle bestehenden Anräge abhängig vom Status abzufragen.
+	 *Der Eingabewert "status" stellt den Status (erstellt, geprüft, genehmigt, erledigt, abgelehnt) der auszugebenden Anträge dar.
+	 *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
+	 *Anschließend wird die Datenbankverbindung hergestellt.
+	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
+	 *Diese Daten sind in ObservableList data gespeichert. 
+	 *#Robin
+	 * @return
+	 */
+	public static ObservableList getAntraegebyStatus(String status, String benutzername) {
+	    ObservableList<Antrag> data = FXCollections.observableArrayList();
+	    try {
+	    	MysqlCon db = new MysqlCon();
+			db.getDbCon();
+			ResultSet rs = db.query("SELECT * FROM antrag where status='"+status+
+					"' and ag_ersteller_fk=(SELECT ag_fk from benutzer where benutzername='"+benutzername+"'");
+
+	        while(rs.next()) {
+
+	            data.add(new Antrag(rs.getInt("idantrag")));
+	        }
+
+	    } catch(SQLException e) {
+	        System.out.println(e);
+	    }
+
+	    return data;
+	}	
+	    
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "arbeitsgruppe" stellt den Antragsersteller des auszugebenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
 	 *  
 	 * @throws SQLException
+	 * Methode wird vermutlich nicht mehr benötigt, da die Methode getAntraegebyStatus dies inne hat #Robin
 	 */
 	public static ResultSet getAntragByBaergruppe(String arbeitsgruppe) throws SQLException
 	{
@@ -234,6 +280,7 @@ public class Antrag {
 	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
 	 *  
 	 * @throws SQLException
+	 * Vermutlich sinnfreie Methode, da keine Umsetzung in GUI #Robin
 	 */
 	public static Antrag getAntragbyDatum (Date fertigstellungsdatum) throws SQLException
 	{
