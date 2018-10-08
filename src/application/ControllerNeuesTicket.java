@@ -14,7 +14,7 @@ public class ControllerNeuesTicket {
 	
 	//View
 	@FXML public TextField fieldTicketart;
-	@FXML public Label fieldErsteller;
+	@FXML public TextField fieldErsteller;
 	@FXML public DatePicker fieldErstelldatum;
 	@FXML public DatePicker fieldZieldatum;
 	@FXML public TextArea fieldText;
