@@ -235,6 +235,9 @@ public class Antrag {
 	 *Anschließend wird die Datenbankverbindung hergestellt.
 	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
 	 *Diese Daten sind in ObservableList data gespeichert. 
+	 *
+	 *
+	 *SQL Befehl muss überarbeitet werden - wirdft sql Fehler aus!
 	 *#Robin
 	 * @return
 	 */
