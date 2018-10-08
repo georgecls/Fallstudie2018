@@ -16,7 +16,7 @@ public class ControllerLogin {
 	
 	//Hiermit kann in in anderen Fenstern die Visibility gesetzt werden
 	public static String user;
-	public static int Berechtigung;
+	public static int berechtigung;
 	
 	public boolean berechtigt = false;
 	
@@ -34,13 +34,14 @@ public class ControllerLogin {
 		
 		berechtigt = Benutzer.anmelden(benutzerName, benutzerKennwort);
 		System.out.println(berechtigt);
-		/*try {
-			int admin = Benutzer.berechtigungPrüfen(benutzerName);
+		try {
+			berechtigung = Benutzer.berechtigungPrüfen(benutzerName);
+			System.out.println(berechtigung);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		if (berechtigt == true) {
 			user = benutzerName;
 			main.primaryStage.close();
@@ -50,9 +51,6 @@ public class ControllerLogin {
 		} else {
 			labelFehler.setText("Benutzer/Passwort falsch");
 		}
-		
-//		if (admin = 1){
-		
 		
 	}
 
