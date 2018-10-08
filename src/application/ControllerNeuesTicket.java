@@ -21,7 +21,7 @@ public class ControllerNeuesTicket {
 	
 	
 	public void initialize() {
-		fieldErsteller.setText("Wolfgang");
+		fieldErsteller.setText(ControllerLogin.user);
 		fieldErstelldatum.setValue(LocalDate.now());
 	}
 	
