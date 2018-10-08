@@ -9,11 +9,13 @@ import javafx.collections.ObservableList;
 public class Benutzer {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
-	private static String benutzername;
+	private String benutzername;
 	private String passwort;
-	private static int berechtigung;
+	private int berechtigung;
 	private String gruppe;
 	
+	private static String bnPrüfen;
+	private static int bPrüfen;
 	
 	private static boolean anmelden;
 	
@@ -72,8 +74,6 @@ public class Benutzer {
 	        	db.getDbCon();
 	        	ResultSet rsN;
 	        	ResultSet rsP;
-	        	
-	        	
 				rsP = db.query("select passwort from benutzer WHERE benutzername ='"+benN+"'");
 	        	
 	        	while(rsP.next())
@@ -92,24 +92,24 @@ public class Benutzer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        System.out.println(anmelden);
 			return anmelden;
 	    }
 	 
 	 
 	 public static int berechtigungPrüfen(String benN) throws SQLException{
-	        benutzername = benN;
+	        bnPrüfen = benN;
 	        
 	        MysqlCon db = new MysqlCon();
 	        db.getDbCon();
-//	        Before Start of Resultset "Exception"
 	        ResultSet rs = db.query("select blevel from benutzer WHERE benutzername ='"+benN+"'");
-	        berechtigung = (Integer) rs.getInt("blevel");
-	        if(anmelden==true){
-	            return berechtigung;
-	        } else {
-	            return 0;
-	        }        
+	        if(rs.first()){
+	        	bPrüfen = (Integer) rs.getInt("blevel");
+	        }
+	         if(anmelden==true){
+		            return bPrüfen;
+		     } else {
+		            return 0;
+		     }    
 	    }
 
 

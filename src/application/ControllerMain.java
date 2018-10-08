@@ -27,12 +27,12 @@ public class ControllerMain implements Initializable {
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
 		
-//		if (ControllerLogin.berechtigung == 2) {
-//			btnBenutzerverwaltung.setVisible(true);
-//		}else {
-//			btnBenutzerverwaltung.setVisible(false);
-//		}
-//	
+		if (ControllerLogin.berechtigung == 2) {
+			btnBenutzerverwaltung.setVisible(true);
+		}else {
+			btnBenutzerverwaltung.setVisible(false);
+		}
+	
 		}
 		
 	public void setMain(Main main) {
