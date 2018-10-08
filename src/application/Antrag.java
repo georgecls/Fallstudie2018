@@ -246,12 +246,19 @@ public class Antrag {
 	    try {
 	    	MysqlCon db = new MysqlCon();
 			db.getDbCon();
-			ResultSet rs = db.query("SELECT * FROM antrag join benutzer on antrag.ersteller_fk = benutzer.benutzername where antrag.status='"+status+"' and antrag.ag_ersteller_fk = benutzer.ag_fk and benutzer.benutzername = '"+benutzername+"'");
+			ResultSet bk = db.query("SELECT * FROM benutzer WHERE benutzername='"+ benutzername +"'");
+			while(bk.next())
+			{
+			String ag = bk.getString("ag_fk");
+			ResultSet rs = db.query("SELECT * FROM antrag WHERE ag_ersteller_fk = '"+ ag +"'");
 
 	        while(rs.next()) {
 
 	            data.add(new Antrag(rs.getInt("idantrag")));
 	        }
+	        
+			}
+			
 
 	    } catch(SQLException e) {
 	        System.out.println(e);

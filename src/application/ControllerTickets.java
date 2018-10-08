@@ -57,29 +57,31 @@ public class ControllerTickets implements Initializable{
         this.main = main;
     }
     
-    @Override
+    @SuppressWarnings("restriction")
+	@Override
     public void initialize(URL url, ResourceBundle rb) {
-    	    	
     	
-    	try {
-			data_EigT = Antrag.getAntraegeByBenutzer("Admin");
-			data_prüfen = Antrag.getAntraegebyStatus("erstellt",ControllerLogin.user);//noch die falsche Methode, da der ersteller seine eigenen Tickets nicht prüfen darf
-			data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
-			data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
-    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
-			data_AlleT = Antrag.getAntraege();
+			try {
+				data_EigT = Antrag.getAntraegeByBenutzer(ControllerLogin.user);
+//				data_prüfen = Antrag.getAntraegebyStatus("erstellt",ControllerLogin.user);//noch die falsche Methode, da der ersteller seine eigenen Tickets nicht prüfen darf
+				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
+				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
+	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
+				data_AlleT = Antrag.getAntraege();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+    
     	
-    	data_prüfen.forEach((antrag) -> {
-    		Antrag a1 = (Antrag) antrag;
-    		System.out.println(a1.getName());
-    	}); 
-    	
-    	data_AbgT.forEach((antrag) -> {
+//    	data_prüfen.forEach((antrag) -> {
+//    		Antrag a1 = (Antrag) antrag;
+//    		System.out.println(a1.getName());
+//    	}); 
+//    	
+			data_AbgT.forEach((antrag) -> {
     		Antrag a2 = (Antrag) antrag;
     		System.out.println(a2.getName());
     	}); 
@@ -106,38 +108,38 @@ public class ControllerTickets implements Initializable{
 	
     	
 //    	select_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));    	
+		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));    	
     	
 //		select_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		
 //		select_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		auftragsID_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		datum_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		
 //		select_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		auftragsID_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		datum_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		
 //		select_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
     	
 //    	select_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
-		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
+		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("datum"));
+		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		
 		
 		tvGruppentickets.setItems(data_gr);
-		tvTicketsPrüfen.setItems(data_prüfen);
+//		tvTicketsPrüfen.setItems(data_prüfen);
 		tvTicketsGenehmigen.setItems(data_genehmigen);
 		tvAbgTickets.setItems(data_AbgT);
 		tvEigeneTickets.setItems(data_EigT);
