@@ -80,28 +80,28 @@ public class ControllerTickets implements Initializable{
     	}); 
     	
     	data_AbgT.forEach((antrag) -> {
-    		Antrag a1 = (Antrag) antrag;
-    		System.out.println(a1.getName());
+    		Antrag a2 = (Antrag) antrag;
+    		System.out.println(a2.getName());
     	}); 
     	
     	data_EigT.forEach((antrag) -> {
-    		Antrag a1 = (Antrag) antrag;
-    		System.out.println(a1.getName());
+    		Antrag a3 = (Antrag) antrag;
+    		System.out.println(a3.getName());
     	}); 
     	
     	data_gr.forEach((antrag) -> {
-    		Antrag a1 = (Antrag) antrag;
-    		System.out.println(a1.getName());
+    		Antrag a4 = (Antrag) antrag;
+    		System.out.println(a4.getName());
     	});    	
     	
     	data_AlleT.forEach((antrag) -> { 
-        	Antrag a1 = (Antrag) antrag;
-    	    System.out.println(a1.getName());
+        	Antrag a5 = (Antrag) antrag;
+    	    System.out.println(a5.getName());
     	});
     	
     	data_genehmigen.forEach((antrag) -> {
-    		Antrag a1 = (Antrag) antrag;
-    		System.out.println(a1.getName());
+    		Antrag a6 = (Antrag) antrag;
+    		System.out.println(a6.getName());
     	}); 
 	
     	
@@ -142,9 +142,6 @@ public class ControllerTickets implements Initializable{
 		tvAbgTickets.setItems(data_AbgT);
 		tvEigeneTickets.setItems(data_EigT);
 		tvAlleTickets.setItems(data_AlleT);
-
-//		select_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("idantrag"));	
-		
 		
 
 	}
