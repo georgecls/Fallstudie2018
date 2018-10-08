@@ -9,9 +9,9 @@ import javafx.collections.ObservableList;
 public class Benutzer {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
-	private static String benutzername;
+	private String benutzername;
 	private String passwort;
-	private static int berechtigung;
+	private int berechtigung;
 	private String gruppe;
 	
 	
@@ -97,7 +97,7 @@ public class Benutzer {
 	    }
 	 
 	 
-	 public static int berechtigungPrüfen(String benN) throws SQLException{
+	 public int berechtigungPrüfen(String benN) throws SQLException{
 	        benutzername = benN;
 	        
 	        MysqlCon db = new MysqlCon();

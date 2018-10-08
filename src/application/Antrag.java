@@ -237,7 +237,7 @@ public class Antrag {
 	 *Diese Daten sind in ObservableList data gespeichert. 
 	 *
 	 *
-	 *SQL Befehl muss überarbeitet werden - wirdft sql Fehler aus!
+	 *SQL Befehl muss überarbeitet werden - wirft sql Fehler aus!
 	 *#Robin
 	 * @return
 	 */
@@ -246,8 +246,7 @@ public class Antrag {
 	    try {
 	    	MysqlCon db = new MysqlCon();
 			db.getDbCon();
-			ResultSet rs = db.query("SELECT * FROM antrag where status='"+status+
-					"' and ag_ersteller_fk=(SELECT ag_fk from benutzer where benutzername='"+benutzername+"'");
+			ResultSet rs = db.query("SELECT * FROM antrag join benutzer on antrag.ersteller_fk = benutzer.benutzername where antrag.status='"+status+"' and antrag.ag_ersteller_fk = benutzer.ag_fk and benutzer.benutzername = '"+benutzername+"'");
 
 	        while(rs.next()) {
 
