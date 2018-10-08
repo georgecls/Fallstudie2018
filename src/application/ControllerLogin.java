@@ -33,10 +33,9 @@ public class ControllerLogin {
 		String benutzerKennwort = fieldKennwort.getText();
 		
 		berechtigt = Benutzer.anmelden(benutzerName, benutzerKennwort);
-		System.out.println(berechtigt);
+		
 		try {
 			berechtigung = Benutzer.berechtigungPrüfen(benutzerName);
-			System.out.println(berechtigung);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

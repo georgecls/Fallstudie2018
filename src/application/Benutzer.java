@@ -14,6 +14,8 @@ public class Benutzer {
 	private int berechtigung;
 	private String gruppe;
 	
+	private static String bnPrüfen;
+	private static int bPrüfen;
 	
 	private static boolean anmelden;
 	
@@ -72,8 +74,6 @@ public class Benutzer {
 	        	db.getDbCon();
 	        	ResultSet rsN;
 	        	ResultSet rsP;
-	        	
-	        	
 				rsP = db.query("select passwort from benutzer WHERE benutzername ='"+benN+"'");
 	        	
 	        	while(rsP.next())
@@ -92,24 +92,29 @@ public class Benutzer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        System.out.println(anmelden);
 			return anmelden;
 	    }
 	 
 	 
+<<<<<<< HEAD
 	 public int berechtigungPrüfen(String benN) throws SQLException{
 	        benutzername = benN;
+=======
+	 public static int berechtigungPrüfen(String benN) throws SQLException{
+	        bnPrüfen = benN;
+>>>>>>> de10b542b1ae93223548f91d2535a121975e0fa5
 	        
 	        MysqlCon db = new MysqlCon();
 	        db.getDbCon();
-//	        Before Start of Resultset "Exception"
 	        ResultSet rs = db.query("select blevel from benutzer WHERE benutzername ='"+benN+"'");
-	        berechtigung = (Integer) rs.getInt("blevel");
-	        if(anmelden==true){
-	            return berechtigung;
-	        } else {
-	            return 0;
-	        }        
+	        if(rs.first()){
+	        	bPrüfen = (Integer) rs.getInt("blevel");
+	        }
+	         if(anmelden==true){
+		            return bPrüfen;
+		     } else {
+		            return 0;
+		     }    
 	    }
 
 
