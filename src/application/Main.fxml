@@ -34,7 +34,7 @@
                         </Button>
                         <VBox alignment="BOTTOM_LEFT" prefHeight="209.0" prefWidth="210.0">
                            <children>
-                              <Button fx:id="benutzerverwaltung" mnemonicParsing="false" onAction="#handleBenutzerverwaltung" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Benutzerverwaltung">
+                              <Button fx:id="btnBenutzerverwaltung" mnemonicParsing="false" onAction="#handleBenutzerverwaltung" prefHeight="51.0" prefWidth="210.0" style="-fx-background-color: transparent;" text="Benutzerverwaltung">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

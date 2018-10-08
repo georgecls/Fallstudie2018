@@ -1,23 +1,40 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ControllerMain {
+public class ControllerMain implements Initializable {
 	
 	//View
 	@FXML private AnchorPane rootPane;
+	@FXML private Button btnBenutzerverwaltung;
 	
 	
 	public Main main;
 	public AnchorPane pane;
 	
+	@Override
+	public void initialize (URL url, ResourceBundle rb){
+		
+//		if (ControllerLogin.berechtigung == 2) {
+//			btnBenutzerverwaltung.setVisible(true);
+//		}else {
+//			btnBenutzerverwaltung.setVisible(false);
+//		}
+//	
+		}
+		
 	public void setMain(Main main) {
 		this.main = main;
 	}
