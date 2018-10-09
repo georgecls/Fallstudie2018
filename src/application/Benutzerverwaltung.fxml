@@ -12,9 +12,8 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="656.0">
                <children>
-                  <TableView fx:id="tvBenutzerverwaltung" prefHeight="167.0" prefWidth="656.0">
+                  <TableView fx:id="tvBenutzerverwaltung" onMouseClicked="#onMouseClicked" prefHeight="167.0" prefWidth="656.0">
                     <columns>
-                      <TableColumn fx:id="select_Col" prefWidth="82.0" text="Select" />
                       <TableColumn fx:id="benutzer_Col" minWidth="0.0" prefWidth="136.0" text="Benutzer" />
                         <TableColumn fx:id="passwort_Col" prefWidth="130.0" text="Passwort" />
                         <TableColumn fx:id="gruppe_Col" prefWidth="119.0" text="Gruppe" />

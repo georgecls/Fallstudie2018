@@ -20,11 +20,16 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	@FXML private TableView<Benutzer> tvBenutzerverwaltung;
 	
-	@FXML private TableColumn<Benutzer, String> select_Col;
+//	@FXML private TableColumn<Benutzer, String> select_Col;
 	@FXML private TableColumn<Benutzer, String> benutzer_Col;
 	@FXML private TableColumn<Benutzer, String> passwort_Col;
 	@FXML private TableColumn<Benutzer, String> gruppe_Col;
 	@FXML private TableColumn<Benutzer, String> berechtigung_Col;
+	
+	public static String b12;
+	public static String p12;
+	public static String g12;
+	public static int a12;
 	
 	private ObservableList<Benutzer> data;
 	
@@ -53,6 +58,22 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		
 	}
 	
+	public void onMouseClicked () {
+		Benutzer b1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
+//		System.out.println(b1.getBenutzername());
+		b12 = b1.getBenutzername();
+		
+		
+		Benutzer p1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
+		p12 = p1.getPasswort();
+		
+		Benutzer g1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
+		g12 = g1.getGruppe();
+		
+		Benutzer a1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
+		a12 = a1.getBerechtigung();
+	}
+	
 	
 	
 	public void handleHinzufügen() {
@@ -72,7 +93,14 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	public void handleBearbeiten() {
 		//Auswahl der zu bearbeitenden Spalte
+		
+		
+//		ObservableList<Benutzer> selectedItems = tvBenutzerverwaltung.getSelectionModel().getSelectedItems();
+//		System.out.println(selectedItems);
+		
 		//Übergabe der bereits vorhandenen Dateien
+		
+		//Aufruf des Bearbeiterfensters
 		
 		try {
     		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BenutzerWindowBearbeiten.fxml"));
