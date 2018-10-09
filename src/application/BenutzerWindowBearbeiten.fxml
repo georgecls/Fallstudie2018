@@ -61,7 +61,7 @@
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="30.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" />
-                  <Button fx:id="ändern" alignment="TOP_LEFT" mnemonicParsing="false" text="Ändern">
+                  <Button fx:id="ändern" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleÄndern" text="Ändern">
                      <font>
                         <Font size="14.0" />
                      </font>

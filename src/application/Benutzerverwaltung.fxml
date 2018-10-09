@@ -26,7 +26,7 @@
                <children>
                   <Button fx:id="hinzufügen" mnemonicParsing="false" onAction="#handleHinzufügen" text="Hinzufügen" />
                   <Button fx:id="bearbeiten" mnemonicParsing="false" onAction="#handleBearbeiten" text="Bearbeiten" />
-                  <Button fx:id="löschen" mnemonicParsing="false" text="Löschen" />
+                  <Button fx:id="löschen" mnemonicParsing="false" onAction="#handleLoeschen" text="Löschen" />
                </children>
             </HBox>
          </children>

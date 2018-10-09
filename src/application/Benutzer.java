@@ -141,12 +141,12 @@ public class Benutzer {
 	 *  
 	 * @throws SQLException
 	 */
-	public void updateAntragById(int name) throws SQLException
+	public static void updateBenutzer(String name, String passwort, String gruppe, int berechtigung) throws SQLException
 	{
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
-		String ps = "UPDATE benutzer SET benutzername = '" + this.getBenutzername() + "', passwort = '" + this.getPasswort() + "', blevel = '" + this.getBerechtigung() 
-				+ "', ag_fk = '" + this.getGruppe() + "WHERE benutzername = " + name;
+		String ps = "UPDATE benutzer SET benutzername = '" + name + "', passwort = '" + passwort + "', blevel = '" + berechtigung 
+				+ "', ag_fk = '" + gruppe + "' WHERE benutzername = '" + name + "'";
 		db.update(ps);
 		
 	}
@@ -158,11 +158,11 @@ public class Benutzer {
 	 *  
 	 * @throws SQLException
 	 */
-	public void deleteAntragById(int name) throws SQLException
+	public static void deleteBenutzer(String name) throws SQLException
 	{
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
-		String ps = "DELETE FROM benutzer WHERE benutzername = " + name;
+		String ps = "DELETE FROM benutzer WHERE benutzername = '" + name + "'";
 		db.delete(ps);
 		
 	}

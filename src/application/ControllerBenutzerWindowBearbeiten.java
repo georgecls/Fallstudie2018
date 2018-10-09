@@ -22,6 +22,7 @@ public class ControllerBenutzerWindowBearbeiten  implements Initializable{
 					"Rechtsabteilung","Vertrieb");
 	
 	@FXML private javafx.scene.control.Button cancelButton;
+	@FXML private javafx.scene.control.Button ändern;
 	
 	@FXML private TextField fieldBenutzer;
 	@FXML private TextField fieldPasswort;
@@ -56,6 +57,24 @@ public class ControllerBenutzerWindowBearbeiten  implements Initializable{
 		
 		choiceBoxGruppe.setItems(choiceBoxGruppeListe);
 		choiceBoxBerechtigung.setItems(choiceBoxBerechtigungListe);
+	}
+	
+	
+	public void handleÄndern() {
+		
+		String benutzer = fieldBenutzer.getText().toString();
+		String passwort = fieldPasswort.getText().toString();
+		String gruppe = (String) choiceBoxGruppe.getSelectionModel().getSelectedItem();
+		int berechtigung =  (int) choiceBoxBerechtigung.getSelectionModel().getSelectedItem();
+//		System.out.println(benutzer+passwort+gruppe+berechtigung);
+		try {
+			Benutzer.updateBenutzer(benutzer, passwort, gruppe, berechtigung);
+			Stage stage = (Stage) ändern.getScene().getWindow();
+			stage.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

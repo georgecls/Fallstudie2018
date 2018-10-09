@@ -92,16 +92,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	}
 	
 	public void handleBearbeiten() {
-		//Auswahl der zu bearbeitenden Spalte
-		
-		
-//		ObservableList<Benutzer> selectedItems = tvBenutzerverwaltung.getSelectionModel().getSelectedItems();
-//		System.out.println(selectedItems);
-		
-		//Übergabe der bereits vorhandenen Dateien
-		
-		//Aufruf des Bearbeiterfensters
-		
+			
 		try {
     		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BenutzerWindowBearbeiten.fxml"));
     		Parent root1 = (Parent) fxmlLoader.load();
@@ -114,6 +105,15 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	}
+	
+	public void handleLoeschen() {
+		try {
+			Benutzer.deleteBenutzer(b12);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
