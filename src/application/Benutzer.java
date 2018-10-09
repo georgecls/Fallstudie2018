@@ -96,13 +96,10 @@ public class Benutzer {
 	    }
 	 
 	 
-<<<<<<< HEAD
-	 public int berechtigungPrüfen(String benN) throws SQLException{
-	        benutzername = benN;
-=======
+
 	 public static int berechtigungPrüfen(String benN) throws SQLException{
 	        bnPrüfen = benN;
->>>>>>> de10b542b1ae93223548f91d2535a121975e0fa5
+
 	        
 	        MysqlCon db = new MysqlCon();
 	        db.getDbCon();
