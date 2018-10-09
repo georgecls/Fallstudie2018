@@ -249,14 +249,13 @@ public class Antrag {
 			ResultSet bk = db.query("SELECT * FROM benutzer WHERE benutzername='"+ benutzername +"'");
 			while(bk.next())
 			{
-			String ag = bk.getString("ag_fk");
-			ResultSet rs = db.query("SELECT * FROM antrag WHERE ag_ersteller_fk = '"+ ag +"'");
+				String ag = bk.getString("ag_fk");
+				ResultSet rs = db.query("SELECT * FROM antrag WHERE ag_ersteller_fk = '"+ ag +"' and WHERE status = '"+status+"'");
 
-	        while(rs.next()) {
+	        		while(rs.next()) {
 
-	            data.add(new Antrag(rs.getInt("idantrag")));
-	        }
-	        
+	        			data.add(new Antrag(rs.getInt("idantrag")));
+	        		}
 			}
 			
 
@@ -416,5 +415,4 @@ public class Antrag {
 	{
 		
 	}
-
 }

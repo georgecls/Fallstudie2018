@@ -65,8 +65,8 @@ public class ControllerTickets implements Initializable{
 				data_EigT = Antrag.getAntraegeByBenutzer(ControllerLogin.user);
 //				data_prüfen = Antrag.getAntraegebyStatus("erstellt",ControllerLogin.user);//noch die falsche Methode, da der ersteller seine eigenen Tickets nicht prüfen darf
 				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
-				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
-	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
+//				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
+//	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
 				data_AlleT = Antrag.getAntraege();
 
 			} catch (SQLException e) {
@@ -81,11 +81,11 @@ public class ControllerTickets implements Initializable{
 //    		System.out.println(a1.getName());
 //    	}); 
 //    	
-			data_AbgT.forEach((antrag) -> {
-    		Antrag a2 = (Antrag) antrag;
-    		System.out.println(a2.getName());
-    	}); 
-    	
+//			data_AbgT.forEach((antrag) -> {
+//    		Antrag a2 = (Antrag) antrag;
+//    		System.out.println(a2.getName());
+//    	}); 
+//    	
     	data_EigT.forEach((antrag) -> {
     		Antrag a3 = (Antrag) antrag;
     		System.out.println(a3.getName());
@@ -101,11 +101,11 @@ public class ControllerTickets implements Initializable{
     	    System.out.println(a5.getName());
     	});
     	
-    	data_genehmigen.forEach((antrag) -> {
-    		Antrag a6 = (Antrag) antrag;
-    		System.out.println(a6.getName());
-    	}); 
-	
+//    	data_genehmigen.forEach((antrag) -> {
+//    		Antrag a6 = (Antrag) antrag;
+//    		System.out.println(a6.getName());
+//    	}); 
+//	
     	
 //    	select_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("select"));
 		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
@@ -140,11 +140,10 @@ public class ControllerTickets implements Initializable{
 		
 		tvGruppentickets.setItems(data_gr);
 //		tvTicketsPrüfen.setItems(data_prüfen);
-		tvTicketsGenehmigen.setItems(data_genehmigen);
-		tvAbgTickets.setItems(data_AbgT);
+//		tvTicketsGenehmigen.setItems(data_genehmigen);
+//		tvAbgTickets.setItems(data_AbgT);
 		tvEigeneTickets.setItems(data_EigT);
 		tvAlleTickets.setItems(data_AlleT);
-		
 
 	}
     
