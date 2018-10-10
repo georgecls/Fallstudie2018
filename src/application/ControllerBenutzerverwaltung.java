@@ -74,6 +74,9 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		a12 = a1.getBerechtigung();
 	}
 	
+	public void handleAktualisieren() {
+		initialize (null, null);
+	}
 	
 	
 	public void handleHinzufügen() {
@@ -110,6 +113,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	public void handleLoeschen() {
 		try {
 			Benutzer.deleteBenutzer(b12);
+			initialize (null, null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
