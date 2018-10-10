@@ -79,7 +79,7 @@ public class Antrag {
 		String ps = "INSERT INTO antrag "
 				+ "(idantrag, titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
 				+ "VALUES "+ "(" + idZaehler + ", '"+name+"', '"+text+"','"+zieldatum+"', '"
-		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', 'NULL', '"+erstGruppe+"', "+erstGruppe+")";
+		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', 'NULL', '"+erstGruppe+"', '"+erstGruppe+"')";
 		db.executeSt(ps);
 	}
 	
