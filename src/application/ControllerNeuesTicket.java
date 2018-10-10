@@ -1,5 +1,6 @@
 package application;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -19,10 +20,18 @@ public class ControllerNeuesTicket {
 	@FXML public DatePicker fieldZieldatum;
 	@FXML public TextArea fieldText;
 	
+	private String gruppeErsteller;
+	
 	
 	public void initialize() {
 		fieldErsteller.setText(ControllerLogin.user);
 		fieldErstelldatum.setValue(LocalDate.now());
+		try {
+			gruppeErsteller = Benutzer.getBearGruppeByUser(ControllerLogin.user);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -35,11 +44,17 @@ public class ControllerNeuesTicket {
 		String beschreibung = fieldText.getText();
 		
 		//transfer Methoden
-		System.out.println(ticketart);
-		System.out.println(ersteller);
-		System.out.println(erstelldatum);
-		System.out.println(zieldatum);
-		System.out.println(beschreibung);
+		try {
+			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		System.out.println(ticketart);
+//		System.out.println(ersteller);
+//		System.out.println(erstelldatum);
+//		System.out.println(zieldatum);
+//		System.out.println(beschreibung);
 	}
 	
 	

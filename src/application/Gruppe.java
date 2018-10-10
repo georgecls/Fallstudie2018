@@ -32,7 +32,7 @@ public class Gruppe {
 		db.getDbCon();
 		String ps = "INSERT INTO benutzer "
 				+ "(gruppenname, gruppenbeschreibung) " + "VALUES " + "('" + this.getGruppenname() + "', '" + this.getGruppenbeschr() + "')";
-		db.insert(ps);
+		db.executeSt(ps);
 	}
 	
 	/**Methode, um eine Gruppe in der DB zu ändern. Der Übergabewert "name" stellt den Gruppennamen der zu bearbeitenden Gruppe dar.
@@ -47,7 +47,7 @@ public class Gruppe {
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		String ps = "UPDATE ag SET gruppenname = '" + this.getGruppenname() + "', gruppenbeschreibung = '" + this.getGruppenbeschr() + "WHERE benutzername = " + name;
-		db.update(ps);
+		db.executeSt(ps);
 		
 	}
 	
@@ -63,7 +63,7 @@ public class Gruppe {
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		String ps = "DELETE FROM ag WHERE gruppenname = " + name;
-		db.delete(ps);
+		db.executeSt(ps);
 		
 	}
 	
