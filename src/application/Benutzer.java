@@ -16,6 +16,8 @@ public class Benutzer {
 	
 	private static String bnPrüfen;
 	private static int bPrüfen;
+	private static String gPrüfen;
+
 	
 	private static boolean anmelden;
 	
@@ -130,7 +132,7 @@ public class Benutzer {
 		String ps = "INSERT INTO benutzer"
 				+ "(benutzername, passwort, blevel, ag_fk) VALUES ('" + benutzer 
 				+ "', '" + passwort + "', '" + berechtigung + "','" + gruppe +"')";
-		db.insert(ps);
+		db.executeSt(ps);
 	}
 	
 	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
@@ -146,7 +148,7 @@ public class Benutzer {
 		db.getDbCon();
 		String ps = "UPDATE benutzer SET benutzername = '" + name + "', passwort = '" + passwort + "', blevel = '" + berechtigung 
 				+ "', ag_fk = '" + gruppe + "' WHERE benutzername = '" + name + "'";
-		db.update(ps);
+		db.executeSt(ps);
 		
 	}
 	
@@ -162,7 +164,7 @@ public class Benutzer {
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		String ps = "DELETE FROM benutzer WHERE benutzername = '" + name + "'";
-		db.delete(ps);
+		db.executeSt(ps);
 		
 	}
 	
@@ -214,6 +216,23 @@ public class Benutzer {
 		
 		return this;
 	}
+	
+	public static String getBearGruppeByUser(String benN) throws SQLException{
+        
+ 		bnPrüfen = benN;
+   
+        MysqlCon db = new MysqlCon();
+        db.getDbCon();
+        ResultSet rs = db.query("select ag_fk from benutzer WHERE benutzername ='"+benN+"'");
+        if(rs.first()){
+        	gPrüfen = (String) rs.getString("ag_fk");
+        }
+         if(anmelden==true){
+	            return gPrüfen;
+	     } else {
+	            return null;
+	     }    
+    }
 	
 	
 	/** ***************************************************************************************************************************************************
