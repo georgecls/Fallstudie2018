@@ -68,8 +68,18 @@
                   <TextArea fx:id="fieldText" prefHeight="200.0" prefWidth="300.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="40.0">
                <children>
+                  <Label fx:id="fieldAntwort" prefWidth="150.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefWidth="150.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                   <Button fx:id="abschicken" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAbschicken" text="Abschicken">
                      <font>
                         <Font size="14.0" />

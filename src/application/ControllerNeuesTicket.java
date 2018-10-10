@@ -20,6 +20,8 @@ public class ControllerNeuesTicket {
 	@FXML public DatePicker fieldZieldatum;
 	@FXML public TextArea fieldText;
 	
+	@FXML public Label fieldAntwort;
+	
 	private String gruppeErsteller;
 	
 	
@@ -46,10 +48,16 @@ public class ControllerNeuesTicket {
 		//transfer Methoden
 		try {
 			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		fieldTicketart.setText(null);
+		fieldZieldatum.setValue(null);
+		fieldText.setText(null);
+		fieldAntwort.setText("Das Ticket "+ticketart+" wurde erstellt");
 //		System.out.println(ticketart);
 //		System.out.println(ersteller);
 //		System.out.println(erstelldatum);
