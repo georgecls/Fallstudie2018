@@ -28,6 +28,7 @@ public class ControllerNeuesTicket {
 	public void initialize() {
 		fieldErsteller.setText(ControllerLogin.user);
 		fieldErstelldatum.setValue(LocalDate.now());
+		fieldAntwort.setText(null);
 		try {
 			gruppeErsteller = Benutzer.getBearGruppeByUser(ControllerLogin.user);
 		} catch (SQLException e) {
