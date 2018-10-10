@@ -28,7 +28,7 @@ public class ControllerLogin {
 	}
 	
 	@FXML
-	public void handleLogin() {
+	public void handleLogin() throws SQLException {
 		String benutzerName = fieldBenutzer.getText();
 		String benutzerKennwort = fieldKennwort.getText();
 		
