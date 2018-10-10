@@ -42,8 +42,8 @@ public class Antrag {
 	
 	
 	//Attribute, die darüberhinaus noch benötigt werden
-	private int idZaehler = 10000;
-	private int antragzaehler = 1;
+	private static int idZaehler = 10000;
+	private static int antragzaehler = 1;
 	
 	
 	
@@ -71,16 +71,16 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text) throws SQLException
+	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe) throws SQLException
 	{	
-		antragzaehler = antragzaehler + 1;
+		idZaehler = idZaehler + 1;
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		String ps = "INSERT INTO antrag "
 				+ "(idantrag, titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-				+ "VALUES "+ "('"+this.antragzaehler+"', '"+name+"', '"+text+"','"+zieldatum+"', '"
-		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', 'NULL', '"+this.getErstGruppe()+"', '')";
-		db.insert(ps);
+				+ "VALUES "+ "(" + idZaehler + ", '"+name+"', '"+text+"','"+zieldatum+"', '"
+		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', 'NULL', '"+erstGruppe+"', '')";
+		db.executeSt(ps);
 	}
 	
 	/**Methode, um einen Antrag in der DB zu überschreiben bzw. zu korrigieren. Der Übergabewert "id" stellt die AntragsID des zu korrigierenden Antrags dar.
@@ -90,18 +90,18 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public void updateAntragById(int id) throws SQLException
-	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "UPDATE antrag SET idantrag = '" + this.getAntragid() + "', titel = '" + this.getName() + "', beschreibung = '" + this.getBeschreibung() 
-				+ "', fertigstellungsdatum = '" + this.getFertigstellungsdatum() + "', antragsdatum = '" + this.getAntragsdatum() + "', status = '" + this.getStatus()
-				+ "', ablehnungsgrund = '" + this.getAblehnungsgrund() + "', anmerkung = '" + this.getAnmerkung() + "', ersteller_fk = '" + this.getErsteller() 
-				+ "', bearbeiter_fk = '" + this.getBearbeiter() + "', ag_ersteller_fk = '" + this.getErstGruppe() + "', ag_bearbeiter_fk = '" + this.getBearbeiterGruppe()
-				+ "WHERE idantrag = " + id;
-		db.update(ps);
-		
-	}
+//	public static void updateAntragById(int id) throws SQLException
+//	{
+//		MysqlCon db = new MysqlCon();
+//		db.getDbCon();
+//		String ps = "UPDATE antrag SET idantrag = '" + id + "', titel = '" + this.getName() + "', beschreibung = '" + this.getBeschreibung() 
+//				+ "', fertigstellungsdatum = '" + this.getFertigstellungsdatum() + "', antragsdatum = '" + this.getAntragsdatum() + "', status = '" + this.getStatus()
+//				+ "', ablehnungsgrund = '" + this.getAblehnungsgrund() + "', anmerkung = '" + this.getAnmerkung() + "', ersteller_fk = '" + this.getErsteller() 
+//				+ "', bearbeiter_fk = '" + this.getBearbeiter() + "', ag_ersteller_fk = '" + this.getErstGruppe() + "', ag_bearbeiter_fk = '" + this.getBearbeiterGruppe()
+//				+ "WHERE idantrag = " + id;
+//		db.executeSt(ps);
+//		
+//	}
 	
 	/**Methode, um einen Antrag aus der DB zu löschen. Der Übergabewert "id" stellt die AntragsID des zu löschenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
@@ -110,12 +110,12 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public void deleteAntragById(int id) throws SQLException
+	public static void deleteAntragById(int id) throws SQLException
 	{
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		String ps = "DELETE FROM antrag WHERE idantrag = " + id;
-		db.delete(ps);
+		db.executeSt(ps);
 		
 	}
 	
