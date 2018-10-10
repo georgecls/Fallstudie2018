@@ -58,16 +58,18 @@ public class Benutzer {
 		ResultSet rs = db.query("select * from benutzer WHERE benutzer='"+ pBenutzer +"' and passwort = '"+ pPasswort +"'");
 		if(rs.next())
 		{
+			MysqlCon.conn.close();
 			return true;
 		}
 		else
 		{
+			MysqlCon.conn.close();
 			return false;
 		}
-		
+
 	}
 	
-	 public static boolean anmelden(String benN, String p){
+	 public static boolean anmelden(String benN, String p) throws SQLException{
 	        String eingabeName = benN;
 	        String eingabePasswort = p;
 	        String vergleichsPasswort = "";
@@ -94,6 +96,7 @@ public class Benutzer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			MysqlCon.conn.close();
 			return anmelden;
 	    }
 	 
@@ -109,8 +112,10 @@ public class Benutzer {
 	        	bPrüfen = (Integer) rs.getInt("blevel");
 	        }
 	         if(anmelden==true){
+	     		MysqlCon.conn.close();
 		            return bPrüfen;
 		     } else {
+		 		MysqlCon.conn.close();
 		            return 0;
 		     }    
 	    }
@@ -133,6 +138,8 @@ public class Benutzer {
 				+ "(benutzername, passwort, blevel, ag_fk) VALUES ('" + benutzer 
 				+ "', '" + passwort + "', '" + berechtigung + "','" + gruppe +"')";
 		db.executeSt(ps);
+		MysqlCon.conn.close();
+
 	}
 	
 	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
@@ -149,7 +156,8 @@ public class Benutzer {
 		String ps = "UPDATE benutzer SET benutzername = '" + name + "', passwort = '" + passwort + "', blevel = '" + berechtigung 
 				+ "', ag_fk = '" + gruppe + "' WHERE benutzername = '" + name + "'";
 		db.executeSt(ps);
-		
+		MysqlCon.conn.close();
+
 	}
 	
 	/**Methode, um einen Benutzer aus der DB zu löschen. Der Übergabewert "name" stellt den Benutzernamen des zu löschenden Benutzers dar.
@@ -165,6 +173,7 @@ public class Benutzer {
 		db.getDbCon();
 		String ps = "DELETE FROM benutzer WHERE benutzername = '" + name + "'";
 		db.executeSt(ps);
+		MysqlCon.conn.close();
 		
 	}
 	
@@ -181,6 +190,7 @@ public class Benutzer {
 			this.gruppe = (String)rs.getObject("gruppe");
 
 		}
+		MysqlCon.conn.close();
 		return this;
 			
 	}
@@ -197,7 +207,7 @@ public class Benutzer {
 		{
 			data.add(new Benutzer(rs.getString("benutzername")));
 		}
-		
+		MysqlCon.conn.close();
 		return data;
 	}
 	
@@ -213,7 +223,7 @@ public class Benutzer {
 			this.gruppe = rs.getString("ag_fk");
 			this.berechtigung = rs.getInt("blevel");		    
 		}
-		
+		MysqlCon.conn.close();
 		return this;
 	}
 	
@@ -228,8 +238,10 @@ public class Benutzer {
         	gPrüfen = (String) rs.getString("ag_fk");
         }
          if(anmelden==true){
+     		MysqlCon.conn.close();
 	            return gPrüfen;
 	     } else {
+	 		MysqlCon.conn.close();
 	            return null;
 	     }    
     }

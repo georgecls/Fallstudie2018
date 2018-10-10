@@ -72,15 +72,18 @@ public class Antrag {
 	 * @throws SQLException
 	 */
 	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe) throws SQLException
-	{	
-		idZaehler = idZaehler + 1;
+	{
+		
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
+		//idZaehler = countAntraege() + 1; //Funktioniert nicht! :)
 		String ps = "INSERT INTO antrag "
-				+ "(idantrag, titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-				+ "VALUES "+ "(" + idZaehler + ", '"+name+"', '"+text+"','"+zieldatum+"', '"
-		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', 'NULL', '"+erstGruppe+"', '"+erstGruppe+"')";
+				+ "(titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
+				+ "VALUES "+ "('" + name + "', '"+text+"','"+zieldatum+"', '"
+		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', NULL, '"+erstGruppe+"', '"+erstGruppe+"')";
 		db.executeSt(ps);
+		MysqlCon.conn.close();
+
 	}
 	
 	/**Methode, um einen Antrag in der DB zu Ã¼berschreiben bzw. zu korrigieren. Der Ãœbergabewert "id" stellt die AntragsID des zu korrigierenden Antrags dar.
@@ -116,7 +119,8 @@ public class Antrag {
 		db.getDbCon();
 		String ps = "DELETE FROM antrag WHERE idantrag = " + id;
 		db.executeSt(ps);
-		
+		MysqlCon.conn.close();
+
 	}
 	
 	/**Methode zieht sich Antrag mit im Parameter angegebener ID.
@@ -145,10 +149,11 @@ public class Antrag {
 			this.anmerkung = rs.getString("anmerkung");
 			this.ersteller = new Benutzer(rs.getString("ersteller_fk"));
 			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-		    
+
 		}
-		
+		MysqlCon.conn.close();
 		return this;
+		
 	}
 	
 		
@@ -168,11 +173,14 @@ public class Antrag {
 	    	while(rs.next()) {
 	    		
 	    		data.add(new Antrag(rs.getInt("idantrag")));
+	    		
 	    	}
 	    } catch(SQLException e) {
 	    	System.out.println(e);
 	    }
+			MysqlCon.conn.close();
 	    	return data;
+
 	}
 	
 /**Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
@@ -182,8 +190,9 @@ public class Antrag {
  *Diese Daten sind in ObservableList data gespeichert.
  *#Robin
  * @return
+ * @throws SQLException 
  */
-	public static ObservableList getAntraege() {
+	public static ObservableList getAntraege() throws SQLException {
 	    ObservableList<Antrag> data = FXCollections.observableArrayList();
 	    try {
 	    	MysqlCon db = new MysqlCon();
@@ -198,7 +207,7 @@ public class Antrag {
 	    } catch(SQLException e) {
 	        System.out.println(e);
 	    }
-
+		MysqlCon.conn.close();
 	    return data;
 	}
 	
@@ -225,7 +234,7 @@ public class Antrag {
 			this.ersteller = (Benutzer) rs.getObject("ersteller_fk");
 			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
 		}
-		
+		MysqlCon.conn.close();
 		return rs;
 	}
 	
@@ -240,8 +249,9 @@ public class Antrag {
 	 *SQL Befehl muss überarbeitet werden - wirft sql Fehler aus!
 	 *#Robin
 	 * @return
+	 * @throws SQLException 
 	 */
-	public static ObservableList getAntraegebyStatus(String status, String benutzername) {
+	public static ObservableList getAntraegebyStatus(String status, String benutzername) throws SQLException {
 	    ObservableList<Antrag> data = FXCollections.observableArrayList();
 	    try {
 	    	MysqlCon db = new MysqlCon();
@@ -262,7 +272,7 @@ public class Antrag {
 	    } catch(SQLException e) {
 	        System.out.println(e);
 	    }
-
+		MysqlCon.conn.close();
 	    return data;
 	}	
 	    
@@ -278,6 +288,7 @@ public class Antrag {
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();
 		ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ arbeitsgruppe +"'");
+		MysqlCon.conn.close();
 		return rs;
 	}
 	
@@ -306,9 +317,19 @@ public class Antrag {
 			a1.status = rs.getString("status");
 			a1.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
 		}
-		
+		MysqlCon.conn.close();
 		return a1;
 	}
+//	
+//	public static int countAntraege() throws SQLException {
+//		MysqlCon db = new MysqlCon();
+//		db.getDbCon();
+//		int rs = db.executeSt("SELECT COUNT(idantrag) FROM antrag");
+//		MysqlCon.conn.close();
+//		return rs;
+//		
+//	}
+	
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************

@@ -3,7 +3,7 @@ package application;
 import java.sql.*;
 
 public class MysqlCon {
-    public Connection conn;
+    public static Connection conn;
     private Statement statement;
     public static MysqlCon db;
     
@@ -51,5 +51,4 @@ public class MysqlCon {
         return result;
  
     }
-    
 }
