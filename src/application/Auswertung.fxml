@@ -17,7 +17,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fieldErsteller1" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
+                  <Label fx:id="fieldTGesamt" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -31,7 +31,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fieldErsteller" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
+                  <Label fx:id="fieldTFreigegeben" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fieldErsteller2" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
+                  <Label fx:id="fieldETGenehmigt" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
                      <font>
                         <Font size="14.0" />
                      </font>
