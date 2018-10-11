@@ -320,15 +320,15 @@ public class Antrag {
 		MysqlCon.conn.close();
 		return a1;
 	}
-//	
-//	public static int countAntraege() throws SQLException {
-//		MysqlCon db = new MysqlCon();
-//		db.getDbCon();
-//		int rs = db.executeSt("SELECT COUNT(idantrag) FROM antrag");
-//		MysqlCon.conn.close();
-//		return rs;
-//		
-//	}
+	
+	public static int countAntraege() throws SQLException {
+		MysqlCon db = new MysqlCon();
+		db.getDbCon();
+		int rs = db.executeSt("SELECT COUNT(idantrag) FROM antrag");
+		MysqlCon.conn.close();
+		return rs;
+		
+	}
 	
 	
 	/** ***************************************************************************************************************************************************
