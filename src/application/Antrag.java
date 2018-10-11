@@ -252,29 +252,27 @@ public class Antrag {
 	 * @throws SQLException 
 	 */
 	public static ObservableList getAntraegebyStatus(String status, String benutzername) throws SQLException {
-	    ObservableList<Antrag> data = FXCollections.observableArrayList();
-	    try {
-	    	MysqlCon db = new MysqlCon();
-			db.getDbCon();
-			ResultSet bk = db.query("SELECT * FROM benutzer WHERE benutzername='"+ benutzername +"'");
-			while(bk.next())
-			{
-				String ag = bk.getString("ag_fk");
-				ResultSet rs = db.query("SELECT * FROM antrag WHERE ag_ersteller_fk = '"+ ag +"' and WHERE status = '"+status+"'");
-
-	        		while(rs.next()) {
-
-	        			data.add(new Antrag(rs.getInt("idantrag")));
-	        		}
-			}
-			
-
-	    } catch(SQLException e) {
-	        System.out.println(e);
-	    }
-		MysqlCon.conn.close();
-	    return data;
-	}	
+        ObservableList<Antrag> data = FXCollections.observableArrayList();
+        try {
+          MysqlCon db = new MysqlCon();
+                 db.getDbCon();
+                 ResultSet rs = db.query("Select a.idantrag, a.titel, a.beschreibung, a.fertigstellungsdatum, a.antragsdatum, a.status \r\n" + 
+                              "     from antrag a, benutzer b \r\n" + 
+                              "            where benutzername = '"+benutzername+"' \r\n" + 
+                              "            and a.ag_ersteller_fk = b.ag_fk \r\n" + 
+                              "            and a.status = '"+status+"'");
+                 while(rs.next())
+                 {
+                        data.add(new Antrag(rs.getInt("idantrag")));
+                 }
+                 
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+           MysqlCon.conn.close();
+        return data;
+    }
+	
 	    
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "arbeitsgruppe" stellt den Antragsersteller des auszugebenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
