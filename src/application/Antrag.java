@@ -1,27 +1,12 @@
 package application;
 
-import java.net.URL;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-
-import java.sql.*;
 import java.util.Date;
 
 public class Antrag {
@@ -51,17 +36,13 @@ public class Antrag {
 	 * *********************************************************Implementierung der Methoden***************************************************************
 	 ******************************************************************************************************************************************************/
 	
-	
-	
 	public Antrag()
 	{
 		
 	}
 	
 	public Antrag(int pID) throws SQLException
-	{
-		this.getAntragById(pID);
-	}
+	{		this.getAntragById(pID);	}
 	
 	
 	/**Methode, um einen neuen Antrag in die DB zu schreiben.
@@ -74,16 +55,20 @@ public class Antrag {
 	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe) throws SQLException
 	{
 		
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		//idZaehler = countAntraege() + 1; //Funktioniert nicht! :)
-		String ps = "INSERT INTO antrag "
-				+ "(titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-				+ "VALUES "+ "('" + name + "', '"+text+"','"+zieldatum+"', '"
-		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', NULL, '"+erstGruppe+"', '"+erstGruppe+"')";
-		db.executeSt(ps);
-		MysqlCon.conn.close();
+		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO antrag (titel, beschreibung, fertigstellungsdatum, antragsdatum, "
+				+ "status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
+				+ "VALUES('%s', '%s', '%s', '%s', 'erstellt', '', '', '%s', NULL, '%s', '%s');"
+				, name, text, zieldatum, erstelldatum, ersteller, erstGruppe, erstGruppe));
 
+		/*Ticket wurde erstellt Meldung kommt, jedoch wird es nicht unter Tickets angezeigt*/
+		/*UPDATE: Rollback der Transaktion wurde ausgeführt*/
+		
+		//idZaehler = countAntraege() + 1; //Funktioniert nicht! :)
+//		String ps = "INSERT INTO antrag "
+//				+ "(titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
+//				+ "VALUES "+ "('" + name + "', '"+text+"','"+zieldatum+"', '"
+//		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', NULL, '"+erstGruppe+"', '"+erstGruppe+"')";
+//		db.executeSt(ps);
 	}
 	
 	/**Methode, um einen Antrag in der DB zu Ã¼berschreiben bzw. zu korrigieren. Der Ãœbergabewert "id" stellt die AntragsID des zu korrigierenden Antrags dar.
@@ -115,12 +100,7 @@ public class Antrag {
 	 */
 	public static void deleteAntragById(int id) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "DELETE FROM antrag WHERE idantrag = " + id;
-		db.executeSt(ps);
-		MysqlCon.conn.close();
-
+		Main.get_DBConnection().ExecuteTransact(String.format("DELETE FROM antrag WHERE idantrag = '%d';", id));
 	}
 	
 	/**Methode zieht sich Antrag mit im Parameter angegebener ID.
@@ -134,9 +114,9 @@ public class Antrag {
 	 */
 	public Antrag getAntragById(int pID) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE idantrag='"+ pID +"'");
+		Main.get_DBConnection().Execute(String.format("SELEcT * FROM antrag WHERE idantrag = '%d';", pID));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
 		if(rs.first())
 		{
 			this.antragid = rs.getInt("idantrag");
@@ -149,11 +129,8 @@ public class Antrag {
 			this.anmerkung = rs.getString("anmerkung");
 			this.ersteller = new Benutzer(rs.getString("ersteller_fk"));
 			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-
 		}
-		MysqlCon.conn.close();
 		return this;
-		
 	}
 	
 		
@@ -163,13 +140,12 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public static ObservableList getAntraegeByBenutzer(String benutzer) throws SQLException
+	public static ObservableList<Antrag> getAntraegeByBenutzer(String benutzer) throws SQLException
 	{
 	    ObservableList data = FXCollections.observableArrayList();
 	    try {
-	    	MysqlCon db = new MysqlCon();
-	    	db.getDbCon();
-	    	ResultSet rs = db.query("select * from antrag WHERE ersteller_fk='"+ benutzer +"'");
+	    	Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE ersteller_fk = '%s';", benutzer));
+	    	ResultSet rs = Main.get_DBConnection().get_last_resultset();
 	    	while(rs.next()) {
 	    		
 	    		data.add(new Antrag(rs.getInt("idantrag")));
@@ -178,36 +154,34 @@ public class Antrag {
 	    } catch(SQLException e) {
 	    	System.out.println(e);
 	    }
-			MysqlCon.conn.close();
 	    	return data;
-
 	}
 	
-/**Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
- *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
- *Anschließend wird die Datenbankverbindung hergestellt.
- *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
- *Diese Daten sind in ObservableList data gespeichert.
- *#Robin
- * @return
- * @throws SQLException 
- */
-	public static ObservableList getAntraege() throws SQLException {
-	    ObservableList<Antrag> data = FXCollections.observableArrayList();
+	/**Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
+	 *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
+	 *Anschließend wird die Datenbankverbindung hergestellt.
+	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
+	 *Diese Daten sind in ObservableList data gespeichert.
+	 *#Robin
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static ObservableList<Antrag> getAntraege() throws SQLException {
+	    
+		ObservableList<Antrag> data = FXCollections.observableArrayList();
+	    
 	    try {
-	    	MysqlCon db = new MysqlCon();
-			db.getDbCon();
-			ResultSet rs = db.query("SELECT * FROM antrag");
-
+	    	Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag"));
+	    	ResultSet rs = Main.get_DBConnection().get_last_resultset();	
+	    	
 	        while(rs.next()) {
 
 	            data.add(new Antrag(rs.getInt("idantrag")));
 	        }
-
-	    } catch(SQLException e) {
-	        System.out.println(e);
 	    }
-		MysqlCon.conn.close();
+	    catch(SQLException e)
+	    {	System.out.println(e);	}
+	    
 	    return data;
 	}
 	
@@ -221,22 +195,21 @@ public class Antrag {
 	 * 
 	 * Ich vermute, dass die Methode nicht mehr benötigt wird, da die Methode getAntraegeByStatus diese ersetzt #Robin
 	 */
-	public ResultSet getAntragByStatus(String status) throws SQLException
-	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE status='"+ status+"'");
-		while(rs.next())
-		{
-			this.antragid = rs.getInt("idantrag");
-			this.name = rs.getString("titel");
-			this.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
-			this.ersteller = (Benutzer) rs.getObject("ersteller_fk");
-			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-		}
-		MysqlCon.conn.close();
-		return rs;
-	}
+//	public ResultSet getAntragByStatus(String status) throws SQLException
+//	{
+//		MysqlCon db = new MysqlCon();
+//		db.getDbCon();
+//		ResultSet rs = db.query("select * from antrag WHERE status='"+ status+"'");
+//		while(rs.next())
+//		{
+//			this.antragid = rs.getInt("idantrag");
+//			this.name = rs.getString("titel");
+//			this.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
+//			this.ersteller = (Benutzer) rs.getObject("ersteller_fk");
+//			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
+//		}
+//		return rs;
+//	}
 	
 	/**Methode um alle bestehenden Anräge abhängig vom Status abzufragen.
 	 *Der Eingabewert "status" stellt den Status (erstellt, geprüft, genehmigt, erledigt, abgelehnt) der auszugebenden Anträge dar.
@@ -246,30 +219,28 @@ public class Antrag {
 	 *Diese Daten sind in ObservableList data gespeichert. 
 	 *
 	 *
-	 *SQL Befehl muss überarbeitet werden - wirft sql Fehler aus!
 	 *#Robin
 	 * @return
 	 * @throws SQLException 
 	 */
-	public static ObservableList getAntraegebyStatus(String status, String benutzername) throws SQLException {
+	public static ObservableList<Antrag> getAntraegebyStatus(String status, String benutzername) throws SQLException
+	{
         ObservableList<Antrag> data = FXCollections.observableArrayList();
-        try {
-          MysqlCon db = new MysqlCon();
-                 db.getDbCon();
-                 ResultSet rs = db.query("Select a.idantrag, a.titel, a.beschreibung, a.fertigstellungsdatum, a.antragsdatum, a.status \r\n" + 
-                              "     from antrag a, benutzer b \r\n" + 
-                              "            where benutzername = '"+benutzername+"' \r\n" + 
-                              "            and a.ag_ersteller_fk = b.ag_fk \r\n" + 
-                              "            and a.status = '"+status+"'");
+        try
+        {
+            /*!*/     Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
+                		 						"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
+                		 						"WHERE benutzername = '%s' AND status = '%s';", benutzername, status));
+                 
+            /*!*/     ResultSet rs = Main.get_DBConnection().get_last_resultset();
                  while(rs.next())
                  {
-                        data.add(new Antrag(rs.getInt("idantrag")));
-                 }
-                 
-        } catch(SQLException e) {
-            System.out.println(e);
+                     data.add(new Antrag(rs.getInt("idantrag")));
+                 }                 
         }
-           MysqlCon.conn.close();
+        catch(SQLException e)
+        {	System.out.println(e);	}
+        
         return data;
     }
 	
@@ -281,15 +252,14 @@ public class Antrag {
 	 * @throws SQLException
 	 * Methode wird vermutlich nicht mehr benötigt, da die Methode getAntraegebyStatus dies inne hat #Robin
 	 */
-	public static ResultSet getAntragByBaergruppe(String arbeitsgruppe) throws SQLException
-	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ arbeitsgruppe +"'");
-		MysqlCon.conn.close();
-		return rs;
-	}
-	
+//	public static ResultSet getAntragByBaergruppe(String arbeitsgruppe) throws SQLException
+//	{
+//		MysqlCon db = new MysqlCon();
+//		db.getDbCon();
+//		ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ arbeitsgruppe +"'");
+//		return rs;
+//	}
+//	
 	
 	
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "datum" stellt den Antragsersteller des auszugebenden Antrags dar.
@@ -299,136 +269,107 @@ public class Antrag {
 	 * @throws SQLException
 	 * Vermutlich sinnfreie Methode, da keine Umsetzung in GUI #Robin
 	 */
-	public static Antrag getAntragbyDatum (Date fertigstellungsdatum) throws SQLException
-	{
-		Antrag a1 = null;
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from antrag WHERE fertigstellungsdatum='"+ fertigstellungsdatum +"'");
-		
-		while(rs.next())
-		{
-			a1 = new Antrag();
-			a1.antragid = rs.getInt("idantrag");
-			a1.name = rs.getString("titel");
-			a1.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
-			a1.status = rs.getString("status");
-			a1.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-		}
-		MysqlCon.conn.close();
-		return a1;
-	}
+//	public static Antrag getAntragbyDatum (Date fertigstellungsdatum) throws SQLException
+//	{
+//		Antrag a1 = null;
+//		MysqlCon db = new MysqlCon();
+//		db.getDbCon();
+//		ResultSet rs = db.query("select * from antrag WHERE fertigstellungsdatum='"+ fertigstellungsdatum +"'");
+//		
+//		while(rs.next())
+//		{
+//			a1 = new Antrag();
+//			a1.antragid = rs.getInt("idantrag");
+//			a1.name = rs.getString("titel");
+//			a1.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
+//			a1.status = rs.getString("status");
+//			a1.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
+//		}
+//		return a1;
+//	}
 	
 	public static int countAntraege() throws SQLException {
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		int rs = db.executeSt("SELECT COUNT(idantrag) FROM antrag");
-		MysqlCon.conn.close();
+		Main.get_DBConnection().Execute(String.format("SELECT COUNT(idantrag) FROM antrag"));
+		Main.get_DBConnection().get_last_resultset().next();
+		int rs = Main.get_DBConnection().get_last_resultset().getInt(0);
 		return rs;
-		
 	}
-	
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
 	
-	
-	public int getAntragid() {
-		return antragid;
-	}
+	public int getAntragid()
+	{	return antragid;	}
 
-	public void setAntragid(int antragid) {
-		this.antragid = antragid;
-	}
+	public void setAntragid(int antragid)
+	{	this.antragid = antragid;	}
 
-	public String getName() {
-		return name;
-	}
+	public String getName()
+	{	return name;	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	public void setName(String name)
+	{	this.name = name;	}
 	
-	public String getBeschreibung() {
-		return beschreibung;
-	}
+	public String getBeschreibung()
+	{	return beschreibung;	}
 	
-	public void setBeschreibung(String beschreibung) {
-		this.beschreibung = beschreibung;
-	}
+	public void setBeschreibung(String beschreibung)
+	{	this.beschreibung = beschreibung;	}
 	
-	public Date getAntragsdatum(){
-	    return antragsdatum;
-	}
+	public Date getAntragsdatum()
+	{	return antragsdatum;	}
 	
-	public void setAntragsdatum(Date aDatum){
-	    this.antragsdatum = aDatum;
-	}
+	public void setAntragsdatum(Date aDatum)
+	{	this.antragsdatum = aDatum;	}
 	
-	public Date getFertigstellungsdatum(){
-	    return fertigstellungsdatum;
-	}
+	public Date getFertigstellungsdatum()
+	{	return fertigstellungsdatum;	}
 	
-	public void setFertigstellungsdatum(Date fDatum){
-	    this.fertigstellungsdatum = fDatum;
-	}
+	public void setFertigstellungsdatum(Date fDatum)
+	{	this.fertigstellungsdatum = fDatum;	}
 	
-	public String getStatus(){
-	    return status;
-	}
+	public String getStatus()
+	{	return status;	}
 	
-	public void setStatus(String status){
-	    this.status = status;
-	}
+	public void setStatus(String status)
+	{	this.status = status;	}
 	
-	public String getAblehnungsgrund(){
-	    return ablehnungsgrund;
-	}
+	public String getAblehnungsgrund()
+	{	return ablehnungsgrund;	}
 	
-	public void setAblehnungsgrund(String abGrund){
-	    this.ablehnungsgrund = abGrund;
-	}
+	public void setAblehnungsgrund(String abGrund)
+	{	this.ablehnungsgrund = abGrund;	}
 
-    public String getAnmerkung(){
-        return anmerkung;
-    }
+    public String getAnmerkung()
+    {	return anmerkung;	}
     
-    public void setAnmerkung(String anmerkung){
-        this.anmerkung = anmerkung;
-    }
+    public void setAnmerkung(String anmerkung)
+    {	this.anmerkung = anmerkung;	}
     
-    public Benutzer getErsteller(){
-        return ersteller;
-    }
+    public Benutzer getErsteller()
+    {	return ersteller;	}
     
-    public void setErsteller(Benutzer ersteller){
-        this.ersteller = ersteller;
-    }
+    public void setErsteller(Benutzer ersteller)
+    {	this.ersteller = ersteller;	}
 
-    public Gruppe getErstGruppe(){
-        return erstGruppe;
-    }
+    public Gruppe getErstGruppe()
+    {	return erstGruppe;	}
     
-    public void setErstellerGruppe(Gruppe eGruppe){
-        this.erstGruppe = eGruppe;
-    }
+    public void setErstellerGruppe(Gruppe eGruppe)
+    {   this.erstGruppe = eGruppe;	}
     
-    public Benutzer getBearbeiter(){
-        return bearbeiter;
-    }
+    public Benutzer getBearbeiter()
+    {	return bearbeiter;	}
     
-    public void setBearbeiter(Benutzer bearbeiter){
-        this.bearbeiter = bearbeiter;
-    }
+    public void setBearbeiter(Benutzer bearbeiter)
+    {   this.bearbeiter = bearbeiter;	}
 
-	    public Gruppe getBearbeiterGruppe(){
-        return bearGruppe;
-    }
+	public Gruppe getBearbeiterGruppe()
+	{   return bearGruppe;	}
     
-    public void setBearbeiterGruppe(Gruppe bGruppe){
-        this.bearGruppe = bGruppe;
-    }
+    public void setBearbeiterGruppe(Gruppe bGruppe)
+    {   this.bearGruppe = bGruppe;	}
 
 	public void getAuftragByNr(int pNR)
 	{

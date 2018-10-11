@@ -18,7 +18,6 @@ public class Benutzer {
 	private static int bPrüfen;
 	private static String gPrüfen;
 
-	
 	private static boolean anmelden;
 	
 	
@@ -53,20 +52,17 @@ public class Benutzer {
 	*/
 	public static boolean isRightBenutzer(String pBenutzer, String pPasswort) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from benutzer WHERE benutzer='"+ pBenutzer +"' and passwort = '"+ pPasswort +"'");
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzer = '%s' AND passwort = '%s';", pBenutzer, pPasswort));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		
 		if(rs.next())
 		{
-			MysqlCon.conn.close();
 			return true;
 		}
 		else
 		{
-			MysqlCon.conn.close();
 			return false;
 		}
-
 	}
 	
 	 public static boolean anmelden(String benN, String p) throws SQLException{
@@ -74,11 +70,9 @@ public class Benutzer {
 	        String eingabePasswort = p;
 	        String vergleichsPasswort = "";
 	        try {
-	        	MysqlCon db = new MysqlCon();
-	        	db.getDbCon();
-	        	ResultSet rsN;
-	        	ResultSet rsP;
-				rsP = db.query("select passwort from benutzer WHERE benutzername ='"+benN+"'");
+	        	
+	        	Main.get_DBConnection().Execute(String.format("SELECT passwort FROM benutzer WHERE benutzername = '%s';", benN));
+				ResultSet rsP = Main.get_DBConnection().get_last_resultset();
 	        	
 	        	while(rsP.next())
 	        	{
@@ -96,7 +90,6 @@ public class Benutzer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			MysqlCon.conn.close();
 			return anmelden;
 	    }
 	 
@@ -105,23 +98,18 @@ public class Benutzer {
 	        
 	 		bnPrüfen = benN;
        
-	        MysqlCon db = new MysqlCon();
-	        db.getDbCon();
-	        ResultSet rs = db.query("select blevel from benutzer WHERE benutzername ='"+benN+"'");
+	 		Main.get_DBConnection().Execute(String.format("SELECT blevel FROM benutzer WHERE benutzername = '%s';", benN));
+			ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
 	        if(rs.first()){
 	        	bPrüfen = (Integer) rs.getInt("blevel");
 	        }
 	         if(anmelden==true){
-	     		MysqlCon.conn.close();
 		            return bPrüfen;
 		     } else {
-		 		MysqlCon.conn.close();
 		            return 0;
 		     }    
 	    }
-
-
-	
 
 	/**Methode, um einen neuen Benutzer in die DB zu schreiben.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
@@ -132,14 +120,8 @@ public class Benutzer {
 	 */
 	public static void insertBenutzer(String benutzer, String passwort, int berechtigung, String gruppe) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "INSERT INTO benutzer"
-				+ "(benutzername, passwort, blevel, ag_fk) VALUES ('" + benutzer 
-				+ "', '" + passwort + "', '" + berechtigung + "','" + gruppe +"')";
-		db.executeSt(ps);
-		MysqlCon.conn.close();
-
+		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO benutzer (benutzername, passwort, blevel, ag_fk) "
+				+ "VALUES ('%s', '%s', '%d', '%s')", benutzer, passwort, berechtigung, gruppe));
 	}
 	
 	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
@@ -151,13 +133,8 @@ public class Benutzer {
 	 */
 	public static void updateBenutzer(String name, String passwort, String gruppe, int berechtigung) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "UPDATE benutzer SET benutzername = '" + name + "', passwort = '" + passwort + "', blevel = '" + berechtigung 
-				+ "', ag_fk = '" + gruppe + "' WHERE benutzername = '" + name + "'";
-		db.executeSt(ps);
-		MysqlCon.conn.close();
-
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET benutzername = '%s', passwort = '%s',"
+				+ " blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", name, passwort, berechtigung, gruppe, name));
 	}
 	
 	/**Methode, um einen Benutzer aus der DB zu löschen. Der Übergabewert "name" stellt den Benutzernamen des zu löschenden Benutzers dar.
@@ -167,32 +144,24 @@ public class Benutzer {
 	 *  
 	 * @throws SQLException
 	 */
-	public static void deleteBenutzer(String name) throws SQLException{
-		
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "DELETE FROM benutzer WHERE benutzername = '" + name + "'";
-		db.executeSt(ps);
-		MysqlCon.conn.close();
-		
+	public static void deleteBenutzer(String name) throws SQLException
+	{	
+		Main.get_DBConnection().ExecuteTransact(String.format("DELETE FROM benutzer WHERE benutzername = '%s';", name));
 	}
 	
 	
 	public Benutzer getBenutzerByBenutzerAndPassword(String pBenutzer, String pPasswort) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from benutzer WHERE benutzer='"+ pBenutzer +"' and passwort='"+ pPasswort +"' ");
+		Main.get_DBConnection().Execute(String.format("select * from benutzer WHERE benutzer='%s' AND passwort = '%s';", pBenutzer, pPasswort));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
 		while(rs.next())
 		{	
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
 			this.gruppe = (String)rs.getObject("gruppe");
-
 		}
-		MysqlCon.conn.close();
 		return this;
-			
 	}
 	
 	// Methode um TableView Benutzerverwaltung zu befüllen
@@ -200,22 +169,21 @@ public class Benutzer {
 		
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from benutzer");
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer"));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
 		while(rs.next())
 		{
 			data.add(new Benutzer(rs.getString("benutzername")));
 		}
-		MysqlCon.conn.close();
 		return data;
 	}
 	
 	public Benutzer getAntragByBenutzername(String BName) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		ResultSet rs = db.query("select * from benutzer WHERE benutzername='"+ BName +"'");
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", BName));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
 		if(rs.next())
 		{
 			this.benutzername = rs.getString("benutzername");
@@ -223,32 +191,29 @@ public class Benutzer {
 			this.gruppe = rs.getString("ag_fk");
 			this.berechtigung = rs.getInt("blevel");		    
 		}
-		MysqlCon.conn.close();
 		return this;
 	}
 	
-	public static String getBearGruppeByUser(String benN) throws SQLException{
-        
+	public static String getBearGruppeByUser(String benN) throws SQLException
+	{
  		bnPrüfen = benN;
    
-        MysqlCon db = new MysqlCon();
-        db.getDbCon();
-        ResultSet rs = db.query("select ag_fk from benutzer WHERE benutzername ='"+benN+"'");
+ 		Main.get_DBConnection().Execute(String.format("SELECT ag_fk FROM benutzer WHERE benutzername = '%s'", benN));
+ 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+ 		
         if(rs.first()){
         	gPrüfen = (String) rs.getString("ag_fk");
         }
          if(anmelden==true){
-     		MysqlCon.conn.close();
 	            return gPrüfen;
 	     } else {
-	 		MysqlCon.conn.close();
 	            return null;
 	     }    
     }
 	
 	
-	/** ***************************************************************************************************************************************************
-	 * ******************************************************Implementierung der Getter und Setter*********************************************************
+	/*****************************************************************************************************************************************************
+	 *******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
 	
 	public String getBenutzername() {
@@ -274,6 +239,5 @@ public class Benutzer {
 	}
 	public void setGruppe(String gruppe) {
 		this.gruppe = gruppe;
-	}
-	
+	}	
 }

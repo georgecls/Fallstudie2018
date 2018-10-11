@@ -1,6 +1,9 @@
 package application;
 	
 import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +17,19 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	
 	public Stage primaryStage;
-	
+	static DBConnector db = null;
+
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		loginWindow();
 	}
+
+	
+public static MysqlCon getSQL()
+{
+	return MysqlCon.getDbCon();
+}
 	
 	public void loginWindow() {
 		try {
@@ -30,7 +40,6 @@ public class Main extends Application {
 			
 			ControllerLogin loginWindowController = loader.getController();
 			loginWindowController.setMain(this);
-			
 			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -66,5 +75,37 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public static DBConnector get_DBConnection()
+	{
+		if(null == db) db = new DBConnector("sql7258916", "sql7258916", "SfSFVG296y");
+		if(db.is_connected() == false)
+		{
+			try
+			{
+				db.ConnectToDatabase();
+			}
+			catch (InstantiationException e)
+			{
+				System.out.println(String.format("Fehler bei Herstellung der Datenbank-Verbindung: %s", e.getMessage()));
+			}
+			catch (IllegalAccessException e)
+			{
+				System.out.println(String.format("Fehler bei Herstellung der Datenbank-Verbindung: %s", e.getMessage()));
+			}
+			String error = db.get_last_error();
+			if(error != null)
+			{
+				System.out.println(String.format("Fehler bei Herstellung der Datenbank-Verbindung: %s", error));
+				return null;
+			}
+			else
+			{
+				System.out.println("Datenbank-Verbindung wurde erfolgreich hergestellt");
+			}
+		}
+
+		return db;
 	}
 }

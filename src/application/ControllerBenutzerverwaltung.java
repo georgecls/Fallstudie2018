@@ -94,17 +94,19 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			}
 	}
 	
-	public void handleBearbeiten() {
-			
-		try {
+	public void handleBearbeiten()
+	{
+		try
+		{
     		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BenutzerWindowBearbeiten.fxml"));
     		Parent root1 = (Parent) fxmlLoader.load();
     		Stage stage = new Stage();
     		stage.setScene(new Scene(root1));
     		stage.show();
     		
-			} 
-    		catch (IOException e) {
+		} 
+    		catch (IOException e)
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -119,6 +121,4 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
-
 }
