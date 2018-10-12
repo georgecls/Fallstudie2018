@@ -58,6 +58,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		
 	}
 	
+	@FXML
 	public void onMouseClicked () {
 		Benutzer b1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
 //		System.out.println(b1.getBenutzername());

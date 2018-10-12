@@ -70,7 +70,6 @@ public class ControllerTickets implements Initializable{
 //				data_AlleT = Antrag.getAntraege();
 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
@@ -165,7 +164,6 @@ public class ControllerTickets implements Initializable{
         		
     			} 
         		catch (IOException e) {
-    				// TODO Auto-generated catch block
     				e.printStackTrace();
     			}    	
     	}
@@ -182,7 +180,6 @@ public class ControllerTickets implements Initializable{
         		
     			} 
         		catch (IOException e) {
-    				// TODO Auto-generated catch block
     				e.printStackTrace();
     			}    	    
     	}
