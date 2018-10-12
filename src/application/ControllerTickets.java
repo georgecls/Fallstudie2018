@@ -73,8 +73,9 @@ public class ControllerTickets implements Initializable{
 				e.printStackTrace();
 			}
 		
-    
-    	
+		/**
+		 * Kommentar einfügen
+		 */
     	data_prüfen.forEach((antrag) -> {
     		Antrag a1 = (Antrag) antrag;
     	}); 
@@ -99,7 +100,9 @@ public class ControllerTickets implements Initializable{
     		Antrag a6 = (Antrag) antrag;
     	}); 
 	
-    	
+    	/**
+    	 * Kommentar einfügen
+    	 */
     	status_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
@@ -130,7 +133,9 @@ public class ControllerTickets implements Initializable{
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		
-		
+		/**
+		 * Kommentar einfügen
+		 */
 		tvGruppentickets.setItems(data_gr);
 		tvTicketsPrüfen.setItems(data_prüfen);
 		tvTicketsGenehmigen.setItems(data_genehmigen);
