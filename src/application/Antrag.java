@@ -60,15 +60,6 @@ public class Antrag {
 				+ "VALUES('%s', '%s', '%s', '%s', 'erstellt', '', '', '%s', NULL, '%s', '%s');"
 				, name, text, zieldatum, erstelldatum, ersteller, erstGruppe, erstGruppe));
 
-		/*Ticket wurde erstellt Meldung kommt, jedoch wird es nicht unter Tickets angezeigt*/
-		/*UPDATE: Rollback der Transaktion wurde ausgeführt*/
-		
-		//idZaehler = countAntraege() + 1; //Funktioniert nicht! :)
-//		String ps = "INSERT INTO antrag "
-//				+ "(titel, beschreibung, fertigstellungsdatum, antragsdatum, status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-//				+ "VALUES "+ "('" + name + "', '"+text+"','"+zieldatum+"', '"
-//		 		+erstelldatum+"', 'erstellt', '', '', '"+ersteller+"', NULL, '"+erstGruppe+"', '"+erstGruppe+"')";
-//		db.executeSt(ps);
 	}
 	
 	/**Methode, um einen Antrag in der DB zu Ã¼berschreiben bzw. zu korrigieren. Der Ãœbergabewert "id" stellt die AntragsID des zu korrigierenden Antrags dar.
@@ -114,7 +105,7 @@ public class Antrag {
 	 */
 	public Antrag getAntragById(int pID) throws SQLException
 	{
-		Main.get_DBConnection().Execute(String.format("SELEcT * FROM antrag WHERE idantrag = '%d';", pID));
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE idantrag = '%d';", pID));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		if(rs.first())
@@ -140,7 +131,7 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public static ObservableList<Antrag> getAntraegeByBenutzer(String benutzer) throws SQLException
+	public static ObservableList<Antrag> getGruppenAntraege(String benutzer) throws SQLException
 	{
 	    ObservableList data = FXCollections.observableArrayList();
 	    try {
@@ -166,7 +157,7 @@ public class Antrag {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public static ObservableList<Antrag> getAntraege() throws SQLException {
+	public static ObservableList<Antrag> getAlleAntraege() throws SQLException {
 	    
 		ObservableList<Antrag> data = FXCollections.observableArrayList();
 	    
@@ -212,7 +203,13 @@ public class Antrag {
 //	}
 	
 	/**Methode um alle bestehenden Anräge abhängig vom Status abzufragen.
-	 *Der Eingabewert "status" stellt den Status (erstellt, geprüft, genehmigt, erledigt, abgelehnt) der auszugebenden Anträge dar.
+	 *Der Eingabewert "status" stellt den Status  der auszugebenden Anträge dar.
+	 *erstellt = neues Ticket angelegt -> verschieben in Tickets prüfen,
+	 *geprüft = Ticket geprüft -> verschieben in Tickets genehmigen,
+	 *genehmigt = Ticket genehmigt -> verschieben in Gruppentickets,
+	 *erledigt = Ticket abschließend bearbeitet -> verschieben in abgeschlossene Tickets, 
+	 *abgelehnt = Ticket wurde vom genehmiger/prüfer abgelehnt -> anzeige in eigene Tickets, aber nicht in abgesch. Tickets
+	 *
 	 *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
 	 *Anschließend wird die Datenbankverbindung hergestellt.
 	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
@@ -228,11 +225,11 @@ public class Antrag {
         ObservableList<Antrag> data = FXCollections.observableArrayList();
         try
         {
-            /*!*/     Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
+            Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
                 		 						"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
                 		 						"WHERE benutzername = '%s' AND status = '%s';", benutzername, status));
                  
-            /*!*/     ResultSet rs = Main.get_DBConnection().get_last_resultset();
+            ResultSet rs = Main.get_DBConnection().get_last_resultset();
                  while(rs.next())
                  {
                      data.add(new Antrag(rs.getInt("idantrag")));
@@ -243,6 +240,28 @@ public class Antrag {
         
         return data;
     }
+	
+	public static ObservableList<Antrag> getAntraegezuPruefen (String status, String benutzername) throws SQLException
+	{
+        ObservableList<Antrag> data = FXCollections.observableArrayList();
+        
+        try
+        {
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
+					"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
+					"WHERE benutzername = '%s' AND status = '%s' and ersteller_fk <> '%s';", benutzername, status, benutzername));
+
+		 ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		 	while(rs.next())
+		 	{
+		 		data.add(new Antrag(rs.getInt("idantrag")));
+		 	}                 
+		}
+		catch(SQLException e)
+		{	System.out.println(e);	}
+
+		return data;
+	}
 	
 	    
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "arbeitsgruppe" stellt den Antragsersteller des auszugebenden Antrags dar.

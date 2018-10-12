@@ -26,11 +26,6 @@ public class Main extends Application {
 	}
 
 	
-public static MysqlCon getSQL()
-{
-	return MysqlCon.getDbCon();
-}
-	
 	public void loginWindow() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("Login.fxml"));
