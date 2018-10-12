@@ -3,23 +3,19 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Observable;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,7 +43,21 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableColumn<Antrag, String> titel_ColGr, titel_ColP, titel_ColGe, titel_ColA, titel_ColET, titel_ColAT;
 	@FXML private TableColumn<Antrag, String> datum_ColGr, datum_ColP, datum_ColGe, datum_ColA, datum_ColET, datum_ColAT;
 
-	@FXML private Button btnBearbeiten, btnPrüfen, btnGenehmigen;
+	@FXML private Label lblGrId, lblPrId, lblGeId; 
+	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
+	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
+	@FXML private Label lblGrKommentar, lblPrKommentar, lblGeKommentar;
+	@FXML private Label lblGrFertigstellungsdatum, lblPrFertigstellungsdatum, lblGeFertigstellungsdatum;
+	
+	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum;
+	@FXML private JFXTextField tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
+	@FXML private JFXTextField tfGeId,tfGeTitel,tfGeFertigstellungsdatum;
+
+	@FXML private JFXTextArea taGrBeschreibung, taGrKommentar;
+	@FXML private JFXTextArea taPrBeschreibung, taPrKommentar;
+	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
+	
+	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
 	
@@ -63,12 +73,12 @@ public class ControllerTickets implements Initializable{
     	
 			try {
 				data_EigT = Antrag.getGruppenAntraege(ControllerLogin.user);
-				data_prüfen = Antrag.getAntraegezuPruefen("erstellt",ControllerLogin.user);//noch die falsche Methode, da der ersteller seine eigenen Tickets nicht prüfen darf
+				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.user);
 				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
 				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
 	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
-//				data_AlleT = Antrag.getAlleAntraege();
-
+				data_AlleT = Antrag.getAlleAntraege();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -80,7 +90,7 @@ public class ControllerTickets implements Initializable{
     		Antrag a1 = (Antrag) antrag;
     	}); 
     	
-			data_AbgT.forEach((antrag) -> {
+		data_AbgT.forEach((antrag) -> {
     		Antrag a2 = (Antrag) antrag;
     	}); 
     	
@@ -92,9 +102,9 @@ public class ControllerTickets implements Initializable{
     		Antrag a4 = (Antrag) antrag;
     	});    	
     	
-//    	data_AlleT.forEach((antrag) -> { 
-//        	Antrag a5 = (Antrag) antrag;
-//    	});
+    	data_AlleT.forEach((antrag) -> { 
+        	Antrag a5 = (Antrag) antrag;
+    	});
     	
     	data_genehmigen.forEach((antrag) -> {
     		Antrag a6 = (Antrag) antrag;
@@ -141,7 +151,7 @@ public class ControllerTickets implements Initializable{
 		tvTicketsGenehmigen.setItems(data_genehmigen);
 		tvAbgTickets.setItems(data_AbgT);
 		tvEigeneTickets.setItems(data_EigT);
-//		tvAlleTickets.setItems(data_AlleT);
+		tvAlleTickets.setItems(data_AlleT);
 
 	}
     

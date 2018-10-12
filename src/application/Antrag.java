@@ -128,7 +128,9 @@ public class Antrag {
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "ersteller" stellt den Antragsersteller des auszugebenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 *  
+	 * 
+	 * @author 
+	 * @param benutzer
 	 * @throws SQLException
 	 */
 	public static ObservableList<Antrag> getGruppenAntraege(String benutzer) throws SQLException
@@ -153,8 +155,8 @@ public class Antrag {
 	 *Anschließend wird die Datenbankverbindung hergestellt.
 	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
 	 *Diese Daten sind in ObservableList data gespeichert.
-	 *#Robin
-	 * @return
+	 * @author Robin
+	 * @return data
 	 * @throws SQLException 
 	 */
 	public static ObservableList<Antrag> getAlleAntraege() throws SQLException {
@@ -162,11 +164,11 @@ public class Antrag {
 		ObservableList<Antrag> data = FXCollections.observableArrayList();
 	    
 	    try {
-	    	Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag"));
+	    	Main.get_DBConnection().Execute("SELECT * FROM antrag;");
 	    	ResultSet rs = Main.get_DBConnection().get_last_resultset();	
 	    	
-	        while(rs.next()) {
-
+	        while(rs.next())
+	        {
 	            data.add(new Antrag(rs.getInt("idantrag")));
 	        }
 	    }
@@ -216,8 +218,9 @@ public class Antrag {
 	 *Diese Daten sind in ObservableList data gespeichert. 
 	 *
 	 *
-	 *#Robin
-	 * @return
+	 * @author Robin
+	 * @param status, benutzername
+	 * @return data
 	 * @throws SQLException 
 	 */
 	public static ObservableList<Antrag> getAntraegebyStatus(String status, String benutzername) throws SQLException
@@ -241,7 +244,22 @@ public class Antrag {
         return data;
     }
 	
-	public static ObservableList<Antrag> getAntraegezuPruefen (String status, String benutzername) throws SQLException
+	/**
+	 * Methode, um die Anträge mit Status 'erstellt' abzufragen.
+	 * Die Ergebnisse erscheinen in der Tabelle 'Tickets prüfen'.
+	 * 
+	 * Im ersten Schritt wird eine lokale ObservableList erzeugt.
+	 * Im Anschluss wird die DBConnection abgefragt u. ggfs. neu verbunden.
+	 * Dann wird das SQL Statement abgefragt und das Ergebnis in einem ResultSet gespeichert.
+	 * Dieses wird durch die Schleife in die ObservableList eingeftragen.
+	 * Zum Schluss wird die Liste zurückgegeben.
+	 * 
+	 * @author Robin
+	 * @param status, benutzername
+	 * @return data
+	 * @throws SQLException
+	 */
+	public static ObservableList<Antrag> getAntraegezuPruefen (String benutzername) throws SQLException
 	{
         ObservableList<Antrag> data = FXCollections.observableArrayList();
         
@@ -249,7 +267,7 @@ public class Antrag {
         {
 		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
 					"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
-					"WHERE benutzername = '%s' AND status = '%s' and ersteller_fk <> '%s';", benutzername, status, benutzername));
+					"WHERE benutzername = '%s' AND status = 'erstellt' and ersteller_fk <> '%s';", benutzername, benutzername));
 
 		 ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		 	while(rs.next())
