@@ -131,11 +131,22 @@ public class Benutzer {
 	 *  
 	 * @throws SQLException
 	 */
-	public static void updateBenutzer(String name, String passwort, String gruppe, int berechtigung) throws SQLException
+	public static void updateBenutzerPw(String name, String passwort, String gruppe, int berechtigung) throws SQLException
 	{
 		passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET benutzername = '%s', passwort = '%s',"
-				+ " blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", name, passwort, berechtigung, gruppe, name));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET passwort = '%s',"
+				+ " blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", passwort, berechtigung, gruppe, name));
+	}
+	
+	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
+	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
+	 * Danach werden die Parameter für das SQL-Statement übergeben und das gesamte SQL-Statement in einem String gespeichert.
+	 *  
+	 * @throws SQLException
+	 */
+	public static void updateBenutzer(String name, String gruppe, int berechtigung) throws SQLException
+	{
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", berechtigung, gruppe, name));
 	}
 	
 	/**Methode, um einen Benutzer aus der DB zu löschen. Der Übergabewert "name" stellt den Benutzernamen des zu löschenden Benutzers dar.
