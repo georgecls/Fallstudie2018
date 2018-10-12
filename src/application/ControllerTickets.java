@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -43,21 +44,22 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableColumn<Antrag, String> titel_ColGr, titel_ColP, titel_ColGe, titel_ColA, titel_ColET, titel_ColAT;
 	@FXML private TableColumn<Antrag, String> datum_ColGr, datum_ColP, datum_ColGe, datum_ColA, datum_ColET, datum_ColAT;
 
-	@FXML private Label lblGrId, lblPrId, lblGeId; 
-	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
-	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
-	@FXML private Label lblGrKommentar, lblPrKommentar, lblGeKommentar;
-	@FXML private Label lblGrFertigstellungsdatum, lblPrFertigstellungsdatum, lblGeFertigstellungsdatum;
+//	@FXML private Label lblGrId, lblPrId, lblGeId; 
+//	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
+//	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
+//	@FXML private Label lblGrKommentar, lblPrKommentar, lblGeKommentar;
+//	@FXML private Label lblGrFertigstellungsdatum, lblPrFertigstellungsdatum, lblGeFertigstellungsdatum;
+//	
+//	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum;
+//	@FXML private JFXTextField tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
+//	@FXML private JFXTextField tfGeId,tfGeTitel,tfGeFertigstellungsdatum;
+//
+//	@FXML private JFXTextArea taGrBeschreibung, taGrKommentar;
+//	@FXML private JFXTextArea taPrBeschreibung, taPrKommentar;
+//	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
 	
-	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum;
-	@FXML private JFXTextField tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
-	@FXML private JFXTextField tfGeId,tfGeTitel,tfGeFertigstellungsdatum;
-
-	@FXML private JFXTextArea taGrBeschreibung, taGrKommentar;
-	@FXML private JFXTextArea taPrBeschreibung, taPrKommentar;
-	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
-	
-	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
+//	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
+	@FXML private Button btnBearbeiten, btnPrüfen, btnGenehmigen;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
 	

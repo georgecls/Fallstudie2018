@@ -69,13 +69,13 @@
             </Tab>
             <Tab fx:id="TicketsPrüfen" text="Tickets prüfen">
                <content>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="958.0">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="656.0">
                      <children>
                         <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="656.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColP" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColP" prefWidth="306.0" text="Titel" />
-                              <TableColumn fx:id="datum_ColP" minWidth="0.0" prefWidth="150.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="datum_ColP" prefWidth="150.0" text="Fertigstellungsdatum" />
                               <TableColumn fx:id="status_ColP" prefWidth="100.0" text="Status" />
                            </columns>
                         </TableView>
@@ -124,7 +124,7 @@
                      <columns>
                         <TableColumn fx:id="auftragsID_ColET" prefWidth="100.0" text="Antrags-ID" />
                         <TableColumn fx:id="titel_ColET" prefWidth="306.0" text="Titel" />
-                        <TableColumn fx:id="datum_ColET" minWidth="0.0" prefWidth="150.0" text="Fertigstellungsdatum" />
+                        <TableColumn fx:id="datum_ColET" prefWidth="150.0" text="Fertigstellungsdatum" />
                         <TableColumn fx:id="status_ColET" prefWidth="99.0" text="Status" />
                      </columns>
                   </TableView>
@@ -136,7 +136,7 @@
                      <columns>
                         <TableColumn fx:id="auftragsID_ColA" prefWidth="100.0" text="Antrags-ID" />
                         <TableColumn fx:id="titel_ColA" prefWidth="306.0" text="Titel" />
-                        <TableColumn fx:id="datum_ColA" minWidth="0.0" prefWidth="150.0" text="Fertigstellungsdatum" />
+                        <TableColumn fx:id="datum_ColA" prefWidth="150.0" text="Fertigstellungsdatum" />
                         <TableColumn fx:id="status_ColA" prefWidth="100.0" text="Status" />
                      </columns>
                   </TableView>
@@ -150,7 +150,7 @@
                            <columns>
                               <TableColumn fx:id="auftragsID_ColGe" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColGe" prefWidth="306.0" text="Titel" />
-                              <TableColumn fx:id="datum_ColGe" minWidth="0.0" prefWidth="150.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="datum_ColGe" prefWidth="150.0" text="Fertigstellungsdatum" />
                               <TableColumn fx:id="status_ColGe" prefWidth="100.0" text="Status" />
                            </columns>
                         </TableView>
@@ -200,7 +200,7 @@
                      <columns>
                         <TableColumn fx:id="auftragsID_ColAT" prefWidth="100.0" text="Antrags-ID" />
                         <TableColumn fx:id="titel_ColAT" prefWidth="306.0" text="Titel" />
-                        <TableColumn fx:id="datum_ColAT" minWidth="0.0" prefWidth="150.0" text="Fertigstellungsdatum" />
+                        <TableColumn fx:id="datum_ColAT" prefWidth="150.0" text="Fertigstellungsdatum" />
                         <TableColumn fx:id="status_ColAT" prefWidth="100.0" text="Status" />
                      </columns>
                   </TableView>

@@ -106,7 +106,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tvTicketsGenehmigen1" prefHeight="550.0" prefWidth="656.0">
+                        <TableView fx:id="tvAlleTickets" prefHeight="550.0" prefWidth="656.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColA" minWidth="0.0" prefWidth="107.0" text="Auftrags-ID" />
                               <TableColumn fx:id="titel_ColA" minWidth="0.0" prefWidth="290.0" text="Titel" />
