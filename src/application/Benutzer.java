@@ -34,7 +34,7 @@ public class Benutzer {
 	
 	public Benutzer(String BName) throws SQLException
 	{
-		this.getAntragByBenutzername(BName);
+		this.getBenutzerByBenutzername(BName);
 	}
 
 	
@@ -78,8 +78,7 @@ public class Benutzer {
 	        	{
 		        	vergleichsPasswort = rsP.getString("passwort");
 		        	
-					
-					if(vergleichsPasswort.equals(p)) {
+		        	if(BCrypt.checkpw(p, vergleichsPasswort))   {
 			            anmelden = true;
 			        } else {
 			            anmelden = false;
@@ -120,6 +119,7 @@ public class Benutzer {
 	 */
 	public static void insertBenutzer(String benutzer, String passwort, int berechtigung, String gruppe) throws SQLException
 	{
+		passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
 		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO benutzer (benutzername, passwort, blevel, ag_fk) "
 				+ "VALUES ('%s', '%s', '%d', '%s')", benutzer, passwort, berechtigung, gruppe));
 	}
@@ -133,6 +133,7 @@ public class Benutzer {
 	 */
 	public static void updateBenutzer(String name, String passwort, String gruppe, int berechtigung) throws SQLException
 	{
+		passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET benutzername = '%s', passwort = '%s',"
 				+ " blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", name, passwort, berechtigung, gruppe, name));
 	}
@@ -179,7 +180,7 @@ public class Benutzer {
 		return data;
 	}
 	
-	public Benutzer getAntragByBenutzername(String BName) throws SQLException
+	public Benutzer getBenutzerByBenutzername(String BName) throws SQLException
 	{
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", BName));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
