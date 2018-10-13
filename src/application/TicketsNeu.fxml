@@ -20,7 +20,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="958.0">
                      <children>
-                        <TableView fx:id="tvGruppentickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="656.0">
+                        <TableView fx:id="tvGruppentickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="656.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColGr" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColGr" prefWidth="306.0" text="Titel" />
@@ -31,36 +31,36 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGrId" prefHeight="20.0" prefWidth="130.0" text="Antrag-ID" />
-                              <JFXTextField fx:id="tfGrId" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfGrId" focusColor="#2eb7bf" prefHeight="35.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGrTitel" prefHeight="20.0" prefWidth="130.0" text="Titel" />
-                              <JFXTextField fx:id="tfGrTitel" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfGrTitel" focusColor="#2eb7bf" prefHeight="35.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGrBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
-                              <JFXTextArea fx:id="taGrBeschreibung" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
+                              <JFXTextArea fx:id="taGrBeschreibung" focusColor="#2eb7bf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGrKommentar" prefHeight="20.0" prefWidth="130.0" text="Kommentar" />
-                              <JFXTextArea fx:id="taGrKommentar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
+                              <JFXTextArea fx:id="taGrKommentar" focusColor="#2eb7bf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGrFertigstellungsdatum" prefHeight="20.0" prefWidth="130.0" text="Fertigstellungsdatum" />
-                              <JFXTextField fx:id="tfGrFertigstellungsdatum" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfGrFertigstellungsdatum" focusColor="#2eb7bf" prefHeight="35.0" prefWidth="350.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="656.0">
                            <children>
-                              <JFXButton fx:id="btnBearbeiten" prefHeight="35.0" prefWidth="100.0" text="bearbeiten" />
+                              <JFXButton fx:id="btnBearbeiten" buttonType="RAISED" onAction="#handleBtnBearbeiten" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2eb7bf;" text="bearbeiten" />
                            </children>
                         </HBox>
                      </children>
@@ -71,7 +71,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="656.0">
                      <children>
-                        <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="656.0">
+                        <TableView fx:id="tvTicketsPrüfen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="656.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColP" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColP" prefWidth="306.0" text="Titel" />
@@ -82,36 +82,36 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblPrId" prefHeight="20.0" prefWidth="130.0" text="Antrag-ID" />
-                              <JFXTextField fx:id="tfPrId" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfPrId" focusColor="#2eb7bf" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblPrTitel" prefHeight="20.0" prefWidth="130.0" text="Titel" />
-                              <JFXTextField fx:id="tfPrTitel" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfPrTitel" focusColor="#2eb7bf" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblPrBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
-                              <JFXTextArea fx:id="taPrBeschreibung" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
+                              <JFXTextArea fx:id="taPrBeschreibung" focusColor="#2eb7bf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblPrKommentar" prefHeight="20.0" prefWidth="130.0" text="Kommentar" />
-                              <JFXTextArea fx:id="taPrKommentar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
+                              <JFXTextArea fx:id="taPrKommentar" focusColor="#2eb7bf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblPrFertigstellungsdatum" prefHeight="20.0" prefWidth="130.0" text="Fertigstellungsdatum" />
-                              <JFXTextField fx:id="tfPrFertigstellungsdatum" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfPrFertigstellungsdatum" focusColor="#2eb7bf" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="656.0">
                            <children>
-                              <JFXButton fx:id="btnPrüfen" prefHeight="35.0" prefWidth="100.0" text="prüfen" />
+                              <JFXButton fx:id="btnPrüfen" buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2eb7bf;" text="prüfen" />
                            </children>
                         </HBox>
                      </children>
@@ -120,7 +120,7 @@
             </Tab>
             <Tab fx:id="eigeneTickets" text="eigene Tickets">
                <content>
-                  <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="656.0">
+                  <TableView fx:id="tvEigeneTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="656.0">
                      <columns>
                         <TableColumn fx:id="auftragsID_ColET" prefWidth="100.0" text="Antrags-ID" />
                         <TableColumn fx:id="titel_ColET" prefWidth="306.0" text="Titel" />
@@ -130,9 +130,9 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="abgeschlosseneTickets" text="abgeschlossene Tickets">
+            <Tab fx:id="abgeschlosseneTickets" text="abg. Tickets">
                <content>
-                  <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="656.0">
+                  <TableView fx:id="tvAbgTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="656.0">
                      <columns>
                         <TableColumn fx:id="auftragsID_ColA" prefWidth="100.0" text="Antrags-ID" />
                         <TableColumn fx:id="titel_ColA" prefWidth="306.0" text="Titel" />
@@ -142,11 +142,11 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="TicketsGenehmigen" text="genehmigte Tickets">
+            <Tab fx:id="TicketsGenehmigen" text="gen. Tickets">
                <content>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="958.0">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="656.0">
                      <children>
-                        <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="656.0">
+                        <TableView fx:id="tvTicketsGenehmigen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="656.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColGe" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColGe" prefWidth="306.0" text="Titel" />
@@ -157,46 +157,46 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGeId" prefHeight="20.0" prefWidth="130.0" text="Antrag-ID" />
-                              <JFXTextField fx:id="tfGeId" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfGeId" focusColor="#2eb7bf" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGeTitel" prefHeight="20.0" prefWidth="130.0" text="Titel" />
-                              <JFXTextField fx:id="tfGeTitel" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfGeTitel" focusColor="#2eb7bf" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGeBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
-                              <JFXTextArea fx:id="taGeBeschreibung" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
+                              <JFXTextArea fx:id="taGeBeschreibung" focusColor="#2eb7bf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGeKommentar" prefHeight="20.0" prefWidth="130.0" text="Kommentar" />
-                              <JFXTextArea fx:id="taGeKommentar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
+                              <JFXTextArea fx:id="taGeKommentar" focusColor="#2eb7bf" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0">
                            <children>
                               <Label fx:id="lblGeFertigstellungsdatum" prefHeight="20.0" prefWidth="130.0" text="Fertigstellungsdatum" />
-                              <JFXTextField fx:id="tfGeFertigstellungsdatum" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfGeFertigstellungsdatum" focusColor="#2eb7bf" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="656.0" spacing="20.0">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="656.0" spacing="20.0">
                            <children>
-                              <JFXButton fx:id="btnGenehmigen" prefHeight="35.0" prefWidth="100.0" text="genehmigen" />
-                              <JFXButton fx:id="btnAblehnen" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="100.0" text="ablehnen" />
+                              <JFXButton fx:id="btnGenehmigen" onAction="#handleBtnGenehmigen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2eb7bf;" text="genehmigen" />
+                              <JFXButton fx:id="btnAblehnen" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleBtnAblehnen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #2eb7bf;" text="ablehnen" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                </content>
             </Tab>
-            <Tab fx:id="AlleTickets" text="Untitled Tab">
+            <Tab fx:id="AlleTickets" text="Alle Tickets">
                <content>
-                  <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="656.0">
+                  <TableView fx:id="tvAlleTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="656.0">
                      <columns>
                         <TableColumn fx:id="auftragsID_ColAT" prefWidth="100.0" text="Antrags-ID" />
                         <TableColumn fx:id="titel_ColAT" prefWidth="306.0" text="Titel" />

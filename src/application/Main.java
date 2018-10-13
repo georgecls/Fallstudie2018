@@ -50,8 +50,8 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("Main.fxml"));
 			BorderPane pane = loader.load();
-			primaryStage.setMinHeight(630);
-			primaryStage.setMinWidth(900);
+			primaryStage.setMinHeight(730);
+			primaryStage.setMinWidth(910);
 			
 			ControllerMain mainWindowController = loader.getController();
 			mainWindowController.setMain(this);

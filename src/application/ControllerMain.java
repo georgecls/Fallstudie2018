@@ -56,7 +56,7 @@ public class ControllerMain implements Initializable {
 	public void handleTickets() {
 		try {
 			rootPane.getChildren().remove(pane);
-			pane = FXMLLoader.load(getClass().getResource("Tickets.fxml"));
+			pane = FXMLLoader.load(getClass().getResource("TicketsNeu.fxml"));
 			rootPane.getChildren().add(pane);
 			
 			
