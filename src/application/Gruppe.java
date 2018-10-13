@@ -5,8 +5,8 @@ import java.sql.SQLException;
 public class Gruppe {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
-	public String gruppenname;
-	public String gruppenbeschr;
+	private String gruppenname;
+	private String gruppenbeschr;
 	
 	
 	
@@ -58,7 +58,7 @@ public class Gruppe {
 	 *  
 	 * @throws SQLException
 	 */
-	public void deleteGruppeById(int name) throws SQLException
+	public static void deleteGruppe(String name) throws SQLException
 	{
 		MysqlCon db = new MysqlCon();
 		db.getDbCon();

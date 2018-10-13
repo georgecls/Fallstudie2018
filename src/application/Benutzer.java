@@ -68,7 +68,7 @@ public class Benutzer {
 	 public static boolean anmelden(String benN, String p) throws SQLException{
 	        String eingabeName = benN;
 	        String eingabePasswort = p;
-	        String vergleichsPasswort = "";
+	        String vergleichsPasswort = null;
 	        try {
 	        	
 	        	Main.get_DBConnection().Execute(String.format("SELECT passwort FROM benutzer WHERE benutzername = '%s';", benN));
@@ -89,6 +89,7 @@ public class Benutzer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	        
 			return anmelden;
 	    }
 	 

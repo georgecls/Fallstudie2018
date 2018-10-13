@@ -57,13 +57,17 @@ public class ControllerLogin {
 		
 		if (berechtigt == true) {
 			user = benutzerName;
+			benutzerName = null;
+			benutzerKennwort = null;
 			main.primaryStage.close();
 			main.primaryStage.setHeight(0);
 			main.primaryStage.setWidth(0);
 			main.mainWindow();
+
 		} else {
 			labelFehler.setVisible(true);
 			labelFehler.setTextFill(Color.RED);
 		}	
+
 	}
 }
