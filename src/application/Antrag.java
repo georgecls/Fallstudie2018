@@ -326,7 +326,7 @@ public class Antrag {
 //	}
 	
 	public static int countAntraege() throws SQLException {
-		Main.get_DBConnection().Execute(String.format("SELECT COUNT(idantrag) FROM antrag"));
+		Main.get_DBConnection().Execute("SELECT COUNT(idantrag) FROM antrag");
 		Main.get_DBConnection().get_last_resultset().next();
 		int rs = Main.get_DBConnection().get_last_resultset().getInt(0);
 		return rs;

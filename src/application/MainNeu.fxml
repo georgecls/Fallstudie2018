@@ -32,6 +32,6 @@
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="656.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="656.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
