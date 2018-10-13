@@ -51,7 +51,7 @@ public class ControllerBenutzerWindowBearbeiten  implements Initializable{
 		// TODO Auto-generated method stub
 		
 		fieldBenutzer.setText(ControllerBenutzerverwaltung.b12);
-		fieldPasswort.setText(ControllerBenutzerverwaltung.p12);
+//		fieldPasswort.setText(ControllerBenutzerverwaltung.p12);
 		choiceBoxGruppe.setValue(ControllerBenutzerverwaltung.g12);
 		choiceBoxBerechtigung.setValue(ControllerBenutzerverwaltung.a12);
 		
@@ -68,9 +68,18 @@ public class ControllerBenutzerWindowBearbeiten  implements Initializable{
 		int berechtigung =  (int) choiceBoxBerechtigung.getSelectionModel().getSelectedItem();
 //		System.out.println(benutzer+passwort+gruppe+berechtigung);
 		try {
-			Benutzer.updateBenutzer(benutzer, passwort, gruppe, berechtigung);
-			Stage stage = (Stage) ändern.getScene().getWindow();
-			stage.close();
+			if (passwort.equals("")) 
+			{
+				Benutzer.updateBenutzer(benutzer, gruppe, berechtigung);
+				Stage stage = (Stage) ändern.getScene().getWindow();
+				stage.close();
+			}else
+			{
+				Benutzer.updateBenutzerPw(benutzer,passwort, gruppe, berechtigung);
+				Stage stage = (Stage) ändern.getScene().getWindow();
+				stage.close();
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
