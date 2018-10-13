@@ -1,18 +1,34 @@
 package application;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 
 public class ControllerLogin {
 	
 	//View
 	
-	@FXML public TextField fieldBenutzer;
-	@FXML public TextField fieldKennwort;
-	@FXML public Label labelFehler;
+//	@FXML public TextField fieldBenutzer;
+//	@FXML public TextField fieldKennwort;
+//	@FXML public Label labelFehler;
+	
+	//neueView
+	
+	@FXML private JFXTextField fieldBenutzer;
+	@FXML private JFXPasswordField fieldKennwort;
+	@FXML private Label labelFehler, labelBenutzer, labelPasswort;
+	@FXML private JFXButton btnAnmelden;
+	
 	
 	//Hiermit kann in in anderen Fenstern die Visibility gesetzt werden
 	public static String user;
@@ -26,6 +42,11 @@ public class ControllerLogin {
 	public void setMain(Main main) {
 		this.main = main;
 	}
+	
+//	@Override
+//    public void initialize(URL url, ResourceBundle rb) {
+//		
+//	}
 	
 	@FXML
 	public void handleLogin() throws SQLException {
@@ -48,7 +69,9 @@ public class ControllerLogin {
 			main.primaryStage.setWidth(0);
 			main.mainWindow();
 		} else {
-			labelFehler.setText("Benutzer/Passwort falsch");
+			labelFehler.setVisible(true);
+			labelFehler.setTextFill(Color.RED);
+//			labelFehler.setText("Benutzer/Passwort falsch");
 		}
 		
 	}
