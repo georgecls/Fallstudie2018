@@ -17,20 +17,13 @@ import javafx.scene.paint.Color;
 public class ControllerLogin {
 	
 	//View
-	
-//	@FXML public TextField fieldBenutzer;
-//	@FXML public TextField fieldKennwort;
-//	@FXML public Label labelFehler;
-	
-	//neueView
-	
 	@FXML private JFXTextField fieldBenutzer;
 	@FXML private JFXPasswordField fieldKennwort;
 	@FXML private Label labelFehler, labelBenutzer, labelPasswort;
 	@FXML private JFXButton btnAnmelden;
 	
 	
-	//Hiermit kann in in anderen Fenstern die Visibility gesetzt werden
+	//Hiermit kann in anderen Fenstern die Visibility gesetzt werden
 	public static String user;
 	public static int berechtigung;
 	
@@ -43,10 +36,10 @@ public class ControllerLogin {
 		this.main = main;
 	}
 	
-//	@Override
-//    public void initialize(URL url, ResourceBundle rb) {
-//		
-//	}
+	public void initialize(URL url, ResourceBundle rb) {
+		//sollte machen, dass die Farbe des Buttons weiﬂ wird - funkt nicht
+		btnAnmelden.setStyle("-fx-text-fill: white");
+	}
 	
 	@FXML
 	public void handleLogin() throws SQLException {
@@ -71,9 +64,6 @@ public class ControllerLogin {
 		} else {
 			labelFehler.setVisible(true);
 			labelFehler.setTextFill(Color.RED);
-//			labelFehler.setText("Benutzer/Passwort falsch");
-		}
-		
+		}	
 	}
-
 }

@@ -30,8 +30,10 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("LoginNeu.fxml"));
 			AnchorPane pane = loader.load();
-			primaryStage.setMinHeight(200.00);
-			primaryStage.setMinWidth(300.00);
+			primaryStage.setMinHeight(290.00);
+			primaryStage.setMinWidth(370.00);
+			primaryStage.setMaxHeight(290.00);
+			primaryStage.setMaxWidth(370.00);
 			
 			ControllerLogin loginWindowController = loader.getController();
 			loginWindowController.setMain(this);
