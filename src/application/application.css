@@ -1,1 +1,16 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.parent {
+	-fx-background-color: #fff;
+}
+
+.sidebar{
+	-fx-background-color: #333645;
+}
+
+.btns{
+	-fx-background-color: transparent;
+}
+
+.btns:hover{
+	-fx-background-color: #202332;
+}
