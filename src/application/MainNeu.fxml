@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerMain">
+   <left>
+      <AnchorPane prefHeight="700.0" prefWidth="230.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="22.0" layoutY="2.0" prefHeight="700.0" prefWidth="230.0" spacing="5.0" style="-fx-background-color: #E6E6E6;">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                     <children>
+                        <JFXButton fx:id="btnNTicket" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleNeuesTicket" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Neues Ticket" />
+                        <JFXButton fx:id="btnTickets" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleTickets" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Tickets" />
+                        <JFXButton fx:id="btnAuswertung" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleAuswertung" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Auswertung" />
+                        <JFXButton fx:id="btnBenutzerverwaltung" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleBenutzerverwaltung" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Benutzerverwaltung" />
+                        <JFXButton fx:id="btnGruppenverwaltung" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Gruppenverwaltung" />
+                     </children></VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="230.0" spacing="5.0">
+                     <children>
+                        <JFXButton fx:id="btnAbmelden" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleAbmelden" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Abmelden" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="656.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
