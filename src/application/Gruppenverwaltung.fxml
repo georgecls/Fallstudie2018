@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerGruppenverwaltung">
+   <children>
+      <HBox layoutX="350.0" layoutY="239.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="700.0" prefWidth="501.0" spacing="40.0">
+               <children>
+                  <TableView fx:id="tvGruppenverwaltung" prefHeight="455.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="gruppe_Col" prefWidth="136.09027874469757" text="Gruppe" />
+                      <TableColumn fx:id="beschreibung_Col" prefWidth="279.5000762939453" text="Beschreibung" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tvBenutzer" prefHeight="357.0" prefWidth="353.0">
+                     <columns>
+                        <TableColumn fx:id="benutzer_Col" prefWidth="92.62151348590851" text="Benutzer" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="700.0" prefWidth="563.0" spacing="40.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="479.0" spacing="40.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Gruppe">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="fieldGruppe" focusColor="#128277" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="160.0" prefWidth="479.0" spacing="40.0">
+                     <children>
+                        <Label prefWidth="90.0" text="Beschreibung">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextArea fx:id="fieldBeschreibung" focusColor="#128277" prefHeight="80.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <JFXButton fx:id="btnHinzufuegen" buttonType="RAISED" onAction="#handleHinzufuegen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Hinzufügen" />
+                        <JFXButton fx:id="btnAendern" buttonType="RAISED" onAction="#handleAendern" prefWidth="90.0" style="-fx-background-color: #128277;" text="Ändern" />
+                        <JFXButton fx:id="btnLoeschen" buttonType="RAISED" onAction="#handleLoeschen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Löschen" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
