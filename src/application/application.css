@@ -7,10 +7,14 @@
 	-fx-background-color: #333645;
 }
 
+/* Bsp. für Hintergrund transparent und text-Füllfarbe weiß */
 .btns{
 	-fx-background-color: transparent;
+	-fx-text-fill: white; 
 }
 
-.btns:hover{
-	-fx-background-color: #202332;
+/* Beispiel für türkiser Hintergrund und Schriftgröße 14 */
+.tabs{
+	-fx-background-color: #2eb7bf;
+	-fx-font-size: 14p;
 }

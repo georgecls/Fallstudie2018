@@ -50,7 +50,7 @@ public class Main extends Application {
 	
 	public void mainWindow() {
 		try {
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("Main.fxml"));
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("MainNeu.fxml"));
 			BorderPane pane = loader.load();
 			primaryStage.setMinHeight(730);
 			primaryStage.setMinWidth(910);

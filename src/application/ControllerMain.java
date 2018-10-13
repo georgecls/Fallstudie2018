@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +20,8 @@ public class ControllerMain implements Initializable {
 	
 	//View
 	@FXML private AnchorPane rootPane;
-	@FXML private Button btnBenutzerverwaltung;
+	@FXML private JFXButton btnBenutzerverwaltung, btnNTicket, btnTickets,
+							btnAuswertung, btnGruppenverwaltung, btnAbmelden;
 	
 	
 	public Main main;
@@ -45,6 +48,7 @@ public class ControllerMain implements Initializable {
 			rootPane.getChildren().remove(pane);
 			pane = FXMLLoader.load(getClass().getResource("NeuesTicket.fxml"));
 			rootPane.getChildren().add(pane);
+			//btnNTicket.setStyle("#2eb7bf");
 						
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
