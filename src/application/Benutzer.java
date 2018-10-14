@@ -240,6 +240,16 @@ public class Benutzer {
 	     }    
     }
 	
+	public static Boolean selberName(String benutzer) {
+		
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", benutzer));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		if (rs == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}	
 
 	
 	
@@ -270,5 +280,6 @@ public class Benutzer {
 	}
 	public void setGruppe(String gruppe) {
 		this.gruppe = gruppe;
-	}	
+	}
+
 }

@@ -35,13 +35,10 @@ public class Gruppe {
 	 *  
 	 * @throws SQLException
 	 */
-	public void insertGruppe() throws SQLException
+	public static void insertGruppe(String gruppe, String beschreibung) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "INSERT INTO benutzer "
-				+ "(gruppenname, gruppenbeschreibung) " + "VALUES " + "('" + this.getGruppenname() + "', '" + this.getGruppenbeschr() + "')";
-		db.executeSt(ps);
+		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO ag (gruppenname, gruppenbeschreibung) "
+				+ "VALUES ('%s', '%s')", gruppe, beschreibung));
 	}
 	
 	/**Methode, um eine Gruppe in der DB zu ändern. Der Übergabewert "name" stellt den Gruppennamen der zu bearbeitenden Gruppe dar.
@@ -51,13 +48,9 @@ public class Gruppe {
 	 *  
 	 * @throws SQLException
 	 */
-	public void updateGruppeById(int name) throws SQLException
+	public void updateGruppeById(String gruppe, String beschreibung) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "UPDATE ag SET gruppenname = '" + this.getGruppenname() + "', gruppenbeschreibung = '" + this.getGruppenbeschr() + "WHERE benutzername = " + name;
-		db.executeSt(ps);
-		
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppe = '%d', ag_fk = '%s' WHERE benutzername = '%s';", gruppe, beschreibung));
 	}
 	
 	/**Methode, um eine Gruppe aus der DB zu löschen. Der Übergabewert "name" stellt den Gruppennamen der zu löschenden Gruppe dar.
