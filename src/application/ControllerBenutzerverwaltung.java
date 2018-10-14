@@ -57,10 +57,8 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 				
 		data.forEach((benutzer) -> {
 			Benutzer b1 = (Benutzer) benutzer;
-			System.out.println(b1);
 		});
 				
-//		select_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("select"));
 		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppe"));
 		berechtigung_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("berechtigung"));
@@ -114,7 +112,6 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		String passwort = fieldPasswort.getText().toString();
 		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
 		int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
-//		System.out.println(benutzer+passwort+gruppe+berechtigung);
 		try {
 			if (passwort.equals("")) {
 				Benutzer.updateBenutzer(benutzer, gruppe, berechtigung);

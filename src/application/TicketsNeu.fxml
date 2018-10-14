@@ -16,7 +16,7 @@
    <children>
       <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="730.0" stylesheets="@application.css" tabMaxHeight="40.0" tabMaxWidth="140.0" tabMinHeight="40.0" tabMinWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab fx:id="Gruppentickets" text="Gruppentickets">
+            <Tab id="PaneTab" fx:id="Gruppentickets" text="Gruppentickets">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="958.0">
                      <children>
@@ -66,7 +66,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab fx:id="TicketsPrüfen" text="Tickets prüfen">
+            <Tab id="PaneTab" fx:id="TicketsPrüfen" text="Tickets prüfen">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
@@ -116,7 +116,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab fx:id="eigeneTickets" text="eigene Tickets">
+            <Tab id="PaneTab" fx:id="eigeneTickets" text="eigene Tickets">
                <content>
                   <TableView fx:id="tvEigeneTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="730.0">
                      <columns>
@@ -128,7 +128,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="abgeschlosseneTickets" text="abg. Tickets">
+            <Tab id="PaneTab" fx:id="abgeschlosseneTickets" text="abg. Tickets">
                <content>
                   <TableView fx:id="tvAbgTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="730.0">
                      <columns>
@@ -140,7 +140,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab fx:id="TicketsGenehmigen" text="gen. Tickets">
+            <Tab id="PaneTab" fx:id="TicketsGenehmigen" text="gen. Tickets">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
@@ -191,7 +191,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab fx:id="AlleTickets" text="Alle Tickets">
+            <Tab id="PaneTab" fx:id="AlleTickets" text="Alle Tickets">
                <content>
                   <TableView fx:id="tvAlleTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="730.0">
                      <columns>

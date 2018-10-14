@@ -2,12 +2,18 @@
 
 /* Bsp. für Button-Text-Füllfarbe weiß */
 
-.tab{
+#tab{
 -fx-background-color:#128277;
--fx-font-size: 12pt;
 }
+
 
 .tab-header-background{
 -fx-background-color:#128277;
--fx-font-size: 12pt;
+-fx-font-size: 10pt;
+-fx-font-weight: normal;
+}
+
+tab.PaneTab{
+	-fx-font-size: 10pt;
+	-fx-font-weight: normal;
 }
