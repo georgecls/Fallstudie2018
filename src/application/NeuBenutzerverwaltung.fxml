@@ -14,11 +14,11 @@
    <children>
       <HBox layoutX="246.0" layoutY="250.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView prefHeight="600.0" prefWidth="311.0">
+            <TableView fx:id="tvBenutzerverwaltung" prefHeight="600.0" prefWidth="311.0">
               <columns>
-                <TableColumn prefWidth="111.5" text="Benutzer" />
-                <TableColumn prefWidth="115.5" text="Gruppe" />
-                  <TableColumn prefWidth="82.5" text="Berechtigung" />
+                <TableColumn fx:id="benutzer_Col" prefWidth="111.5" text="Benutzer" />
+                <TableColumn fx:id="gruppe_Col" prefWidth="115.5" text="Gruppe" />
+                  <TableColumn fx:id="berechtigung_Col" prefWidth="82.5" text="Berechtigung" />
               </columns>
             </TableView>
             <VBox alignment="CENTER" prefHeight="600.0" prefWidth="347.0" spacing="20.0">
