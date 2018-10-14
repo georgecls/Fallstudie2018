@@ -71,7 +71,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btnAbschicken" buttonType="RAISED" style="-fx-background-color: #128277;" text="abschicken" textFill="WHITE" />
+                  <JFXButton fx:id="btnAbschicken" buttonType="RAISED" onAction="#handleAbschicken" style="-fx-background-color: #128277;" text="abschicken" textFill="WHITE" />
                </children>
             </HBox>
          </children>

@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +33,9 @@ public class ControllerNeuBenutzerverwaltung  implements Initializable {
 	
 	private ObservableList<Benutzer> data;
 	
-	@FXML private Button btnHinzufuegen;
-	@FXML private Button btnAendern;
-	@FXML private Button btnLoeschen;
+	@FXML private JFXButton btnHinzufuegen;
+	@FXML private JFXButton btnAendern;
+	@FXML private JFXButton btnLoeschen;
 	
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
