@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -43,6 +44,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
 	@FXML private JFXTextField fieldBenutzer, fieldPasswort;
 	@FXML private JFXComboBox boxGruppe, boxBerechtigung;
+	@FXML private Label label;
 	
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
@@ -72,6 +74,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		fieldPasswort.setText("");
 		boxGruppe.setValue(null);
 		boxBerechtigung.setValue(null);
+        label.setText(null);
 		
 	}
 	
@@ -92,20 +95,28 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	}
 	
 	@FXML
-	public void handleHinzufuegen() {
-		String benutzer = fieldBenutzer.getText().toString();
-		String passwort = fieldPasswort.getText().toString();
-		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
-		int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
-		
-		try {
-			Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-		initialize (null, null);
-	}
+    public void handleHinzufuegen() {
+              String benutzer = fieldBenutzer.getText().toString();
+              String passwort = fieldPasswort.getText().toString();
+              String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
+              int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
+              
+              Boolean selberName = Benutzer.selberName(benutzer);
+              
+              if(selberName==true) {
+                         label.setText("Der Benutzer existiert bereits!");
+              }else {
+              
+                         try {
+                                   Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
+                         } catch (SQLException e) {
+                                   // TODO Auto-generated catch block
+                                   e.printStackTrace();
+                         }                    
+                         initialize (null, null);
+              }
+    }
+
 	@FXML
 	public void handleAendern() {
 		String benutzer = fieldBenutzer.getText().toString();
