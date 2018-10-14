@@ -25,7 +25,8 @@ import javafx.stage.Stage;
 
 public class ControllerGruppenverwaltung  implements Initializable {
 	
-	@FXML private TableView<Gruppe> tvGruppenverwaltung, tvBenutzer;
+	@FXML private TableView<Gruppe> tvGruppenverwaltung;
+	@FXML private TableView<Benutzer> tvBenutzer;
 	
 	@FXML private TableColumn<Benutzer, String> benutzer_Col;
 	@FXML private TableColumn<Gruppe, String> gruppe_Col, beschreibung_Col;
@@ -33,7 +34,8 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	private static String b12, g12, a12;
 	
 	
-	private ObservableList<Gruppe> gruppe, benutzer;
+	private ObservableList<Gruppe> gruppe;
+	private ObservableList<Benutzer> benutzer;
 
 	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
 	@FXML private JFXTextField fieldGruppe;
@@ -63,37 +65,46 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	@FXML
 	public void onMouseClicked () {
-//		Benutzer b1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
-////		System.out.println(b1.getBenutzername());
-//		b12 = b1.getBenutzername();
-			
 		Gruppe g1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
 		g12 = g1.getGruppenname();
 		
 		Gruppe a1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
 		a12 = a1.getGruppenbeschr();
 		
+		fieldGruppe.setText(g12);
+		fieldBeschreibung.setText(a12);
+		
 		
 //		Nachdem eine auf eine Gruppe geklickt wird, soll die 2. Tabelle mit den zugehörigen Benutzern befüllt werden...
 		
-//		try {
-//			benutzer = Benutzer.getGruppenbenutzer();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//				
-//		benutzer.forEach((benutzer) -> {
-//			benutzer b1 = (Benutzer) benutzer;
-//		});
-//				
-//		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
-//		
-//		tvBenutzer.setItems(benutzer);
+		try {
+			benutzer = Benutzer.getBenutzerByGruppe(g12);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		benutzer.forEach((benutzer) -> {
+			Benutzer b1 = (Benutzer) benutzer;
+		});
+				
+		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
+		
+		tvBenutzer.setItems(benutzer);
 	}
 	
 	@FXML
 	public void handleHinzufuegen() {
+		String gruppe = fieldGruppe.getText().toString();
+		String beschreibung = fieldBeschreibung.getText().toString();
+		
+		try {
+			Gruppe.insertGruppe(gruppe, beschreibung);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		initialize (null, null);
 		
 	}
 	@FXML
