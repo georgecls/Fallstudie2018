@@ -36,7 +36,6 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	private ObservableList<Gruppe> gruppe, benutzer;
 
 	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
-	
 	@FXML private JFXTextField fieldGruppe;
 	@FXML private JFXTextArea fieldBeschreibung;
 
@@ -53,13 +52,11 @@ public class ControllerGruppenverwaltung  implements Initializable {
 				
 		gruppe.forEach((gruppe) -> {
 			Gruppe b1 = (Gruppe) gruppe;
-			System.out.println(b1);
 		});
 				
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenname"));
 		beschreibung_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenbeschr"));
 		
-		System.out.println("Hallo");
 		tvGruppenverwaltung.setItems(gruppe);
 		
 	}

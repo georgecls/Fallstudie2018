@@ -94,7 +94,7 @@ public class Gruppe {
 	
 	public Gruppe getGruppeByBenutzername(String GName) throws SQLException
 	{
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", GName));
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", GName));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		if(rs.next())
