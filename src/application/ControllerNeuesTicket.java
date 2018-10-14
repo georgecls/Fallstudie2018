@@ -61,16 +61,6 @@ public class ControllerNeuesTicket {
 		fieldTicketart.setText(null);
 		fieldZieldatum.setValue(null);
 		fieldText.setText(null);
-		fieldAntwort.setText("Das Ticket "+ticketart+" wurde erstellt");
-//		System.out.println(ticketart);
-//		System.out.println(ersteller);
-//		System.out.println(erstelldatum);
-//		System.out.println(zieldatum);
-//		System.out.println(beschreibung);
+		fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
 	}
-	
-	
-	
-	
-
 }
