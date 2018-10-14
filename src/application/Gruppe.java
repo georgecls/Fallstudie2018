@@ -23,6 +23,11 @@ public class Gruppe {
 		
 	}
 	
+	public Gruppe(String GName) throws SQLException
+	{
+		this.getGruppeByBenutzername(GName);
+	}
+	
 	/**Methode, um eine neue Gruppe in die DB zu schreiben.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
@@ -74,18 +79,31 @@ public class Gruppe {
 	// Methode um TableView Benutzerverwaltung zu befüllen
 	public static ObservableList getGruppenverwaltung() throws SQLException {
 		
-	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
+	    ObservableList<Gruppe> data = FXCollections.observableArrayList();
 
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag"));
+	    Main.get_DBConnection().Execute("SELECT * FROM ag");
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		while(rs.next())
 		{
-			data.add(new Benutzer(rs.getString("gruppenname")));
+			data.add(new Gruppe(rs.getString("gruppenname")));
 		}
 		return data;
 	}
 	
+	
+	public Gruppe getGruppeByBenutzername(String GName) throws SQLException
+	{
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", GName));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		if(rs.next())
+		{
+			this.gruppenname = rs.getString("gruppenname");
+			this.gruppenbeschr = rs.getString("gruppenbeschreibung");	    
+		}
+		return this;
+	}
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
