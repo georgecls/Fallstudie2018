@@ -18,7 +18,7 @@
                <children>
                   <Label prefWidth="150.0" text="Ticketart:">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                   <JFXTextField fx:id="fieldTicketart" focusColor="#128277" labelFloat="true" prefHeight="26.0" prefWidth="300.0" promptText="z.B. Verschrottung, Berechtigung, etc." />
@@ -28,7 +28,7 @@
                <children>
                   <Label prefWidth="150.0" text="Ersteller:">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                   <JFXTextField fx:id="fieldErsteller" editable="false" focusColor="#128277" prefHeight="26.0" prefWidth="300.0" />
@@ -38,7 +38,7 @@
                <children>
                   <Label prefWidth="150.0" text="Erstelldatum:">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                   <JFXDatePicker fx:id="fieldErstelldatum" defaultColor="#128277" disable="true" editable="false" prefHeight="26.0" prefWidth="300.0" />
@@ -48,7 +48,7 @@
                <children>
                   <Label prefWidth="150.0" text="Zieldatum:">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                   <JFXDatePicker fx:id="fieldZieldatum" defaultColor="#128277" prefHeight="26.0" prefWidth="301.0" />
@@ -58,7 +58,7 @@
                <children>
                   <Label prefWidth="150.0" text="Text:">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
                   <JFXTextArea fx:id="fieldText" focusColor="#128277" prefHeight="200.0" prefWidth="300.0" />
@@ -71,7 +71,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="btnAbschicken" buttonType="RAISED" style="-fx-background-color: #128277;" text="abschicken" />
+                  <JFXButton fx:id="btnAbschicken" buttonType="RAISED" style="-fx-background-color: #128277;" text="abschicken" textFill="WHITE" />
                </children>
             </HBox>
          </children>

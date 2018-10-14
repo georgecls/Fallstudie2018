@@ -16,7 +16,7 @@
             <Label fx:id="labelPasswort" layoutX="14.0" layoutY="101.0" prefHeight="18.0" prefWidth="61.0" text="Passwort" />
             <JFXTextField fx:id="fieldBenutzer" focusColor="#128277" layoutX="146.0" layoutY="30.0" />
             <JFXPasswordField fx:id="fieldKennwort" focusColor="#128277" layoutX="146.0" layoutY="97.0" />
-            <JFXButton id="jfxButton" fx:id="btnAnmelden" buttonType="RAISED" layoutX="184.0" layoutY="154.0" onAction="#handleLogin" ripplerFill="#128277" style="-fx-background-color: #128277" stylesheets="@application.css" text="anmelden" />
+            <JFXButton id="jfxButton" fx:id="btnAnmelden" buttonType="RAISED" layoutX="184.0" layoutY="154.0" onAction="#handleLogin" ripplerFill="#128277" style="-fx-background-color: #128277" stylesheets="@application.css" text="anmelden" textFill="WHITE" />
             <Label fx:id="labelFehler" layoutX="140.0" layoutY="197.0" text="Anmeldung fehlgeschlagen" visible="false" />
          </children>
          <effect>
