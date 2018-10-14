@@ -207,6 +207,22 @@ public class Benutzer {
 		return this;
 	}
 	
+	
+	public static ObservableList getBenutzerByGruppe(String gruppe) throws SQLException {
+		
+	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
+
+	    Main.get_DBConnection().Execute(String.format("SELECT benutzername FROM benutzer WHERE ag_fk = '%s'", gruppe));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		while(rs.next())
+		{
+			data.add(new Benutzer(rs.getString("benutzername")));
+		}
+		return data;
+	}
+	
+	
 	public static String getBearGruppeByUser(String benN) throws SQLException
 	{
  		bnPrüfen = benN;
@@ -223,6 +239,8 @@ public class Benutzer {
 	            return null;
 	     }    
     }
+	
+
 	
 	
 	/*****************************************************************************************************************************************************
