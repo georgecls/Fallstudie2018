@@ -1,6 +1,13 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
 /* Bsp. für Button-Text-Füllfarbe weiß */
-.jfxButton{
-	-fx-text-fill: white; 
+
+.tab{
+-fx-background-color:#128277;
+-fx-font-size: 12pt;
+}
+
+.tab-header-background{
+-fx-background-color:#128277;
+-fx-font-size: 12pt;
 }

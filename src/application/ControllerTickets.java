@@ -107,12 +107,10 @@ public class ControllerTickets implements Initializable{
     	/**
     	 * Kommentar einfügen
     	 */
-    	status_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));    	
     	
-		status_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
@@ -127,7 +125,6 @@ public class ControllerTickets implements Initializable{
 		titel_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		
-		status_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
