@@ -11,21 +11,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerGruppenverwaltung">
+<AnchorPane prefHeight="700.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerGruppenverwaltung">
    <children>
       <HBox layoutX="350.0" layoutY="239.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="700.0" prefWidth="501.0" spacing="40.0">
+            <VBox alignment="CENTER" prefHeight="700.0" prefWidth="525.0" spacing="40.0">
                <children>
-                  <TableView fx:id="tvGruppenverwaltung" prefHeight="455.0" prefWidth="200.0">
+                  <TableView fx:id="tvGruppenverwaltung" prefHeight="332.0" prefWidth="280.0">
                     <columns>
-                      <TableColumn fx:id="gruppe_Col" prefWidth="136.09027874469757" text="Gruppe" />
-                      <TableColumn fx:id="beschreibung_Col" prefWidth="279.5000762939453" text="Beschreibung" />
+                      <TableColumn fx:id="gruppe_Col" prefWidth="121.0" text="Gruppe" />
+                      <TableColumn fx:id="beschreibung_Col" prefWidth="239.0" text="Beschreibung" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="tvBenutzer" prefHeight="357.0" prefWidth="353.0">
+                  <TableView fx:id="tvBenutzer" prefHeight="338.0" prefWidth="280.0">
                      <columns>
-                        <TableColumn fx:id="benutzer_Col" prefWidth="92.62151348590851" text="Benutzer" />
+                        <TableColumn fx:id="benutzer_Col" prefWidth="355.0" text="Benutzer" />
                      </columns>
                   </TableView>
                </children>
@@ -39,20 +39,20 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="fieldGruppe" focusColor="#128277" prefWidth="200.0" />
+                        <JFXTextField fx:id="fieldGruppe" focusColor="#128277" prefWidth="200.0" promptText="z.B. Verwaltung, IT, etc." />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="160.0" prefWidth="479.0" spacing="40.0">
+                  <HBox alignment="CENTER" prefHeight="295.0" prefWidth="359.0" spacing="40.0">
                      <children>
-                        <Label prefWidth="90.0" text="Beschreibung">
+                        <Label prefHeight="20.0" prefWidth="88.0" text="Beschreibung">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextArea fx:id="fieldBeschreibung" focusColor="#128277" prefHeight="80.0" prefWidth="200.0" />
+                        <JFXTextArea fx:id="fieldBeschreibung" focusColor="#128277" labelFloat="true" prefHeight="295.0" prefWidth="200.0" promptText="Hier wierden die Aufgaben der Gruppe kurz definiert" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="257.0" spacing="30.0">
                      <children>
                         <JFXButton fx:id="btnHinzufuegen" buttonType="RAISED" onAction="#handleHinzufuegen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Hinzufügen" />
                         <JFXButton fx:id="btnAendern" buttonType="RAISED" onAction="#handleAendern" prefWidth="90.0" style="-fx-background-color: #128277;" text="Ändern" />

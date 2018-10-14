@@ -5,6 +5,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,10 +35,10 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	private ObservableList<Gruppe> gruppe, benutzer;
 
-	@FXML private Button btnHinzufuegen, btnAendern, btnLoeschen;
+	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
 	
-	@FXML private TextField fieldGruppe;
-	@FXML private TextArea fieldBeschreibung;
+	@FXML private JFXTextField fieldGruppe;
+	@FXML private JFXTextArea fieldBeschreibung;
 
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
@@ -84,7 +88,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 //			benutzer b1 = (Benutzer) benutzer;
 //		});
 //				
-////		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
+//		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
 //		
 //		tvBenutzer.setItems(benutzer);
 	}

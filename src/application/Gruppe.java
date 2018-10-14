@@ -1,6 +1,10 @@
 package application;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Gruppe {
 	
@@ -65,6 +69,21 @@ public class Gruppe {
 		String ps = "DELETE FROM ag WHERE gruppenname = " + name;
 		db.executeSt(ps);
 		
+	}
+	
+	// Methode um TableView Benutzerverwaltung zu befüllen
+	public static ObservableList getGruppenverwaltung() throws SQLException {
+		
+	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
+
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag"));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		while(rs.next())
+		{
+			data.add(new Benutzer(rs.getString("gruppenname")));
+		}
+		return data;
 	}
 	
 	
