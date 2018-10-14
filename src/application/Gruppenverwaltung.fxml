@@ -39,7 +39,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="fieldGruppe" focusColor="#128277" prefWidth="200.0" promptText="z.B. Verwaltung, IT, etc." />
+                        <JFXTextField fx:id="fieldGruppe" focusColor="#128277" labelFloat="true" prefWidth="200.0" promptText="z.B. Verwaltung, IT, etc." />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="295.0" prefWidth="359.0" spacing="40.0">
@@ -54,9 +54,9 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="257.0" spacing="30.0">
                      <children>
-                        <JFXButton fx:id="btnHinzufuegen" buttonType="RAISED" onAction="#handleHinzufuegen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Hinzufügen" />
-                        <JFXButton fx:id="btnAendern" buttonType="RAISED" onAction="#handleAendern" prefWidth="90.0" style="-fx-background-color: #128277;" text="Ändern" />
-                        <JFXButton fx:id="btnLoeschen" buttonType="RAISED" onAction="#handleLoeschen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Löschen" />
+                        <JFXButton fx:id="btnHinzufuegen" buttonType="RAISED" onAction="#handleHinzufuegen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Hinzufügen" textFill="WHITE" />
+                        <JFXButton fx:id="btnAendern" buttonType="RAISED" onAction="#handleAendern" prefWidth="90.0" style="-fx-background-color: #128277;" text="Ändern" textFill="WHITE" />
+                        <JFXButton fx:id="btnLoeschen" buttonType="RAISED" onAction="#handleLoeschen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Löschen" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>
