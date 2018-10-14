@@ -18,7 +18,7 @@
                         <JFXButton fx:id="btnTickets" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleTickets" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Tickets" />
                         <JFXButton fx:id="btnAuswertung" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleAuswertung" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Auswertung" />
                         <JFXButton fx:id="btnBenutzerverwaltung" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleBenutzerverwaltung" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Benutzerverwaltung" />
-                        <JFXButton fx:id="btnGruppenverwaltung" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Gruppenverwaltung" />
+                        <JFXButton fx:id="btnGruppenverwaltung" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleGruppenverwaltung" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Gruppenverwaltung" />
                      </children></VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="230.0" spacing="5.0">

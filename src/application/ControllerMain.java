@@ -104,6 +104,17 @@ public class ControllerMain implements Initializable {
 		
 	}
 	
+	@FXML public void handleGruppenverwaltung() {
+		try {
+			rootPane.getChildren().remove(pane);
+			pane = FXMLLoader.load(getClass().getResource("Gruppenverwaltung.fxml"));
+			rootPane.getChildren().add(pane);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@FXML
 	public void handleAbmelden() {
 		DBConnector db = new DBConnector();
