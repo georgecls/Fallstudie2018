@@ -5,6 +5,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -14,13 +19,11 @@ import javafx.scene.control.TextField;
 public class ControllerNeuesTicket {
 	
 	//View
-	@FXML public TextField fieldTicketart;
-	@FXML public TextField fieldErsteller;
-	@FXML public DatePicker fieldErstelldatum;
-	@FXML public DatePicker fieldZieldatum;
-	@FXML public TextArea fieldText;
-	
-	@FXML public Label fieldAntwort;
+	@FXML private JFXTextField fieldErsteller, fieldTicketart;
+	@FXML private JFXDatePicker fieldZieldatum, fieldErstelldatum;
+	@FXML private JFXTextArea fieldText;
+	@FXML private JFXButton btnAbschicken;	
+	@FXML private Label fieldAntwort;
 	
 	private String gruppeErsteller;
 	

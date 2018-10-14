@@ -46,7 +46,7 @@ public class ControllerMain implements Initializable {
 	public void handleNeuesTicket() {
 		try {
 			rootPane.getChildren().remove(pane);
-			pane = FXMLLoader.load(getClass().getResource("NeuesTicket.fxml"));
+			pane = FXMLLoader.load(getClass().getResource("NeuesTicketNeu.fxml"));
 			rootPane.getChildren().add(pane);
 			//btnNTicket.setStyle("#2eb7bf");
 						

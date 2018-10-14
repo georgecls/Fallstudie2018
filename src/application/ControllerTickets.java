@@ -25,20 +25,12 @@ import javafx.stage.Stage;
 
 public class ControllerTickets implements Initializable{
 	
-	@FXML private TableView<Antrag> tvGruppentickets;
-	@FXML private TableView<Antrag> tvTicketsPrüfen;
-	@FXML private TableView<Antrag> tvTicketsGenehmigen;
-	@FXML private TableView<Antrag> tvAlleTickets;
-	@FXML private TableView<Antrag> tvAbgTickets;
-	@FXML private TableView<Antrag> tvEigeneTickets;
+	@FXML private TableView<Antrag> tvGruppentickets, tvEigeneTickets, tvTicketsPrüfen;
+	@FXML private TableView<Antrag> tvTicketsGenehmigen, tvAlleTickets, tvAbgTickets;
 	
-	@FXML private Tab Gruppentickets;
-	@FXML private Tab TicketsPrüfen;
-	@FXML private Tab eigeneTickets;
-	@FXML private Tab abgeschlosseneTickets;
-	@FXML private Tab TicketsGenehmigen;
-	@FXML private Tab AlleTickets;
-	
+	@FXML private Tab Gruppentickets, TicketsPrüfen, eigeneTickets;
+	@FXML private Tab abgeschlosseneTickets, TicketsGenehmigen, AlleTickets;
+		
 	@FXML private TableColumn<Antrag, String> status_ColGr, status_ColP, status_ColGe, status_ColA, status_ColET, status_ColAT;
 	@FXML private TableColumn<Antrag, String> auftragsID_ColGr,auftragsID_ColP, auftragsID_ColGe, auftragsID_ColA, auftragsID_ColET, auftragsID_ColAT;
 	@FXML private TableColumn<Antrag, String> titel_ColGr, titel_ColP, titel_ColGe, titel_ColA, titel_ColET, titel_ColAT;
@@ -90,32 +82,26 @@ public class ControllerTickets implements Initializable{
 		 */
     	data_prüfen.forEach((antrag) -> {
     		Antrag a1 = (Antrag) antrag;
-    		System.out.println(a1.getName());
     	}); 
     	
 		data_AbgT.forEach((antrag) -> {
     		Antrag a2 = (Antrag) antrag;
-    		System.out.println(a2.getName());
     	}); 
     	
     	data_EigT.forEach((antrag) -> {
     		Antrag a3 = (Antrag) antrag;
-    		System.out.println(a3.getName());
     	}); 
     	
     	data_gr.forEach((antrag) -> {
     		Antrag a4 = (Antrag) antrag;
-    		System.out.println(a4.getName());
     	});    	
     	
     	data_AlleT.forEach((antrag) -> { 
         	Antrag a5 = (Antrag) antrag;
-    		System.out.println(a5.getName());
     	});
     	
     	data_genehmigen.forEach((antrag) -> {
     		Antrag a6 = (Antrag) antrag;
-    		System.out.println(a6.getName());
     	}); 
 	
     	/**
@@ -163,14 +149,12 @@ public class ControllerTickets implements Initializable{
 
 	}
     
-    	//neue FXML - Abwandlung von "TicketsWindow.fxml"
     	@FXML
     	public void handleBtnBearbeiten()
     	{
     		
     	}
     	
-    	//Button umbenennen in GUI - FXML anpassen
     	@FXML
     	public void handleBtnPrüfen()
     	{
@@ -187,7 +171,7 @@ public class ControllerTickets implements Initializable{
     			}    	
     	}
     	
-    	//Button wieder umbenennen + Kommentar füllen - neue FXML - abwandlung von "TicketsWindow.fxml"
+    	//Kommentar füllen
     	@FXML
     	public void handleBtnGenehmigen()
     	{
