@@ -179,14 +179,12 @@ public class DBConnector
 	public void close()
 	{
 		if(connection == null) return;
-		System.out.println("Verbindung getrennt1");
 		try
 		{
 			if(is_connected() || false == connection.isClosed())
 			{
 				connection.close();
 				connection = null;
-				System.out.println("Verbindung getrennt2");
 			}
 		}
 		catch (SQLException e)

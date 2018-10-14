@@ -281,55 +281,33 @@ public class Antrag {
 		return data;
 	}
 	
-	    
-	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "arbeitsgruppe" stellt den Antragsersteller des auszugebenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 *  
-	 * @throws SQLException
-	 * Methode wird vermutlich nicht mehr benötigt, da die Methode getAntraegebyStatus dies inne hat #Robin
-	 */
-//	public static ResultSet getAntragByBaergruppe(String arbeitsgruppe) throws SQLException
+
+
+//	public static ObservableList<Antrag> auswertungGesamt(String benutzername) throws SQLException
 //	{
-//		MysqlCon db = new MysqlCon();
-//		db.getDbCon();
-//		ResultSet rs = db.query("select * from antrag WHERE ersteller='"+ arbeitsgruppe +"'");
-//		return rs;
-//	}
-//	
-	
-	
-	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "datum" stellt den Antragsersteller des auszugebenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 *  
-	 * @throws SQLException
-	 * Vermutlich sinnfreie Methode, da keine Umsetzung in GUI #Robin
-	 */
-//	public static Antrag getAntragbyDatum (Date fertigstellungsdatum) throws SQLException
-//	{
-//		Antrag a1 = null;
-//		MysqlCon db = new MysqlCon();
-//		db.getDbCon();
-//		ResultSet rs = db.query("select * from antrag WHERE fertigstellungsdatum='"+ fertigstellungsdatum +"'");
-//		
-//		while(rs.next())
-//		{
-//			a1 = new Antrag();
-//			a1.antragid = rs.getInt("idantrag");
-//			a1.name = rs.getString("titel");
-//			a1.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
-//			a1.status = rs.getString("status");
-//			a1.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-//		}
-//		return a1;
+//        
+//        try {
+//        	Main.get_DBConnection().Execute("SELECT COUNT(idantrag) FROM antrag where status = 'erstellt';");
+//        	ResultSet rs = Main.get_DBConnection().get_last_resultset();
+//        	while(rs.next())
+//        	{
+//        		
+//        	}
+//        }
+//        return data;
 //	}
 	
-	public static int countAntraege() throws SQLException {
+	
+	public static String countAntraege() throws SQLException {
+		String i = null;
+		
 		Main.get_DBConnection().Execute("SELECT COUNT(idantrag) FROM antrag");
-		Main.get_DBConnection().get_last_resultset().next();
-		int rs = Main.get_DBConnection().get_last_resultset().getInt(0);
-		return rs;
+//		Main.get_DBConnection().get_last_resultset().next();
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		while(rs.next()) {
+			i = rs.getString(1);
+		}
+		return i;
 	}
 	
 	/** ***************************************************************************************************************************************************
