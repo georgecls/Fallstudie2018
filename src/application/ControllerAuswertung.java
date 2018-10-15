@@ -22,9 +22,8 @@ public class ControllerAuswertung implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub		
-		
-		loadAuswertungGes();
 		loadAuswertungGr();
+		loadAuswertungGes();
 	}
 	
 	public void loadAuswertungGes()
@@ -33,8 +32,7 @@ public class ControllerAuswertung implements Initializable {
 		try {
 			dataChartGes = FXCollections.observableArrayList(
 					 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByStatus("abgeschlossen")),
-						new PieChart.Data("zu bearbeiten", Antrag.countAntraegeByStatus("genehmigt"))
-						//new PieChart.Data("offen", Antrag.countAntraegeOffen())
+						new PieChart.Data("offen", Antrag.countAntraegeByStatus("genehmigt"))
 					 );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -42,9 +40,7 @@ public class ControllerAuswertung implements Initializable {
 		}
 		pieChartGes.setData(dataChartGes);
         pieChartGes.setTitle("Auswertung Gesamt");
-        
-        pieChartGes.setLabelLineLength(10);
-        pieChartGes.setLegendSide(Side.RIGHT);
+ 
 	}
 	
 	
@@ -54,8 +50,7 @@ public class ControllerAuswertung implements Initializable {
 			try {
 				dataChartGr = FXCollections.observableArrayList(
 						 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByGruppe(ControllerLogin.user, "abgeschlossen")),
-							new PieChart.Data("zu bearbeiten", Antrag.countAntraegeByGruppe(ControllerLogin.user ,"genehmigt"))
-							//new PieChart.Data("offen", Antrag.countAntraegeOffen())
+							new PieChart.Data("offen", Antrag.countAntraegeByGruppe(ControllerLogin.user ,"genehmigt"))
 						 );
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -65,7 +60,5 @@ public class ControllerAuswertung implements Initializable {
 	        pieChartGr.setData(dataChartGr);
 	        pieChartGr.setTitle("Auswertung Gruppe");
 	        
-	        pieChartGr.setLabelLineLength(10);
-	        pieChartGr.setLegendSide(Side.RIGHT);
 	}
 }

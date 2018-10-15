@@ -319,17 +319,7 @@ public class Antrag {
 		return i;
 	}
 	
-	public static Double countAntraegeOffen() throws SQLException {
-		double i = 0.00;
-		
-		Main.get_DBConnection().Execute("SELECT COUNT(idantrag) FROM antrag where status = 'erstellt' or status = 'geprüft' or status = 'genehmigt';");
-		ResultSet rs = Main.get_DBConnection().get_last_resultset();
-		while(rs.next()) {
-			String is = rs.getString(1);
-			i = Double.parseDouble(is);
-		}
-		return i;
-	}
+
 	
 	/**
 	 * Methode um die Anzahl der Anträge je nach Status und Gruppe ausgeben zu lassen.
@@ -343,9 +333,14 @@ public class Antrag {
 	public static Double countAntraegeByGruppe(String benutzername, String status) throws SQLException{
 		double i = 0.00;
 		
-		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
+		Main.get_DBConnection().Execute(String.format("SELECT COUNT(idantrag) FROM antrag " + 
 				"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
 				"WHERE benutzername = '%s' AND status = '%s';", benutzername, status));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		while(rs.next()) {
+			String is = rs.getString(1);
+			i = Double.parseDouble(is);
+		}
 		return i;
 	}
 	

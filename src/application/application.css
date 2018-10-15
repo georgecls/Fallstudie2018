@@ -17,3 +17,11 @@ tab.PaneTab{
 	-fx-font-size: 10pt;
 	-fx-font-weight: normal;
 }
+
+.default-color0.chart-pie {
+	-fx-pie-color: #00f6ff;
+}
+
+.default-color1.chart-pie {
+	-fx-pie-color: #00ff87;
+}
