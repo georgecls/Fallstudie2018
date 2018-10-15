@@ -62,37 +62,6 @@ public class Antrag {
 
 	}
 	
-	/**Methode, um einen Antrag in der DB zu überschreiben bzw. zu korrigieren. Der Übergabewert "id" stellt die AntragsID des zu korrigierenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" übergeben und damit der entsprechende Datensatz überschrieben.
-	 *  
-	 * @throws SQLException
-	 */
-//	public static void updateAntragById(int id) throws SQLException
-//	{
-//		MysqlCon db = new MysqlCon();
-//		db.getDbCon();
-//		String ps = "UPDATE antrag SET idantrag = '" + id + "', titel = '" + this.getName() + "', beschreibung = '" + this.getBeschreibung() 
-//				+ "', fertigstellungsdatum = '" + this.getFertigstellungsdatum() + "', antragsdatum = '" + this.getAntragsdatum() + "', status = '" + this.getStatus()
-//				+ "', ablehnungsgrund = '" + this.getAblehnungsgrund() + "', anmerkung = '" + this.getAnmerkung() + "', ersteller_fk = '" + this.getErsteller() 
-//				+ "', bearbeiter_fk = '" + this.getBearbeiter() + "', ag_ersteller_fk = '" + this.getErstGruppe() + "', ag_bearbeiter_fk = '" + this.getBearbeiterGruppe()
-//				+ "WHERE idantrag = " + id;
-//		db.executeSt(ps);
-//		
-//	}
-	
-	/**Methode, um einen Antrag aus der DB zu löschen. Der Übergabewert "id" stellt die AntragsID des zu löschenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" übergeben und damit der entsprechende Datensatz gelöscht.
-	 *  
-	 * @throws SQLException
-	 */
-	public static void deleteAntragById(int id) throws SQLException
-	{
-		Main.get_DBConnection().ExecuteTransact(String.format("DELETE FROM antrag WHERE idantrag = '%d';", id));
-	}
 	
 	/**Methode zieht sich Antrag mit im Parameter angegebener ID.
 	 *Zuerst wird die Datenbankverbindung hergestellt.
@@ -304,6 +273,48 @@ public class Antrag {
 		return i;
 	}
 	
+	
+	/** ***************************************************************************************************************************************************
+	 * *************************************************************Ver�nderung der Status*****************************************************************
+	 ******************************************************************************************************************************************************/
+	
+	
+	/**Methode, um einen Antrag aus der DB zu löschen. Der Übergabewert "id" stellt die AntragsID des zu löschenden Antrags dar.
+	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
+	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
+	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" übergeben und damit der entsprechende Datensatz gelöscht.
+	 *  
+	 * @throws SQLException
+	 */
+	public static void deleteAntragById(int id) throws SQLException
+	{
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geloescht' WHERE idantrag = '%s'", id));
+	}
+	
+	
+	public static void antragPruefen(int id) throws SQLException
+	{
+		
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geprueft' WHERE idantrag = '%s'", id));
+	}
+	
+	public static void antragGenehmigen(int id) throws SQLException
+	{
+		
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'genehmigt' WHERE idantrag = '%s'", id));
+	}
+	
+	public static void antragBearbeiten(int id) throws SQLException
+	{
+		
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'erledigt' WHERE idantrag = '%s'", id));
+	}
+	
+	public static void antragAblehnen(int id) throws SQLException
+	{
+		
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'abgelehnt' WHERE idantrag = '%s'", id));
+	}
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
