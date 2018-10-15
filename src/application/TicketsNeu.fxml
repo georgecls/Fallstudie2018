@@ -25,6 +25,8 @@
                               <TableColumn fx:id="auftragsID_ColGr" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColGr" prefWidth="495.0" text="Titel" />
                               <TableColumn fx:id="datum_ColGr" prefWidth="135.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="Kommentar_ColGr" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Kommentar" />
+                              <TableColumn fx:id="Beschreibung_ColGr" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Beschreibung" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
@@ -75,6 +77,8 @@
                               <TableColumn fx:id="auftragsID_ColP" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColP" prefWidth="495.0" text="Titel" />
                               <TableColumn fx:id="datum_ColP" prefWidth="135.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="Kommentar_ColP" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Kommentar" />
+                              <TableColumn fx:id="Beschreibung_ColP" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Beschreibung" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
@@ -149,6 +153,8 @@
                               <TableColumn fx:id="auftragsID_ColGe" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColGe" prefWidth="495.0" text="Titel" />
                               <TableColumn fx:id="datum_ColGe" prefWidth="135.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="Kommentar_ColGe" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Kommentar" />
+                              <TableColumn fx:id="Beschreibung_ColGe" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Beschreibung" />
                            </columns>
                         </TableView>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">

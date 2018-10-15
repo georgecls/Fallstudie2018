@@ -19,7 +19,7 @@ public class Antrag {
 	private Date fertigstellungsdatum;
 	private String status;
 	private String ablehnungsgrund;
-	private String anmerkung;
+	private String kommentar;
 	private Benutzer ersteller;
 	private Benutzer bearbeiter;
 	private Gruppe erstGruppe;
@@ -117,7 +117,7 @@ public class Antrag {
 			this.antragsdatum = rs.getDate("antragsdatum");
 			this.status = rs.getString("status");
 			this.ablehnungsgrund = rs.getString("ablehnungsgrund");
-			this.anmerkung = rs.getString("anmerkung");
+			this.kommentar = rs.getString("anmerkung");
 			this.ersteller = new Benutzer(rs.getString("ersteller_fk"));
 			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
 		}
@@ -177,32 +177,6 @@ public class Antrag {
 	    
 	    return data;
 	}
-	
-	
-	
-	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "status" stellt den Antragsersteller des auszugebenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 *  
-	 * @throws SQLException
-	 * 
-	 * Ich vermute, dass die Methode nicht mehr benötigt wird, da die Methode getAntraegeByStatus diese ersetzt #Robin
-	 */
-//	public ResultSet getAntragByStatus(String status) throws SQLException
-//	{
-//		MysqlCon db = new MysqlCon();
-//		db.getDbCon();
-//		ResultSet rs = db.query("select * from antrag WHERE status='"+ status+"'");
-//		while(rs.next())
-//		{
-//			this.antragid = rs.getInt("idantrag");
-//			this.name = rs.getString("titel");
-//			this.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
-//			this.ersteller = (Benutzer) rs.getObject("ersteller_fk");
-//			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-//		}
-//		return rs;
-//	}
 	
 	/**Methode um alle bestehenden Anräge abhängig vom Status abzufragen.
 	 *Der Eingabewert "status" stellt den Status  der auszugebenden Anträge dar.
@@ -281,22 +255,10 @@ public class Antrag {
 		return data;
 	}
 	
-
-
-//	public static ObservableList<Antrag> auswertungGesamt(String benutzername) throws SQLException
-//	{
-//        
-//        try {
-//        	Main.get_DBConnection().Execute("SELECT COUNT(idantrag) FROM antrag where status = 'erstellt';");
-//        	ResultSet rs = Main.get_DBConnection().get_last_resultset();
-//        	while(rs.next())
-//        	{
-//        		
-//        	}
-//        }
-//        return data;
-//	}
 	
+	/****************************************************************************************
+	 * *************************************Auswertung***************************************
+	 ****************************************************************************************/
 	
 	/**
 	 * Methode um die Anzahl der Anträge je nach Status ausgeben zu lassen.
@@ -318,8 +280,6 @@ public class Antrag {
 		}
 		return i;
 	}
-	
-
 	
 	/**
 	 * Methode um die Anzahl der Anträge je nach Status und Gruppe ausgeben zu lassen.
@@ -344,7 +304,6 @@ public class Antrag {
 		return i;
 	}
 	
-
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
@@ -392,11 +351,11 @@ public class Antrag {
 	public void setAblehnungsgrund(String abGrund)
 	{	this.ablehnungsgrund = abGrund;	}
 
-    public String getAnmerkung()
-    {	return anmerkung;	}
+    public String getKommentar()
+    {	return kommentar;	}
     
-    public void setAnmerkung(String anmerkung)
-    {	this.anmerkung = anmerkung;	}
+    public void setKommentar(String kommentar)
+    {	this.kommentar = kommentar;	}
     
     public Benutzer getErsteller()
     {	return ersteller;	}

@@ -37,6 +37,8 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableColumn<Antrag, String> auftragsID_ColGr,auftragsID_ColP, auftragsID_ColGe, auftragsID_ColA, auftragsID_ColET, auftragsID_ColAT;
 	@FXML private TableColumn<Antrag, String> titel_ColGr, titel_ColP, titel_ColGe, titel_ColA, titel_ColET, titel_ColAT;
 	@FXML private TableColumn<Antrag, String> datum_ColGr, datum_ColP, datum_ColGe, datum_ColA, datum_ColET, datum_ColAT;
+	@FXML private TableColumn<Antrag, String> Kommentar_ColGr, Beschreibung_ColGr, Kommentar_ColP, Beschreibung_ColP, Kommentar_ColGe, Beschreibung_ColGe;
+
 
 	@FXML private Label lblGrId, lblPrId, lblGeId; 
 	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
@@ -57,7 +59,7 @@ public class ControllerTickets implements Initializable{
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     
-    private String antragsID, name;
+    private String antragsID, name, komm, beschr;
     private Date datum;
 	
 	public Main main;
@@ -113,11 +115,15 @@ public class ControllerTickets implements Initializable{
     	 */
 		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
-		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));    	
-    	
+		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));   
+		Kommentar_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Kommentar"));
+		Beschreibung_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
+
 		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
+		Kommentar_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Kommentar"));
+		Beschreibung_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
 		
 		status_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
@@ -132,7 +138,9 @@ public class ControllerTickets implements Initializable{
 		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
-    	
+		Kommentar_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Kommentar"));
+		Beschreibung_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
+		
     	status_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
@@ -165,10 +173,17 @@ public class ControllerTickets implements Initializable{
     		datum = fst.getFertigstellungsdatum();
     		String pattern = "dd.MM.yyyy";
     		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
     		String date = simpleDateFormat.format(datum);
     		tfGrFertigstellungsdatum.setText(date);
-    	}
+    		
+    		Antrag kom = tvGruppentickets.getSelectionModel().getSelectedItem();
+    		komm = kom.getKommentar();
+    		taGrKommentar.setText(komm);
+    		
+    		Antrag beschreibung = tvGruppentickets.getSelectionModel().getSelectedItem();
+    		beschr = beschreibung.getBeschreibung();
+    		taGrBeschreibung.setText(beschr);
+    		}
     	
     	@FXML
     	public void omcTicketsPruefen()
@@ -185,9 +200,16 @@ public class ControllerTickets implements Initializable{
     		datum = fst.getFertigstellungsdatum();
     		String pattern = "dd.MM.yyyy";
     		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
     		String date = simpleDateFormat.format(datum);
     		tfPrFertigstellungsdatum.setText(date);
+    		
+    		Antrag kom = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    		komm = kom.getKommentar();
+    		taPrKommentar.setText(komm);
+    		
+    		Antrag beschreibung = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    		beschr = beschreibung.getBeschreibung();
+    		taPrBeschreibung.setText(beschr);
     	}
     	
     	@FXML
@@ -205,9 +227,16 @@ public class ControllerTickets implements Initializable{
     		datum = fst.getFertigstellungsdatum();
     		String pattern = "dd.MM.yyyy";
     		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
     		String date = simpleDateFormat.format(datum);
     		tfGeFertigstellungsdatum.setText(date);
+    		
+    		Antrag kom = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    		komm = kom.getKommentar();
+    		taGeKommentar.setText(komm);
+    		
+    		Antrag beschreibung = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    		beschr = beschreibung.getBeschreibung();
+    		taGeBeschreibung.setText(beschr);
     	}
     
     	@FXML
