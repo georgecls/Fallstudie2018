@@ -9,9 +9,12 @@ import javafx.collections.ObservableList;
 public class Gruppe {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
-	private String id;
+	private String agid;
 	private String gruppenname;
 	private String gruppenbeschr;
+	private String agstatus;
+	
+
 	
 	
 	
@@ -23,6 +26,11 @@ public class Gruppe {
 	public Gruppe() 
 	{
 		
+	}
+	
+	public Gruppe(int agid) throws SQLException
+	{
+		this.getGruppe(agid);
 	}
 	
 	public Gruppe(String name) throws SQLException
@@ -82,6 +90,17 @@ public class Gruppe {
 		return data;
 	}
 	
+	public Gruppe getGruppe(int agid) throws SQLException
+	{
+		Main.get_DBConnection().Execute(String.format("SELECT gruppenname FROM ag WHERE agid = '%s'", agid));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		if(rs.next())
+		{
+			this.gruppenname = rs.getString("gruppenname");	    
+		}
+		return this;
+	}
 	
 	public Gruppe getGruppeByName(String name) throws SQLException
 	{
@@ -90,7 +109,7 @@ public class Gruppe {
 
 		if(rs.next())
 		{
-			this.id = rs.getString("agid");
+			this.agid = rs.getString("agid");
 			this.gruppenname = rs.getString("gruppenname");
 			this.gruppenbeschr = rs.getString("gruppenbeschreibung");	    
 		}
@@ -101,10 +120,10 @@ public class Gruppe {
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
 	public String getId() {
-		return id;
+		return agid;
 	}
 	public void setId(String id) {
-		this.id = id;
+		this.agid = id;
 	}
 	
 	public String getGruppenname() {

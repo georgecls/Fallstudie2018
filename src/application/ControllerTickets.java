@@ -88,10 +88,10 @@ public class ControllerTickets implements Initializable{
     		Antrag a2 = (Antrag) antrag;
     	}); 
     	
-    	data_EigT.forEach((antrag) -> {
-    		Antrag a3 = (Antrag) antrag;
-    	}); 
-    	
+//    	data_EigT.forEach((antrag) -> {
+//    		Antrag a3 = (Antrag) antrag;
+//    	}); 
+//    	
     	data_gr.forEach((antrag) -> {
     		Antrag a4 = (Antrag) antrag;
     	});    	
@@ -141,7 +141,7 @@ public class ControllerTickets implements Initializable{
 		tvTicketsPrüfen.setItems(data_prüfen);
 		tvTicketsGenehmigen.setItems(data_genehmigen);
 		tvAbgTickets.setItems(data_AbgT);
-		tvEigeneTickets.setItems(data_EigT);
+//		tvEigeneTickets.setItems(data_EigT);
 		tvAlleTickets.setItems(data_AlleT);
 
 	}

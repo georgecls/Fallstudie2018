@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -52,6 +53,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		
 		try {
 			data = Benutzer.getBenutzerverwaltung();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,10 +61,11 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 				
 		data.forEach((benutzer) -> {
 			Benutzer b1 = (Benutzer) benutzer;
+
 		});
 				
 		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
-		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppenname"));
+		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("agid"));
 		berechtigung_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("berechtigung"));
 		
 		tvBenutzerverwaltung.setItems(data);

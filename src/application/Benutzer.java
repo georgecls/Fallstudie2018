@@ -3,6 +3,7 @@ package application;
 import java.sql.*;
 import java.util.Observable;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -16,10 +17,10 @@ public class Benutzer {
 	private String status;
 	private int ag_fk;
 	
-	private int agid;
 	private String gruppenname;
-	private String gruppenbeschreibung;
-	private String grstatus;
+	
+	private Gruppe agid;
+
 	
 	private static String bnPrüfen;
 	private static int bPrüfen;
@@ -157,32 +158,31 @@ public class Benutzer {
 	}
 	
 	
-	public Benutzer getBenutzerByBenutzerAndPassword(String pBenutzer, String pPasswort) throws SQLException
-	{
-		Main.get_DBConnection().Execute(String.format("select * from benutzer WHERE benutzer='%s' AND passwort = '%s';", pBenutzer, pPasswort));
-		ResultSet rs = Main.get_DBConnection().get_last_resultset();
-
-		while(rs.next())
-		{	
-			this.benutzername = rs.getString("benutzername");
-			this.passwort = rs.getString("passwort");
-			this.gruppenname = (String)rs.getObject("gruppe");
-		}
-		return this;
-	}
+//	public Benutzer getBenutzerByBenutzerAndPassword(String pBenutzer, String pPasswort) throws SQLException
+//	{
+//		Main.get_DBConnection().Execute(String.format("select * from benutzer WHERE benutzer='%s' AND passwort = '%s';", pBenutzer, pPasswort));
+//		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+//
+//		while(rs.next())
+//		{	
+//			this.benutzername = rs.getString("benutzername");
+//			this.passwort = rs.getString("passwort");
+//			this.gruppenname = (String) rs.getObject("gruppe");
+//		}
+//		return this;
+//	}
 	
 	// Methode um TableView Benutzerverwaltung zu befüllen
 	public static ObservableList getBenutzerverwaltung() throws SQLException {
 		
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer INNER JOIN ag ON benutzer.ag_fk = ag.agid"));
+	    Main.get_DBConnection().Execute("SELECT * FROM benutzer INNER JOIN ag ON benutzer.ag_fk = ag.agid");
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		while(rs.next())
 		{
 			data.add(new Benutzer(rs.getString("benutzername")));
-			System.out.println(data);
 		}
 		return data;
 	}
@@ -198,12 +198,8 @@ public class Benutzer {
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
 			this.berechtigung = rs.getInt("blevel");
-			this.setAg_fk(rs.getInt("ag_fk"));
-			this.setAgid(rs.getInt("agid"));
-			this.gruppenname = rs.getString("gruppenname");
-			this.setGruppenbeschreibung(rs.getString("gruppenbeschreibung"));
-			this.setGrstatus(rs.getString("agstatus"));
-
+			this.ag_fk = rs.getInt("ag_fk");
+			this.agid = new Gruppe(rs.getInt(6));
 			
 		}
 		return this;
@@ -293,12 +289,7 @@ public class Benutzer {
 	public void setPasswort(int berechtigung) {
 		this.berechtigung = berechtigung;
 	}
-	public String getGruppe() {
-		return gruppenname;
-	}
-	public void setGruppe(String gruppe) {
-		this.gruppenname = gruppe;
-	}
+
 
 	public int getId() {
 		return id;
@@ -324,28 +315,11 @@ public class Benutzer {
 		this.ag_fk = ag_fk;
 	}
 
-	public int getAgid() {
-		return agid;
+	public String getGruppe() {
+		return gruppenname;
 	}
 
-	public void setAgid(int agid) {
-		this.agid = agid;
+	public void setGruppe(String gruppenname) {
+		this.gruppenname = gruppenname;
 	}
-
-	public String getGruppenbeschreibung() {
-		return gruppenbeschreibung;
-	}
-
-	public void setGruppenbeschreibung(String gruppenbeschreibung) {
-		this.gruppenbeschreibung = gruppenbeschreibung;
-	}
-
-	public String getGrstatus() {
-		return grstatus;
-	}
-
-	public void setGrstatus(String grstatus) {
-		this.grstatus = grstatus;
-	}
-
 }
