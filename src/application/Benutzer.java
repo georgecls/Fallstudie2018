@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 public class Benutzer {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
+	private int id;
 	private String benutzername;
 	private String passwort;
 	private int berechtigung;
@@ -32,9 +33,9 @@ public class Benutzer {
 		
 	}
 	
-	public Benutzer(String BName) throws SQLException
+	public Benutzer(int id) throws SQLException
 	{
-		this.getBenutzerByBenutzername(BName);
+		this.getBenutzerById(id);
 	}
 
 	
@@ -187,18 +188,19 @@ public class Benutzer {
 
 		while(rs.next())
 		{
-			data.add(new Benutzer(rs.getString("benutzername")));
+			data.add(new Benutzer(rs.getInt("benutzerid")));
 		}
 		return data;
 	}
 	
-	public Benutzer getBenutzerByBenutzername(String BName) throws SQLException
+	public Benutzer getBenutzerById(int id) throws SQLException
 	{
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", BName));
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", id));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		if(rs.next())
 		{
+			this.id = rs.getInt("benutzerid");
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
 			this.gruppe = rs.getString("ag_fk");
@@ -208,16 +210,16 @@ public class Benutzer {
 	}
 	
 	
-	public static ObservableList getBenutzerByGruppe(String gruppe) throws SQLException {
+	public static ObservableList getBenutzerByGruppe(int id) throws SQLException {
 		
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 
-	    Main.get_DBConnection().Execute(String.format("SELECT benutzername FROM benutzer WHERE ag_fk = '%s'", gruppe));
+	    Main.get_DBConnection().Execute(String.format("SELECT benutzername FROM benutzer WHERE ag_fk = '%s'", id));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		while(rs.next())
 		{
-			data.add(new Benutzer(rs.getString("benutzername")));
+			data.add(new Benutzer(rs.getInt("benutzerid")));
 		}
 		return data;
 	}
