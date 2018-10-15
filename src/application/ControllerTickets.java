@@ -66,7 +66,7 @@ public class ControllerTickets implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
     	
 			try {
-				data_EigT = Antrag.getGruppenAntraege(ControllerLogin.user);
+//				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.user);
 				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.user);
 				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
 				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);

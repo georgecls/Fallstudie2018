@@ -118,10 +118,11 @@ public class ControllerMain implements Initializable {
 	
 	@FXML
 	public void handleAbmelden() {
-		DBConnector db = new DBConnector();
+//		DBConnector db = new DBConnector();
 		Main.get_DBConnection().close();
 //		System.out.println("Datenbankverbindung geschlossen");
 		ControllerLogin.user = null;
+		ControllerLogin.berechtigung = 0;
 		main.primaryStage.close();
 		main.primaryStage.setHeight(0);
 		main.primaryStage.setWidth(0);

@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,7 +22,10 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="fieldTicketart" focusColor="#128277" labelFloat="true" prefHeight="26.0" prefWidth="300.0" promptText="z.B. Verschrottung, Berechtigung, etc." />
+                  <JFXTextField fx:id="fieldTicketart" focusColor="#128277" labelFloat="true" prefHeight="26.0" prefWidth="300.0" promptText="z.B. Verschrottung, Berechtigung, etc.">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
@@ -31,7 +35,10 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="fieldErsteller" editable="false" focusColor="#128277" prefHeight="26.0" prefWidth="300.0" />
+                  <JFXTextField fx:id="fieldErsteller" editable="false" focusColor="#128277" prefHeight="26.0" prefWidth="300.0">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextField>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
@@ -51,7 +58,10 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <JFXDatePicker fx:id="fieldZieldatum" defaultColor="#128277" prefHeight="26.0" prefWidth="301.0" />
+                  <JFXDatePicker fx:id="fieldZieldatum" defaultColor="#128277" prefHeight="26.0" prefWidth="301.0">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXDatePicker>
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="210.0" prefWidth="656.0">
@@ -61,7 +71,10 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <JFXTextArea fx:id="fieldText" focusColor="#128277" prefHeight="200.0" prefWidth="300.0" />
+                  <JFXTextArea fx:id="fieldText" focusColor="#128277" prefHeight="200.0" prefWidth="300.0">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></JFXTextArea>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="20.0">

@@ -19,7 +19,7 @@ public class Benutzer {
 	private static int bPrüfen;
 	private static String gPrüfen;
 
-	private static boolean anmelden;
+	private static boolean anmelden = false;
 	
 	
 	
@@ -30,7 +30,7 @@ public class Benutzer {
 	
 	public Benutzer()
 	{
-		
+		anmelden = false;
 	}
 	
 	public Benutzer(String name) throws SQLException
@@ -68,19 +68,18 @@ public class Benutzer {
 		}
 	}
 	
-	 public static boolean anmelden(String benN, String p) throws SQLException{
+	 public static boolean anmelden(String benN, String p) throws SQLException 
+	 {
 	        String eingabeName = benN;
 	        String eingabePasswort = p;
 	        String vergleichsPasswort = null;
 	        try {
-	        	
 	        	Main.get_DBConnection().Execute(String.format("SELECT passwort FROM benutzer WHERE benutzername = '%s';", benN));
 				ResultSet rsP = Main.get_DBConnection().get_last_resultset();
 	        	
 	        	while(rsP.next())
 	        	{
 		        	vergleichsPasswort = rsP.getString("passwort");
-		        	
 		        	if(BCrypt.checkpw(p, vergleichsPasswort))   {
 			            anmelden = true;
 			        } else {

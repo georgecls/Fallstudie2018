@@ -27,7 +27,7 @@ public class ControllerLogin {
 	public static String user;
 	public static int berechtigung;
 	
-	public boolean berechtigt = false;
+	public static boolean berechtigt = false;
 	
 	
 	public Main main;
@@ -36,38 +36,45 @@ public class ControllerLogin {
 		this.main = main;
 	}
 	
-	public void initialize(URL url, ResourceBundle rb) {
-		//sollte machen, dass die Farbe des Buttons weiß wird - funkt nicht
-		btnAnmelden.setStyle("-fx-text-fill: white");
-	}
-	
 	@FXML
-	public void handleLogin() throws SQLException {
+	public void handleLogin() throws SQLException
+	{
 		String benutzerName = fieldBenutzer.getText();
 		String benutzerKennwort = fieldKennwort.getText();
 		
-		berechtigt = Benutzer.anmelden(benutzerName, benutzerKennwort);
-		
-		try {
-			berechtigung = Benutzer.berechtigungPrüfen(benutzerName);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		if (berechtigt == true) {
-			user = benutzerName;
-			benutzerName = null;
-			benutzerKennwort = null;
-			main.primaryStage.close();
-			main.primaryStage.setHeight(0);
-			main.primaryStage.setWidth(0);
-			main.mainWindow();
-
-		} else {
+		if(benutzerName.isEmpty() || benutzerKennwort.isEmpty()) 
+		{
 			labelFehler.setVisible(true);
 			labelFehler.setTextFill(Color.RED);
-		}	
+		}
+		else 
+		{
+			berechtigt = Benutzer.anmelden(benutzerName, benutzerKennwort);
+			try
+			{
+				berechtigung = Benutzer.berechtigungPrüfen(benutzerName);
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			
+			if (berechtigt == true)
+			{
+				user = benutzerName;
+				benutzerName = null;
+				benutzerKennwort = null;
+				main.primaryStage.close();
+				main.primaryStage.setHeight(0);
+				main.primaryStage.setWidth(0);
+				main.mainWindow();
 
+			}
+			else
+			{
+				labelFehler.setVisible(true);
+				labelFehler.setTextFill(Color.RED);
+			}		
+		}
 	}
 }

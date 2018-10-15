@@ -26,8 +26,10 @@ public class Main extends Application {
 	}
 
 	
-	public void loginWindow() {
-		try {
+	public void loginWindow()
+	{
+		try
+		{
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("LoginNeu.fxml"));
 			AnchorPane pane = loader.load();
 			primaryStage.setMinHeight(290.00);
@@ -39,13 +41,12 @@ public class Main extends Application {
 			loginWindowController.setMain(this);
 			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);
-			primaryStage.show();
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			primaryStage.show();		
 		}
-		
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}		
 	}
 	
 	public void mainWindow() {
