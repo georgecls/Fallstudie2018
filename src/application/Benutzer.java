@@ -212,7 +212,7 @@ public class Benutzer {
 	}
 	
 	
-	public static ObservableList getBenutzerByGruppe(int id) throws SQLException {
+	public static ObservableList getBenutzerByGruppe(String id) throws SQLException {
 		
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 

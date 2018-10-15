@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 public class Gruppe {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
-	private int id;
+	private String id;
 	private String gruppenname;
 	private String gruppenbeschr;
 	
@@ -62,7 +62,7 @@ public class Gruppe {
 	 *  
 	 * @throws SQLException
 	 */
-	public static void deleteGruppe(int id) throws SQLException
+	public static void deleteGruppe(String id) throws SQLException
 	{
 		
 	}
@@ -90,7 +90,7 @@ public class Gruppe {
 
 		if(rs.next())
 		{
-			this.id = rs.getInt("agid");
+			this.id = rs.getString("agid");
 			this.gruppenname = rs.getString("gruppenname");
 			this.gruppenbeschr = rs.getString("gruppenbeschreibung");	    
 		}
@@ -100,10 +100,10 @@ public class Gruppe {
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

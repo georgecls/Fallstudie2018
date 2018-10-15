@@ -30,11 +30,11 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	@FXML private TableColumn<Benutzer, String> benutzer_Col;
 	@FXML private TableColumn<Gruppe, String> gruppe_Col, beschreibung_Col;
-	@FXML private TableColumn<Gruppe, Integer> id_Col;
+	@FXML private TableColumn<Gruppe, String> id_Col;
 
 	
 	private static String b12, g12, a12;
-	private static int id12;
+	private static String id12;
 	
 	
 	private ObservableList<Gruppe> gruppe;
@@ -59,7 +59,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 			Gruppe b1 = (Gruppe) gruppe;
 		});
 		
-		id_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, Integer>("agid"));		
+		id_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("agid"));		
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenname"));
 		beschreibung_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenbeschr"));
 		
