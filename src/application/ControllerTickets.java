@@ -4,6 +4,8 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -54,6 +56,9 @@ public class ControllerTickets implements Initializable{
 //	@FXML private Button btnBearbeiten, btnPrüfen, btnGenehmigen;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
+    
+    private String antragsID, name;
+    private Date datum;
 	
 	public Main main;
     public void setMain(Main main) {
@@ -76,7 +81,6 @@ public class ControllerTickets implements Initializable{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		
 		/**
 		 * Kommentar einfügen
 		 */
@@ -145,6 +149,26 @@ public class ControllerTickets implements Initializable{
 		tvAlleTickets.setItems(data_AlleT);
 
 	}
+    
+    	@FXML
+    	public void omcGruppentickets()
+    	{
+    		Antrag aID = tvGruppentickets.getSelectionModel().getSelectedItem();
+    		antragsID = Integer.toString(aID.getAntragid());
+    		tfGrId.setText(antragsID);
+    		
+    		Antrag n = tvGruppentickets.getSelectionModel().getSelectedItem();
+    		name = n.getName();
+    		tfGrTitel.setText(name);
+    		
+    		Antrag fst = tvGruppentickets.getSelectionModel().getSelectedItem();
+    		datum = fst.getFertigstellungsdatum();
+    		String pattern = "dd.MM.yyyy";
+    		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+    		String date = simpleDateFormat.format(datum);
+    		tfGrFertigstellungsdatum.setText(date);
+    	}
     
     	@FXML
     	public void handleBtnBearbeiten()

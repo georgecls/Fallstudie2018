@@ -20,7 +20,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="958.0">
                      <children>
-                        <TableView fx:id="tvGruppentickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="730.0">
+                        <TableView fx:id="tvGruppentickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcGruppentickets" prefHeight="270.0" prefWidth="730.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColGr" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColGr" prefWidth="495.0" text="Titel" />
