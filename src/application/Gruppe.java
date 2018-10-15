@@ -62,7 +62,7 @@ public class Gruppe {
 	 *  
 	 * @throws SQLException
 	 */
-	public static void deleteGruppe(String name) throws SQLException
+	public static void deleteGruppe(int id) throws SQLException
 	{
 		
 	}

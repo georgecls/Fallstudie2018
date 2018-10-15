@@ -30,8 +30,11 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	@FXML private TableColumn<Benutzer, String> benutzer_Col;
 	@FXML private TableColumn<Gruppe, String> gruppe_Col, beschreibung_Col;
+	@FXML private TableColumn<Gruppe, Integer> id_Col;
+
 	
 	private static String b12, g12, a12;
+	private static int id12;
 	
 	
 	private ObservableList<Gruppe> gruppe;
@@ -55,7 +58,8 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		gruppe.forEach((gruppe) -> {
 			Gruppe b1 = (Gruppe) gruppe;
 		});
-				
+		
+		id_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, Integer>("agid"));		
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenname"));
 		beschreibung_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenbeschr"));
 		
@@ -65,6 +69,9 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	@FXML
 	public void onMouseClicked () {
+		Gruppe id1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
+		id12 = id1.getId();
+		
 		Gruppe g1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
 		g12 = g1.getGruppenname();
 		
@@ -78,7 +85,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 //		Nachdem eine auf eine Gruppe geklickt wird, soll die 2. Tabelle mit den zugehörigen Benutzern befüllt werden...
 		
 		try {
-			benutzer = Benutzer.getBenutzerByGruppe(g12);
+			benutzer = Benutzer.getBenutzerByGruppe(id12);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,7 +121,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	@FXML
 	public void handleLoeschen() {
 		try {
-			Gruppe.deleteGruppe(g12);
+			Gruppe.deleteGruppe(id12);
 			initialize (null, null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
