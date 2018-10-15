@@ -169,6 +169,46 @@ public class ControllerTickets implements Initializable{
     		String date = simpleDateFormat.format(datum);
     		tfGrFertigstellungsdatum.setText(date);
     	}
+    	
+    	@FXML
+    	public void omcTicketsPruefen()
+    	{
+    		Antrag aID = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    		antragsID = Integer.toString(aID.getAntragid());
+    		tfPrId.setText(antragsID);
+    		
+    		Antrag n = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    		name = n.getName();
+    		tfPrTitel.setText(name);
+    		
+    		Antrag fst = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    		datum = fst.getFertigstellungsdatum();
+    		String pattern = "dd.MM.yyyy";
+    		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+    		String date = simpleDateFormat.format(datum);
+    		tfPrFertigstellungsdatum.setText(date);
+    	}
+    	
+    	@FXML
+    	public void omcTicketsGenehmigen()
+    	{
+    		Antrag aID = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    		antragsID = Integer.toString(aID.getAntragid());
+    		tfGeId.setText(antragsID);
+    		
+    		Antrag n = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    		name = n.getName();
+    		tfGeTitel.setText(name);
+    		
+    		Antrag fst = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    		datum = fst.getFertigstellungsdatum();
+    		String pattern = "dd.MM.yyyy";
+    		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+    		String date = simpleDateFormat.format(datum);
+    		tfGeFertigstellungsdatum.setText(date);
+    	}
     
     	@FXML
     	public void handleBtnBearbeiten()

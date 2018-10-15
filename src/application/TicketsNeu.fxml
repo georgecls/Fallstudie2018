@@ -70,7 +70,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
-                        <TableView fx:id="tvTicketsPrüfen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="730.0">
+                        <TableView fx:id="tvTicketsPrüfen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsPruefen" prefHeight="270.0" prefWidth="730.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColP" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColP" prefWidth="495.0" text="Titel" />
@@ -144,7 +144,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
-                        <TableView fx:id="tvTicketsGenehmigen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="730.0">
+                        <TableView fx:id="tvTicketsGenehmigen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsGenehmigen" prefHeight="270.0" prefWidth="730.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColGe" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColGe" prefWidth="495.0" text="Titel" />
