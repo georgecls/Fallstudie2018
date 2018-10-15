@@ -13,7 +13,13 @@ public class Benutzer {
 	private String benutzername;
 	private String passwort;
 	private int berechtigung;
-	private String gruppe;
+	private String status;
+	private int ag_fk;
+	
+	private int agid;
+	private String gruppenname;
+	private String gruppenbeschreibung;
+	private String grstatus;
 	
 	private static String bnPrüfen;
 	private static int bPrüfen;
@@ -39,20 +45,6 @@ public class Benutzer {
 	}
 
 
-	
-
-/*	public Benutzer(String int1) {
-		this.benutzername="admin";
-		this.passwort="pw123";
-	}
-*/
-
-
-	/*public BenutzerMethode(String pBenutzer, String pPasswort) throws SQLException
-	{
-		this.getBenutzerByBenutzerAndPassword(pBenutzer,pPasswort);
-	}
-	*/
 	public static boolean isRightBenutzer(String pBenutzer, String pPasswort) throws SQLException
 	{
 		Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzer = '%s' AND passwort = '%s';", pBenutzer, pPasswort));
@@ -174,7 +166,7 @@ public class Benutzer {
 		{	
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
-			this.gruppe = (String)rs.getObject("gruppe");
+			this.gruppenname = (String)rs.getObject("gruppe");
 		}
 		return this;
 	}
@@ -184,12 +176,13 @@ public class Benutzer {
 		
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer"));
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer INNER JOIN ag ON benutzer.ag_fk = ag.agid"));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		while(rs.next())
 		{
 			data.add(new Benutzer(rs.getString("benutzername")));
+			System.out.println(data);
 		}
 		return data;
 	}
@@ -201,11 +194,17 @@ public class Benutzer {
 
 		if(rs.next())
 		{
-			this.id = rs.getInt("benutzerid");
+			this.setId(rs.getInt("benutzerid"));
 			this.benutzername = rs.getString("benutzername");
 			this.passwort = rs.getString("passwort");
-			this.gruppe = rs.getString("ag_fk");
-			this.berechtigung = rs.getInt("blevel");		    
+			this.berechtigung = rs.getInt("blevel");
+			this.setAg_fk(rs.getInt("ag_fk"));
+			this.setAgid(rs.getInt("agid"));
+			this.gruppenname = rs.getString("gruppenname");
+			this.setGruppenbeschreibung(rs.getString("gruppenbeschreibung"));
+			this.setGrstatus(rs.getString("agstatus"));
+
+			
 		}
 		return this;
 	}
@@ -255,6 +254,22 @@ public class Benutzer {
 	}	
 
 	
+	public static int getIdByName(String name) throws SQLException {
+        
+        ObservableList<Benutzer> data = FXCollections.observableArrayList();
+        int id;
+
+        Main.get_DBConnection().Execute(String.format("SELECT benutzerid FROM benutzer WHERE benutzername = '%s'", name));
+              ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+              if(rs.next()) {
+            	  return id = rs.getInt(1);
+              }else {
+                  return 0;
+              }
+    }
+
+	
 	
 	/*****************************************************************************************************************************************************
 	 *******************************************************Implementierung der Getter und Setter*********************************************************
@@ -279,10 +294,58 @@ public class Benutzer {
 		this.berechtigung = berechtigung;
 	}
 	public String getGruppe() {
-		return gruppe;
+		return gruppenname;
 	}
 	public void setGruppe(String gruppe) {
-		this.gruppe = gruppe;
+		this.gruppenname = gruppe;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getAg_fk() {
+		return ag_fk;
+	}
+
+	public void setAg_fk(int ag_fk) {
+		this.ag_fk = ag_fk;
+	}
+
+	public int getAgid() {
+		return agid;
+	}
+
+	public void setAgid(int agid) {
+		this.agid = agid;
+	}
+
+	public String getGruppenbeschreibung() {
+		return gruppenbeschreibung;
+	}
+
+	public void setGruppenbeschreibung(String gruppenbeschreibung) {
+		this.gruppenbeschreibung = gruppenbeschreibung;
+	}
+
+	public String getGrstatus() {
+		return grstatus;
+	}
+
+	public void setGrstatus(String grstatus) {
+		this.grstatus = grstatus;
 	}
 
 }

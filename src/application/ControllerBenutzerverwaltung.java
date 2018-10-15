@@ -62,7 +62,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		});
 				
 		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
-		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppe"));
+		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppenname"));
 		berechtigung_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("berechtigung"));
 		
 		tvBenutzerverwaltung.setItems(data);
