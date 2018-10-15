@@ -16,33 +16,56 @@ import javafx.scene.control.Label;
 public class ControllerAuswertung implements Initializable {
 	
 
-	@FXML private PieChart pieChart, pieChart2;
+	@FXML private PieChart pieChartGes, pieChartGr;
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub		
 		
-		ObservableList<PieChart.Data> dataChart = null;
+		loadAuswertungGes();
+		loadAuswertungGr();
+	}
+	
+	public void loadAuswertungGes()
+	{
+		ObservableList<PieChart.Data> dataChartGes = null;
 		try {
-			dataChart = FXCollections.observableArrayList(
-					 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByStatus("abgelehnt")),
-						new PieChart.Data("abgelehnt", Antrag.countAntraegeByStatus("abgeschlossen")),
-						new PieChart.Data("offen", Antrag.countAntraegeOffen())
+			dataChartGes = FXCollections.observableArrayList(
+					 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByStatus("abgeschlossen")),
+						new PieChart.Data("zu bearbeiten", Antrag.countAntraegeByStatus("genehmigt"))
+						//new PieChart.Data("offen", Antrag.countAntraegeOffen())
 					 );
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pieChart.setData(dataChart);
-        pieChart.setTitle("Alle Tickets");
-        pieChart2.setTitle("Benutzer Tickets");
+		pieChartGes.setData(dataChartGes);
+        pieChartGes.setTitle("Auswertung Gesamt");
         
-        pieChart.setLabelLineLength(15);
-        pieChart.setLegendSide(Side.RIGHT);
-        pieChart2.setLabelLineLength(15);
-        pieChart2.setLegendSide(Side.RIGHT);
-
-			
+        pieChartGes.setLabelLineLength(10);
+        pieChartGes.setLegendSide(Side.RIGHT);
+	}
+	
+	
+	public void loadAuswertungGr()
+	{
+		 ObservableList<PieChart.Data> dataChartGr = null;
+			try {
+				dataChartGr = FXCollections.observableArrayList(
+						 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByGruppe(ControllerLogin.user, "abgeschlossen")),
+							new PieChart.Data("zu bearbeiten", Antrag.countAntraegeByGruppe(ControllerLogin.user ,"genehmigt"))
+							//new PieChart.Data("offen", Antrag.countAntraegeOffen())
+						 );
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	        pieChartGr.setData(dataChartGr);
+	        pieChartGr.setTitle("Auswertung Gruppe");
+	        
+	        pieChartGr.setLabelLineLength(10);
+	        pieChartGr.setLegendSide(Side.RIGHT);
 	}
 }

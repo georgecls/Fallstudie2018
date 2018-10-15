@@ -298,6 +298,15 @@ public class Antrag {
 //	}
 	
 	
+	/**
+	 * Methode um die Anzahl der Anträge je nach Status ausgeben zu lassen.
+	 * Ergebnis wird in PieChart ausgegeben.
+	 * 
+	 * @author Robin
+	 * @param status
+	 * @return i
+	 * @throws SQLException
+	 */
 	public static Double countAntraegeByStatus(String status) throws SQLException {
 		double i = 0.00;
 		
@@ -321,6 +330,26 @@ public class Antrag {
 		}
 		return i;
 	}
+	
+	/**
+	 * Methode um die Anzahl der Anträge je nach Status und Gruppe ausgeben zu lassen.
+	 * Ergebnis wird in PieChart ausgegeben.
+	 * 
+	 * @author Robin
+	 * @param benutzername, status
+	 * @return i 
+	 * @throws SQLException
+	 */
+	public static Double countAntraegeByGruppe(String benutzername, String status) throws SQLException{
+		double i = 0.00;
+		
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
+				"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
+				"WHERE benutzername = '%s' AND status = '%s';", benutzername, status));
+		return i;
+	}
+	
+
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
