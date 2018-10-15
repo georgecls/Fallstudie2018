@@ -9,8 +9,10 @@ import javafx.collections.ObservableList;
 public class Gruppe {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
+	private int id;
 	private String gruppenname;
 	private String gruppenbeschr;
+	
 	
 	
 	
@@ -23,9 +25,9 @@ public class Gruppe {
 		
 	}
 	
-	public Gruppe(String GName) throws SQLException
+	public Gruppe(int id) throws SQLException
 	{
-		this.getGruppeByBenutzername(GName);
+		this.getGruppeById(id);
 	}
 	
 	/**Methode, um eine neue Gruppe in die DB zu schreiben.
@@ -48,9 +50,9 @@ public class Gruppe {
 	 *  
 	 * @throws SQLException
 	 */
-	public void updateGruppeById(String gruppe, String beschreibung) throws SQLException
+	public void updateGruppeById(int id, String gruppe, String beschreibung) throws SQLException
 	{
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppe = '%d', ag_fk = '%s' WHERE benutzername = '%s';", gruppe, beschreibung));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppe = '%d', ag_fk = '%s' WHERE agid = '%s';", gruppe, beschreibung, id));
 	}
 	
 	/**Methode, um eine Gruppe aus der DB zu löschen. Der Übergabewert "name" stellt den Gruppennamen der zu löschenden Gruppe dar.
@@ -62,10 +64,6 @@ public class Gruppe {
 	 */
 	public static void deleteGruppe(String name) throws SQLException
 	{
-		MysqlCon db = new MysqlCon();
-		db.getDbCon();
-		String ps = "DELETE FROM ag WHERE gruppenname = " + name;
-		db.executeSt(ps);
 		
 	}
 	
@@ -79,19 +77,20 @@ public class Gruppe {
 
 		while(rs.next())
 		{
-			data.add(new Gruppe(rs.getString("gruppenname")));
+			data.add(new Gruppe(rs.getInt("agid")));
 		}
 		return data;
 	}
 	
 	
-	public Gruppe getGruppeByBenutzername(String GName) throws SQLException
+	public Gruppe getGruppeById(int id) throws SQLException
 	{
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", GName));
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE agid = '%s'", id));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		if(rs.next())
 		{
+			this.id = rs.getInt("agid");
 			this.gruppenname = rs.getString("gruppenname");
 			this.gruppenbeschr = rs.getString("gruppenbeschreibung");	    
 		}
@@ -101,6 +100,12 @@ public class Gruppe {
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getGruppenname() {
 		return gruppenname;
