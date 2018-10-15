@@ -1,58 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="656.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerAuswertung">
    <children>
       <VBox alignment="CENTER" prefHeight="600.0" prefWidth="660.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-3.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
-               <children>
-                  <Label prefWidth="200.0" text="Tickets Gesamt">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="fieldTGesamt" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
-               <children>
-                  <Label prefWidth="200.0" text="Tickets freigeben">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="fieldTFreigegeben" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
-               <children>
-                  <Label prefWidth="200.0" text="Tickets genehmigen">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="fieldETGenehmigt" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: black;">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
+            <PieChart fx:id="pieChart2" />
             <PieChart fx:id="pieChart" />
          </children>
       </VBox>

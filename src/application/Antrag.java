@@ -298,14 +298,26 @@ public class Antrag {
 //	}
 	
 	
-	public static String countAntraege() throws SQLException {
-		String i = null;
+	public static Double countAntraegeByStatus(String status) throws SQLException {
+		double i = 0.00;
 		
-		Main.get_DBConnection().Execute("SELECT COUNT(idantrag) FROM antrag");
-//		Main.get_DBConnection().get_last_resultset().next();
+		Main.get_DBConnection().Execute(String.format("SELECT COUNT(idantrag) FROM antrag where status = '%s';", status));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		while(rs.next()) {
-			i = rs.getString(1);
+			String is = rs.getString(1);
+			i = Double.parseDouble(is);
+		}
+		return i;
+	}
+	
+	public static Double countAntraegeOffen() throws SQLException {
+		double i = 0.00;
+		
+		Main.get_DBConnection().Execute("SELECT COUNT(idantrag) FROM antrag where status = 'erstellt' or status = 'geprüft' or status = 'genehmigt';");
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		while(rs.next()) {
+			String is = rs.getString(1);
+			i = Double.parseDouble(is);
 		}
 		return i;
 	}
