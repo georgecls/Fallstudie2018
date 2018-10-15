@@ -189,7 +189,7 @@ public class Benutzer {
 	
 	public Benutzer getBenutzerByName(String name) throws SQLException
 	{
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", name));
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer INNER JOIN ag ON benutzer.ag_fk = ag.agid WHERE benutzername = '%s'", name));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		if(rs.next())
@@ -199,7 +199,7 @@ public class Benutzer {
 			this.passwort = rs.getString("passwort");
 			this.berechtigung = rs.getInt("blevel");
 			this.ag_fk = rs.getInt("ag_fk");
-			this.agid = new Gruppe(rs.getInt(6));
+			this.gruppenname = rs.getString(8);
 			
 		}
 		return this;
