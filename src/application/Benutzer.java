@@ -33,10 +33,11 @@ public class Benutzer {
 		
 	}
 	
-	public Benutzer(int id) throws SQLException
+	public Benutzer(String name) throws SQLException
 	{
-		this.getBenutzerById(id);
+		this.getBenutzerByName(name);
 	}
+
 
 	
 
@@ -45,6 +46,7 @@ public class Benutzer {
 		this.passwort="pw123";
 	}
 */
+
 
 	/*public BenutzerMethode(String pBenutzer, String pPasswort) throws SQLException
 	{
@@ -188,14 +190,14 @@ public class Benutzer {
 
 		while(rs.next())
 		{
-			data.add(new Benutzer(rs.getInt("benutzerid")));
+			data.add(new Benutzer(rs.getString("benutzername")));
 		}
 		return data;
 	}
 	
-	public Benutzer getBenutzerById(int id) throws SQLException
+	public Benutzer getBenutzerByName(String name) throws SQLException
 	{
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", id));
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", name));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		if(rs.next())
@@ -219,7 +221,7 @@ public class Benutzer {
 
 		while(rs.next())
 		{
-			data.add(new Benutzer(rs.getInt("benutzerid")));
+			data.add(new Benutzer(rs.getString("benutzername")));
 		}
 		return data;
 	}

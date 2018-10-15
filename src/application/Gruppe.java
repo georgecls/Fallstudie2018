@@ -25,9 +25,9 @@ public class Gruppe {
 		
 	}
 	
-	public Gruppe(int id) throws SQLException
+	public Gruppe(String name) throws SQLException
 	{
-		this.getGruppeById(id);
+		this.getGruppeByName(name);
 	}
 	
 	/**Methode, um eine neue Gruppe in die DB zu schreiben.
@@ -77,15 +77,15 @@ public class Gruppe {
 
 		while(rs.next())
 		{
-			data.add(new Gruppe(rs.getInt("agid")));
+			data.add(new Gruppe(rs.getString("gruppenname")));
 		}
 		return data;
 	}
 	
 	
-	public Gruppe getGruppeById(int id) throws SQLException
+	public Gruppe getGruppeByName(String name) throws SQLException
 	{
-	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE agid = '%s'", id));
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", name));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		if(rs.next())
