@@ -10,19 +10,16 @@ import javafx.collections.ObservableList;
 public class Benutzer {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
-	private int id;
+	private static int id;
 	private String benutzername;
 	private String passwort;
 	private int berechtigung;
 	private String status;
 	private int ag_fk;
-    static int benutzerid;
-
 	
 	private String gruppenname;
 	
 	private Gruppe agid;
-
 	
 	private static String bnPrüfen;
 	private static int bPrüfen;
@@ -75,7 +72,7 @@ public class Benutzer {
 	        	
 	        	while(rsP.next())
 	        	{
-	        		benutzerid = rsP.getInt("benutzerid");
+	        		id = rsP.getInt("benutzerid");
 		        	vergleichsPasswort = rsP.getString("passwort");
 		        	if(BCrypt.checkpw(p, vergleichsPasswort))
 		        	{
@@ -122,9 +119,13 @@ public class Benutzer {
 	 */
 	public static void insertBenutzer(String benutzer, String passwort, int berechtigung, String gruppe) throws SQLException
 	{
+		Gruppe g1 = new Gruppe();
+		g1.getGruppeByName(gruppe);
+		String i = g1.getId();
+		
 		passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
-		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO benutzer (benutzername, passwort, blevel, ag_fk) "
-				+ "VALUES ('%s', '%s', '%d', '%s')", benutzer, passwort, berechtigung, gruppe));
+		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO benutzer (benutzername, passwort, blevel, bstatus, ag_fk) "
+				+ "VALUES ('%s', '%s', '%d', 'aktiv', '%s')", benutzer, passwort, berechtigung, i));
 	}
 	
 	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
@@ -136,9 +137,13 @@ public class Benutzer {
 	 */
 	public static void updateBenutzerPw(String name, String passwort, String gruppe, int berechtigung) throws SQLException
 	{
+		Gruppe g1 = new Gruppe();
+		g1.getGruppeByName(gruppe);
+		String i = g1.getId();
+		
 		passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET passwort = '%s',"
-				+ " blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", passwort, berechtigung, gruppe, name));
+				+ " blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", passwort, berechtigung, i, name));
 	}
 	
 	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
@@ -252,11 +257,18 @@ public class Benutzer {
 	     }    
     }
 	
-	public static Boolean selberName(String benutzer) {
+	//ÜBERARBEITEN
+	public static Boolean selberName(String benutzer) throws SQLException {
 		
+		int i = 0;
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", benutzer));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
-		if (rs == null) {
+		
+		if(rs.next())
+			i = rs.getInt(1);
+			System.out.println(i);
+		
+		if (i == 0) {
 			return false;
 		}else {
 			return true;

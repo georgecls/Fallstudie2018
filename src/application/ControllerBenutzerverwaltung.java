@@ -106,26 +106,32 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	}
 	
 	@FXML
-    public void handleHinzufuegen() {
+    public void handleHinzufuegen() throws SQLException {
               String benutzer = fieldBenutzer.getText().toString();
               String passwort = fieldPasswort.getText().toString();
               String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
               int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
               
-              Boolean selberName = Benutzer.selberName(benutzer);
+              //ÜBERARBEITEN
+//              Boolean selberName = false;
+//              selberName = Benutzer.selberName(benutzer);
               
-              if(selberName==true) {
-                         label.setText("Der Benutzer existiert bereits!");
-              }else {
+              Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
+              initialize(null, null);
               
-                         try {
-                                   Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
-                         } catch (SQLException e) {
-                                   // TODO Auto-generated catch block
-                                   e.printStackTrace();
-                         }                    
-                         initialize (null, null);
-              }
+              
+//              if(selberName==true) {
+//                         label.setText("Der Benutzer existiert bereits!");
+//              }else {
+//              
+//                         try {
+//                                   Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
+//                         } catch (SQLException e) {
+//                                   // TODO Auto-generated catch block
+//                                   e.printStackTrace();
+//                         }                    
+//                         initialize (null, null);
+//              }
     }
 
 	@FXML
