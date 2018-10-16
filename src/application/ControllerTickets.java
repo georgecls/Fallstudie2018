@@ -60,6 +60,7 @@ public class ControllerTickets implements Initializable{
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     
     private String antragsID, name, komm, beschr;
+    private static String aid;
     private Date datum;
 	
 	public Main main;
@@ -71,6 +72,10 @@ public class ControllerTickets implements Initializable{
     @SuppressWarnings("restriction")
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
+    	
+    	labelGr.setVisible(false);
+    	labelPr.setVisible(false);
+    	labelGe.setVisible(false);
     	
 			try {
 				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.user);
@@ -155,7 +160,6 @@ public class ControllerTickets implements Initializable{
 		tvAbgTickets.setItems(data_AbgT);
 		tvEigeneTickets.setItems(data_EigT);
 		tvAlleTickets.setItems(data_AlleT);
-
 	}
     
     	@FXML
@@ -240,35 +244,40 @@ public class ControllerTickets implements Initializable{
     	}
     
     	@FXML
-    	public void handleBtnBearbeiten()
+    	public void handleBtnBearbeiten() throws SQLException
     	{
+    		Antrag.antragBearbeiten(antragsID);//Methode sollte String bekommen
+    		initialize(null, null);
     		
     		labelGr.setVisible(true);
-    		labelGr.setText("Ticket bearbeitet");
-    		labelGr.setVisible(false);
+    		labelGr.setText("Ticket bearbeitet");  		
     	}
     	
     	@FXML
-    	public void handleBtnPrüfen()
+    	public void handleBtnPrüfen() throws SQLException
     	{
+    		Antrag.antragPruefen(antragsID);
+    		initialize(null, null);
+    		
     		labelPr.setVisible(true);
     		labelPr.setText("Ticket geprüft");
-    		labelPr.setVisible(false);	
     	}
     	
     	//Kommentar füllen
     	@FXML
     	public void handleBtnGenehmigen()
     	{
+    		Antrag.antragGenehmigen(antragsID); //Methode sollte String bekommen
     		labelGe.setVisible(true);
     		labelGr.setText("Ticket genehmigt");   		
-    		labelGe.setVisible(false);   
     	}
     	
     	//FXML Ablehnung öffnen
     	@FXML
     	public void handleBtnAblehnen()
-    	{	try 
+    	{
+    		aid = antragsID;
+    		try 
     		{
     		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ablehnung.fxml"));
     		Parent root1 = (Parent) fxmlLoader.load();
@@ -283,4 +292,9 @@ public class ControllerTickets implements Initializable{
 				e.printStackTrace();
     		}
     	}   
+
+    	public static String getAID()
+    	{
+    		return aid;
+    	}
 }

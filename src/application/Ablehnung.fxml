@@ -22,7 +22,7 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
-            <JFXTextField editable="false" focusColor="#128277" layoutX="102.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" unFocusColor="#128277" />
+            <JFXTextField fx:id="tfAntragid" editable="false" focusColor="#128277" layoutX="102.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" unFocusColor="#128277" />
             <Label layoutX="25.0" layoutY="57.0" text="Antrag-ID:" />
          </children>
       </Pane>

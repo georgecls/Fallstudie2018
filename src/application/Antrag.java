@@ -289,25 +289,21 @@ public class Antrag {
 	
 	public static void antragPruefen(String id) throws SQLException
 	{
-		
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geprueft' WHERE idantrag = '%s'", id));
 	}
 	
 	public static void antragGenehmigen(int id) throws SQLException
 	{
-		
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'genehmigt' WHERE idantrag = '%s'", id));
 	}
 	
 	public static void antragBearbeiten(int id) throws SQLException
-	{
-		
+	{	
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'erledigt' WHERE idantrag = '%s'", id));
 	}
 	
 	public static void antragAblehnen(int id) throws SQLException
-	{
-		
+	{	
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'abgelehnt' WHERE idantrag = '%s'", id));
 	}
 	
