@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -35,40 +34,30 @@
                            <children>
                               <Label fx:id="lblGrId" prefHeight="20.0" prefWidth="130.0" text="Antrag-ID" />
                               <JFXTextField fx:id="tfGrId" editable="false" focusColor="#128277" prefHeight="35.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <Label fx:id="lblGrTitel" prefHeight="20.0" prefWidth="130.0" text="Titel" />
                               <JFXTextField fx:id="tfGrTitel" editable="false" focusColor="#128277" prefHeight="35.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <Label fx:id="lblGrBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
                               <JFXTextArea fx:id="taGrBeschreibung" editable="false" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <Label fx:id="lblGrKommentar" prefHeight="20.0" prefWidth="130.0" text="Kommentar" />
                               <JFXTextArea fx:id="taGrKommentar" editable="false" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <Label fx:id="lblGrFertigstellungsdatum" prefHeight="20.0" prefWidth="130.0" text="Fertigstellungsdatum" />
                               <JFXTextField fx:id="tfGrFertigstellungsdatum" editable="false" focusColor="#128277" prefHeight="35.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0" style="-fx-background-color: #ffffff;">
@@ -99,40 +88,30 @@
                            <children>
                               <Label fx:id="lblPrId" prefHeight="20.0" prefWidth="130.0" text="Antrag-ID" />
                               <JFXTextField fx:id="tfPrId" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblPrTitel" prefHeight="20.0" prefWidth="130.0" text="Titel" />
                               <JFXTextField fx:id="tfPrTitel" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblPrBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
                               <JFXTextArea fx:id="taPrBeschreibung" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblPrKommentar" prefHeight="20.0" prefWidth="130.0" text="Kommentar" />
                               <JFXTextArea fx:id="taPrKommentar" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblPrFertigstellungsdatum" prefHeight="20.0" prefWidth="130.0" text="Fertigstellungsdatum" />
                               <JFXTextField fx:id="tfPrFertigstellungsdatum" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
@@ -187,16 +166,12 @@
                            <children>
                               <Label fx:id="lblGeId" prefHeight="20.0" prefWidth="130.0" text="Antrag-ID" />
                               <JFXTextField fx:id="tfGeId" editable="false" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblGeTitel" prefHeight="20.0" prefWidth="130.0" text="Titel" />
                               <JFXTextField fx:id="tfGeTitel" editable="false" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0" spacing="10.0">
@@ -205,31 +180,24 @@
                               <Label fx:id="lblGeBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
                               <JFXTextArea fx:id="taGeBeschreibung" editable="false" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                               <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblGeKommentar" prefHeight="20.0" prefWidth="130.0" text="Kommentar" />
                               <JFXTextArea fx:id="taGeKommentar" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblGeFertigstellungsdatum" prefHeight="20.0" prefWidth="130.0" text="Fertigstellungsdatum" />
                               <JFXTextField fx:id="tfGeFertigstellungsdatum" editable="false" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblGeFertigstellungsdatum1" prefHeight="20.0" prefWidth="130.0" text="Gruppen zuweisen" />
                               <JFXComboBox fx:id="cbGruppeZuweisen" focusColor="#128277" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="350.0" />
-                              <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
