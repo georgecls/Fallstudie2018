@@ -111,33 +111,41 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		
 		try {
 			Gruppe.insertGruppe(gruppe, beschreibung);
-			label.setText("Gruppe '"+gruppe+"' hinzugefügt");
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		initialize (null, null);
-		
+		label.setText("Gruppe '"+gruppe+"' hinzugefügt");
 	}
+	
+	
 	@FXML
-	public void handleAendern() throws SQLException {
+	public void handleAendern() {
 		String gruppe = fieldGruppe.getText().toString();
 		String beschreibung = fieldBeschreibung.getText().toString();
-		//Hier noch sql Mehthode
-		System.out.println(id12);
-		Gruppe.updateGruppeById(id12, gruppe, beschreibung);
-		initialize(null, null);
-		label.setText("Gruppe '"+gruppe+"' geändert");
-	}
-	@FXML
-	public void handleLoeschen() {
+	
 		try {
-			Gruppe.deleteGruppe(id12);
-			label.setText("Gruppe '"+gruppe+"' gelöscht");
-			initialize (null, null);
+			Gruppe.updateGruppeById(id12, gruppe, beschreibung);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		initialize(null, null);
+		label.setText("Gruppe '"+gruppe+"' geändert");
+	}
+	
+	
+	@FXML
+	public void handleLoeschen() {
+		try {
+			Gruppe.deleteGruppe(id12);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		initialize (null, null);
+		label.setText("Gruppe '"+gruppe+"' gelöscht");
 	}
 }
