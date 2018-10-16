@@ -33,7 +33,7 @@ public class Antrag {
 	
 	
 	/** ***************************************************************************************************************************************************
-	 * *********************************************************Implementierung der Methoden***************************************************************
+	 * **************************************************Implementierung der statischen Methoden***********************************************************
 	 ******************************************************************************************************************************************************/
 	
 	public Antrag()
@@ -52,6 +52,7 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
+	
 	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe) throws SQLException
 	{
 		
@@ -63,36 +64,7 @@ public class Antrag {
 	}
 	
 	
-	/**Methode zieht sich Antrag mit im Parameter angegebener ID.
-	 *Zuerst wird die Datenbankverbindung hergestellt.
-	 *Im ResultSet wird der ausgeführte SELECT gespeichert. 
-	 *in der IF-Abfrage werden die Daten in die jeweiligen Variablen gespeichert und zurückgegeben. 
-	 * @param pID
-	 * @return
-	 * @throws SQLException
-	 * #Robin
-	 */
-	public Antrag getAntragById(int pID) throws SQLException
-	{
-		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE idantrag = '%d';", pID));
-		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
-		if(rs.first())
-		{
-			this.antragid = rs.getInt("idantrag");
-			this.name = rs.getString("titel");
-			this.beschreibung = rs.getString("beschreibung");
-			this.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
-			this.antragsdatum = rs.getDate("antragsdatum");
-			this.status = rs.getString("status");
-			this.ablehnungsgrund = rs.getString("ablehnungsgrund");
-			this.kommentar = rs.getString("anmerkung");
-			this.ersteller = new Benutzer(rs.getString("ersteller_fk"));
-			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
-		}
-		return this;
-	}
-	
 		
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "ersteller" stellt den Antragsersteller des auszugebenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
@@ -297,9 +269,9 @@ public class Antrag {
 	}
 	
 	
-	/** ***************************************************************************************************************************************************
-	 * *************************************************************Veränderung der Status*****************************************************************
-	 ******************************************************************************************************************************************************/
+	/** ****************************************************************************************
+	 * *********************************Veränderung der Status**********************************
+	 *******************************************************************************************/
 	
 	
 	/**Methode, um einen Antrag aus der DB zu lÃ¶schen. Der Ãœbergabewert "id" stellt die AntragsID des zu lÃ¶schenden Antrags dar.
@@ -338,6 +310,42 @@ public class Antrag {
 		
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'abgelehnt' WHERE idantrag = '%s'", id));
 	}
+	
+	/** ***************************************************************************************************************************************************
+	 * ***************************************************Implementierung der icht statische Methoden******************************************************
+	 ******************************************************************************************************************************************************/
+	
+	
+	/**Methode zieht sich Antrag mit im Parameter angegebener ID.
+	 *Zuerst wird die Datenbankverbindung hergestellt.
+	 *Im ResultSet wird der ausgeführte SELECT gespeichert. 
+	 *in der IF-Abfrage werden die Daten in die jeweiligen Variablen gespeichert und zurückgegeben. 
+	 * @param pID
+	 * @return
+	 * @throws SQLException
+	 * #Robin
+	 */
+	public Antrag getAntragById(int pID) throws SQLException
+	{
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE idantrag = '%d';", pID));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		if(rs.first())
+		{
+			this.antragid = rs.getInt("idantrag");
+			this.name = rs.getString("titel");
+			this.beschreibung = rs.getString("beschreibung");
+			this.fertigstellungsdatum = rs.getDate("fertigstellungsdatum");
+			this.antragsdatum = rs.getDate("antragsdatum");
+			this.status = rs.getString("status");
+			this.ablehnungsgrund = rs.getString("ablehnungsgrund");
+			this.kommentar = rs.getString("anmerkung");
+			this.ersteller = new Benutzer(rs.getString("ersteller_fk"));
+			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
+		}
+		return this;
+	}
+	
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
