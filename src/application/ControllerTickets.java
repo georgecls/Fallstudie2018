@@ -24,6 +24,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ControllerTickets implements Initializable{
@@ -189,13 +190,13 @@ public class ControllerTickets implements Initializable{
 		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));   
-		Kommentar_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Kommentar"));
+		Kommentar_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
 
 		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
-		Kommentar_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Kommentar"));
+		Kommentar_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
 		
 		status_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
@@ -211,7 +212,7 @@ public class ControllerTickets implements Initializable{
 		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
-		Kommentar_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Kommentar"));
+		Kommentar_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
 		
     	status_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
@@ -271,10 +272,6 @@ public class ControllerTickets implements Initializable{
     		String date = simpleDateFormat.format(datum);
     		tfPrFertigstellungsdatum.setText(date);
     		
-    		Antrag kom = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
-    		komm = kom.getKommentar();
-    		taPrKommentar.setText(komm);
-    		
     		Antrag beschreibung = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
     		beschr = beschreibung.getBeschreibung();
     		taPrBeschreibung.setText(beschr);
@@ -332,7 +329,8 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnPrüfen() throws SQLException
     	{
-    		Antrag.antragPruefen(antragsID);
+    		String kom = taPrKommentar.getText();
+    		Antrag.antragPruefen(antragsID, kom);
     		initialize(null, null);
     		
     		labelPr.setVisible(true);
@@ -347,10 +345,21 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnGenehmigen() throws SQLException
     	{
-    		String kom = taGeKommentar.getText();
-    		String gru = cbGruppeZuweisen.getValue().toString();
-    		Antrag.antragGenehmigen(antragsID, kom, gru);
-    		initialize(null, null);
+    		if(cbGruppeZuweisen.getValue() == null)
+    		{
+    			labelGe.setVisible(true);
+    			labelGe.setText("Bitte Gruppe auswählen");
+    			labelGe.setTextFill(Color.RED);
+    		}
+    		else
+    		{
+    			String kom = taGeKommentar.getText();
+    			String gru = cbGruppeZuweisen.getValue().toString();
+    			Antrag.antragGenehmigen(antragsID, kom, gru);
+    			initialize(null, null);
+    		}
+    		
+    		
     	}
     	
     	/**
