@@ -149,8 +149,12 @@ public class Benutzer {
 	 */
 	public static void updateBenutzer(String name, String gruppe, int berechtigung) throws SQLException
 	{
-		int i = Gruppe.getGruppenID(gruppe);
-		System.out.println(i);
+//		System.out.println(gruppe);
+		Gruppe g1 = new Gruppe();
+		g1.getGruppeByName(gruppe);
+		String i = g1.getId();
+//		int i = Gruppe.getGruppenID(gruppe);
+//		System.out.println(i);
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET blevel = '%d', ag_fk = '%s' " 
 								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
