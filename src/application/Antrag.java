@@ -287,7 +287,7 @@ public class Antrag {
 	}
 	
 	
-	public static void antragPruefen(int id) throws SQLException
+	public static void antragPruefen(String id) throws SQLException
 	{
 		
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geprueft' WHERE idantrag = '%s'", id));
