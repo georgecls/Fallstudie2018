@@ -291,7 +291,21 @@ public class Benutzer {
               }
     }
 
-	
+	public static int getGruppeByName(String name) throws SQLException {
+        
+        ObservableList<Benutzer> data = FXCollections.observableArrayList();
+        int id;
+
+        Main.get_DBConnection().Execute(String.format("SELECT ag_fk FROM benutzer WHERE benutzername = '%s'", name));
+              ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+              if(rs.next()) {
+            	  return id = rs.getInt(1);
+              }else {
+                  return 0;
+              }
+    }
+
 	
 	/*****************************************************************************************************************************************************
 	 *******************************************************Implementierung der Getter und Setter*********************************************************

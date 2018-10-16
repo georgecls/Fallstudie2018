@@ -141,7 +141,7 @@ public class ControllerTickets implements Initializable{
 			try {
 				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.getUser());
 				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.getUser(), ControllerLogin.getUserid());
-				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.getUser()); 
+				data_gr = Antrag.getGruppenantraege("genehmigt",ControllerLogin.getUser()); 
 				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.getUser());
 	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.getUser());
 				data_AlleT = Antrag.getAlleAntraege();
