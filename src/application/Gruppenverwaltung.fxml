@@ -60,6 +60,7 @@
                         <JFXButton fx:id="btnLoeschen" buttonType="RAISED" onAction="#handleLoeschen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Löschen" textFill="WHITE" />
                      </children>
                   </HBox>
+                  <Label fx:id="label" prefHeight="20.0" prefWidth="250.0" />
                </children>
             </VBox>
          </children>

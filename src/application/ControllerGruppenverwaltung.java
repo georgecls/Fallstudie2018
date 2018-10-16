@@ -16,11 +16,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ControllerGruppenverwaltung  implements Initializable {
@@ -43,6 +45,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
 	@FXML private JFXTextField fieldGruppe;
 	@FXML private JFXTextArea fieldBeschreibung;
+	@FXML private Label label;
 
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
@@ -50,6 +53,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		
 		try {
 			gruppe = Gruppe.getGruppenverwaltung();
+			label.setVisible(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,6 +111,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		
 		try {
 			Gruppe.insertGruppe(gruppe, beschreibung);
+			label.setText("Gruppe '"+gruppe+"' hinzugefügt");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,11 +122,15 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	@FXML
 	public void handleAendern() {
 		
+		//Hier noch sql Mehthode
+		initialize(null, null);
+		label.setText("Gruppe '"+gruppe+"' geändert");
 	}
 	@FXML
 	public void handleLoeschen() {
 		try {
 			Gruppe.deleteGruppe(id12);
+			label.setText("Gruppe '"+gruppe+"' gelöscht");
 			initialize (null, null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -44,6 +44,8 @@ public class ControllerTickets implements Initializable{
 	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
 	@FXML private Label lblGrKommentar, lblPrKommentar, lblGeKommentar;
 	@FXML private Label lblGrFertigstellungsdatum, lblPrFertigstellungsdatum, lblGeFertigstellungsdatum;
+	@FXML private Label labelGr, labelPr, labelGe;
+
 	
 	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum;
 	@FXML private JFXTextField tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
@@ -241,19 +243,26 @@ public class ControllerTickets implements Initializable{
     	public void handleBtnBearbeiten()
     	{
     		
+    		labelGr.setVisible(true);
+    		labelGr.setText("Ticket bearbeitet");
+    		labelGr.setVisible(false);
     	}
     	
     	@FXML
     	public void handleBtnPrüfen()
     	{
-    			
+    		labelPr.setVisible(true);
+    		labelPr.setText("Ticket geprüft");
+    		labelPr.setVisible(false);	
     	}
     	
     	//Kommentar füllen
     	@FXML
     	public void handleBtnGenehmigen()
     	{
-    		    	    
+    		labelGe.setVisible(true);
+    		labelGr.setText("Ticket genehmigt");   		
+    		labelGe.setVisible(false);   
     	}
     	
     	//FXML Ablehnung öffnen

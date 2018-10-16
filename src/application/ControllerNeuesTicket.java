@@ -52,6 +52,7 @@ public class ControllerNeuesTicket {
 		//transfer Methoden
 		try {
 			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller);
+			fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -61,6 +62,6 @@ public class ControllerNeuesTicket {
 		fieldTicketart.setText(null);
 		fieldZieldatum.setValue(null);
 		fieldText.setText(null);
-		fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
+		
 	}
 }

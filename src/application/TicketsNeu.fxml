@@ -59,9 +59,11 @@
                               <JFXTextField fx:id="tfGrFertigstellungsdatum" editable="false" focusColor="#128277" prefHeight="35.0" prefWidth="350.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0" style="-fx-background-color: #ffffff;">
                            <children>
+                              <VBox prefHeight="200.0" prefWidth="200.0" />
                               <JFXButton fx:id="btnBearbeiten" buttonType="RAISED" onAction="#handleBtnBearbeiten" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="bearbeiten" textFill="WHITE" />
+                              <Label fx:id="labelGr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
                      </children>
@@ -111,9 +113,11 @@
                               <JFXTextField fx:id="tfPrFertigstellungsdatum" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
-                              <JFXButton fx:id="btnPrüfen" buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="prüfen" textFill="WHITE" />
+                           		<VBox prefHeight="200.0" prefWidth="200.0" />
+                              	<JFXButton fx:id="btnPrüfen" buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="prüfen" textFill="WHITE" />
+                           		<Label fx:id="labelPr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
                      </children>
@@ -191,6 +195,8 @@
                            <children>
                               <JFXButton fx:id="btnGenehmigen" buttonType="RAISED" onAction="#handleBtnGenehmigen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="genehmigen" textFill="WHITE" />
                               <JFXButton fx:id="btnAblehnen" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleBtnAblehnen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="ablehnen" textFill="WHITE" />
+                           	  <Label fx:id="labelGe" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
+                           	  
                            </children>
                         </HBox>
                      </children>
