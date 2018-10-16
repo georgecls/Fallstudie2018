@@ -120,9 +120,12 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		
 	}
 	@FXML
-	public void handleAendern() {
-		
+	public void handleAendern() throws SQLException {
+		String gruppe = fieldGruppe.getText().toString();
+		String beschreibung = fieldBeschreibung.getText().toString();
 		//Hier noch sql Mehthode
+		System.out.println(id12);
+		Gruppe.updateGruppeById(id12, gruppe, beschreibung);
 		initialize(null, null);
 		label.setText("Gruppe '"+gruppe+"' geändert");
 	}

@@ -58,9 +58,9 @@ public class Gruppe {
 	 *  
 	 * @throws SQLException
 	 */
-	public void updateGruppeById(int id, String gruppe, String beschreibung) throws SQLException
+	public static void updateGruppeById(String id, String gruppe, String beschreibung) throws SQLException
 	{
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppe = '%d', ag_fk = '%s' WHERE agid = '%s';", gruppe, beschreibung, id));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppenname = '%s', gruppenbeschreibung = '%s' WHERE agid = '%s';", gruppe, beschreibung, id));
 	}
 	
 	/**Methode, um eine Gruppe aus der DB zu löschen. Der Übergabewert "name" stellt den Gruppennamen der zu löschenden Gruppe dar.
@@ -72,7 +72,7 @@ public class Gruppe {
 	 */
 	public static void deleteGruppe(String id) throws SQLException
 	{
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET agstatus = 'inaktiv' WHERE gruppenname = '%s'", id));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET agstatus = 'inaktiv' WHERE agid = '%s'", id));
 	}
 	
 	// Methode um TableView Benutzerverwaltung zu befüllen
