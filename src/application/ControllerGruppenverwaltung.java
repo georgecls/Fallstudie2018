@@ -63,7 +63,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 			Gruppe b1 = (Gruppe) gruppe;
 		});
 		
-		id_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("agid"));		
+		id_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("id"));		
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenname"));
 		beschreibung_Col.setCellValueFactory(new PropertyValueFactory<Gruppe, String>("gruppenbeschr"));
 		
