@@ -24,6 +24,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -59,6 +60,8 @@ public class ControllerTickets implements Initializable{
 	
 	@FXML private JFXComboBox cbGruppeZuweisen;	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
+	
+	@FXML private ImageView image;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
@@ -307,6 +310,12 @@ public class ControllerTickets implements Initializable{
     		taGeBeschreibung.setText(beschr);
     	}
     
+    	@FXML
+    	public void omcImage()
+    	{
+    		
+    	}
+    	
     	/**
     	 * Methode definiert, was passiert, wenn der Button bearbeiten auf der GUI gedrückt wird.
     	 * @throws SQLException
