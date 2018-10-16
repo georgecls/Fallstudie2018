@@ -76,6 +76,27 @@ public class ControllerTickets implements Initializable{
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
     	
+    	tfGrId.setText(null);
+    	tfGrTitel.setText(null);
+    	tfGrFertigstellungsdatum.setText(null);
+    	taGrBeschreibung.setText(null);
+    	taGrKommentar.setText(null);
+    	
+    	tfPrId.setText(null);
+    	tfPrTitel.setText(null);
+    	tfPrFertigstellungsdatum.setText(null);
+    	taPrBeschreibung.setText(null);
+    	taPrKommentar.setText(null);
+    	
+    	tfGeId.setText(null);	
+    	tfGeTitel.setText(null);
+    	tfGeFertigstellungsdatum.setText(null);
+    	taGeBeschreibung.setText(null);
+    	taGeKommentar.setText(null);
+    	cbGruppeZuweisen.setValue(null);
+    	
+    	
+    	
     	try {
 			cbData = Gruppe.getGruppennamen();
 		} catch (SQLException e1) {
@@ -329,7 +350,7 @@ public class ControllerTickets implements Initializable{
     		String kom = taGeKommentar.getText();
     		String gru = cbGruppeZuweisen.getValue().toString();
     		Antrag.antragGenehmigen(antragsID, kom, gru);
-    		initialize(null, null); 		
+    		initialize(null, null);
     	}
     	
     	/**

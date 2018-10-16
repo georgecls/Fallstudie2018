@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -9,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 
 public class ControllerAblehnung implements Initializable{
 
@@ -22,9 +24,11 @@ public class ControllerAblehnung implements Initializable{
 		tfAntragid.setText(ControllerTickets.getAID());
 	}
 	
-	public void handleAbschicken()
+	public void handleAbschicken() throws SQLException
 	{
-		//hier Methode - update Antrag - Ablehnungsgrund
+		Antrag.antragAblehnen(tfAntragid.getText(), taAblehnung.getText());
+		Stage stage = (Stage) btnAbschicken.getScene().getWindow();
+		stage.close();
 	}
 
 }
