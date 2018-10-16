@@ -196,7 +196,7 @@ public class Benutzer {
 		
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 
-	    Main.get_DBConnection().Execute("SELECT * FROM benutzer INNER JOIN ag ON benutzer.ag_fk = ag.agid");
+	    Main.get_DBConnection().Execute("SELECT * FROM benutzer WHERE bstatus <> 'inaktiv'");
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		while(rs.next())

@@ -47,8 +47,8 @@ public class Gruppe {
 	 */
 	public static void insertGruppe(String gruppe, String beschreibung) throws SQLException
 	{
-		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO ag (gruppenname, gruppenbeschreibung) "
-				+ "VALUES ('%s', '%s')", gruppe, beschreibung));
+		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO ag (gruppenname, gruppenbeschreibung, agstatus) "
+				+ "VALUES ('%s', '%s', 'aktiv')", gruppe, beschreibung));
 	}
 	
 	/**Methode, um eine Gruppe in der DB zu ändern. Der Übergabewert "name" stellt den Gruppennamen der zu bearbeitenden Gruppe dar.
@@ -80,7 +80,7 @@ public class Gruppe {
 		
 	    ObservableList<Gruppe> data = FXCollections.observableArrayList();
 
-	    Main.get_DBConnection().Execute("SELECT * FROM ag");
+	    Main.get_DBConnection().Execute("SELECT * FROM ag WHERE agstatus <> 'inaktiv'");
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
 		while(rs.next())
