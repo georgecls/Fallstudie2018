@@ -72,7 +72,7 @@ public class Gruppe {
 	 */
 	public static void deleteGruppe(String id) throws SQLException
 	{
-		
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET agstatus = 'inaktiv' WHERE gruppenname = '%s'", id));
 	}
 	
 	// Methode um TableView Benutzerverwaltung zu befüllen
@@ -115,6 +115,19 @@ public class Gruppe {
 		}
 		return this;
 	}
+	
+	public static int getGruppenID(String name) throws SQLException {
+		Main.get_DBConnection().ExecuteTransact(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", name));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		
+		if (rs.next()){
+			int grid = rs.getInt("agid");
+			return grid;
+		}else {
+			return 0;
+		}
+	}
+	
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************

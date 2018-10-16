@@ -149,7 +149,10 @@ public class Benutzer {
 	 */
 	public static void updateBenutzer(String name, String gruppe, int berechtigung) throws SQLException
 	{
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", berechtigung, gruppe, name));
+		int i = Gruppe.getGruppenID(gruppe);
+		System.out.println(i);
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET blevel = '%d', ag_fk = '%s' " 
+								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
 	
 	/**Methode, um einen Benutzer aus der DB zu löschen. Der Übergabewert "name" stellt den Benutzernamen des zu löschenden Benutzers dar.
@@ -161,7 +164,7 @@ public class Benutzer {
 	 */
 	public static void deleteBenutzer(String name) throws SQLException
 	{	
-		Main.get_DBConnection().ExecuteTransact(String.format("DELETE FROM benutzer WHERE benutzername = '%s';", name));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'inaktiv' WHERE benutzername = '%s';", name));
 	}
 	
 	
