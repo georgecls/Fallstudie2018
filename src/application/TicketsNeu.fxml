@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -205,7 +206,10 @@
                               <Label fx:id="lblGeBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
                               <JFXTextArea fx:id="taGeBeschreibung" editable="false" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                               <VBox prefHeight="200.0" prefWidth="20.0" />
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="image" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#omcImage" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../refresh1.png" />
+                                 </image></ImageView>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0">
