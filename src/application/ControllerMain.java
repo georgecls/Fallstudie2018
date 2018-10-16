@@ -30,7 +30,7 @@ public class ControllerMain implements Initializable {
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
 		
-		if (ControllerLogin.berechtigung == 2) {
+		if (ControllerLogin.getBerechtigung() == 2) {
 			btnBenutzerverwaltung.setVisible(true);
 			btnGruppenverwaltung.setVisible(true);
 		}else {
@@ -120,8 +120,8 @@ public class ControllerMain implements Initializable {
 	public void handleAbmelden() {
 //		DBConnector db = new DBConnector();
 		Main.get_DBConnection().close();
-		ControllerLogin.user = null;
-		ControllerLogin.berechtigung = 0;
+		ControllerLogin.setUser(null);
+		ControllerLogin.setBerechtigung(0);
 		main.primaryStage.close();
 		main.primaryStage.setHeight(0);
 		main.primaryStage.setWidth(0);

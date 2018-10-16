@@ -159,6 +159,7 @@ public class Antrag {
         return data;
     }
 	
+	
 	/**
 	 * Methode, um die Anträge mit Status 'erstellt' abzufragen.
 	 * Die Ergebnisse erscheinen in der Tabelle 'Tickets prüfen'.
@@ -182,7 +183,7 @@ public class Antrag {
         {
 		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
 					"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
-					"WHERE benutzername = '%s' AND status = 'erstellt' and ersteller_fk <> '%s';", benutzername, benutzerid));
+					"WHERE benutzername = '%s' AND status = 'erstellt' and ersteller_fk <> '%d';", benutzername, benutzerid));
 
 		 ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		 	while(rs.next())
@@ -283,13 +284,12 @@ public class Antrag {
 	 */
 	public static void deleteAntragById(int id) throws SQLException
 	{
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geloescht' WHERE idantrag = '%s'", id));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'gelöscht' WHERE idantrag = '%s'", id));
 	}
-	
 	
 	public static void antragPruefen(String id) throws SQLException
 	{
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geprueft' WHERE idantrag = '%s'", id));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geprüft' WHERE idantrag = '%s'", id));
 	}
 	
 	public static void antragGenehmigen(int id) throws SQLException

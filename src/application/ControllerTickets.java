@@ -72,24 +72,48 @@ public class ControllerTickets implements Initializable{
     @SuppressWarnings("restriction")
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
-    	
+    	/**
+    	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt
+    	 */
     	labelGr.setVisible(false);
     	labelPr.setVisible(false);
     	labelGe.setVisible(false);
     	
+    	Gruppentickets.setDisable(false);
+		TicketsPrüfen.setDisable(false);
+		eigeneTickets.setDisable(false);
+    	abgeschlosseneTickets.setDisable(false);
+		TicketsGenehmigen.setDisable(false);
+		AlleTickets.setDisable(false);
+    	
+    	if (ControllerLogin.getBerechtigung() == 0) {
+    		abgeschlosseneTickets.setDisable(true);
+			TicketsGenehmigen.setDisable(true);
+			AlleTickets.setDisable(true);
+    		
+		}else {
+			abgeschlosseneTickets.setDisable(false);
+			TicketsGenehmigen.setDisable(false);
+			AlleTickets.setDisable(false);
+		}
+    	
+    	/**
+    	 * Die ObservableList Elemente erhalten ihren Inhalt durch die statischen Methoden von der Klasse 'Antrag'.
+    	 * Inhalt der Listen sind die jeweiligen Anträge.  
+    	 */
 			try {
-				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.user);
-				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.user, Benutzer.benutzerid);
-				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
-				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
-	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
+				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.getUser());
+				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.getUser(), ControllerLogin.getUserid());
+				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.getUser()); 
+				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.getUser());
+	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.getUser());
 				data_AlleT = Antrag.getAlleAntraege();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		/**
-		 * Kommentar einfügen
+		 * mit forEach() wird jedes Element der ObservableList durchgegangen und eine Instanz angelegt. (glaube ich^^)
 		 */
     	data_prüfen.forEach((antrag) -> {
     		Antrag a1 = (Antrag) antrag;
@@ -116,7 +140,18 @@ public class ControllerTickets implements Initializable{
     	}); 
 	
     	/**
-    	 * Kommentar einfügen
+		 * Die Daten der ObservableListe werden der jeweiligen Tabelle zugeordnet.
+		 */
+		tvGruppentickets.setItems(data_gr);
+		tvTicketsPrüfen.setItems(data_prüfen);
+		tvTicketsGenehmigen.setItems(data_genehmigen);
+		tvAbgTickets.setItems(data_AbgT);
+		tvEigeneTickets.setItems(data_EigT);
+		tvAlleTickets.setItems(data_AlleT);
+    	
+    	/**
+    	 * durch die Variablen in den Klammern wird den Tabellenspalten der benötigte Wert zugewiesen.
+    	 * So wird z.B. in Fertigstellungsdatum auch das Fertigstellungsdatum aus der ObservableList angezeigt.
     	 */
 		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
@@ -150,18 +185,11 @@ public class ControllerTickets implements Initializable{
 		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
-		
-		/**
-		 * Kommentar einfügen
-		 */
-		tvGruppentickets.setItems(data_gr);
-		tvTicketsPrüfen.setItems(data_prüfen);
-		tvTicketsGenehmigen.setItems(data_genehmigen);
-		tvAbgTickets.setItems(data_AbgT);
-		tvEigeneTickets.setItems(data_EigT);
-		tvAlleTickets.setItems(data_AlleT);
 	}
     
+    	/**
+    	 * 
+    	 */
     	@FXML
     	public void omcGruppentickets()
     	{
@@ -189,6 +217,9 @@ public class ControllerTickets implements Initializable{
     		taGrBeschreibung.setText(beschr);
     		}
     	
+    	/**
+    	 * 
+    	 */
     	@FXML
     	public void omcTicketsPruefen()
     	{
@@ -216,6 +247,9 @@ public class ControllerTickets implements Initializable{
     		taPrBeschreibung.setText(beschr);
     	}
     	
+    	/**
+    	 * 
+    	 */
     	@FXML
     	public void omcTicketsGenehmigen()
     	{
@@ -243,6 +277,10 @@ public class ControllerTickets implements Initializable{
     		taGeBeschreibung.setText(beschr);
     	}
     
+    	/**
+    	 * Methode definiert, was passiert, wenn der Button bearbeiten auf der GUI gedrückt wird.
+    	 * @throws SQLException
+    	 */
     	@FXML
     	public void handleBtnBearbeiten() throws SQLException
     	{
@@ -253,6 +291,11 @@ public class ControllerTickets implements Initializable{
     		labelGr.setText("Ticket bearbeitet");  		
     	}
     	
+    	/**
+    	 * Methode definiert, was passiert, wenn der Button prüfen auf der GUI gedrückt wird.
+    	 * 
+    	 * @throws SQLException
+    	 */
     	@FXML
     	public void handleBtnPrüfen() throws SQLException
     	{
@@ -263,7 +306,10 @@ public class ControllerTickets implements Initializable{
     		labelPr.setText("Ticket geprüft");
     	}
     	
-    	//Kommentar füllen
+    	/**
+    	 * Methode definiert, was passiert, wenn der Button genehmigen auf der GUI gedrückt wird.
+    	 * 
+    	 */
     	@FXML
     	public void handleBtnGenehmigen()
     	{
@@ -272,7 +318,10 @@ public class ControllerTickets implements Initializable{
     		labelGr.setText("Ticket genehmigt");   		
     	}
     	
-    	//FXML Ablehnung öffnen
+    	/**
+    	 * Methode definiert, was passiert, wenn der Button ablehnen auf der GUI gedrückt wird.
+    	 * Neues Fenster 'Ablehnung.fxml' wird in neuem Fenster geöffnet.
+    	 */
     	@FXML
     	public void handleBtnAblehnen()
     	{
@@ -293,6 +342,10 @@ public class ControllerTickets implements Initializable{
     		}
     	}   
 
+    	/**
+    	 * Getter Methode für Antrags-ID
+    	 * @return aid
+    	 */
     	public static String getAID()
     	{
     		return aid;

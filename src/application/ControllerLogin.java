@@ -24,9 +24,9 @@ public class ControllerLogin {
 	
 	
 	//Hiermit kann in anderen Fenstern die Visibility gesetzt werden
-	public static String user;
-	public static int userid;
-	public static int berechtigung;
+	private static String user;
+	private static int userid;
+	private static int berechtigung;
 	
 	public static boolean berechtigt = false;
 	
@@ -62,6 +62,7 @@ public class ControllerLogin {
 			
 			if (berechtigt == true)
 			{
+				userid = Benutzer.getIdByName(benutzerName);
 				user = benutzerName;
 				benutzerName = null;
 				benutzerKennwort = null;
@@ -77,5 +78,25 @@ public class ControllerLogin {
 				labelFehler.setTextFill(Color.RED);
 			}		
 		}
+	}
+
+	public static int getUserid() {
+		return userid;
+	}
+
+	public static String getUser() {
+		return user;
+	}
+
+	public static void setUser(String user) {
+		ControllerLogin.user = user;
+	}
+	
+	public static int getBerechtigung() {
+		return berechtigung;
+	}
+
+	public static void setBerechtigung(int berechtigung) {
+		ControllerLogin.berechtigung = berechtigung;
 	}
 }

@@ -49,8 +49,8 @@ public class ControllerAuswertung implements Initializable {
 		 ObservableList<PieChart.Data> dataChartGr = null;
 			try {
 				dataChartGr = FXCollections.observableArrayList(
-						 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByGruppe(ControllerLogin.user, "abgeschlossen")),
-							new PieChart.Data("offen", Antrag.countAntraegeByGruppe(ControllerLogin.user ,"genehmigt"))
+						 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByGruppe(ControllerLogin.getUser(), "abgeschlossen")),
+							new PieChart.Data("offen", Antrag.countAntraegeByGruppe(ControllerLogin.getUser() ,"genehmigt"))
 						 );
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
