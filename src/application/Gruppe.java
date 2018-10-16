@@ -117,6 +117,21 @@ public class Gruppe {
 	}
 	
 	
+	public static ObservableList getGruppennamen() throws SQLException {
+		
+	    ObservableList<Gruppe> data = FXCollections.observableArrayList();
+
+	    Main.get_DBConnection().Execute("SELECT * FROM ag WHERE agstatus <> 'inaktiv'");
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		while(rs.next())
+		{
+			data.add(new Gruppe(rs.getInt("agid")));
+		}
+		return data;
+	}
+	
+	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
