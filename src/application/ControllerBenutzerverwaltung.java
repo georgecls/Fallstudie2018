@@ -28,10 +28,9 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	ObservableList<Integer> boxBerechtigungListe = FXCollections.observableArrayList(0,1,2);
 	
-	ObservableList<String> boxGruppeListe = FXCollections.observableArrayList
-			("Controlling","Finanzen","Geschäftsführung","Hausverwaltung","IT","Kundenberatung",
-					"Marketingabteilung","Materialwirtschaft","Personalabteilung","Rechnungswesen",
-					"Rechtsabteilung","Vertrieb");
+	
+	
+	ObservableList<String> boxGruppeListe;
 	
 	@FXML private TableView<Benutzer> tvBenutzerverwaltung;
 	
@@ -48,8 +47,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	@FXML private Label label;
 	
 	@Override
-	public void initialize (URL url, ResourceBundle rb){
-		
+	public void initialize (URL url, ResourceBundle rb){	
 		
 		try {
 			data = Benutzer.getBenutzerverwaltung();
@@ -58,11 +56,21 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+		
 		data.forEach((benutzer) -> {
 			Benutzer b1 = (Benutzer) benutzer;
 
 		});
+		
+//		Übergabe aller aktiven Gruppen
+		try {
+			boxGruppeListe = Gruppe.getGruppennamen();
+			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}				
+		
 				
 		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppe"));
