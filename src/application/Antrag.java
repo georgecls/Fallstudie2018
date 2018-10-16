@@ -302,9 +302,9 @@ public class Antrag {
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'erledigt' WHERE idantrag = '%s'", id));
 	}
 	
-	public static void antragAblehnen(String id) throws SQLException
+	public static void antragAblehnen(String id, String text) throws SQLException
 	{	
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'abgelehnt' WHERE idantrag = '%s'", id));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'abgelehnt', ablehnungsgrund = '%s' WHERE idantrag = '%s'", text, id));
 	}
 	
 	/** ***************************************************************************************************************************************************
