@@ -25,6 +25,7 @@ public class ControllerLogin {
 	
 	//Hiermit kann in anderen Fenstern die Visibility gesetzt werden
 	public static String user;
+	public static int userid;
 	public static int berechtigung;
 	
 	public static boolean berechtigt = false;

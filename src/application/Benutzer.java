@@ -16,6 +16,8 @@ public class Benutzer {
 	private int berechtigung;
 	private String status;
 	private int ag_fk;
+    static int benutzerid;
+
 	
 	private String gruppenname;
 	
@@ -66,16 +68,21 @@ public class Benutzer {
 	        String eingabeName = benN;
 	        String eingabePasswort = p;
 	        String vergleichsPasswort = null;
+	        
 	        try {
-	        	Main.get_DBConnection().Execute(String.format("SELECT passwort FROM benutzer WHERE benutzername = '%s';", benN));
+	        	Main.get_DBConnection().Execute(String.format("SELECT passwort, benutzerid FROM benutzer WHERE benutzername = '%s';", benN));
 				ResultSet rsP = Main.get_DBConnection().get_last_resultset();
 	        	
 	        	while(rsP.next())
 	        	{
+	        		benutzerid = rsP.getInt("benutzerid");
 		        	vergleichsPasswort = rsP.getString("passwort");
-		        	if(BCrypt.checkpw(p, vergleichsPasswort))   {
+		        	if(BCrypt.checkpw(p, vergleichsPasswort))
+		        	{
 			            anmelden = true;
-			        } else {
+			        }
+		        	else
+		        	{
 			            anmelden = false;
 			        }
 	        	}

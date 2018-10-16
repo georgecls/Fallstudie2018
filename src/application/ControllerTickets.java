@@ -39,7 +39,6 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableColumn<Antrag, String> datum_ColGr, datum_ColP, datum_ColGe, datum_ColA, datum_ColET, datum_ColAT;
 	@FXML private TableColumn<Antrag, String> Kommentar_ColGr, Beschreibung_ColGr, Kommentar_ColP, Beschreibung_ColP, Kommentar_ColGe, Beschreibung_ColGe;
 
-
 	@FXML private Label lblGrId, lblPrId, lblGeId; 
 	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
 	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
@@ -55,7 +54,6 @@ public class ControllerTickets implements Initializable{
 	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
 	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
-//	@FXML private Button btnBearbeiten, btnPrüfen, btnGenehmigen;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     
@@ -73,8 +71,8 @@ public class ControllerTickets implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
     	
 			try {
-//				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.user);
-				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.user);
+				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.user);
+				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.user, Benutzer.benutzerid);
 				data_gr = Antrag.getAntraegebyStatus("genehmigt",ControllerLogin.user); 
 				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.user);
 	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.user);
@@ -94,10 +92,10 @@ public class ControllerTickets implements Initializable{
     		Antrag a2 = (Antrag) antrag;
     	}); 
     	
-//    	data_EigT.forEach((antrag) -> {
-//    		Antrag a3 = (Antrag) antrag;
-//    	}); 
-//    	
+    	data_EigT.forEach((antrag) -> {
+    		Antrag a3 = (Antrag) antrag;
+    	}); 
+    	
     	data_gr.forEach((antrag) -> {
     		Antrag a4 = (Antrag) antrag;
     	});    	
@@ -153,7 +151,7 @@ public class ControllerTickets implements Initializable{
 		tvTicketsPrüfen.setItems(data_prüfen);
 		tvTicketsGenehmigen.setItems(data_genehmigen);
 		tvAbgTickets.setItems(data_AbgT);
-//		tvEigeneTickets.setItems(data_EigT);
+		tvEigeneTickets.setItems(data_EigT);
 		tvAlleTickets.setItems(data_AlleT);
 
 	}
@@ -248,34 +246,14 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnPrüfen()
     	{
-    		try {
-        		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TicketsWindow.fxml"));
-        		Parent root1 = (Parent) fxmlLoader.load();
-        		Stage stage = new Stage();
-        		stage.setScene(new Scene(root1));
-        		stage.show();
-        		
-    			} 
-        		catch (IOException e) {
-    				e.printStackTrace();
-    			}    	
+    			
     	}
     	
     	//Kommentar füllen
     	@FXML
     	public void handleBtnGenehmigen()
     	{
-    		try {
-        		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TicketsWindow.fxml"));
-        		Parent root1 = (Parent) fxmlLoader.load();
-        		Stage stage = new Stage();
-        		stage.setScene(new Scene(root1));
-        		stage.show();
-        		
-    			} 
-        		catch (IOException e) {
-    				e.printStackTrace();
-    			}    	    
+    		    	    
     	}
     	
     	@FXML
