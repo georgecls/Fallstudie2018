@@ -54,18 +54,15 @@ public class Antrag {
 	 */
 	
 	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe) throws SQLException
-	{
-		
-		Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO antrag (titel, beschreibung, fertigstellungsdatum, antragsdatum, "
-				+ "status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-				+ "VALUES('%s', '%s', '%s', '%s', 'erstellt', '', '', '%s', NULL, '%s', '%s');"
-				, name, text, zieldatum, erstelldatum, ersteller, erstGruppe, erstGruppe));
+    {
+           int a = Benutzer.getIdByName(ersteller);
+           
+           Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO antrag (titel, beschreibung, fertigstellungsdatum, antragsdatum, "
+                          + "status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
+                          + "VALUES('%s', '%s', '%s', '%s', 'erstellt', NULL, NULL, '%d', NULL, '%s', NULL);", name, text, zieldatum, erstelldatum, a, erstGruppe));
+    }
 
-	}
 	
-	
-
-		
 	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "ersteller" stellt den Antragsersteller des auszugebenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
@@ -282,7 +279,7 @@ public class Antrag {
 	 *  
 	 * @throws SQLException
 	 */
-	public static void deleteAntragById(int id) throws SQLException
+	public static void deleteAntragById(String id) throws SQLException
 	{
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'gelöscht' WHERE idantrag = '%s'", id));
 	}
@@ -292,17 +289,20 @@ public class Antrag {
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geprüft' WHERE idantrag = '%s'", id));
 	}
 	
-	public static void antragGenehmigen(int id) throws SQLException
-	{
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'genehmigt' WHERE idantrag = '%s'", id));
-	}
+	public static void antragGenehmigen(String id, String text, String gruppe) throws SQLException
+    {
+           Gruppe g1 = new Gruppe();
+           g1.getGruppeByName(gruppe);
+           String i = g1.getId();
+           Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'genehmigt', anmerkung = '%s', ag_bearbeiter_fk = '%s' WHERE idantrag = '%s'", text, i, id));
+    }
 	
-	public static void antragBearbeiten(int id) throws SQLException
+	public static void antragBearbeiten(String id) throws SQLException
 	{	
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'erledigt' WHERE idantrag = '%s'", id));
 	}
 	
-	public static void antragAblehnen(int id) throws SQLException
+	public static void antragAblehnen(String id) throws SQLException
 	{	
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'abgelehnt' WHERE idantrag = '%s'", id));
 	}

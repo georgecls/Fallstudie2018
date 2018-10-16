@@ -195,7 +195,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblGeFertigstellungsdatum1" prefHeight="20.0" prefWidth="130.0" text="Gruppen zuweisen" />
-                              <JFXComboBox focusColor="#128277" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="350.0" />
+                              <JFXComboBox fx:id="cbGruppeZuweisen" focusColor="#128277" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">

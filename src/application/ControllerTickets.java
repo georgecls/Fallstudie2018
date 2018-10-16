@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
@@ -55,9 +56,11 @@ public class ControllerTickets implements Initializable{
 	@FXML private JFXTextArea taPrBeschreibung, taPrKommentar;
 	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
 	
+	@FXML private JFXComboBox cbGruppeZuweisen;	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
+    private ObservableList<String> cbData;
     
     private String antragsID, name, komm, beschr;
     private static String aid;
@@ -72,6 +75,15 @@ public class ControllerTickets implements Initializable{
     @SuppressWarnings("restriction")
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
+    	
+    	try {
+			cbData = Gruppe.getGruppennamen();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	cbGruppeZuweisen.setItems(cbData);
+    	
     	/**
     	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt
     	 */
@@ -309,13 +321,15 @@ public class ControllerTickets implements Initializable{
     	/**
     	 * Methode definiert, was passiert, wenn der Button genehmigen auf der GUI gedrückt wird.
     	 * 
+    	 * @throws SQLException 
     	 */
     	@FXML
-    	public void handleBtnGenehmigen()
+    	public void handleBtnGenehmigen() throws SQLException
     	{
-    		Antrag.antragGenehmigen(antragsID); //Methode sollte String bekommen
-    		labelGe.setVisible(true);
-    		labelGr.setText("Ticket genehmigt");   		
+    		String kom = taGeKommentar.getText();
+    		String gru = cbGruppeZuweisen.getValue().toString();
+    		Antrag.antragGenehmigen(antragsID, kom, gru);
+    		initialize(null, null); 		
     	}
     	
     	/**
