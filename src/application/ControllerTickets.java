@@ -434,7 +434,13 @@ public class ControllerTickets implements Initializable{
     			TicketsGenehmigen.setDisable(true);
     			AlleTickets.setDisable(true);
         		
-    		}else {
+    		}
+    		else if (berechtigung == 1) {
+    			TicketsPrüfen.setDisable(true);
+    			AlleTickets.setDisable(true);
+    		}
+    		
+    		else {
     			abgeschlosseneTickets.setDisable(false);
     			TicketsGenehmigen.setDisable(false);
     			AlleTickets.setDisable(false);
