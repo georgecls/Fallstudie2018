@@ -17,17 +17,24 @@ public class ControllerAblehnung implements Initializable{
 	@FXML private JFXButton btnAbschicken;
 	@FXML private JFXTextArea taAblehnung;
 	@FXML private JFXTextField tfAntragid;
-	
+
+	ControllerTickets ct;
+
+	public void setControllerTickets(ControllerTickets ct){
+		this.ct = ct;
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		tfAntragid.setText(ControllerTickets.getAID());
 	}
-	
+
 	public void handleAbschicken() throws SQLException
 	{
 		Antrag.antragAblehnen(tfAntragid.getText(), taAblehnung.getText());
 		Stage stage = (Stage) btnAbschicken.getScene().getWindow();
+		ct.refresh();
 		stage.close();
 	}
 }

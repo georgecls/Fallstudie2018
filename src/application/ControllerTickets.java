@@ -364,7 +364,7 @@ public class ControllerTickets implements Initializable{
     	public void handleBtnAblehnen()
     	{
     		antragsID = tfGeId.getText();
-        	if(antragsID == null) 
+        	if(antragsID == null)
         	{
         		labelGe.setVisible(true);
         		labelGe.setText("Bitte Ticket auswählen");
@@ -374,22 +374,30 @@ public class ControllerTickets implements Initializable{
         		labelGe.setVisible(false);
         		labelGe.setText(null);
 	    		aid = antragsID;
-	    		try 
+	    		try
 	    		{
 		    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ablehnung.fxml"));
 		    		Parent root1 = (Parent) fxmlLoader.load();
 		    		Stage stage = new Stage();
 		    		stage.setScene(new Scene(root1));
 		    		stage.show();
-	    		
-				} 
-	    		catch (IOException e) 
+
+					ControllerAblehnung ca = fxmlLoader.getController();
+					ca.setControllerTickets(this);
+
+
+				}
+	    		catch (IOException e)
 	    		{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 	    		}
         	}
-    	}   
+    	}
+
+			public void refresh(){
+				initialize(null, null);
+			}
 
     	/**
     	 * Initialisierung der GUI Elemente.
