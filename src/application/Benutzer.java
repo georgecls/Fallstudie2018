@@ -239,6 +239,20 @@ public class Benutzer {
 		return data;
 	}
 	
+	public static boolean pruefeBenutzer(String id) throws SQLException {
+
+	    Main.get_DBConnection().Execute(String.format("SELECT benutzername FROM benutzer WHERE ag_fk = '%s'", id));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		if(rs.next())
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
 	
 	public static String getBearGruppeByUser(String benN) throws SQLException
 	{

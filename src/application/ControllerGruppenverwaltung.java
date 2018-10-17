@@ -86,6 +86,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		
 		fieldGruppe.setText(g12);
 		fieldBeschreibung.setText(a12);
+		label.setVisible(false);
 		
 		
 //		Nachdem eine auf eine Gruppe geklickt wird, soll die 2. Tabelle mit den zugehörigen Benutzern befüllt werden...
@@ -108,14 +109,37 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	@FXML
 	public void handleHinzufuegen() throws SQLException{
-		String gruppe = fieldGruppe.getText().toString();
-		String beschreibung = fieldBeschreibung.getText().toString();
+		String gruppe = fieldGruppe.getText();
+		String beschreibung = fieldBeschreibung.getText();
 		
-			Gruppe.insertGruppe(gruppe, beschreibung);
-			initialize (null, null);
+        if (gruppe.equals("")) {
 			label.setVisible(true);
-			label.setText("Gruppe '"+gruppe+"' hinzugefügt");	
-		
+			label.setText("Alle Felder müssen ausgefüllt sein!");
+			label.setTextFill(Color.RED);
+		}
+        else if (beschreibung.equals("")){
+			label.setVisible(true);
+			label.setText("Alle Felder müssen ausgefüllt sein!");
+			label.setTextFill(Color.RED);
+		}
+		else
+		{
+			gruppe = fieldGruppe.getText().toString();
+			beschreibung = fieldBeschreibung.getText().toString();
+			Boolean selberName = false;
+			selberName = Gruppe.selberName(gruppe);
+			
+			if(selberName==true) {
+				label.setText("Die Gruppe existiert bereits!");
+			}
+			else 
+			{
+				Gruppe.insertGruppe(gruppe, beschreibung);
+				initialize (null, null);
+				label.setVisible(true);
+				label.setText("Gruppe '"+gruppe+"' hinzugefügt");	
+			}
+		}
 	}
 	
 	
@@ -136,12 +160,16 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	@FXML
 	public void handleLoeschen() throws SQLException{
-		
+		if(Benutzer.pruefeBenutzer(id12)) {
+			label.setVisible(true);
+			label.setText("Es befinden sich noch Benutzer in der Gruppe.");
+		}
+		else
+		{
 			Gruppe.deleteGruppe(id12);
 			initialize (null, null);
 			label.setVisible(true);
 			label.setText("Gruppe '"+gruppe+"' gelöscht");
-
-		
+		}
 	}
 }

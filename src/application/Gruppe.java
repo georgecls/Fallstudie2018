@@ -129,6 +129,22 @@ public class Gruppe {
 		return data;
 	}
 	
+	public static Boolean selberName(String gruppe) throws SQLException {
+		
+		int i = 0;
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", gruppe));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		
+		if(rs.next())
+			i = rs.getInt(1);
+		
+		if (i == 0) {
+			return false;
+		}else {
+			return true;
+		}
+	}	
+	
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************

@@ -103,7 +103,8 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 					
 		fieldBenutzer.setText(b12);
 		boxGruppe.setValue(g12);
-		boxBerechtigung.setValue(a12);		
+		boxBerechtigung.setValue(a12);	
+		label.setVisible(false);
 	}
 	
 	@FXML
@@ -126,7 +127,8 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			label.setVisible(true);
 			label.setText("Alle Felder müssen ausgefüllt sein!");
 			label.setTextFill(Color.RED);
-		}else if (passwort.equals("")){
+		}
+        else if (passwort.equals("")){
 			label.setVisible(true);
 			label.setText("Alle Felder müssen ausgefüllt sein!");
 			label.setTextFill(Color.RED);
@@ -142,21 +144,16 @@ public class ControllerBenutzerverwaltung  implements Initializable {
               Boolean selberName = false;
               selberName = Benutzer.selberName(benutzer);
               
-//              Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
-//              initialize(null, null);
-              
               
               if(selberName==true) {
-                         label.setText("Der Benutzer existiert bereits!");
-              }else {
-              
-                         try {
-                                   Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
-                         } catch (SQLException e) {
-                                   // TODO Auto-generated catch block
-                                   e.printStackTrace();
-                         }                    
-                         initialize (null, null);
+                  label.setText("Der Benutzer existiert bereits!");
+              }
+              else 
+              {
+            	  Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);                   
+                  initialize (null, null);
+                  label.setVisible(true);
+                  label.setText("Benutzer '"+benutzer+"' hinzugefügt");
               }
 		}
     }
