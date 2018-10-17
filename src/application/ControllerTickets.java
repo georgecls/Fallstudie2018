@@ -85,16 +85,16 @@ public class ControllerTickets implements Initializable{
     	/**
     	 * 
     	 */
-    	try {
-			cbData = Gruppe.getGruppennamen();
-		}
-    	catch (SQLException e1)
-    	{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	
-    	cbGruppeZuweisen.setItems(cbData);
+//    	try {
+//			cbData = Gruppe.getGruppennamen();
+//		}
+//    	catch (SQLException e1)
+//    	{
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//    	
+//    	cbGruppeZuweisen.setItems(cbData);
     	
     	/**
     	 * Die ObservableList Elemente erhalten ihren Inhalt durch die statischen Methoden von der Klasse 'Antrag'.
@@ -355,8 +355,9 @@ public class ControllerTickets implements Initializable{
         	else
     		{
     			String kom = taGeKommentar.getText();
-    			String gru = cbGruppeZuweisen.getValue().toString();
-    			Antrag.antragGenehmigen(antragsID, kom, gru);
+//    			String gru = cbGruppeZuweisen.getValue().toString();
+    			//Methode anpassen
+    			Antrag.antragGenehmigen(antragsID, kom);
     			initialize(null, null);
     		}
     		

@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -24,12 +26,24 @@ public class ControllerNeuesTicket {
 	@FXML private JFXTextArea fieldText;
 	@FXML private JFXButton btnAbschicken;	
 	@FXML private Label fieldAntwort;
+	@FXML private JFXComboBox cbGruppeZuweisen;
+	
+	private ObservableList<String> cbData;
 	
 	private String gruppeErsteller;
 	
-	
 	public void initialize() {
-		fieldErsteller.setText(ControllerLogin.getUser());
+		try {
+			cbData = Gruppe.getGruppennamen();
+		}
+    	catch (SQLException e1)
+    	{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	cbGruppeZuweisen.setItems(cbData);
+		
+    	fieldErsteller.setText(ControllerLogin.getUser());
 		fieldErstelldatum.setValue(LocalDate.now());
 		fieldAntwort.setText(null);
 		try {
@@ -45,17 +59,19 @@ public class ControllerNeuesTicket {
 	@FXML
 	public void handleAbschicken() {
 		//get Methoden
+		
 		String ticketart = fieldTicketart.getText();
 		String ersteller = fieldErsteller.getText();
 		LocalDate erstelldatum = fieldErstelldatum.getValue();
 		LocalDate zieldatum = fieldZieldatum.getValue();
 		String beschreibung = fieldText.getText();
-		
+		String gru = cbGruppeZuweisen.getValue().toString();
+
 		//transfer Methoden
-		try {
+		try
+		{//Methode überarbeiten
 			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller);
 			fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
-			
 		}
 		catch (SQLException e)
 		{

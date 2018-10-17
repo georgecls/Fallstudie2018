@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -13,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="748.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerNeuesTicket">
    <children>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="660.0">
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="660.0" spacing="2.0">
          <children>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
                <children>
@@ -75,6 +76,16 @@
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor></JFXTextArea>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="660.0">
+               <children>
+                  <Label prefWidth="150.0" text="Gruppe zuweisen:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="cbNeuesTicket" focusColor="#128277" prefWidth="300.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="20.0">
