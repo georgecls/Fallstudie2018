@@ -70,7 +70,7 @@ public class ControllerNeuesTicket {
 		//transfer Methoden
 		try
 		{//Methode überarbeiten
-			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller);
+			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller, gru);
 			fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
 		}
 		catch (SQLException e)
