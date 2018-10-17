@@ -74,7 +74,8 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	
 	@FXML
 	public void onMouseClicked () {
-		Gruppe id1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
+		try {
+			Gruppe id1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
 		id12 = id1.getId();
 		
 		Gruppe g1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
@@ -86,6 +87,12 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		fieldGruppe.setText(g12);
 		fieldBeschreibung.setText(a12);
 		label.setVisible(false);
+		}
+		catch(NullPointerException npe)
+		{
+			npe.printStackTrace();
+		}
+		
 		
 //		Nachdem eine auf eine Gruppe geklickt wird, soll die 2. Tabelle mit den zugehörigen Benutzern befüllt werden...
 		

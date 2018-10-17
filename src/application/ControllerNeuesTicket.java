@@ -17,6 +17,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 
 public class ControllerNeuesTicket {
 	
@@ -61,27 +62,54 @@ public class ControllerNeuesTicket {
 		//get Methoden
 		
 		String ticketart = fieldTicketart.getText();
-		String ersteller = fieldErsteller.getText();
-		LocalDate erstelldatum = fieldErstelldatum.getValue();
-		LocalDate zieldatum = fieldZieldatum.getValue();
 		String beschreibung = fieldText.getText();
-		String gru = cbGruppeZuweisen.getValue().toString();
 
-		//transfer Methoden
-		try
-		{//Methode überarbeiten
-			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller);
-			fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
-		}
-		catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		fieldTicketart.setText(null);
-		fieldZieldatum.setValue(null);
-		fieldText.setText(null);
-		cbGruppeZuweisen.setValue(null);
+		if(cbGruppeZuweisen.getValue()==null) {
+			fieldAntwort.setText("Bitte alle Felder ausfüllen");
+			fieldAntwort.setVisible(true);
+			fieldAntwort.setTextFill(Color.RED);
+		}
+		else if(fieldZieldatum.getValue()==null) {
+			fieldAntwort.setText("Bitte alle Felder ausfüllen");
+			fieldAntwort.setVisible(true);
+			fieldAntwort.setTextFill(Color.RED);
+		}
+		else if(beschreibung.equals(""))
+		{
+			fieldAntwort.setText("Bitte alle Felder ausfüllen");
+			fieldAntwort.setVisible(true);
+			fieldAntwort.setTextFill(Color.RED);
+		}
+		else if(ticketart.equals("")) {
+			fieldAntwort.setText("Bitte alle Felder ausfüllen");
+			fieldAntwort.setVisible(true);
+			fieldAntwort.setTextFill(Color.RED);
+		}
+		else
+		{
+			ticketart = fieldTicketart.getText();
+			String ersteller = fieldErsteller.getText();
+			LocalDate erstelldatum = fieldErstelldatum.getValue();
+			LocalDate zieldatum = fieldZieldatum.getValue();
+			beschreibung = fieldText.getText();
+			String gru = cbGruppeZuweisen.getValue().toString();
+			
+			try
+			{
+				Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller, gru);
+				fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
+			}
+			catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fieldTicketart.setText(null);
+			fieldZieldatum.setValue(null);
+			fieldText.setText(null);
+			fieldAntwort.setTextFill(Color.BLACK);
+			cbGruppeZuweisen.setValue(null);
+		}
 	}
 }

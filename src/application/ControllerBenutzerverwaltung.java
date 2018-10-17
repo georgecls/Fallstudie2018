@@ -41,8 +41,6 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	public static String b12, g12;
 	public static int a12;
 	
-	
-	
 	@Override
 	public void initialize (URL url, ResourceBundle rb){	
 		
@@ -88,7 +86,8 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	@FXML
 	public void onMouseClicked () {
-		Benutzer b1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
+		try {
+			Benutzer b1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
 		b12 = b1.getBenutzername();
 								
 		Benutzer g1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
@@ -101,6 +100,11 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		boxGruppe.setValue(g12);
 		boxBerechtigung.setValue(a12);	
 		label.setVisible(false);
+		}
+		catch(NullPointerException npe) {
+			npe.printStackTrace();
+		}
+		
 	}
 	
 	@FXML

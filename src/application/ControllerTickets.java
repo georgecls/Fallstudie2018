@@ -206,8 +206,7 @@ public class ControllerTickets implements Initializable{
     		}
     		catch(NullPointerException npe){
 				npe.printStackTrace();
-    		}
-    		
+    		}	
     	}
     	
     	/**
@@ -354,9 +353,7 @@ public class ControllerTickets implements Initializable{
     			//Methode anpassen
     			Antrag.antragGenehmigen(antragsID, kom);
     			initialize(null, null);
-    		}
-    		
-    		
+    		}	
     	}
     	
     	/**
