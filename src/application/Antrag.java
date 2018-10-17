@@ -53,13 +53,15 @@ public class Antrag {
 	 * @throws SQLException
 	 */
 	
-	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe) throws SQLException
+	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe, String gruppe) throws SQLException
     {
          int a = Benutzer.getIdByName(ersteller);
-           
+         Gruppe g1 = new Gruppe();
+         g1.getGruppeByName(gruppe);
+         String i = g1.getId();  
          Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO antrag (titel, beschreibung, fertigstellungsdatum, antragsdatum, "
                         + "status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-                        + "VALUES('%s', '%s', '%s', '%s', 'erstellt', NULL, NULL, '%d', NULL, '%s', NULL);", name, text, zieldatum, erstelldatum, a, erstGruppe));
+                        + "VALUES('%s', '%s', '%s', '%s', 'erstellt', NULL, NULL, '%d', NULL, '%s', '%s');", name, text, zieldatum, erstelldatum, a, erstGruppe, i));
     }
 
 	
@@ -308,12 +310,9 @@ public class Antrag {
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'geprüft', anmerkung = '%s' WHERE idantrag = '%s'", anm, id));
 	}
 	
-	public static void antragGenehmigen(String id, String text, String gruppe) throws SQLException
+	public static void antragGenehmigen(String id, String text) throws SQLException
     {
-           Gruppe g1 = new Gruppe();
-           g1.getGruppeByName(gruppe);
-           String i = g1.getId();
-           Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'genehmigt', anmerkung = '%s', ag_bearbeiter_fk = '%s' WHERE idantrag = '%s'", text, i, id));
+           Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'genehmigt', anmerkung = '%s' WHERE idantrag = '%s'", text, id));
     }
 	
 	public static void antragBearbeiten(String id) throws SQLException
