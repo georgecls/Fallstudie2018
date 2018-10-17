@@ -82,5 +82,6 @@ public class ControllerNeuesTicket {
 		fieldTicketart.setText(null);
 		fieldZieldatum.setValue(null);
 		fieldText.setText(null);
+		cbGruppeZuweisen.setValue(null);
 	}
 }

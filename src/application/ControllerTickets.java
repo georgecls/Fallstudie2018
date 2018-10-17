@@ -59,7 +59,6 @@ public class ControllerTickets implements Initializable{
 	@FXML private JFXTextArea taPrBeschreibung, taPrKommentar;
 	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
 	
-	@FXML private JFXComboBox cbGruppeZuweisen;	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
@@ -81,20 +80,6 @@ public class ControllerTickets implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
     	
     	initialisiereGUI(ControllerLogin.getBerechtigung());
-
-    	/**
-    	 * 
-    	 */
-//    	try {
-//			cbData = Gruppe.getGruppennamen();
-//		}
-//    	catch (SQLException e1)
-//    	{
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//    	
-//    	cbGruppeZuweisen.setItems(cbData);
     	
     	/**
     	 * Die ObservableList Elemente erhalten ihren Inhalt durch die statischen Methoden von der Klasse 'Antrag'.
@@ -195,29 +180,35 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void omcGruppentickets()
     	{
-    		Antrag aID = tvGruppentickets.getSelectionModel().getSelectedItem();
-    		antragsID = Integer.toString(aID.getAntragid());
-    		tfGrId.setText(antragsID);
+    		try {
+    			Antrag aID = tvGruppentickets.getSelectionModel().getSelectedItem();
+    			antragsID = Integer.toString(aID.getAntragid());
+    			tfGrId.setText(antragsID);
     		
-    		Antrag n = tvGruppentickets.getSelectionModel().getSelectedItem();
-    		name = n.getName();
-    		tfGrTitel.setText(name);
+    			Antrag n = tvGruppentickets.getSelectionModel().getSelectedItem();
+    			name = n.getName();
+    			tfGrTitel.setText(name);
     		
-    		Antrag fst = tvGruppentickets.getSelectionModel().getSelectedItem();
-    		datum = fst.getFertigstellungsdatum();
-    		String pattern = "dd.MM.yyyy";
-    		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    		String date = simpleDateFormat.format(datum);
-    		tfGrFertigstellungsdatum.setText(date);
+    			Antrag fst = tvGruppentickets.getSelectionModel().getSelectedItem();
+    			datum = fst.getFertigstellungsdatum();
+    			String pattern = "dd.MM.yyyy";
+    			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    			String date = simpleDateFormat.format(datum);
+    			tfGrFertigstellungsdatum.setText(date);
     		
-    		Antrag kom = tvGruppentickets.getSelectionModel().getSelectedItem();
-    		komm = kom.getKommentar();
-    		taGrKommentar.setText(komm);
-    		
-    		Antrag beschreibung = tvGruppentickets.getSelectionModel().getSelectedItem();
-    		beschr = beschreibung.getBeschreibung();
-    		taGrBeschreibung.setText(beschr);
+    			Antrag kom = tvGruppentickets.getSelectionModel().getSelectedItem();
+    			komm = kom.getKommentar();
+    			taGrKommentar.setText(komm);
+    			
+    			Antrag beschreibung = tvGruppentickets.getSelectionModel().getSelectedItem();
+    			beschr = beschreibung.getBeschreibung();
+    			taGrBeschreibung.setText(beschr);
     		}
+    		catch(NullPointerException npe){
+				npe.printStackTrace();
+    		}
+    		
+    	}
     	
     	/**
     	 * 
@@ -225,24 +216,29 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void omcTicketsPruefen()
     	{
-    		Antrag aID = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
-    		antragsID = Integer.toString(aID.getAntragid());
-    		tfPrId.setText(antragsID);
+    		try {
+    			Antrag aID = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    			antragsID = Integer.toString(aID.getAntragid());
+    			tfPrId.setText(antragsID);
     		
-    		Antrag n = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
-    		name = n.getName();
-    		tfPrTitel.setText(name);
+    			Antrag n = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    			name = n.getName();
+    			tfPrTitel.setText(name);
     		
-    		Antrag fst = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
-    		datum = fst.getFertigstellungsdatum();
-    		String pattern = "dd.MM.yyyy";
-    		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    		String date = simpleDateFormat.format(datum);
-    		tfPrFertigstellungsdatum.setText(date);
+    			Antrag fst = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    			datum = fst.getFertigstellungsdatum();
+    			String pattern = "dd.MM.yyyy";
+    			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    			String date = simpleDateFormat.format(datum);
+    			tfPrFertigstellungsdatum.setText(date);
     		
-    		Antrag beschreibung = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
-    		beschr = beschreibung.getBeschreibung();
-    		taPrBeschreibung.setText(beschr);
+    			Antrag beschreibung = tvTicketsPrüfen.getSelectionModel().getSelectedItem();
+    			beschr = beschreibung.getBeschreibung();
+    			taPrBeschreibung.setText(beschr);
+    		}
+    		catch(NullPointerException npe){
+				npe.printStackTrace();
+    		}
     	}
     	
     	/**
@@ -251,28 +247,34 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void omcTicketsGenehmigen()
     	{
-    		Antrag aID = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
-    		antragsID = Integer.toString(aID.getAntragid());
-    		tfGeId.setText(antragsID);
+    		try {
+    			Antrag aID = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    			antragsID = Integer.toString(aID.getAntragid());
+    			tfGeId.setText(antragsID);
     		
-    		Antrag n = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
-    		name = n.getName();
-    		tfGeTitel.setText(name);
+    			Antrag n = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    			name = n.getName();
+    			tfGeTitel.setText(name);
     		
-    		Antrag fst = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
-    		datum = fst.getFertigstellungsdatum();
-    		String pattern = "dd.MM.yyyy";
-    		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-    		String date = simpleDateFormat.format(datum);
-    		tfGeFertigstellungsdatum.setText(date);
+    			Antrag fst = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    			datum = fst.getFertigstellungsdatum();
+    			String pattern = "dd.MM.yyyy";
+    			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    			String date = simpleDateFormat.format(datum);
+    			tfGeFertigstellungsdatum.setText(date);
     		
-    		Antrag kom = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
-    		komm = kom.getKommentar();
-    		taGeKommentar.setText(komm);
+    			Antrag kom = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    			komm = kom.getKommentar();
+    			taGeKommentar.setText(komm);
     		
-    		Antrag beschreibung = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
-    		beschr = beschreibung.getBeschreibung();
-    		taGeBeschreibung.setText(beschr);
+    			Antrag beschreibung = tvTicketsGenehmigen.getSelectionModel().getSelectedItem();
+    			beschr = beschreibung.getBeschreibung();
+    			taGeBeschreibung.setText(beschr);
+    		}
+    		catch(NullPointerException npe){
+				npe.printStackTrace();
+    		}
+    		
     	}
     
     	@FXML
@@ -340,12 +342,6 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnGenehmigen() throws SQLException
     	{
-//    		if(cbGruppeZuweisen.getValue() == null)
-//    		{
-//    			labelGe.setVisible(true);
-//    			labelGe.setText("Bitte Gruppe auswählen");
-//    			labelGe.setTextFill(Color.RED);
-//    		}
         	antragsID = tfGeId.getText();
         	if(antragsID == null) 
         	{
@@ -355,7 +351,6 @@ public class ControllerTickets implements Initializable{
         	else
     		{
     			String kom = taGeKommentar.getText();
-//    			String gru = cbGruppeZuweisen.getValue().toString();
     			//Methode anpassen
     			Antrag.antragGenehmigen(antragsID, kom);
     			initialize(null, null);
@@ -421,7 +416,6 @@ public class ControllerTickets implements Initializable{
         	tfGeFertigstellungsdatum.setText(null);
         	taGeBeschreibung.setText(null);
         	taGeKommentar.setText(null);
-        	cbGruppeZuweisen.setValue(null);
         	
         	/**
         	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt.

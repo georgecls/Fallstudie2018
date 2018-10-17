@@ -15,7 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="750.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControllerTickets">
    <children>
-      <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="730.0" style="-fx-background-color: #ffffff;" stylesheets="@application.css" tabMaxHeight="40.0" tabMaxWidth="140.0" tabMinHeight="40.0" tabMinWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="730.0" style="-fx-background-color: #ffffff;" stylesheets="@application.css" tabMaxHeight="40.0" tabMaxWidth="135.0" tabMinHeight="40.0" tabMinWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
             <Tab id="PaneTab" fx:id="Gruppentickets" text="Gruppentickets">
                <content>
@@ -71,7 +71,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab id="PaneTab" fx:id="TicketsPrüfen" text="Tickets prüfen">
+            <Tab id="PaneTab" fx:id="TicketsPrüfen" text="zu prüfen">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
@@ -137,7 +137,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab id="PaneTab" fx:id="abgeschlosseneTickets" text="abg. Tickets">
+            <Tab id="PaneTab" fx:id="abgeschlosseneTickets" text="erl. Tickets">
                <content>
                   <TableView fx:id="tvAbgTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="730.0">
                      <columns>
@@ -149,7 +149,7 @@
                   </TableView>
                </content>
             </Tab>
-            <Tab id="PaneTab" fx:id="TicketsGenehmigen" text="gen. Tickets">
+            <Tab id="PaneTab" fx:id="TicketsGenehmigen" text="zu genehmigen">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
@@ -194,18 +194,11 @@
                               <JFXTextField fx:id="tfGeFertigstellungsdatum" editable="false" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
-                           <children>
-                              <Label fx:id="lblGeFertigstellungsdatum1" prefHeight="20.0" prefWidth="130.0" text="Gruppen zuweisen" />
-                              <JFXComboBox fx:id="cbGruppeZuweisen" focusColor="#128277" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="350.0" />
-                           </children>
-                        </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
                               <JFXButton fx:id="btnGenehmigen" buttonType="RAISED" onAction="#handleBtnGenehmigen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="genehmigen" textFill="WHITE" />
                               <JFXButton fx:id="btnAblehnen" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleBtnAblehnen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="ablehnen" textFill="WHITE" />
                            	  <Label fx:id="labelGe" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
-                           	  
                            </children>
                         </HBox>
                      </children>

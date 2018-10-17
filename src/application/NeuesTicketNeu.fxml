@@ -85,7 +85,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="cbNeuesTicket" focusColor="#128277" prefWidth="300.0" />
+                  <JFXComboBox fx:id="cbGruppeZuweisen" focusColor="#128277" prefWidth="300.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="20.0">
