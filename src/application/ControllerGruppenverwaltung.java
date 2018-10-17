@@ -69,6 +69,8 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		
 		tvGruppenverwaltung.setItems(gruppe);
 		
+		fieldGruppe.setText("");
+		fieldBeschreibung.setText("");
 	}
 	
 	@FXML
@@ -105,47 +107,41 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	}
 	
 	@FXML
-	public void handleHinzufuegen() {
+	public void handleHinzufuegen() throws SQLException{
 		String gruppe = fieldGruppe.getText().toString();
 		String beschreibung = fieldBeschreibung.getText().toString();
 		
-		try {
 			Gruppe.insertGruppe(gruppe, beschreibung);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-		initialize (null, null);
-		label.setText("Gruppe '"+gruppe+"' hinzugefügt");
+			initialize (null, null);
+			label.setVisible(true);
+			label.setText("Gruppe '"+gruppe+"' hinzugefügt");	
+		
 	}
 	
 	
 	@FXML
-	public void handleAendern() {
+	public void handleAendern() throws SQLException{
 		String gruppe = fieldGruppe.getText().toString();
 		String beschreibung = fieldBeschreibung.getText().toString();
 	
-		try {
+
 			Gruppe.updateGruppeById(id12, gruppe, beschreibung);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		initialize(null, null);
-		label.setText("Gruppe '"+gruppe+"' geändert");
+			initialize(null, null);
+			label.setVisible(true);
+			label.setText("Gruppe '"+gruppe+"' geändert");
+
+		
 	}
 	
 	
 	@FXML
-	public void handleLoeschen() {
-		try {
+	public void handleLoeschen() throws SQLException{
+		
 			Gruppe.deleteGruppe(id12);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		initialize (null, null);
-		label.setText("Gruppe '"+gruppe+"' gelöscht");
+			initialize (null, null);
+			label.setVisible(true);
+			label.setText("Gruppe '"+gruppe+"' gelöscht");
+
+		
 	}
 }

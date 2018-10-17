@@ -120,18 +120,18 @@ public class ControllerBenutzerverwaltung  implements Initializable {
               initialize(null, null);
               
               
-//              if(selberName==true) {
-//                         label.setText("Der Benutzer existiert bereits!");
-//              }else {
-//              
-//                         try {
-//                                   Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
-//                         } catch (SQLException e) {
-//                                   // TODO Auto-generated catch block
-//                                   e.printStackTrace();
-//                         }                    
-//                         initialize (null, null);
-//              }
+              if(selberName==true) {
+                         label.setText("Der Benutzer existiert bereits!");
+              }else {
+              
+                         try {
+                                   Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
+                         } catch (SQLException e) {
+                                   // TODO Auto-generated catch block
+                                   e.printStackTrace();
+                         }                    
+                         initialize (null, null);
+              }
     }
 
 	@FXML
