@@ -172,7 +172,7 @@ public class Benutzer {
 	 */
 	public static void deleteBenutzer(String name) throws SQLException
 	{	
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'inaktiv' WHERE benutzername = '%s';", name));
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'inaktiv' AND ag_fk = NULL WHERE benutzername = '%s';", name));
 	}
 	
 	
