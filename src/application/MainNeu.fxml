@@ -14,7 +14,14 @@
          <children>
             <VBox layoutX="22.0" layoutY="2.0" prefHeight="700.0" prefWidth="230.0" spacing="5.0" style="-fx-background-color: #E6E6E6;">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox alignment="TOP_CENTER" prefHeight="152.0" prefWidth="230.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../käpseleohne.png" />
+                           </image>
+                        </ImageView>
+                     </children></VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                      <children>
                         <JFXButton fx:id="btnNTicket" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleNeuesTicket" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Neues Ticket" textFill="WHITE">
@@ -38,7 +45,7 @@
                               <Font size="14.0" />
                            </font></JFXButton>
                      </children></VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
+                  <VBox prefHeight="228.0" prefWidth="230.0" spacing="5.0" />
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="230.0" spacing="5.0">
                      <children>
                         <JFXButton fx:id="btnAbmelden" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleAbmelden" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Abmelden" textFill="WHITE">
