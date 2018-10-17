@@ -123,6 +123,7 @@ public class Antrag {
 	 *genehmigt = Ticket genehmigt -> verschieben in Gruppentickets,
 	 *erledigt = Ticket abschließend bearbeitet -> verschieben in abgeschlossene Tickets, 
 	 *abgelehnt = Ticket wurde vom genehmiger/prüfer abgelehnt -> anzeige in eigene Tickets, aber nicht in abgesch. Tickets
+	 *gelöscht = Ticket gelöscht
 	 *
 	 *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
 	 *Anschließend wird die Datenbankverbindung hergestellt.
