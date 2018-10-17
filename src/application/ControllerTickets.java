@@ -280,11 +280,21 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnBearbeiten() throws SQLException
     	{
-    		Antrag.antragBearbeiten(antragsID);//Methode sollte String bekommen
-    		initialize(null, null);
-    		
-    		labelGr.setVisible(true);
-    		labelGr.setText("Ticket bearbeitet");  		
+    		antragsID = tfGrId.getText();
+        	if(antragsID == null) 
+        	{
+        		labelGr.setVisible(true);
+        		labelGr.setText("Bitte Ticket auswählen");
+        	}
+        	else
+        	{
+        		labelGr.setVisible(false);
+	    		Antrag.antragBearbeiten(antragsID);//Methode sollte String bekommen
+	    		initialize(null, null);
+	    		
+	    		labelGr.setVisible(true);
+	    		labelGr.setText("Ticket bearbeitet");  	
+        	}
     	}
     	
     	/**
@@ -295,12 +305,24 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnPrüfen() throws SQLException
     	{
-    		String kom = taPrKommentar.getText();
-    		Antrag.antragPruefen(antragsID, kom);
-    		initialize(null, null);
-    		
-    		labelPr.setVisible(true);
-    		labelPr.setText("Ticket geprüft");
+    		antragsID = tfPrId.getText();
+    		if(antragsID == null) 
+    		{
+    			labelPr.setVisible(true);
+    			labelPr.setText("Bitte Ticket auswählen");
+    			
+    		}
+    		else
+    		{
+    			antragsID= tfPrId.getText();
+	    		String kom = taPrKommentar.getText();
+	    		Antrag.antragPruefen(antragsID, kom);
+	    		initialize(null, null);
+	    		
+	    		labelPr.setVisible(true);
+	    		labelPr.setText("Ticket geprüft");
+    			
+    		}
     	}
     	
     	/**
@@ -311,13 +333,19 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnGenehmigen() throws SQLException
     	{
-    		if(cbGruppeZuweisen.getValue() == null)
-    		{
-    			labelGe.setVisible(true);
-    			labelGe.setText("Bitte Gruppe auswählen");
-    			labelGe.setTextFill(Color.RED);
-    		}
-    		else
+//    		if(cbGruppeZuweisen.getValue() == null)
+//    		{
+//    			labelGe.setVisible(true);
+//    			labelGe.setText("Bitte Gruppe auswählen");
+//    			labelGe.setTextFill(Color.RED);
+//    		}
+        	antragsID = tfGeId.getText();
+        	if(antragsID == null) 
+        	{
+        		labelGe.setVisible(true);
+        		labelGe.setText("Bitte Ticket auswählen");
+        	}
+        	else
     		{
     			String kom = taGeKommentar.getText();
     			String gru = cbGruppeZuweisen.getValue().toString();
@@ -335,21 +363,32 @@ public class ControllerTickets implements Initializable{
     	@FXML
     	public void handleBtnAblehnen()
     	{
-    		aid = antragsID;
-    		try 
-    		{
-    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ablehnung.fxml"));
-    		Parent root1 = (Parent) fxmlLoader.load();
-    		Stage stage = new Stage();
-    		stage.setScene(new Scene(root1));
-    		stage.show();
-    		
-			} 
-    		catch (IOException e) 
-    		{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-    		}
+    		antragsID = tfGeId.getText();
+        	if(antragsID == null) 
+        	{
+        		labelGe.setVisible(true);
+        		labelGe.setText("Bitte Ticket auswählen");
+        	}
+        	else
+        	{
+        		labelGe.setVisible(false);
+        		labelGe.setText(null);
+	    		aid = antragsID;
+	    		try 
+	    		{
+		    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ablehnung.fxml"));
+		    		Parent root1 = (Parent) fxmlLoader.load();
+		    		Stage stage = new Stage();
+		    		stage.setScene(new Scene(root1));
+		    		stage.show();
+	    		
+				} 
+	    		catch (IOException e) 
+	    		{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+	    		}
+        	}
     	}   
 
     	/**
