@@ -63,12 +63,11 @@ public class ControllerNeuesTicket {
 		
 		String ticketart = fieldTicketart.getText();
 		String beschreibung = fieldText.getText();
-
 		
 		if(cbGruppeZuweisen.getValue()==null) {
 			fieldAntwort.setText("Bitte alle Felder ausfüllen");
 			fieldAntwort.setVisible(true);
-			fieldAntwort.setTextFill(Color.RED);
+			fieldAntwort.setTextFill(Color.RED);		
 		}
 		else if(fieldZieldatum.getValue()==null) {
 			fieldAntwort.setText("Bitte alle Felder ausfüllen");
