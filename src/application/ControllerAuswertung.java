@@ -31,7 +31,7 @@ public class ControllerAuswertung implements Initializable {
 		ObservableList<PieChart.Data> dataChartGes = null;
 		try {
 			dataChartGes = FXCollections.observableArrayList(
-					 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByStatus("abgeschlossen")),
+					 	new PieChart.Data("erledigt", Antrag.countAntraegeByStatus("erledigt")),
 						new PieChart.Data("offen", Antrag.countAntraegeByStatus("genehmigt"))
 					 );
 		} catch (SQLException e) {
@@ -49,7 +49,7 @@ public class ControllerAuswertung implements Initializable {
 		 ObservableList<PieChart.Data> dataChartGr = null;
 			try {
 				dataChartGr = FXCollections.observableArrayList(
-						 	new PieChart.Data("abgeschlossen", Antrag.countAntraegeByGruppe(ControllerLogin.getUser(), "abgeschlossen")),
+						 	new PieChart.Data("erledigt", Antrag.countAntraegeByGruppe(ControllerLogin.getUser(), "erledigt")),
 							new PieChart.Data("offen", Antrag.countAntraegeByGruppe(ControllerLogin.getUser() ,"genehmigt"))
 						 );
 			} catch (SQLException e) {

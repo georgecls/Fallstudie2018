@@ -48,7 +48,6 @@ public class ControllerTickets implements Initializable{
 	@FXML private Label lblGrKommentar, lblPrKommentar, lblGeKommentar;
 	@FXML private Label lblGrFertigstellungsdatum, lblPrFertigstellungsdatum, lblGeFertigstellungsdatum;
 	@FXML private Label labelGr, labelPr, labelGe;
-
 	
 	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum;
 	@FXML private JFXTextField tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
@@ -61,8 +60,7 @@ public class ControllerTickets implements Initializable{
 	@FXML private JFXComboBox cbGruppeZuweisen;	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
 	
-	@FXML private ImageView image;
-	
+
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
     
@@ -80,27 +78,11 @@ public class ControllerTickets implements Initializable{
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
     	
-    	tfGrId.setText(null);
-    	tfGrTitel.setText(null);
-    	tfGrFertigstellungsdatum.setText(null);
-    	taGrBeschreibung.setText(null);
-    	taGrKommentar.setText(null);
-    	
-    	tfPrId.setText(null);
-    	tfPrTitel.setText(null);
-    	tfPrFertigstellungsdatum.setText(null);
-    	taPrBeschreibung.setText(null);
-    	taPrKommentar.setText(null);
-    	
-    	tfGeId.setText(null);	
-    	tfGeTitel.setText(null);
-    	tfGeFertigstellungsdatum.setText(null);
-    	taGeBeschreibung.setText(null);
-    	taGeKommentar.setText(null);
-    	cbGruppeZuweisen.setValue(null);
-    	
-    	
-    	
+    	initialisiereGUI(ControllerLogin.getBerechtigung());
+
+    	/**
+    	 * 
+    	 */
     	try {
 			cbData = Gruppe.getGruppennamen();
 		} catch (SQLException e1) {
@@ -108,31 +90,6 @@ public class ControllerTickets implements Initializable{
 			e1.printStackTrace();
 		}
     	cbGruppeZuweisen.setItems(cbData);
-    	
-    	/**
-    	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt
-    	 */
-    	labelGr.setVisible(false);
-    	labelPr.setVisible(false);
-    	labelGe.setVisible(false);
-    	
-    	Gruppentickets.setDisable(false);
-		TicketsPrüfen.setDisable(false);
-		eigeneTickets.setDisable(false);
-    	abgeschlosseneTickets.setDisable(false);
-		TicketsGenehmigen.setDisable(false);
-		AlleTickets.setDisable(false);
-    	
-    	if (ControllerLogin.getBerechtigung() == 0) {
-    		abgeschlosseneTickets.setDisable(true);
-			TicketsGenehmigen.setDisable(true);
-			AlleTickets.setDisable(true);
-    		
-		}else {
-			abgeschlosseneTickets.setDisable(false);
-			TicketsGenehmigen.setDisable(false);
-			AlleTickets.setDisable(false);
-		}
     	
     	/**
     	 * Die ObservableList Elemente erhalten ihren Inhalt durch die statischen Methoden von der Klasse 'Antrag'.
@@ -143,7 +100,7 @@ public class ControllerTickets implements Initializable{
 				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.getUser(), ControllerLogin.getUserid());
 				data_gr = Antrag.getGruppenantraege("genehmigt",ControllerLogin.getUser()); 
 				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.getUser());
-	    		data_AbgT = Antrag.getAntraegebyStatus("abgeschlossen", ControllerLogin.getUser());
+	    		data_AbgT = Antrag.getAntraegebyStatus("erledigt", ControllerLogin.getUser());
 				data_AlleT = Antrag.getAlleAntraege();
 				
 			} catch (SQLException e) {
@@ -395,6 +352,57 @@ public class ControllerTickets implements Initializable{
     		}
     	}   
 
+    	/**
+    	 * Initialisierung der TextFelder usw.
+    	 */
+    	public void initialisiereGUI(int berechtigung)
+    	{
+    		tfGrId.setText(null);
+        	tfGrTitel.setText(null);
+        	tfGrFertigstellungsdatum.setText(null);
+        	taGrBeschreibung.setText(null);
+        	taGrKommentar.setText(null);
+        	
+        	tfPrId.setText(null);
+        	tfPrTitel.setText(null);
+        	tfPrFertigstellungsdatum.setText(null);
+        	taPrBeschreibung.setText(null);
+        	taPrKommentar.setText(null);
+        	
+        	tfGeId.setText(null);	
+        	tfGeTitel.setText(null);
+        	tfGeFertigstellungsdatum.setText(null);
+        	taGeBeschreibung.setText(null);
+        	taGeKommentar.setText(null);
+        	cbGruppeZuweisen.setValue(null);
+        	
+        	/**
+        	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt
+        	 */
+        	labelGr.setVisible(false);
+        	labelPr.setVisible(false);
+        	labelGe.setVisible(false);
+        	
+        	Gruppentickets.setDisable(false);
+    		TicketsPrüfen.setDisable(false);
+    		eigeneTickets.setDisable(false);
+        	abgeschlosseneTickets.setDisable(false);
+    		TicketsGenehmigen.setDisable(false);
+    		AlleTickets.setDisable(false);
+    		
+    		if (berechtigung == 0) {
+        		abgeschlosseneTickets.setDisable(true);
+    			TicketsGenehmigen.setDisable(true);
+    			AlleTickets.setDisable(true);
+        		
+    		}else {
+    			abgeschlosseneTickets.setDisable(false);
+    			TicketsGenehmigen.setDisable(false);
+    			AlleTickets.setDisable(false);
+    		}
+    	}
+    	
+    	
     	/**
     	 * Getter Methode für Antrags-ID
     	 * @return aid
