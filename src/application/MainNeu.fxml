@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,6 +49,7 @@
                   <VBox prefHeight="228.0" prefWidth="230.0" spacing="5.0" />
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="230.0" spacing="5.0">
                      <children>
+                        <Label fx:id="lblAngemeldet" prefHeight="20.0" prefWidth="200.0" visible="false" />
                         <JFXButton fx:id="btnAbmelden" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleAbmelden" prefHeight="35.0" prefWidth="230.0" style="-fx-background-color: #128277;" text="Abmelden" textFill="WHITE">
                            <font>
                               <Font size="14.0" />

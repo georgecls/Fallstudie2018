@@ -59,7 +59,6 @@ public class ControllerNeuesTicket {
 	
 	@FXML
 	public void handleAbschicken() {
-		//get Methoden
 		
 		String ticketart = fieldTicketart.getText();
 		String beschreibung = fieldText.getText();

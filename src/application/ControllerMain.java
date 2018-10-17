@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class ControllerMain implements Initializable {
 	@FXML private AnchorPane rootPane;
 	@FXML private JFXButton btnBenutzerverwaltung, btnNTicket, btnTickets,
 							btnAuswertung, btnGruppenverwaltung, btnAbmelden;
+	@FXML private Label lblAngemeldet;
 	
 	public Main main;
 	public AnchorPane pane;
@@ -36,6 +38,8 @@ public class ControllerMain implements Initializable {
 			btnBenutzerverwaltung.setVisible(false);
 			btnGruppenverwaltung.setVisible(false);
 		}
+		lblAngemeldet.setVisible(true);
+		lblAngemeldet.setText("Käpsele "+ControllerLogin.getUser()+ " ist angemeldet");
 	}
 		
 	public void setMain(Main main) {
