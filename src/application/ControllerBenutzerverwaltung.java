@@ -113,8 +113,8 @@ public class ControllerBenutzerverwaltung  implements Initializable {
               int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
               
               //ÜBERARBEITEN
-//              Boolean selberName = false;
-//              selberName = Benutzer.selberName(benutzer);
+              Boolean selberName = false;
+              selberName = Benutzer.selberName(benutzer);
               
               Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
               initialize(null, null);

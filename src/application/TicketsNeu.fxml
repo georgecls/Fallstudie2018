@@ -87,19 +87,19 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <Label fx:id="lblPrId" prefHeight="20.0" prefWidth="130.0" text="Antrag-ID" />
-                              <JFXTextField fx:id="tfPrId" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfPrId" editable="false" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblPrTitel" prefHeight="20.0" prefWidth="130.0" text="Titel" />
-                              <JFXTextField fx:id="tfPrTitel" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfPrTitel" editable="false" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0">
                            <children>
-                              <Label fx:id="lblPrBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
-                              <JFXTextArea fx:id="taPrBeschreibung" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
+                              <Label fx:id="lblPrBeschreibung"  prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
+                              <JFXTextArea fx:id="taPrBeschreibung" editable="false" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0">
@@ -111,7 +111,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="730.0">
                            <children>
                               <Label fx:id="lblPrFertigstellungsdatum" prefHeight="20.0" prefWidth="130.0" text="Fertigstellungsdatum" />
-                              <JFXTextField fx:id="tfPrFertigstellungsdatum" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
+                              <JFXTextField fx:id="tfPrFertigstellungsdatum" editable="false" focusColor="#128277" prefHeight="40.0" prefWidth="350.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">

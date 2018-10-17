@@ -266,7 +266,6 @@ public class Benutzer {
 		
 		if(rs.next())
 			i = rs.getInt(1);
-			System.out.println(i);
 		
 		if (i == 0) {
 			return false;
