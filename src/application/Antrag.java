@@ -42,7 +42,7 @@ public class Antrag {
 	}
 	
 	public Antrag(int pID) throws SQLException
-	{		this.getAntragById(pID);	}
+	{	this.getAntragById(pID);	}
 	
 	
 	/**Methode, um einen neuen Antrag in die DB zu schreiben.
@@ -55,11 +55,11 @@ public class Antrag {
 	
 	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe) throws SQLException
     {
-           int a = Benutzer.getIdByName(ersteller);
+         int a = Benutzer.getIdByName(ersteller);
            
-           Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO antrag (titel, beschreibung, fertigstellungsdatum, antragsdatum, "
-                          + "status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-                          + "VALUES('%s', '%s', '%s', '%s', 'erstellt', NULL, NULL, '%d', NULL, '%s', NULL);", name, text, zieldatum, erstelldatum, a, erstGruppe));
+         Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO antrag (titel, beschreibung, fertigstellungsdatum, antragsdatum, "
+                        + "status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
+                        + "VALUES('%s', '%s', '%s', '%s', 'erstellt', NULL, NULL, '%d', NULL, '%s', NULL);", name, text, zieldatum, erstelldatum, a, erstGruppe));
     }
 
 	
@@ -67,7 +67,7 @@ public class Antrag {
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
 	 * 
-	 * @author 
+	 *  
 	 * @param benutzer
 	 * @throws SQLException
 	 */
@@ -82,10 +82,10 @@ public class Antrag {
 	    		data.add(new Antrag(rs.getInt("idantrag")));
 	    		
 	    	}
-	    } catch(SQLException e) {
-	    	System.out.println(e);
 	    }
-	    	return data;
+	    catch(SQLException e)
+	    {	System.out.println(e);	}
+	 return data;
 	}
 	
 	/**Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
@@ -93,7 +93,7 @@ public class Antrag {
 	 *Anschließend wird die Datenbankverbindung hergestellt.
 	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
 	 *Diese Daten sind in ObservableList data gespeichert.
-	 * @author Robin
+	 *
 	 * @return data
 	 * @throws SQLException 
 	 */
@@ -131,7 +131,6 @@ public class Antrag {
 	 *Diese Daten sind in ObservableList data gespeichert. 
 	 *
 	 *
-	 * @author Robin
 	 * @param status, benutzername
 	 * @return data
 	 * @throws SQLException 
@@ -190,7 +189,6 @@ public class Antrag {
 	 * Dieses wird durch die Schleife in die ObservableList eingeftragen.
 	 * Zum Schluss wird die Liste zurückgegeben.
 	 * 
-	 * @author Robin
 	 * @param status, benutzername
 	 * @return data
 	 * @throws SQLException
@@ -249,7 +247,6 @@ public class Antrag {
 	 * Methode um die Anzahl der Anträge je nach Status ausgeben zu lassen.
 	 * Ergebnis wird in PieChart ausgegeben.
 	 * 
-	 * @author Robin
 	 * @param status
 	 * @return i
 	 * @throws SQLException
@@ -270,7 +267,6 @@ public class Antrag {
 	 * Methode um die Anzahl der Anträge je nach Status und Gruppe ausgeben zu lassen.
 	 * Ergebnis wird in PieChart ausgegeben.
 	 * 
-	 * @author Robin
 	 * @param benutzername, status
 	 * @return i 
 	 * @throws SQLException
@@ -339,10 +335,10 @@ public class Antrag {
 	 *Zuerst wird die Datenbankverbindung hergestellt.
 	 *Im ResultSet wird der ausgeführte SELECT gespeichert. 
 	 *in der IF-Abfrage werden die Daten in die jeweiligen Variablen gespeichert und zurückgegeben. 
+	 * 
 	 * @param pID
 	 * @return
 	 * @throws SQLException
-	 * #Robin
 	 */
 	public Antrag getAntragById(int pID) throws SQLException
 	{

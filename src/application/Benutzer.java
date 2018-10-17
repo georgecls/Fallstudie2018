@@ -27,9 +27,6 @@ public class Benutzer {
 
 	private static boolean anmelden = false;
 	
-	
-	
-
 	/** ***************************************************************************************************************************************************
 	 * *********************************************************Implementierung der Methoden***************************************************************
 	 ******************************************************************************************************************************************************/
@@ -60,36 +57,38 @@ public class Benutzer {
 		}
 	}
 	
-	 public static boolean anmelden(String benN, String p) throws SQLException 
-	 {
-	        String eingabeName = benN;
-	        String eingabePasswort = p;
-	        String vergleichsPasswort = null;
-	        
-	        try {
-	        	Main.get_DBConnection().Execute(String.format("SELECT passwort, benutzerid FROM benutzer WHERE benutzername = '%s';", benN));
-				ResultSet rsP = Main.get_DBConnection().get_last_resultset();
+	public static boolean anmelden(String benN, String p) throws SQLException 
+	{
+	       String eingabeName = benN;
+	       String eingabePasswort = p;
+	       String vergleichsPasswort = null;
+	       
+	       try {
+	    	   Main.get_DBConnection().Execute(String.format("SELECT passwort, benutzerid FROM benutzer WHERE benutzername = '%s';", benN));
+	    	   ResultSet rsP = Main.get_DBConnection().get_last_resultset();
 	        	
-	        	while(rsP.next())
-	        	{
-	        		id = rsP.getInt("benutzerid");
-		        	vergleichsPasswort = rsP.getString("passwort");
-		        	if(BCrypt.checkpw(p, vergleichsPasswort))
-		        	{
-			            anmelden = true;
-			        }
-		        	else
-		        	{
-			            anmelden = false;
-			        }
+	    	   while(rsP.next())
+	    	   {
+	    		   id = rsP.getInt("benutzerid");
+	    		   vergleichsPasswort = rsP.getString("passwort");
+	    		   if(BCrypt.checkpw(p, vergleichsPasswort))
+	    		   {
+	    			   anmelden = true;
+			       }
+	    		   else
+	    		   {
+	    			   anmelden = false;
+			       }
 	        	}
 	        	
-			} catch (SQLException e) {
+	       }
+	       catch (SQLException e)
+	       {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+	       }
 	        
-			return anmelden;
+	       return anmelden;
 	    }
 	 
 	 
@@ -103,12 +102,14 @@ public class Benutzer {
 	        if(rs.first()){
 	        	bPrüfen = (Integer) rs.getInt("blevel");
 	        }
-	         if(anmelden==true){
-		            return bPrüfen;
-		     } else {
-		            return 0;
-		     }    
-	    }
+	        if(anmelden==true){
+		        return bPrüfen;
+		    }
+	        else
+	        {
+		        return 0;
+		    }    
+	   }
 
 	/**Methode, um einen neuen Benutzer in die DB zu schreiben.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
@@ -154,12 +155,10 @@ public class Benutzer {
 	 */
 	public static void updateBenutzer(String name, String gruppe, int berechtigung) throws SQLException
 	{
-//		System.out.println(gruppe);
 		Gruppe g1 = new Gruppe();
 		g1.getGruppeByName(gruppe);
 		String i = g1.getId();
-//		int i = Gruppe.getGruppenID(gruppe);
-//		System.out.println(i);
+	
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET blevel = '%d', ag_fk = '%s' " 
 								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
@@ -218,8 +217,7 @@ public class Benutzer {
 			this.passwort = rs.getString("passwort");
 			this.berechtigung = rs.getInt("blevel");
 			this.ag_fk = rs.getInt("ag_fk");
-			this.gruppenname = rs.getString(8);
-			
+			this.gruppenname = rs.getString(8);	
 		}
 		return this;
 	}
@@ -264,14 +262,16 @@ public class Benutzer {
         if(rs.first()){
         	gPrüfen = (String) rs.getString("ag_fk");
         }
-         if(anmelden==true){
-	            return gPrüfen;
-	     } else {
-	            return null;
-	     }    
+        if(anmelden==true){
+	        return gPrüfen;
+        }
+        else
+        {
+	        return null;
+	    }    
     }
 	
-	//ÜBERARBEITEN
+	
 	public static Boolean selberName(String benutzer) throws SQLException {
 		
 		int i = 0;
@@ -283,7 +283,9 @@ public class Benutzer {
 		
 		if (i == 0) {
 			return false;
-		}else {
+		}
+		else
+		{
 			return true;
 		}
 	}	
@@ -295,13 +297,15 @@ public class Benutzer {
         int id;
 
         Main.get_DBConnection().Execute(String.format("SELECT benutzerid FROM benutzer WHERE benutzername = '%s'", name));
-              ResultSet rs = Main.get_DBConnection().get_last_resultset();
+        ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
-              if(rs.next()) {
-            	  return id = rs.getInt(1);
-              }else {
-                  return 0;
-              }
+        if(rs.next()) {
+          return id = rs.getInt(1);
+        }
+        else
+        {
+           return 0;
+        }
     }
 
 	public static int getGruppeByName(String name) throws SQLException {
@@ -310,13 +314,15 @@ public class Benutzer {
         int id;
 
         Main.get_DBConnection().Execute(String.format("SELECT ag_fk FROM benutzer WHERE benutzername = '%s'", name));
-              ResultSet rs = Main.get_DBConnection().get_last_resultset();
+        ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
-              if(rs.next()) {
-            	  return id = rs.getInt(1);
-              }else {
-                  return 0;
-              }
+        if(rs.next()) {
+        	return id = rs.getInt(1);
+        }
+        else
+        {
+        	return 0;
+        }
     }
 
 	
@@ -342,36 +348,27 @@ public class Benutzer {
 	public void setPasswort(int berechtigung) {
 		this.berechtigung = berechtigung;
 	}
-
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getStatus() {
 		return status;
 	}
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 	public int getAg_fk() {
 		return ag_fk;
 	}
-
 	public void setAg_fk(int ag_fk) {
 		this.ag_fk = ag_fk;
 	}
-
 	public String getGruppe() {
 		return gruppenname;
 	}
-
 	public void setGruppe(String gruppenname) {
 		this.gruppenname = gruppenname;
 	}

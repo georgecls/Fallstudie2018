@@ -27,25 +27,21 @@ import javafx.stage.Stage;
 
 public class ControllerBenutzerverwaltung  implements Initializable {
 	
-	ObservableList<Integer> boxBerechtigungListe = FXCollections.observableArrayList(0,1,2);
-	
-	
-	
-	ObservableList<String> boxGruppeListe;
-	
-	@FXML private TableView<Benutzer> tvBenutzerverwaltung;
-	
-	@FXML private TableColumn<Benutzer, String> benutzer_Col, gruppe_Col, berechtigung_Col;
-	
-	public static String b12, g12;
-	public static int a12;
-	
+	private ObservableList<Integer> boxBerechtigungListe = FXCollections.observableArrayList(0,1,2);
+	private ObservableList<String> boxGruppeListe;
 	private ObservableList<Benutzer> data;
 	
+	@FXML private TableView<Benutzer> tvBenutzerverwaltung;
+	@FXML private TableColumn<Benutzer, String> benutzer_Col, gruppe_Col, berechtigung_Col;
 	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
 	@FXML private JFXTextField fieldBenutzer, fieldPasswort;
 	@FXML private JFXComboBox boxGruppe, boxBerechtigung;
 	@FXML private Label label;
+	
+	public static String b12, g12;
+	public static int a12;
+	
+	
 	
 	@Override
 	public void initialize (URL url, ResourceBundle rb){	
@@ -135,56 +131,49 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		}
 		else
 		{
-				benutzer = fieldBenutzer.getText().toString();
-				passwort = fieldPasswort.getText().toString();
-		        String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
-		        int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
+			benutzer = fieldBenutzer.getText().toString();
+			passwort = fieldPasswort.getText().toString();
+		    String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
+		    int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
 
-              //ÜBERARBEITEN
-              Boolean selberName = false;
-              selberName = Benutzer.selberName(benutzer);
+            Boolean selberName = false;
+            selberName = Benutzer.selberName(benutzer);  
               
-              
-              if(selberName==true) {
-                  label.setText("Der Benutzer existiert bereits!");
-              }
-              else 
-              {
-            	  Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);                   
-                  initialize (null, null);
-                  label.setVisible(true);
-                  label.setText("Benutzer '"+benutzer+"' hinzugefügt");
-              }
+            if(selberName==true) {
+            	label.setText("Der Benutzer existiert bereits!");
+            }
+            else 
+            {
+            	Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);                   
+                initialize (null, null);
+                label.setVisible(true);
+                label.setText("Benutzer '"+benutzer+"' hinzugefügt");
+            }
 		}
     }
 
 	@FXML
-	public void handleAendern() {
+	public void handleAendern() throws SQLException{
 		String benutzer = fieldBenutzer.getText().toString();
 		String passwort = fieldPasswort.getText().toString();
 		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
 		int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
-		try {
+		
 			if (passwort.equals("")) {
 				Benutzer.updateBenutzer(benutzer, gruppe, berechtigung);
-			}else{
-				Benutzer.updateBenutzerPw(benutzer,passwort, gruppe, berechtigung);
 			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			else
+			{
+				Benutzer.updateBenutzerPw(benutzer,passwort, gruppe, berechtigung);
+			}	
+		
 		initialize (null, null);
 	}
 	@FXML
-	public void handleLoeschen() {
-		try {
-			Benutzer.deleteBenutzer(b12);
-			initialize (null, null);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void handleLoeschen() throws SQLException {
+
+		Benutzer.deleteBenutzer(b12);
+		initialize (null, null);
+		
 	}
 }

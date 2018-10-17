@@ -23,7 +23,6 @@ public class ControllerMain implements Initializable {
 	@FXML private JFXButton btnBenutzerverwaltung, btnNTicket, btnTickets,
 							btnAuswertung, btnGruppenverwaltung, btnAbmelden;
 	
-	
 	public Main main;
 	public AnchorPane pane;
 	
@@ -51,7 +50,9 @@ public class ControllerMain implements Initializable {
 			rootPane.getChildren().add(pane);
 			//btnNTicket.setStyle("#2eb7bf");
 						
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -89,7 +90,6 @@ public class ControllerMain implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	@FXML
@@ -98,11 +98,12 @@ public class ControllerMain implements Initializable {
 			rootPane.getChildren().remove(pane);
 			pane = FXMLLoader.load(getClass().getResource("NeuBenutzerverwaltung.fxml"));
 			rootPane.getChildren().add(pane);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	@FXML public void handleGruppenverwaltung() {
@@ -110,7 +111,9 @@ public class ControllerMain implements Initializable {
 			rootPane.getChildren().remove(pane);
 			pane = FXMLLoader.load(getClass().getResource("Gruppenverwaltung.fxml"));
 			rootPane.getChildren().add(pane);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -127,5 +130,4 @@ public class ControllerMain implements Initializable {
 		main.primaryStage.setWidth(0);
 		main.loginWindow();
 	}
-
 }

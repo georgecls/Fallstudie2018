@@ -22,14 +22,12 @@ public class ControllerLogin {
 	@FXML private Label labelFehler, labelBenutzer, labelPasswort;
 	@FXML private JFXButton btnAnmelden;
 	
-	
 	//Hiermit kann in anderen Fenstern die Visibility gesetzt werden
 	private static String user;
 	private static int userid;
 	private static int berechtigung;
 	
 	public static boolean berechtigt = false;
-	
 	
 	public Main main;
 

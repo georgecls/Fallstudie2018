@@ -34,10 +34,8 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	@FXML private TableColumn<Gruppe, String> gruppe_Col, beschreibung_Col;
 	@FXML private TableColumn<Gruppe, String> id_Col;
 
-	
 	private static String b12, g12, a12;
-	private static String id12;
-	
+	private static String id12;	
 	
 	private ObservableList<Gruppe> gruppe;
 	private ObservableList<Benutzer> benutzer;
@@ -50,11 +48,12 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
 		
-		
 		try {
 			gruppe = Gruppe.getGruppenverwaltung();
 			label.setVisible(false);
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -88,12 +87,13 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		fieldBeschreibung.setText(a12);
 		label.setVisible(false);
 		
-		
 //		Nachdem eine auf eine Gruppe geklickt wird, soll die 2. Tabelle mit den zugehörigen Benutzern befüllt werden...
 		
 		try {
 			benutzer = Benutzer.getBenutzerByGruppe(id12);
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -142,21 +142,17 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		}
 	}
 	
-	
 	@FXML
 	public void handleAendern() throws SQLException{
 		String gruppe = fieldGruppe.getText().toString();
 		String beschreibung = fieldBeschreibung.getText().toString();
 	
 
-			Gruppe.updateGruppeById(id12, gruppe, beschreibung);
-			initialize(null, null);
-			label.setVisible(true);
-			label.setText("Gruppe '"+gruppe+"' geändert");
-
-		
+		Gruppe.updateGruppeById(id12, gruppe, beschreibung);
+		initialize(null, null);
+		label.setVisible(true);
+		label.setText("Gruppe '"+gruppe+"' geändert");	
 	}
-	
 	
 	@FXML
 	public void handleLoeschen() throws SQLException{

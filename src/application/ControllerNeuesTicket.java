@@ -34,7 +34,9 @@ public class ControllerNeuesTicket {
 		fieldAntwort.setText(null);
 		try {
 			gruppeErsteller = Benutzer.getBearGruppeByUser(ControllerLogin.getUser());
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -54,7 +56,9 @@ public class ControllerNeuesTicket {
 			Antrag.insertAntrag(ticketart, ersteller, erstelldatum, zieldatum, beschreibung, gruppeErsteller);
 			fieldAntwort.setText("Das Ticket '"+ticketart+"' wurde erstellt");
 			
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -62,6 +66,5 @@ public class ControllerNeuesTicket {
 		fieldTicketart.setText(null);
 		fieldZieldatum.setValue(null);
 		fieldText.setText(null);
-		
 	}
 }

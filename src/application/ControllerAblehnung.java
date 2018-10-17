@@ -30,5 +30,4 @@ public class ControllerAblehnung implements Initializable{
 		Stage stage = (Stage) btnAbschicken.getScene().getWindow();
 		stage.close();
 	}
-
 }

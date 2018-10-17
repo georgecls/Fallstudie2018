@@ -14,11 +14,6 @@ public class Gruppe {
 	private String gruppenbeschr;
 	private String agstatus;
 	
-
-	
-	
-	
-	
 	/** ***************************************************************************************************************************************************
 	 * *********************************************************Implementierung der Methoden***************************************************************
 	 ******************************************************************************************************************************************************/
@@ -155,7 +150,6 @@ public class Gruppe {
 	public void setId(String id) {
 		this.agid = id;
 	}
-	
 	public String getGruppenname() {
 		return gruppenname;
 	}
@@ -168,5 +162,4 @@ public class Gruppe {
 	public void setGruppenbeschr(String gruppenbeschreibung) {
 		this.gruppenbeschr = gruppenbeschreibung;
 	}
-
 }

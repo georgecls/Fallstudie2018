@@ -1,6 +1,5 @@
 package application;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -28,8 +27,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
 public class ControllerTickets implements Initializable{
-	
+	/**
+	 * Deklarierung der Variablen und GUI Elemente 
+	 */
 	@FXML private TableView<Antrag> tvGruppentickets, tvEigeneTickets, tvTicketsPrüfen;
 	@FXML private TableView<Antrag> tvTicketsGenehmigen, tvAlleTickets, tvAbgTickets;
 	
@@ -60,7 +62,6 @@ public class ControllerTickets implements Initializable{
 	@FXML private JFXComboBox cbGruppeZuweisen;	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
 	
-
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
     
@@ -68,6 +69,7 @@ public class ControllerTickets implements Initializable{
     private static String aid;
     private Date datum;
 	
+    
 	public Main main;
     public void setMain(Main main) {
 
@@ -85,17 +87,20 @@ public class ControllerTickets implements Initializable{
     	 */
     	try {
 			cbData = Gruppe.getGruppennamen();
-		} catch (SQLException e1) {
+		}
+    	catch (SQLException e1)
+    	{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+    	
     	cbGruppeZuweisen.setItems(cbData);
     	
     	/**
     	 * Die ObservableList Elemente erhalten ihren Inhalt durch die statischen Methoden von der Klasse 'Antrag'.
     	 * Inhalt der Listen sind die jeweiligen Anträge.  
     	 */
-			try {
+		try {
 				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.getUser());
 				data_prüfen = Antrag.getAntraegezuPruefen(ControllerLogin.getUser(), ControllerLogin.getUserid());
 				data_gr = Antrag.getGruppenantraege("genehmigt",ControllerLogin.getUser()); 
@@ -103,9 +108,12 @@ public class ControllerTickets implements Initializable{
 	    		data_AbgT = Antrag.getAntraegebyStatus("erledigt", ControllerLogin.getUser());
 				data_AlleT = Antrag.getAlleAntraege();
 				
-			} catch (SQLException e) {
+		}
+		catch (SQLException e) 
+		{
 				e.printStackTrace();
-			}
+		}
+		
 		/**
 		 * mit forEach() wird jedes Element der ObservableList durchgegangen und eine Instanz angelegt. (glaube ich^^)
 		 */
@@ -320,8 +328,7 @@ public class ControllerTickets implements Initializable{
 	    		initialize(null, null);
 	    		
 	    		labelPr.setVisible(true);
-	    		labelPr.setText("Ticket geprüft");
-    			
+	    		labelPr.setText("Ticket geprüft");		
     		}
     	}
     	
@@ -392,7 +399,7 @@ public class ControllerTickets implements Initializable{
     	}   
 
     	/**
-    	 * Initialisierung der TextFelder usw.
+    	 * Initialisierung der GUI Elemente.
     	 */
     	public void initialisiereGUI(int berechtigung)
     	{
@@ -416,7 +423,8 @@ public class ControllerTickets implements Initializable{
         	cbGruppeZuweisen.setValue(null);
         	
         	/**
-        	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt
+        	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt.
+        	 * Die Tabs werden auf verfügbar gesetzt.
         	 */
         	labelGr.setVisible(false);
         	labelPr.setVisible(false);
@@ -429,12 +437,15 @@ public class ControllerTickets implements Initializable{
     		TicketsGenehmigen.setDisable(false);
     		AlleTickets.setDisable(false);
     		
+    		/**
+    		 * Je nach Berechtigung kann der angemeldete Nutzer verschiedene Tabs anklicken oder auch nicht.
+    		 */
     		if (berechtigung == 0) {
         		abgeschlosseneTickets.setDisable(true);
     			TicketsGenehmigen.setDisable(true);
     			AlleTickets.setDisable(true);
-        		
     		}
+    		
     		else if (berechtigung == 1) {
     			TicketsPrüfen.setDisable(true);
     			AlleTickets.setDisable(true);
