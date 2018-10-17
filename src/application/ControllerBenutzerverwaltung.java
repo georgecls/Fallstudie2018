@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ControllerBenutzerverwaltung  implements Initializable {
@@ -107,17 +108,42 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	@FXML
     public void handleHinzufuegen() throws SQLException {
-              String benutzer = fieldBenutzer.getText().toString();
-              String passwort = fieldPasswort.getText().toString();
-              String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
-              int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
-              
+		
+        String benutzer = fieldBenutzer.getText();
+        String passwort = fieldPasswort.getText();
+        
+		if(boxGruppe.getValue()==null){
+			label.setVisible(true);
+			label.setText("Alle Felder müssen ausgefüllt sein!");
+			label.setTextFill(Color.RED);
+		}
+		else if(boxBerechtigung.getValue() == null){
+			label.setVisible(true);
+			label.setText("Alle Felder müssen ausgefüllt sein!");
+			label.setTextFill(Color.RED);
+		}
+        else if (benutzer.equals("")) {
+			label.setVisible(true);
+			label.setText("Alle Felder müssen ausgefüllt sein!");
+			label.setTextFill(Color.RED);
+		}else if (passwort.equals("")){
+			label.setVisible(true);
+			label.setText("Alle Felder müssen ausgefüllt sein!");
+			label.setTextFill(Color.RED);
+		}
+		else
+		{
+				benutzer = fieldBenutzer.getText().toString();
+				passwort = fieldPasswort.getText().toString();
+		        String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
+		        int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
+
               //ÜBERARBEITEN
               Boolean selberName = false;
               selberName = Benutzer.selberName(benutzer);
               
-              Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
-              initialize(null, null);
+//              Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);
+//              initialize(null, null);
               
               
               if(selberName==true) {
@@ -132,6 +158,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
                          }                    
                          initialize (null, null);
               }
+		}
     }
 
 	@FXML
