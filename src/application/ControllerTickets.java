@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
@@ -17,14 +16,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -48,7 +44,6 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableColumn<Antrag, String> gruppe_ColGr, gruppe_ColP, gruppe_ColGe, gruppe_ColA, gruppe_ColET, gruppe_ColAT;
 	@FXML private TableColumn<Antrag, String> Ablehnung_ColGr, Ablehnung_ColP, Ablehnung_ColGe, Ablehnung_ColA, Ablehnung_ColET, Ablehnung_ColAT;
 
-	
 	@FXML private Label lblGrId, lblPrId, lblGeId; 
 	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
 	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
@@ -66,7 +61,6 @@ public class ControllerTickets implements Initializable{
 	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen,
 							btnETInfo, btnATInfo, btnAbgTInfo;
-	
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
@@ -151,7 +145,7 @@ public class ControllerTickets implements Initializable{
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));   
 		Kommentar_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
-		Beschreibung_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
+		Beschreibung_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 
 		auftragsID_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
@@ -183,7 +177,7 @@ public class ControllerTickets implements Initializable{
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		Kommentar_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
-		Beschreibung_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
+		Beschreibung_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		
     	status_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
@@ -294,12 +288,14 @@ public class ControllerTickets implements Initializable{
     		}
     		catch(NullPointerException npe){
 				npe.printStackTrace();
-    		}
-    		
+    		}	
     	}
     
     	//Wen Zeile in Tabelle ausgewähl, alle Infos zum Ticket speichern und in neues Fenster bei handleInfo übergeben
     	// Für Tabellen erledigte Tickets, eigene Tickets und Alle Tickets
+    	/**
+    	 * 
+    	 */
     	@FXML
     	public void omcTicketInfo() {
     		
@@ -407,12 +403,9 @@ public class ControllerTickets implements Initializable{
 
 					ControllerAblehnung ca = fxmlLoader.getController();
 					ca.setControllerTickets(this);
-
-
 				}
 	    		catch (IOException e)
 	    		{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 	    		}
         	}
@@ -487,7 +480,6 @@ public class ControllerTickets implements Initializable{
     			AlleTickets.setDisable(false);
     		}
     	}
-    	
     	
     	/**
     	 * Getter Methode für Antrags-ID
