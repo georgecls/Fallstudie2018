@@ -362,6 +362,8 @@ public class Antrag {
 			this.kommentar = rs.getString("anmerkung");
 			this.ersteller = new Benutzer(rs.getString("ersteller_fk"));
 			this.bearbeiter = (Benutzer) rs.getObject("bearbeiter_fk");
+			this.erstGruppe = new Gruppe(rs.getString("ag_ersteller_fk"));
+			this.bearGruppe = new Gruppe (rs.getString("ag_bearbeiter_fk"));
 		}
 		return this;
 	}
