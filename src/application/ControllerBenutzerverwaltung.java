@@ -142,43 +142,75 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 
             Boolean selberName = Benutzer.selberName(benutzer);
             
-            if (selberName == true)
+
+	        if (selberName == true)
+	        {
+	          	label.setVisible(true);
+	           	label.setText("Der Benutzer existiert bereits!");
+	           	label.setTextFill(Color.RED);
+	        }
+	        else
             {
-            	label.setVisible(true);
-            	label.setText("Der Benutzer existiert bereits!");
-            	label.setTextFill(Color.RED);
-            }
-            else
-            {
-            	Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);                   
-                initialize (null, null);
-                label.setVisible(true);
-                label.setText("Benutzer '"+benutzer+"' hinzugefügt");
-            }
+	           	Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);                   
+	           	initialize (null, null);
+	            label.setVisible(true);
+	            label.setText("Benutzer '"+benutzer+"' hinzugefügt");
+	        }
 		}
     }
 
 	@FXML
 	public void handleAendern() throws SQLException{
-		String benutzer = fieldBenutzer.getText().toString();
-		String passwort = fieldPasswort.getText().toString();
-		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
-		int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
+		String benutzer = fieldBenutzer.getText();
+		String passwort = fieldPasswort.getText();
+
+		if (benutzer.equals("")) {
+			label.setVisible(true);
+			label.setText("Es ist kein Benutzer zum Ändern ausgewählt!");
+			label.setTextFill(Color.RED);
+		}
+		else if(boxGruppe.getValue()==null){
+			label.setVisible(true);
+			label.setText("Berechtigung und Gruppe müssen ausgewählt sein!");
+			label.setTextFill(Color.RED);
+		}
+		else if(boxBerechtigung.getValue() == null){
+			label.setVisible(true);
+			label.setText("Berechtigung und Gruppe müssen ausgewählt sein!");
+			label.setTextFill(Color.RED);
+		}
+		else
+		{
+			benutzer = fieldBenutzer.getText().toString();
+			passwort = fieldPasswort.getText().toString();
+			String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
+			int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
 		
 			if (passwort.equals("")) {
 				Benutzer.updateBenutzer(benutzer, gruppe, berechtigung);
+				label.setVisible(true);
+				label.setText("Benutzer '"+benutzer+"' geändert");
+				label.setTextFill(Color.BLACK);
 			}
 			else
 			{
 				Benutzer.updateBenutzerPw(benutzer,passwort, gruppe, berechtigung);
+				label.setVisible(true);
+				label.setText("Benutzer '"+benutzer+"' und Passwort geändert");
+				label.setTextFill(Color.BLACK);
 			}	
 		
 		initialize (null, null);
+		}
 	}
 	@FXML
 	public void handleLoeschen() throws SQLException {
 
+		String benutzer = fieldBenutzer.getText().toString();
 		Benutzer.deleteBenutzer(b12);
+		label.setVisible(true);
+		label.setText("Benutzer '"+benutzer+"' gelöscht");
+		label.setTextFill(Color.BLACK);
 		initialize (null, null);
 		
 	}
@@ -201,7 +233,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		else 
 		{
 			label.setVisible(true);
-			label.setText("Der Benutzer kann nicht wiederhergestellt werden.");
+			label.setText("Der Benutzer '" + benutzer + "' kann nicht wiederhergestellt werden.");
 			label.setTextFill(Color.RED);
 		}
 		

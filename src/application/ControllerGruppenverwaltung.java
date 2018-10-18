@@ -148,10 +148,12 @@ public class ControllerGruppenverwaltung  implements Initializable {
 					initialize (null, null);
 					label.setVisible(true);
 					label.setText("Gruppe '"+gruppe+"' hinzugefügt");
+					label.setTextFill(Color.BLACK);
 				}
 			}
 			else if(Gruppe.selberName(gruppe)) {
 				label.setText("Die Gruppe existiert bereits!");
+				label.setTextFill(Color.BLACK);
 			}
 			else 
 			{
@@ -159,6 +161,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 				initialize (null, null);
 				label.setVisible(true);
 				label.setText("Gruppe '"+gruppe+"' hinzugefügt");	
+				label.setTextFill(Color.BLACK);
 			}
 		}
 	}
@@ -173,13 +176,17 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		initialize(null, null);
 		label.setVisible(true);
 		label.setText("Gruppe '"+gruppe+"' geändert");	
+		label.setTextFill(Color.BLACK);
 	}
 	
 	@FXML
 	public void handleLoeschen() throws SQLException{
+		String gruppe = fieldGruppe.getText().toString();
+		
 		if(Benutzer.pruefeBenutzer(id12)) {
 			label.setVisible(true);
 			label.setText("Es befinden sich noch Benutzer in der Gruppe.");
+			label.setTextFill(Color.BLACK);
 		}
 		else
 		{
@@ -187,6 +194,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 			initialize (null, null);
 			label.setVisible(true);
 			label.setText("Gruppe '"+gruppe+"' gelöscht");
+			label.setTextFill(Color.BLACK);
 		}
 	}
 }
