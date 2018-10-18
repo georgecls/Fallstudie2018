@@ -140,13 +140,39 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		    String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
 		    int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
 
-            Boolean selberName = false;
-            selberName = Benutzer.selberName(benutzer);  
+            Boolean selberName = Benutzer.selberName(benutzer);
+            Boolean inaktiverBenutzer = Benutzer.inaktiverBenutzer(benutzer);
               
-            if(selberName==true) {
+            if(inaktiverBenutzer == true) 
+            {
+            	if(boxGruppe.getValue()==null){
+        			label.setVisible(true);
+        			label.setText("Alle Felder müssen ausgefüllt sein!");
+        			label.setTextFill(Color.RED);
+        		}
+        		else if(boxBerechtigung.getValue() == null){
+        			label.setVisible(true);
+        			label.setText("Alle Felder müssen ausgefüllt sein!");
+        			label.setTextFill(Color.RED);
+        		}
+                else if (passwort.equals("")){
+        			label.setVisible(true);
+        			label.setText("Alle Felder müssen ausgefüllt sein!");
+        			label.setTextFill(Color.RED);
+        		}
+        		else
+        		{
+	            	Benutzer.updateInaktiverBenutzerPw(benutzer, passwort, gruppe, berechtigung);
+	                initialize (null, null);
+	                label.setVisible(true);
+	                label.setText("Benutzer '"+benutzer+"' hinzugefügt");
+        		}
+            }
+            else if (selberName == true)
+            {
             	label.setText("Der Benutzer existiert bereits!");
             }
-            else 
+            else
             {
             	Benutzer.insertBenutzer(benutzer, passwort, berechtigung, gruppe);                   
                 initialize (null, null);
@@ -177,6 +203,12 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	public void handleLoeschen() throws SQLException {
 
 		Benutzer.deleteBenutzer(b12);
+		initialize (null, null);
+		
+	}
+	@FXML
+	public void handleClear() throws SQLException {
+
 		initialize (null, null);
 		
 	}

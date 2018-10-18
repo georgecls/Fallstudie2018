@@ -163,6 +163,18 @@ public class Benutzer {
 								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
 	
+	public static void updateInaktiverBenutzerPw(String name, String passwort, String gruppe, int berechtigung) throws SQLException
+	{
+		Gruppe g1 = new Gruppe();
+		g1.getGruppeByName(gruppe);
+		String i = g1.getId();
+		
+		passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET passwort = '%s',"
+				+ " blevel = '%d', ag_fk = '%s', bstatus = 'aktiv' WHERE benutzername = '%s';", passwort, berechtigung, i, name));
+	}
+	
+	
 	/**Methode, um einen Benutzer aus der DB zu löschen. Der Übergabewert "name" stellt den Benutzernamen des zu löschenden Benutzers dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
@@ -276,6 +288,24 @@ public class Benutzer {
 		
 		int i = 0;
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", benutzer));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		
+		if(rs.next())
+			i = rs.getInt(1);
+		
+		if (i == 0) {
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}	
+	
+	public static Boolean inaktiverBenutzer(String benutzer) throws SQLException {
+		
+		int i = 0;
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s' AND  bstatus = 'inaktiv'", benutzer));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		
 		if(rs.next())
