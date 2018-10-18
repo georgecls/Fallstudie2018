@@ -42,8 +42,13 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableColumn<Antrag, String> auftragsID_ColGr,auftragsID_ColP, auftragsID_ColGe, auftragsID_ColA, auftragsID_ColET, auftragsID_ColAT;
 	@FXML private TableColumn<Antrag, String> titel_ColGr, titel_ColP, titel_ColGe, titel_ColA, titel_ColET, titel_ColAT;
 	@FXML private TableColumn<Antrag, String> datum_ColGr, datum_ColP, datum_ColGe, datum_ColA, datum_ColET, datum_ColAT;
-	@FXML private TableColumn<Antrag, String> Kommentar_ColGr, Beschreibung_ColGr, Kommentar_ColP, Beschreibung_ColP, Kommentar_ColGe, Beschreibung_ColGe;
+	@FXML private TableColumn<Antrag, String> Kommentar_ColGr, Kommentar_ColP, Kommentar_ColGe, Kommentar_ColA, Kommentar_ColET, Kommentar_ColAT;
+	@FXML private TableColumn<Antrag, String> Beschreibung_ColGr, Beschreibung_ColP, Beschreibung_ColGe, Beschreibung_ColET, Beschreibung_ColA, Beschreibung_ColAT;
+	@FXML private TableColumn<Antrag, String> Edatum_ColGr, Edatum_ColP, Edatum_ColGe, Edatum_ColA, Edatum_ColET, Edatum_ColAT;
+	@FXML private TableColumn<Antrag, String> gruppe_ColGr, gruppe_ColP, gruppe_ColGe, gruppe_ColA, gruppe_ColET, gruppe_ColAT;
+	@FXML private TableColumn<Antrag, String> Ablehnung_ColGr, Ablehnung_ColP, Ablehnung_ColGe, Ablehnung_ColA, Ablehnung_ColET, Ablehnung_ColAT;
 
+	
 	@FXML private Label lblGrId, lblPrId, lblGeId; 
 	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
 	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
@@ -152,18 +157,28 @@ public class ControllerTickets implements Initializable{
 		titel_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
 		Kommentar_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
-		Beschreibung_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("Beschreibung"));
+		Beschreibung_ColP.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		
 		status_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
-		
+		Edatum_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragsdatum"));
+		Kommentar_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
+		Beschreibung_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
+		Ablehnung_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
+		gruppe_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));//Variable gruppe gibt es noch nicht in getAntragById in Antrag
+				
 		status_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
-		
+		Edatum_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragsdatum"));
+		Kommentar_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
+		Beschreibung_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
+		Ablehnung_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
+		gruppe_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));//Variable gruppe gibt es noch nicht in getAntragById in Antrag
+			
 		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
@@ -174,7 +189,12 @@ public class ControllerTickets implements Initializable{
 		auftragsID_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
-	}
+		Edatum_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragsdatum"));
+		Kommentar_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
+		Beschreibung_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
+		Ablehnung_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
+		gruppe_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));//Variable gruppe gibt es noch nicht in getAntragById in Antrag
+    }
     
     	/**
     	 * 
