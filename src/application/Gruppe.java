@@ -57,6 +57,10 @@ public class Gruppe {
 	{
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppenname = '%s', gruppenbeschreibung = '%s' WHERE agid = '%s';", gruppe, beschreibung, id));
 	}
+	public static void updateGruppeByName(String gruppe, String beschreibung) throws SQLException
+	{
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppenbeschreibung = '%s', agstatus = 'aktiv' WHERE gruppenname = '%s';", beschreibung, gruppe));
+	}
 	
 	/**Methode, um eine Gruppe aus der DB zu löschen. Der Übergabewert "name" stellt den Gruppennamen der zu löschenden Gruppe dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.

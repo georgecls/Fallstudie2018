@@ -165,15 +165,9 @@ public class Benutzer {
 								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
 	
-	public static void updateInaktiverBenutzer(String name)
+	public static void updateInaktiverBenutzer(String name) throws SQLException
 	{
-		
-		try {
 			Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'aktiv' WHERE benutzername = '%s';", name));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	

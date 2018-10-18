@@ -136,13 +136,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 			
 			if(Gruppe.inaktiveGruppe(gruppe)) 
 			{
-				 if (gruppe.equals("")) 
-				 {
-					 label.setVisible(true);
-					label.setText("Alle Felder müssen ausgefüllt sein!");
-					label.setTextFill(Color.RED);
-				}
-		        else if (beschreibung.equals(""))
+		        if (beschreibung.equals(""))
 		        {
 					label.setVisible(true);
 					label.setText("Alle Felder müssen ausgefüllt sein!");
@@ -150,7 +144,7 @@ public class ControllerGruppenverwaltung  implements Initializable {
 				}
 				else
 				{
-					Gruppe.insertGruppe(gruppe, beschreibung);
+					Gruppe.updateGruppeByName(gruppe, beschreibung);;
 					initialize (null, null);
 					label.setVisible(true);
 					label.setText("Gruppe '"+gruppe+"' hinzugefügt");
