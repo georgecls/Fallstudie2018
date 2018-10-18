@@ -50,6 +50,7 @@ public class ControllerTickets implements Initializable{
 	@FXML private Label lblGrKommentar, lblPrKommentar, lblGeKommentar;
 	@FXML private Label lblGrFertigstellungsdatum, lblPrFertigstellungsdatum, lblGeFertigstellungsdatum;
 	@FXML private Label labelGr, labelPr, labelGe;
+	@FXML private Label labelET, labelAT, labelAbgT;
 	
 	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum;
 	@FXML private JFXTextField tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
@@ -65,10 +66,12 @@ public class ControllerTickets implements Initializable{
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
     
-    private String antragsID, name, komm, beschr;
-    private static String aid;
-    private Date datum;
-	
+    private String antragsID, name, komm, beschr, status, ablehnung, date, Edate;
+    private Gruppe gruppe;
+    private Date datum, Edatum;
+
+    private static String aid, nameS, kommS, beschrS, statusS, ablehnungS;
+    private static String datumS, EdatumS;
     
 	public Main main;
     public void setMain(Main main) {
@@ -161,8 +164,8 @@ public class ControllerTickets implements Initializable{
 		Kommentar_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		Ablehnung_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
-		gruppe_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));//Variable gruppe gibt es noch nicht in getAntragById in Antrag
-				
+//		gruppe_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));
+		
 		status_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
@@ -171,8 +174,8 @@ public class ControllerTickets implements Initializable{
 		Kommentar_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		Ablehnung_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
-		gruppe_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));//Variable gruppe gibt es noch nicht in getAntragById in Antrag
-			
+//		gruppe_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));
+		
 		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
 		datum_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("fertigstellungsdatum"));
@@ -187,7 +190,7 @@ public class ControllerTickets implements Initializable{
 		Kommentar_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		Ablehnung_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
-		gruppe_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));//Variable gruppe gibt es noch nicht in getAntragById in Antrag
+//		gruppe_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));
     }
     
     	/**
@@ -297,9 +300,123 @@ public class ControllerTickets implements Initializable{
     	 * 
     	 */
     	@FXML
-    	public void omcTicketInfo() {
-    		
+    	public void omcTicketInfoAT()
+    	{
+    		try {
+    		Antrag aID = tvAlleTickets.getSelectionModel().getSelectedItem();
+			antragsID = Integer.toString(aID.getAntragid());
+		
+			Antrag n = tvAlleTickets.getSelectionModel().getSelectedItem();
+			name = n.getName();
+			
+//			Antrag gru = tvAlleTickets.getSelectionModel().getSelectedItem();
+//			gruppe = gru.getGruppe();
+			
+			Antrag est = tvAlleTickets.getSelectionModel().getSelectedItem();
+			Edatum = est.getAntragsdatum();
+			String pattern = "dd.MM.yyyy";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			Edate = simpleDateFormat.format(Edatum);
+			
+			Antrag fst = tvAlleTickets.getSelectionModel().getSelectedItem();
+			datum = fst.getFertigstellungsdatum();
+			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
+			date = simpleDateFormat1.format(datum);
+		
+			Antrag beschreibung = tvAlleTickets.getSelectionModel().getSelectedItem();
+			beschr = beschreibung.getBeschreibung();
+		
+			Antrag kom = tvAlleTickets.getSelectionModel().getSelectedItem();
+			komm = kom.getKommentar();
+			
+			Antrag abl = tvAlleTickets.getSelectionModel().getSelectedItem();
+			ablehnung = abl.getAblehnungsgrund();
+			
+			Antrag stat = tvAlleTickets.getSelectionModel().getSelectedItem();
+			status = stat.getStatus();
+    		}
+    		catch(NullPointerException npe){
+				npe.printStackTrace();
+    		}	
     	}
+    	
+    	@FXML
+    	public void omcTicketInfoET()
+    	{
+    		try {
+    		Antrag aID = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			antragsID = Integer.toString(aID.getAntragid());
+		
+			Antrag n = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			name = n.getName();
+			
+			Antrag est = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			Edatum = est.getAntragsdatum();
+			String pattern = "dd.MM.yyyy";
+			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
+			Edate = simpleDateFormat1.format(Edatum);
+			
+			Antrag fst = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			datum = fst.getFertigstellungsdatum();
+			
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			date = simpleDateFormat.format(datum);
+		
+			Antrag beschreibung = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			beschr = beschreibung.getBeschreibung();
+		
+			Antrag kom = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			komm = kom.getKommentar();
+			
+			Antrag abl = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			ablehnung = abl.getAblehnungsgrund();
+			
+			Antrag stat = tvEigeneTickets.getSelectionModel().getSelectedItem();
+			status = stat.getStatus();
+    		}
+    		catch(NullPointerException npe){
+				npe.printStackTrace();
+    		}	
+    	}
+    	
+    	@FXML
+    	public void omcTicketInfoAbgT()
+    	{
+    		try {
+    		Antrag aID = tvAbgTickets.getSelectionModel().getSelectedItem();
+			antragsID = Integer.toString(aID.getAntragid());
+		
+			Antrag n = tvAbgTickets.getSelectionModel().getSelectedItem();
+			name = n.getName();
+			
+			Antrag est = tvAbgTickets.getSelectionModel().getSelectedItem();
+			Edatum = est.getAntragsdatum();
+			String pattern = "dd.MM.yyyy";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			Edate = simpleDateFormat.format(Edatum);
+			
+			Antrag fst = tvAbgTickets.getSelectionModel().getSelectedItem();
+			datum = fst.getFertigstellungsdatum();
+			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
+			date = simpleDateFormat1.format(datum);
+		
+			Antrag beschreibung = tvAbgTickets.getSelectionModel().getSelectedItem();
+			beschr = beschreibung.getBeschreibung();
+		
+			Antrag kom = tvAbgTickets.getSelectionModel().getSelectedItem();
+			komm = kom.getKommentar();
+			
+			Antrag abl = tvAbgTickets.getSelectionModel().getSelectedItem();
+			ablehnung = abl.getAblehnungsgrund();
+			
+			Antrag stat = tvAbgTickets.getSelectionModel().getSelectedItem();
+			status = stat.getStatus();
+    		}
+    		catch(NullPointerException npe){
+				npe.printStackTrace();
+    		}	
+    	}
+    	
     	
     	/**
     	 * Methode definiert, was passiert, wenn der Button bearbeiten auf der GUI gedrückt wird.
@@ -414,9 +531,35 @@ public class ControllerTickets implements Initializable{
     	//Öffnet neues Fenster Info.fxml
     	@FXML
     	public void handleInfo() {
-    		
+    		try
+    		{
+    			if(antragsID == null)
+    			{
+    				
+    			}
+    			else 
+    			{
+    				aid = antragsID;
+    				nameS = name;
+    				statusS = status;
+    				setDatumS(date);
+    				setEdatumS(Edate);
+    				kommS = komm;
+    				beschrS = beschr;
+    				ablehnungS = ablehnung;
+    				
+    				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Info.fxml"));
+    				Parent root1 = (Parent) fxmlLoader.load();
+    				Stage stage = new Stage();
+    				stage.setScene(new Scene(root1));
+    				stage.show();
+    			}
+			}
+    		catch (IOException e)
+    		{
+				e.printStackTrace();
+    		}
     	}
-    	
     	
 		public void refresh(){
 				initialize(null, null);
@@ -489,4 +632,92 @@ public class ControllerTickets implements Initializable{
     	{
     		return aid;
     	}
+    	
+		public Date getEdatum() {
+			return Edatum;
+		}
+
+		public void setEdatum(Date edatum) {
+			Edatum = edatum;
+		}
+
+		public Gruppe getGruppe() {
+			return gruppe;
+		}
+
+		public void setGruppe(Gruppe gruppe) {
+			this.gruppe = gruppe;
+		}
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String status) {
+			this.status = status;
+		}
+
+		public String getAblehnung() {
+			return ablehnung;
+		}
+
+		public void setAblehnung(String ablehnung) {
+			this.ablehnung = ablehnung;
+		}
+
+		public static String getStatusS() {
+			return statusS;
+		}
+
+		public static void setStatusS(String statusS) {
+			ControllerTickets.statusS = statusS;
+		}
+
+		public static String getNameS() {
+			return nameS;
+		}
+
+		public static void setNameS(String nameS) {
+			ControllerTickets.nameS = nameS;
+		}
+
+		public static String getBeschrS() {
+			return beschrS;
+		}
+
+		public static void setBeschrS(String beschrS) {
+			ControllerTickets.beschrS = beschrS;
+		}
+
+		public static String getKommS() {
+			return kommS;
+		}
+
+		public static void setKommS(String kommS) {
+			ControllerTickets.kommS = kommS;
+		}
+
+		public static String getAblehnungS() {
+			return ablehnungS;
+		}
+
+		public static void setAblehnungS(String ablehnungS) {
+			ControllerTickets.ablehnungS = ablehnungS;
+		}
+
+		public static String getEdatumS() {
+			return EdatumS;
+		}
+
+		public static void setEdatumS(String edatumS) {
+			EdatumS = edatumS;
+		}
+
+		public static String getDatumS() {
+			return datumS;
+		}
+
+		public static void setDatumS(String datumS) {
+			ControllerTickets.datumS = datumS;
+		}
 }

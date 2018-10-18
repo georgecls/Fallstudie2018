@@ -128,7 +128,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
-                        <TableView fx:id="tvEigeneTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsPruefen" prefHeight="590.0" prefWidth="730.0">
+                        <TableView fx:id="tvEigeneTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketInfoET" prefHeight="590.0" prefWidth="730.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColET" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColET" prefWidth="380.0" text="Titel" />
@@ -144,7 +144,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="200.0" />
-                              <JFXButton buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#handleInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
                               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
@@ -156,7 +156,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
-                        <TableView fx:id="tvAbgTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsPruefen" prefHeight="590.0" prefWidth="730.0">
+                        <TableView fx:id="tvAbgTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketInfoAbgT" prefHeight="590.0" prefWidth="730.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColA" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColA" prefWidth="380.0" text="Titel" />
@@ -172,7 +172,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="200.0" />
-                              <JFXButton buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#handleInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
                               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
@@ -240,7 +240,7 @@
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
-                        <TableView fx:id="tvAlleTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsPruefen" prefHeight="590.0" prefWidth="730.0">
+                        <TableView fx:id="tvAlleTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketInfoAT" prefHeight="590.0" prefWidth="730.0">
                            <columns>
                               <TableColumn fx:id="auftragsID_ColAT" prefWidth="100.0" text="Antrags-ID" />
                               <TableColumn fx:id="titel_ColAT" prefWidth="380.0" text="Titel" />
@@ -256,7 +256,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="200.0" />
-                              <JFXButton buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#handleInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
                               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
