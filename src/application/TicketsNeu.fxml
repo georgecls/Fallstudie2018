@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -98,7 +97,7 @@
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="730.0">
                            <children>
-                              <Label fx:id="lblPrBeschreibung"  prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
+                              <Label fx:id="lblPrBeschreibung" prefHeight="20.0" prefWidth="130.0" text="Beschreibung" />
                               <JFXTextArea fx:id="taPrBeschreibung" editable="false" focusColor="#128277" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="350.0" />
                            </children>
                         </HBox>
@@ -127,26 +126,52 @@
             </Tab>
             <Tab id="PaneTab" fx:id="eigeneTickets" text="eigene Tickets">
                <content>
-                  <TableView fx:id="tvEigeneTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="730.0">
-                     <columns>
-                        <TableColumn fx:id="auftragsID_ColET" prefWidth="100.0" text="Antrags-ID" />
-                        <TableColumn fx:id="titel_ColET" prefWidth="380.0" text="Titel" />
-                        <TableColumn fx:id="datum_ColET" prefWidth="150.0" text="Fertigstellungsdatum" />
-                        <TableColumn fx:id="status_ColET" prefWidth="99.0" text="Status" />
-                     </columns>
-                  </TableView>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
+                     <children>
+                        <TableView fx:id="tvEigeneTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsPruefen" prefHeight="590.0" prefWidth="730.0">
+                           <columns>
+                              <TableColumn fx:id="auftragsID_ColET" prefWidth="100.0" text="Antrags-ID" />
+                              <TableColumn fx:id="titel_ColET" prefWidth="380.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColET" prefWidth="150.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="Kommentar_ColET" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Kommentar" />
+                              <TableColumn fx:id="Beschreibung_ColET" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Beschreibung" />
+                              <TableColumn fx:id="status_ColET" prefWidth="99.0" text="Status" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="200.0" />
+                              <JFXButton buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="PaneTab" fx:id="abgeschlosseneTickets" text="erl. Tickets">
                <content>
-                  <TableView fx:id="tvAbgTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="730.0">
-                     <columns>
-                        <TableColumn fx:id="auftragsID_ColA" prefWidth="100.0" text="Antrags-ID" />
-                        <TableColumn fx:id="titel_ColA" prefWidth="380.0" text="Titel" />
-                        <TableColumn fx:id="datum_ColA" prefWidth="150.0" text="Fertigstellungsdatum" />
-                        <TableColumn fx:id="status_ColA" prefWidth="100.0" text="Status" />
-                     </columns>
-                  </TableView>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
+                     <children>
+                        <TableView fx:id="tvAbgTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsPruefen" prefHeight="590.0" prefWidth="730.0">
+                           <columns>
+                              <TableColumn fx:id="auftragsID_ColA" prefWidth="100.0" text="Antrags-ID" />
+                              <TableColumn fx:id="titel_ColA" prefWidth="380.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColA" prefWidth="150.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="Kommentar_ColA" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Kommentar" />
+                              <TableColumn fx:id="Beschreibung_ColA" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Beschreibung" />
+                              <TableColumn fx:id="status_ColA" prefWidth="99.0" text="Status" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="200.0" />
+                              <JFXButton buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
             <Tab id="PaneTab" fx:id="TicketsGenehmigen" text="zu genehmigen">
@@ -207,14 +232,27 @@
             </Tab>
             <Tab id="PaneTab" fx:id="AlleTickets" text="Alle Tickets">
                <content>
-                  <TableView fx:id="tvAlleTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="730.0">
-                     <columns>
-                        <TableColumn fx:id="auftragsID_ColAT" prefWidth="100.0" text="Antrags-ID" />
-                        <TableColumn fx:id="titel_ColAT" prefWidth="380.0" text="Titel" />
-                        <TableColumn fx:id="datum_ColAT" prefWidth="150.0" text="Fertigstellungsdatum" />
-                        <TableColumn fx:id="status_ColAT" prefWidth="100.0" text="Status" />
-                     </columns>
-                  </TableView>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
+                     <children>
+                        <TableView fx:id="tvAlleTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#omcTicketsPruefen" prefHeight="590.0" prefWidth="730.0">
+                           <columns>
+                              <TableColumn fx:id="auftragsID_ColAT" prefWidth="100.0" text="Antrags-ID" />
+                              <TableColumn fx:id="titel_ColAT" prefWidth="380.0" text="Titel" />
+                              <TableColumn fx:id="datum_ColAT" prefWidth="150.0" text="Fertigstellungsdatum" />
+                              <TableColumn fx:id="status_ColAT" prefWidth="99.0" text="Status" />
+                              <TableColumn fx:id="Kommentar_ColAT" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Kommentar" />
+                              <TableColumn fx:id="Beschreibung_ColAT" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" resizable="false" text="Beschreibung" />
+                           </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="200.0" />
+                              <JFXButton buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </content>
             </Tab>
          </tabs>
