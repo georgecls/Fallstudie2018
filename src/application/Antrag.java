@@ -45,10 +45,11 @@ public class Antrag {
 	{	this.getAntragById(pID);	}
 	
 	
-	/**Methode, um einen neuen Antrag in die DB zu schreiben.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter fÃ¼r das SQL-Statement mit Get-Methoden Ã¼bergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "insert" aus der Klasse "MysqlCon" Ã¼bergeben und damit ein neuer Datensatz in der DB erzeugt.
+	/**
+	 *Methode, um einen neuen Antrag in die DB zu schreiben.
+	 *Im ersten Schritt wird die Datenbankverbindung hergestellt.
+	 *Danach werden die Parameter fÃ¼r das SQL-Statement mit Get-Methoden Ã¼bergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
+	 *Im letzten Schritt wird der String an die Instanzmethode "insert" aus der Klasse "MysqlCon" Ã¼bergeben und damit ein neuer Datensatz in der DB erzeugt.
 	 *  
 	 * @throws SQLException
 	 */
@@ -65,10 +66,10 @@ public class Antrag {
     }
 
 	
-	/**Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "ersteller" stellt den Antragsersteller des auszugebenden Antrags dar.
+	/**
+	 * Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "ersteller" stellt den Antragsersteller des auszugebenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * 
 	 *  
 	 * @param benutzer
 	 * @throws SQLException
@@ -90,7 +91,8 @@ public class Antrag {
 	 return data;
 	}
 	
-	/**Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
+	/**
+	 *Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
 	 *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
 	 *Anschließend wird die Datenbankverbindung hergestellt.
 	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
@@ -118,7 +120,8 @@ public class Antrag {
 	    return data;
 	}
 	
-	/**Methode um alle bestehenden Anräge abhängig vom Status abzufragen.
+	/**
+	 *Methode um alle bestehenden Anräge abhängig vom Status abzufragen.
 	 *Der Eingabewert "status" stellt den Status  der auszugebenden Anträge dar.
 	 *erstellt = neues Ticket angelegt -> verschieben in Tickets prüfen,
 	 *geprüft = Ticket geprüft -> verschieben in Tickets genehmigen,
@@ -127,7 +130,7 @@ public class Antrag {
 	 *abgelehnt = Ticket wurde vom genehmiger/prüfer abgelehnt -> anzeige in eigene Tickets, aber nicht in abgesch. Tickets
 	 *gelöscht = Ticket gelöscht
 	 *
-	 *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
+	 *Im ersten Schritt eine Liste erstellt, in welcher anschließend die Daten gespeichert werden.
 	 *Anschließend wird die Datenbankverbindung hergestellt.
 	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
 	 *Diese Daten sind in ObservableList data gespeichert. 
@@ -157,6 +160,7 @@ public class Antrag {
         
         return data;
     }
+	
 	
 	public static ObservableList<Antrag> getGruppenantraege(String status, String benutzername) throws SQLException
 	{
@@ -293,10 +297,11 @@ public class Antrag {
 	 *******************************************************************************************/
 	
 	
-	/**Methode, um einen Antrag aus der DB zu lÃ¶schen. Der Ãœbergabewert "id" stellt die AntragsID des zu lÃ¶schenden Antrags dar.
+	/**
+	 * Methode, um einen Antrag aus der DB zu löschen. Der Ãœbergabewert "id" stellt die AntragsID des zu löschenden Antrags dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter fÃ¼r das SQL-Statement mit Get-Methoden Ã¼bergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" Ã¼bergeben und damit der entsprechende Datensatz gelÃ¶scht.
+	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden Übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
+	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" Übergeben und damit der entsprechende Datensatz gelöscht.
 	 *  
 	 * @throws SQLException
 	 */
@@ -326,17 +331,18 @@ public class Antrag {
 	}
 	
 	/** ***************************************************************************************************************************************************
-	 * ***************************************************Implementierung der icht statische Methoden******************************************************
+	 * ***************************************************Implementierung der nicht statische Methoden******************************************************
 	 ******************************************************************************************************************************************************/
 	
 	
-	/**Methode zieht sich Antrag mit im Parameter angegebener ID.
-	 *Zuerst wird die Datenbankverbindung hergestellt.
-	 *Im ResultSet wird der ausgeführte SELECT gespeichert. 
+	/**
+	 *Methode zieht sich Antrag mit im Parameter angegebener ID.
+	 *Zuerst wird die Datenbankverbindung hergestellt und gleichzeitig der SELECT ausgeführt.
+	 *Im ResultSet wird der ausgeführte SELECT gespeichert.
 	 *in der IF-Abfrage werden die Daten in die jeweiligen Variablen gespeichert und zurückgegeben. 
 	 * 
 	 * @param pID
-	 * @return
+	 * @return Objekt von Antrag
 	 * @throws SQLException
 	 */
 	public Antrag getAntragById(int pID) throws SQLException
