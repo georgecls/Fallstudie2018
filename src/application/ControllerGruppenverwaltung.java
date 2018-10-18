@@ -133,10 +133,30 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		{
 			gruppe = fieldGruppe.getText().toString();
 			beschreibung = fieldBeschreibung.getText().toString();
-			Boolean selberName = false;
-			selberName = Gruppe.selberName(gruppe);
 			
-			if(selberName==true) {
+			if(Gruppe.inaktiveGruppe(gruppe)) 
+			{
+				 if (gruppe.equals("")) 
+				 {
+					 label.setVisible(true);
+					label.setText("Alle Felder müssen ausgefüllt sein!");
+					label.setTextFill(Color.RED);
+				}
+		        else if (beschreibung.equals(""))
+		        {
+					label.setVisible(true);
+					label.setText("Alle Felder müssen ausgefüllt sein!");
+					label.setTextFill(Color.RED);
+				}
+				else
+				{
+					Gruppe.insertGruppe(gruppe, beschreibung);
+					initialize (null, null);
+					label.setVisible(true);
+					label.setText("Gruppe '"+gruppe+"' hinzugefügt");
+				}
+			}
+			else if(Gruppe.selberName(gruppe)) {
 				label.setText("Die Gruppe existiert bereits!");
 			}
 			else 

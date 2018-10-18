@@ -60,6 +60,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="346.0" spacing="20.0">
                      <children>
+                        <JFXButton fx:id="btnBenWiederherstellen" buttonType="RAISED" onAction="#handleWiederherstellen" prefWidth="90.0" style="-fx-background-color: #128277;" text="Wiederherstellen" textFill="WHITE" />
                         <JFXButton fx:id="btnClear" buttonType="RAISED" onAction="#handleClear" prefWidth="90.0" style="-fx-background-color: #128277;" text="Clear" textFill="WHITE" />
                      </children>
                   </HBox>

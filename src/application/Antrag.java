@@ -205,9 +205,9 @@ public class Antrag {
         
         try
         {
-		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
-					"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
-					"WHERE benutzername = '%s' AND status = 'erstellt' and ersteller_fk <> '%d';", benutzername, benutzerid));
+        int grid = Benutzer.getGruppeByName(benutzername);	
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " +  
+					"WHERE ag_ersteller_fk = '%d' AND status = 'erstellt' AND ersteller_fk <> '%d';", grid, benutzerid));
 
 		 ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		 	while(rs.next())
@@ -222,15 +222,14 @@ public class Antrag {
 	}
 	
 	
-	public static ObservableList<Antrag> getEigeneAntraege (String benutzername) throws SQLException
+	public static ObservableList<Antrag> getEigeneAntraege (int benutzerid) throws SQLException
 	{
         ObservableList<Antrag> data = FXCollections.observableArrayList();
         
         try
         {
 		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag " + 
-					"INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk " + 
-					"WHERE benutzername = '%s' AND status = 'erstellt';", benutzername));
+					"WHERE ersteller_fk = '%d';", benutzerid));
 
 		 ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		 	while(rs.next())

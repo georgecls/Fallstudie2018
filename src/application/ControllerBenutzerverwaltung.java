@@ -33,7 +33,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	@FXML private TableView<Benutzer> tvBenutzerverwaltung;
 	@FXML private TableColumn<Benutzer, String> benutzer_Col, gruppe_Col, berechtigung_Col;
-	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
+	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen, btnClear, btnWiederherstellen;
 	@FXML private JFXTextField fieldBenutzer, fieldPasswort;
 	@FXML private JFXComboBox boxGruppe, boxBerechtigung;
 	@FXML private Label label;
@@ -141,36 +141,12 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		    int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
 
             Boolean selberName = Benutzer.selberName(benutzer);
-            Boolean inaktiverBenutzer = Benutzer.inaktiverBenutzer(benutzer);
-              
-            if(inaktiverBenutzer == true) 
+            
+            if (selberName == true)
             {
-            	if(boxGruppe.getValue()==null){
-        			label.setVisible(true);
-        			label.setText("Alle Felder müssen ausgefüllt sein!");
-        			label.setTextFill(Color.RED);
-        		}
-        		else if(boxBerechtigung.getValue() == null){
-        			label.setVisible(true);
-        			label.setText("Alle Felder müssen ausgefüllt sein!");
-        			label.setTextFill(Color.RED);
-        		}
-                else if (passwort.equals("")){
-        			label.setVisible(true);
-        			label.setText("Alle Felder müssen ausgefüllt sein!");
-        			label.setTextFill(Color.RED);
-        		}
-        		else
-        		{
-	            	Benutzer.updateInaktiverBenutzerPw(benutzer, passwort, gruppe, berechtigung);
-	                initialize (null, null);
-	                label.setVisible(true);
-	                label.setText("Benutzer '"+benutzer+"' hinzugefügt");
-        		}
-            }
-            else if (selberName == true)
-            {
+            	label.setVisible(true);
             	label.setText("Der Benutzer existiert bereits!");
+            	label.setTextFill(Color.RED);
             }
             else
             {
@@ -209,6 +185,26 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	@FXML
 	public void handleClear() throws SQLException {
 
+		initialize (null, null);
+		
+	}
+	@FXML
+	public void handleWiederherstellen() throws SQLException {
+		String benutzer = fieldBenutzer.getText().toString();
+		
+		//Muss überarbeitet werden, funktioniert noch nicht
+		
+		if(Benutzer.inaktiverBenutzer(benutzer)) 
+		{
+			Benutzer.updateInaktiverBenutzer(benutzer);
+		}
+		else 
+		{
+			label.setVisible(true);
+			label.setText("Der Benutzer kann nicht wiederhergestellt werden.");
+			label.setTextFill(Color.RED);
+		}
+		
 		initialize (null, null);
 		
 	}

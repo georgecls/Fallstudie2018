@@ -62,16 +62,18 @@ public class Benutzer {
 	       String eingabeName = benN;
 	       String eingabePasswort = p;
 	       String vergleichsPasswort = null;
+	       String aktivität = null;
 	       
 	       try {
-	    	   Main.get_DBConnection().Execute(String.format("SELECT passwort, benutzerid FROM benutzer WHERE benutzername = '%s';", benN));
+	    	   Main.get_DBConnection().Execute(String.format("SELECT passwort, benutzerid, bstatus FROM benutzer WHERE benutzername = '%s';", benN));
 	    	   ResultSet rsP = Main.get_DBConnection().get_last_resultset();
 	        	
 	    	   while(rsP.next())
 	    	   {
 	    		   id = rsP.getInt("benutzerid");
 	    		   vergleichsPasswort = rsP.getString("passwort");
-	    		   if(BCrypt.checkpw(p, vergleichsPasswort))
+	    		   aktivität = rsP.getString("bstatus");
+	    		   if(BCrypt.checkpw(p, vergleichsPasswort) && aktivität.equals("aktiv"))
 	    		   {
 	    			   anmelden = true;
 			       }
@@ -163,15 +165,15 @@ public class Benutzer {
 								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
 	
-	public static void updateInaktiverBenutzerPw(String name, String passwort, String gruppe, int berechtigung) throws SQLException
+	public static void updateInaktiverBenutzer(String name)
 	{
-		Gruppe g1 = new Gruppe();
-		g1.getGruppeByName(gruppe);
-		String i = g1.getId();
 		
-		passwort = BCrypt.hashpw(passwort, BCrypt.gensalt());
-		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET passwort = '%s',"
-				+ " blevel = '%d', ag_fk = '%s', bstatus = 'aktiv' WHERE benutzername = '%s';", passwort, berechtigung, i, name));
+		try {
+			Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'aktiv' WHERE benutzername = '%s';", name));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

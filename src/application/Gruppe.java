@@ -139,6 +139,25 @@ public class Gruppe {
 			return true;
 		}
 	}	
+	
+public static Boolean inaktiveGruppe(String gruppe) throws SQLException {
+		
+		int i = 0;
+	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s' AND  agstatus = 'inaktiv'", gruppe));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+		
+		if(rs.next())
+			i = rs.getInt(1);
+		
+		if (i == 0) {
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}	
+	
 	@Override
 	public String toString() {
 		return getGruppenname();
