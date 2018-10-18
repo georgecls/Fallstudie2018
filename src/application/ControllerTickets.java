@@ -59,7 +59,9 @@ public class ControllerTickets implements Initializable{
 	@FXML private JFXTextArea taPrBeschreibung, taPrKommentar;
 	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
 	
-	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen;
+	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen,
+							btnETInfo, btnATInfo, btnAbgTInfo;
+	
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
@@ -276,9 +278,10 @@ public class ControllerTickets implements Initializable{
     		
     	}
     
+    	//Wen Zeile in Tabelle ausgewähl, alle Infos zum Ticket speichern und in neues Fenster bei handleInfo übergeben
+    	// Für Tabellen erledigte Tickets, eigene Tickets und Alle Tickets
     	@FXML
-    	public void omcImage()
-    	{
+    	public void omcTicketInfo() {
     		
     	}
     	
@@ -395,7 +398,14 @@ public class ControllerTickets implements Initializable{
         	}
     	}
 
-			public void refresh(){
+    	//Öffnet neues Fenster Info.fxml
+    	@FXML
+    	public void handleInfo() {
+    		
+    	}
+    	
+    	
+		public void refresh(){
 				initialize(null, null);
 			}
 
