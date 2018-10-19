@@ -80,7 +80,6 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		fieldPasswort.setText("");
 		boxGruppe.setValue(null);
 		boxBerechtigung.setValue(null);
-        label.setText(null);
 		
 	}
 	
