@@ -15,7 +15,7 @@ public class Gruppe {
 	private String agstatus;
 	
 	/** ***************************************************************************************************************************************************
-	 * *********************************************************Implementierung der Methoden***************************************************************
+	 * ******************************************************Implementierung der Konstruktoren*************************************************************
 	 ******************************************************************************************************************************************************/
 	
 	public Gruppe() 
@@ -33,12 +33,18 @@ public class Gruppe {
 		this.getGruppeByName(name);
 	}
 	
-	/**Methode, um eine neue Gruppe in die DB zu schreiben.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "insert" aus der Klasse "MysqlCon" übergeben und damit ein neuer Datensatz in der DB erzeugt.
+	
+	/** ***************************************************************************************************************************************************
+	 * *************************************************Implementierung der statischen Methoden************************************************************
+	 ******************************************************************************************************************************************************/
+	
+	/**
+	 * Methode, um eine neue Gruppe in die DB zu schreiben.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 *  
 	 * @throws SQLException
+	 * @return none
+	 * @param gruppenname, gruppenbeschreibung
 	 */
 	public static void insertGruppe(String gruppe, String beschreibung) throws SQLException
 	{
@@ -46,35 +52,54 @@ public class Gruppe {
 				+ "VALUES ('%s', '%s', 'aktiv')", gruppe, beschreibung));
 	}
 	
-	/**Methode, um eine Gruppe in der DB zu ändern. Der Übergabewert "name" stellt den Gruppennamen der zu bearbeitenden Gruppe dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" übergeben und damit der entsprechende Datensatz geändert.
+	/**
+	 * Methode, um eine Gruppe anhand der GruppenID in der DB zu ändern.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 *  
 	 * @throws SQLException
+	 * @return none
+	 * @param gruppenID, gruppenname, gruppenbeschreibung
 	 */
 	public static void updateGruppeById(String id, String gruppe, String beschreibung) throws SQLException
 	{
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppenname = '%s', gruppenbeschreibung = '%s' WHERE agid = '%s';", gruppe, beschreibung, id));
 	}
+	
+	/**
+	 * Methode, um eine Gruppe anhand des Gruppennamen in der DB zu ändern.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 *  
+	 * @throws SQLException
+	 * @return none
+	 * @param gruppenname, gruppenbeschreibung
+	 */
 	public static void updateGruppeByName(String gruppe, String beschreibung) throws SQLException
 	{
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET gruppenbeschreibung = '%s', agstatus = 'aktiv' WHERE gruppenname = '%s';", beschreibung, gruppe));
 	}
 	
-	/**Methode, um eine Gruppe aus der DB zu löschen. Der Übergabewert "name" stellt den Gruppennamen der zu löschenden Gruppe dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" übergeben und damit die entsprechende Gruppe gelöscht.
-	 *  
+	/**
+	 * Methode, um den Status (agstatus) einer Gruppe anhand der GruppenID in der DB auf "inaktiv" zu setzen.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
 	 * @throws SQLException
+	 * @return none
+	 * @param GruppenID
 	 */
 	public static void deleteGruppe(String id) throws SQLException
 	{
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE ag SET agstatus = 'inaktiv' WHERE agid = '%s'", id));
 	}
 	
-	// Methode um TableView Benutzerverwaltung zu befüllen
+	/**
+	 *  Methode, um TableView in Benutzerverwaltung zu befüllen. Es werden alle aktiven Gruppen ausgewählt und das
+	 *  Resultset dann in einer ObservableList gespeichert.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return ObservableList
+	 * @param none
+	 */
 	public static ObservableList getGruppenverwaltung() throws SQLException {
 		
 	    ObservableList<Gruppe> data = FXCollections.observableArrayList();
@@ -89,6 +114,14 @@ public class Gruppe {
 		return data;
 	}
 	
+	/**
+	 * Methode wird im Konstruktor Gruppe(int) aufgerufen, der Konstruktor wird aber nie verwendet.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+
+	 * @throws SQLException
+	 * @return Gruppe
+	 * @param GruppenID als int
+	 */
 	public Gruppe getGruppe(int agid) throws SQLException
 	{
 		Main.get_DBConnection().Execute(String.format("SELECT gruppenname FROM ag WHERE agid = '%s'", agid));
@@ -101,6 +134,15 @@ public class Gruppe {
 		return this;
 	}
 	
+	/**
+	 * Methode wird im Konstruktor Gruppe(String) aufgerufen und holt sich alle Informationen der entsprechenden Gruppe 
+	 * aus der Datenbank anhand des angegebenen Gruppennamen und gibt diese Informationen in einem Objekt der Klasse Gruppe zurück.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return Gruppe
+	 * @param gruppenname
+	 */
 	public Gruppe getGruppeByName(String name) throws SQLException
 	{
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", name));
@@ -115,6 +157,14 @@ public class Gruppe {
 		return this;
 	}
 	
+	/**
+	 * Methode, um die DropDown-Boxen in verschiedenen Fenstern mit den Namen der aktiven Gruppen zu füllen.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return ObservableList
+	 * @param none
+	 */
 	public static ObservableList getGruppennamen() throws SQLException {
 		
 		ObservableList<String> data = FXCollections.observableArrayList();
@@ -128,6 +178,15 @@ public class Gruppe {
 		return data;
 	}
 	
+	/**
+	 * Methode, um beim Anlegen einer neuen Gruppe zu prüfen, ob der Gruppenname schon vergeben ist.
+	 * Ist der Gruppenname schon vergeben, dann gibt die Methode "true" zurück, wenn nicht "false".
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return boolean
+	 * @param gruppenname
+	 */
 	public static Boolean selberName(String gruppe) throws SQLException {
 		
 		int i = 0;
@@ -137,14 +196,26 @@ public class Gruppe {
 		if(rs.next())
 			i = rs.getInt(1);
 		
-		if (i == 0) {
+		if (i == 0) 
+		{
 			return false;
-		}else {
+		}
+		else 
+		{
 			return true;
 		}
 	}	
 	
-public static Boolean inaktiveGruppe(String gruppe) throws SQLException {
+	/**
+	 * Methode, um den Status der Gruppe abzufragen.
+	 * Ist Gruppe inaktiv, dann gibt die Methode "true" zurück, ist sie aktiv "false".
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return boolean
+	 * @param gruppenname
+	 */
+	public static Boolean inaktiveGruppe(String gruppe) throws SQLException {
 		
 		int i = 0;
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s' AND  agstatus = 'inaktiv'", gruppe));
@@ -153,7 +224,8 @@ public static Boolean inaktiveGruppe(String gruppe) throws SQLException {
 		if(rs.next())
 			i = rs.getInt(1);
 		
-		if (i == 0) {
+		if (i == 0) 
+		{
 			return false;
 		}
 		else
@@ -161,11 +233,6 @@ public static Boolean inaktiveGruppe(String gruppe) throws SQLException {
 			return true;
 		}
 	}	
-	
-	@Override
-	public String toString() {
-		return getGruppenname();
-	}
 	
 	/** ***************************************************************************************************************************************************
 	 * ******************************************************Implementierung der Getter und Setter*********************************************************
