@@ -222,7 +222,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	public void handleWiederherstellen() throws SQLException {
 		String benutzer = fieldBenutzer.getText().toString();
 		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
-		String passwort = fieldPasswort.getText();
+		
 		
 		if (benutzer.equals("")) {
 			label.setVisible(true);
@@ -236,14 +236,14 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		}
 		else if(boxBerechtigung.getValue() != null)
 		{
+			boxBerechtigung.setValue(null);
 			label.setVisible(true);
 			label.setText("Berechtigung kann beim Wiederherstellen nicht geändert werden.");
 			label.setTextFill(Color.RED);
 		}
-
 		else 
 		{
-			if (passwort.equals("")) 
+			if (fieldPasswort.getText()==null) 
 			{
 				if(Benutzer.inaktiverBenutzer(benutzer)) 
 				{
@@ -256,11 +256,11 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 				label.setText("Benutzer '" + benutzer + "' kann nicht wiederhergestellt werden.");
 				label.setTextFill(Color.RED);
 				initialize (null, null);
-				
 				}	
 			}
 			else 
 			{
+				fieldPasswort.setText(null);
 				label.setVisible(true);
 				label.setText("Passwort kann beim Wiederherstellen nicht geändert werden.");
 				label.setTextFill(Color.RED);
