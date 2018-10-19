@@ -17,18 +17,16 @@ public class Benutzer {
 	private String status;
 	private int ag_fk;
 	
+	//Attribute die darüberhinaus noch benötigt werden
 	private String gruppenname;
-	
 	private Gruppe agid;
-	
 	private static String bnPrüfen;
 	private static int bPrüfen;
 	private static String gPrüfen;
-
 	private static boolean anmelden = false;
 	
 	/** ***************************************************************************************************************************************************
-	 * *********************************************************Implementierung der Methoden***************************************************************
+	 * ******************************************************Implementierung der Konstruktoren*************************************************************
 	 ******************************************************************************************************************************************************/
 	
 	public Benutzer()
@@ -41,7 +39,11 @@ public class Benutzer {
 		this.getBenutzerByName(name);
 	}
 
-
+	/** ***************************************************************************************************************************************************
+	 * *************************************************Implementierung der statischen Methoden************************************************************
+	 ******************************************************************************************************************************************************/
+	
+	// Wird nicht aufgerufen -> LÖSCHEN?
 	public static boolean isRightBenutzer(String pBenutzer, String pPasswort) throws SQLException
 	{
 		Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzer = '%s' AND passwort = '%s';", pBenutzer, pPasswort));
@@ -57,68 +59,83 @@ public class Benutzer {
 		}
 	}
 	
+	/**
+	 * Methode, um die Anmeldung eines vermeintlichen Benutzers abzuwicklen.
+	 * TRUE: der Benutzer ist in der DB vorhanden, sein Status aktiv und das eingegebene Passwort 
+	 * 		 stimmt mit dem hinterlegten aus der DB überein.
+	 * FALSE: alle anderen Fälle.
+	 * 
+	 * Der Status wird in der statischen Klassenvariable "anmelden" gespeichert.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+
+	 * @throws SQLException
+	 * @return boolean
+	 * @param benutzername, passwort
+	 */
 	public static boolean anmelden(String benN, String p) throws SQLException 
 	{
-	       String eingabeName = benN;
-	       String eingabePasswort = p;
-	       String vergleichsPasswort = null;
-	       String aktivität = null;
+		String eingabeName = benN;
+	    String eingabePasswort = p;
+	    String vergleichsPasswort = null;
+	    String aktivität = null;
 	       
-	       try {
-	    	   Main.get_DBConnection().Execute(String.format("SELECT passwort, benutzerid, bstatus FROM benutzer WHERE benutzername = '%s';", benN));
-	    	   ResultSet rsP = Main.get_DBConnection().get_last_resultset();
+	    Main.get_DBConnection().Execute(String.format("SELECT passwort, benutzerid, bstatus FROM benutzer WHERE benutzername = '%s';", benN));
+	    ResultSet rs = Main.get_DBConnection().get_last_resultset();
 	        	
-	    	   while(rsP.next())
-	    	   {
-	    		   id = rsP.getInt("benutzerid");
-	    		   vergleichsPasswort = rsP.getString("passwort");
-	    		   aktivität = rsP.getString("bstatus");
-	    		   if(BCrypt.checkpw(p, vergleichsPasswort) && aktivität.equals("aktiv"))
-	    		   {
-	    			   anmelden = true;
-			       }
-	    		   else
-	    		   {
-	    			   anmelden = false;
-			       }
-	        	}
-	        	
+	    while(rs.next())
+	    {
+	 	   id = rs.getInt("benutzerid");
+  		   vergleichsPasswort = rs.getString("passwort");
+  		   aktivität = rs.getString("bstatus");
+    	   if(BCrypt.checkpw(p, vergleichsPasswort) && aktivität.equals("aktiv"))
+    	   {
+	    	   anmelden = true;
 	       }
-	       catch (SQLException e)
-	       {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+   		   else
+   		   {
+    		   anmelden = false;
 	       }
-	        
-	       return anmelden;
-	    }
+   	   }
+	   return anmelden;
+	}
 	 
-	 
-	 	public static int berechtigungPrüfen(String benN) throws SQLException{
-	        
-	 		bnPrüfen = benN;
-       
-	 		Main.get_DBConnection().Execute(String.format("SELECT blevel FROM benutzer WHERE benutzername = '%s';", benN));
-			ResultSet rs = Main.get_DBConnection().get_last_resultset();
-
-	        if(rs.first()){
-	        	bPrüfen = (Integer) rs.getInt("blevel");
-	        }
-	        if(anmelden==true){
-		        return bPrüfen;
-		    }
-	        else
-	        {
-		        return 0;
-		    }    
-	   }
-
-	/**Methode, um einen neuen Benutzer in die DB zu schreiben.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "insert" aus der Klasse "MysqlCon" übergeben und damit ein neuer Datensatz in der DB erzeugt.
-	 *  
+	/**
+	 * Methode, um die Berechtigung des aktuell angemeldeten Benutzers abzufragen und zurückzugeben.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
 	 * @throws SQLException
+	 * @return int
+	 * @param benutzername
+	 */
+	public static int berechtigungPrüfen(String benN) throws SQLException
+	{    
+		bnPrüfen = benN;
+		
+	 	Main.get_DBConnection().Execute(String.format("SELECT blevel FROM benutzer WHERE benutzername = '%s';", benN));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+	    if(rs.first())
+	    {
+	       	bPrüfen = (Integer) rs.getInt("blevel");
+	    }
+	    if(anmelden==true)
+	    {
+	        return bPrüfen;
+	    }
+	    else
+	    {
+	        return -1;
+	    }    
+	 }
+
+	/**
+	 * Methode, um einen neuen Benutzer in die DB einzutragen.
+	 * Die ID wird von der DB automatisch erzeugt.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return none
+	 * @param benutzername, passwort, berechtigung, gruppe
 	 */
 	public static void insertBenutzer(String benutzer, String passwort, int berechtigung, String gruppe) throws SQLException
 	{
@@ -131,12 +148,13 @@ public class Benutzer {
 				+ "VALUES ('%s', '%s', '%d', 'aktiv', '%s')", benutzer, passwort, berechtigung, i));
 	}
 	
-	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" übergeben und damit der entsprechende Datensatz geändert.
-	 *  
+	/**
+	 * Methode, um die Berechtigung, die Gruppe und das Passwort eines Benutzers in der DB zu ändern.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
 	 * @throws SQLException
+	 * @return none
+	 * @param benutzername, passwort, gruppe, berechtigung
 	 */
 	public static void updateBenutzerPw(String name, String passwort, String gruppe, int berechtigung) throws SQLException
 	{
@@ -150,11 +168,12 @@ public class Benutzer {
 	}
 	
 	/**
-	 * Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement übergeben und das gesamte SQL-Statement in einem String gespeichert.
-	 *  
+	 * Methode, um die Berechtigung und die Gruppe eines Benutzers in der DB zu ändern.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
 	 * @throws SQLException
+	 * @return none
+	 * @param benutzername, gruppe, berechtigung
 	 */
 	public static void updateBenutzer(String name, String gruppe, int berechtigung) throws SQLException
 	{
@@ -166,6 +185,14 @@ public class Benutzer {
 								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
 	
+	/**
+	 * Methode, um den Status eines Benutzers auf "aktiv" zu setzen und die Gruppe eines Benutzers in der DB zu ändern.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return none
+	 * @param benutzername, gruppe
+	 */
 	public static void updateInaktiverBenutzer(String name, String gruppe) throws SQLException
 	{
 		Gruppe g1 = new Gruppe();
@@ -175,36 +202,30 @@ public class Benutzer {
 				+ "WHERE benutzername = '%s';", i, name));
 	}
 	
-	
-	/**Methode, um einen Benutzer aus der DB zu löschen. Der Übergabewert "name" stellt den Benutzernamen des zu löschenden Benutzers dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" übergeben und damit der entsprechende Benutzer gelöscht.
-	 *  
+	/**
+	 * Methode, um den Status eines Benutzers auf "inaktiv" und seine Gruppe auf NULL zu setzen.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
 	 * @throws SQLException
+	 * @return none
+	 * @param benutzername
 	 */
 	public static void deleteBenutzer(String name) throws SQLException
 	{	
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'inaktiv', ag_fk = NULL WHERE benutzername = '%s';", name));
 	}
 	
-	
-//	public Benutzer getBenutzerByBenutzerAndPassword(String pBenutzer, String pPasswort) throws SQLException
-//	{
-//		Main.get_DBConnection().Execute(String.format("select * from benutzer WHERE benutzer='%s' AND passwort = '%s';", pBenutzer, pPasswort));
-//		ResultSet rs = Main.get_DBConnection().get_last_resultset();
-//
-//		while(rs.next())
-//		{	
-//			this.benutzername = rs.getString("benutzername");
-//			this.passwort = rs.getString("passwort");
-//			this.gruppenname = (String) rs.getObject("gruppe");
-//		}
-//		return this;
-//	}
-	
-	// Methode um TableView Benutzerverwaltung zu befüllen
-	public static ObservableList getBenutzerverwaltung() throws SQLException {
+	/**
+	 *  Methode, um TableView in Benutzerverwaltung zu befüllen. Es werden alle aktiven Benutzer ausgewählt und das
+	 *  Resultset dann in einer ObservableList gespeichert und zurückgegeben.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return ObservableList
+	 * @param none
+	 */
+	public static ObservableList getBenutzerverwaltung() throws SQLException 
+	{
 		
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
 
@@ -218,6 +239,15 @@ public class Benutzer {
 		return data;
 	}
 	
+	/**
+	 * Methode wird im Konstruktor Benutzer(String) aufgerufen und holt sich alle Informationen des entsprechenden Benutzers
+	 * aus der Datenbank anhand des angegebenen Benutzernamen und gibt diese Informationen in einem Objekt der Klasse Benutzer zurück.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return Benutzer
+	 * @param benutzername
+	 */
 	public Benutzer getBenutzerByName(String name) throws SQLException
 	{
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer INNER JOIN ag ON benutzer.ag_fk = ag.agid WHERE benutzername = '%s'", name));
@@ -235,11 +265,19 @@ public class Benutzer {
 		return this;
 	}
 	
-	
-	public static ObservableList getBenutzerByGruppe(String id) throws SQLException {
-		
+	/**
+	 *  Methode, um untere TableView in Gruppenverwaltung zu befüllen. Es werden alle aktiven Benutzer anhand der übergebene Gruppe 
+	 *  ausgewählt, das Resultset dann in einer ObservableList gespeichert und zurückgegeben.
+	 *  Die obere TbaleView in Gruppenverwaltung wird von der Klasse Gruppe befüllt.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return ObservableList
+	 * @param gruppenID
+	 */
+	public static ObservableList getBenutzerByGruppe(String id) throws SQLException 
+	{	
 	    ObservableList<Benutzer> data = FXCollections.observableArrayList();
-
 	    Main.get_DBConnection().Execute(String.format("SELECT benutzername FROM benutzer WHERE ag_fk = '%s'", id));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
@@ -250,8 +288,19 @@ public class Benutzer {
 		return data;
 	}
 	
-	public static boolean pruefeBenutzer(String id) throws SQLException {
-
+	/**
+	 *  Methode, um zu prüfen, ob Benutzer einer bestimmten Gruppe zugeordnet sind.
+	 *  Verwendet wird die Methode in ControllerGruppenverwaltung bei der Prüfung, ob eine Gruppe auf "inaktiv" gesetzt werden kann.
+	 *  TRUE: es sind noch Benutzer in der Gruppe
+	 *  FALSE: es sind keine Benutzer mehr in der Gruppe
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return boolean
+	 * @param gruppenID
+	 */
+	public static boolean pruefeBenutzer(String id) throws SQLException 
+	{
 	    Main.get_DBConnection().Execute(String.format("SELECT benutzername FROM benutzer WHERE ag_fk = '%s'", id));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
@@ -265,14 +314,22 @@ public class Benutzer {
 		}
 	}
 	
+	/**
+	 *  Methode, um die Gruppe des angemeldeten Benutzers herauszufinden und zurückzugeben.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return String
+	 * @param benutzername
+	 */
 	public static String getBearGruppeByUser(String benN) throws SQLException
 	{
  		bnPrüfen = benN;
-   
  		Main.get_DBConnection().Execute(String.format("SELECT ag_fk FROM benutzer WHERE benutzername = '%s'", benN));
  		ResultSet rs = Main.get_DBConnection().get_last_resultset();
  		
-        if(rs.first()){
+        if(rs.first())
+        {
         	gPrüfen = (String) rs.getString("ag_fk");
         }
         if(anmelden==true){
@@ -284,17 +341,28 @@ public class Benutzer {
 	    }    
     }
 	
-	
-	public static Boolean selberName(String benutzer) throws SQLException {
-		
+	/**
+	 * Methode, um beim Anlegen eines neuen Benutzers zu prüfen, ob der Benutzername schon vergeben ist.
+	 * TRUE: Benutzername schon vergeben 
+	 * FALSE: Benutzername nicht vergeben 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return boolean
+	 * @param benutzername
+	 */
+	public static Boolean selberName(String benutzer) throws SQLException 
+	{
 		int i = 0;
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s'", benutzer));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		
-		if(rs.next())
+		if(rs.next()) 
+		{
 			i = rs.getInt(1);
-		
-		if (i == 0) {
+		}
+		if (i == 0) 
+		{
 			return false;
 		}
 		else
@@ -303,16 +371,28 @@ public class Benutzer {
 		}
 	}	
 	
-	public static Boolean inaktiverBenutzer(String benutzer) throws SQLException {
-		
+	/**
+	 * Methode, um herauszufinden, ob ein Benutzer aktiv oder inaktiv ist.
+	 * TRUE: Benutzername inaktiv
+	 * FALSE: Benutzername aktiv 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return boolean
+	 * @param benutzername
+	 */
+	public static Boolean inaktiverBenutzer(String benutzer) throws SQLException 
+	{
 		int i = 0;
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM benutzer WHERE benutzername = '%s' AND  bstatus = 'inaktiv'", benutzer));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		
-		if(rs.next())
+		if(rs.next()) 
+		{
 			i = rs.getInt(1);
-		
-		if (i == 0) {
+		}
+		if (i == 0) 
+		{
 			return false;
 		}
 		else
@@ -321,16 +401,23 @@ public class Benutzer {
 		}
 	}	
 
-	
-	public static int getIdByName(String name) throws SQLException {
-        
+	/**
+	 * Methode, um die benutzerID zu einem Benutzernamen herauszufinden und zurückzugeben.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return int
+	 * @param benutzername
+	 */
+	public static int getIdByName(String name) throws SQLException 
+	{
         ObservableList<Benutzer> data = FXCollections.observableArrayList();
         int id;
-
         Main.get_DBConnection().Execute(String.format("SELECT benutzerid FROM benutzer WHERE benutzername = '%s'", name));
         ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
-        if(rs.next()) {
+        if(rs.next()) 
+        {
           return id = rs.getInt(1);
         }
         else
@@ -339,15 +426,23 @@ public class Benutzer {
         }
     }
 
-	public static int getGruppeByName(String name) throws SQLException {
-        
+	/**
+	 *  Methode, um die Gruppe eines Benutzers herauszufinden und zurückzugeben.
+	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return String
+	 * @param benutzername
+	 */
+	public static int getGruppeByName(String name) throws SQLException 
+	{
         ObservableList<Benutzer> data = FXCollections.observableArrayList();
         int id;
-
         Main.get_DBConnection().Execute(String.format("SELECT ag_fk FROM benutzer WHERE benutzername = '%s'", name));
         ResultSet rs = Main.get_DBConnection().get_last_resultset();
 
-        if(rs.next()) {
+        if(rs.next()) 
+        {
         	return id = rs.getInt(1);
         }
         else

@@ -33,7 +33,6 @@ public class Gruppe {
 		this.getGruppeByName(name);
 	}
 	
-	
 	/** ***************************************************************************************************************************************************
 	 * *************************************************Implementierung der statischen Methoden************************************************************
 	 ******************************************************************************************************************************************************/
@@ -92,8 +91,9 @@ public class Gruppe {
 	}
 	
 	/**
-	 *  Methode, um TableView in Benutzerverwaltung zu befüllen. Es werden alle aktiven Gruppen ausgewählt und das
-	 *  Resultset dann in einer ObservableList gespeichert.
+	 *  Methode, um obere TableView in Gruppenverwaltung zu befüllen. Es werden alle aktiven Gruppen ausgewählt und das
+	 *  Resultset dann in einer ObservableList gespeichert und zurückgegeben.
+	 *  Die untere TableView in Gruppenverwaltung wird von der Klasse Benutzer befüllt.
 	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
@@ -114,6 +114,8 @@ public class Gruppe {
 		return data;
 	}
 	
+	
+	// Wird nicht aufgerufen -> LÖSCHEN?
 	/**
 	 * Methode wird im Konstruktor Gruppe(int) aufgerufen, der Konstruktor wird aber nie verwendet.
 	 *  !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
@@ -180,14 +182,15 @@ public class Gruppe {
 	
 	/**
 	 * Methode, um beim Anlegen einer neuen Gruppe zu prüfen, ob der Gruppenname schon vergeben ist.
-	 * Ist der Gruppenname schon vergeben, dann gibt die Methode "true" zurück, wenn nicht "false".
+	 * TRUE: Gruppenname schon vergeben 
+	 * FALSE: Gruppenname nicht vergeben 
 	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return boolean
 	 * @param gruppenname
 	 */
-	public static Boolean selberName(String gruppe) throws SQLException {
+	public static boolean selberName(String gruppe) throws SQLException {
 		
 		int i = 0;
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", gruppe));
@@ -208,7 +211,8 @@ public class Gruppe {
 	
 	/**
 	 * Methode, um den Status der Gruppe abzufragen.
-	 * Ist Gruppe inaktiv, dann gibt die Methode "true" zurück, ist sie aktiv "false".
+	 * TRUE: Gruppe inaktiv
+	 * FALSE: Gruppe aktiv
 	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException

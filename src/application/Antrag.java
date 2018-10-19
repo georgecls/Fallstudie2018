@@ -25,8 +25,7 @@ public class Antrag {
 	private Gruppe erstGruppe;
 	private Gruppe bearGruppe;
 	
-	
-	//Attribute, die darüberhinaus noch benötigt werden
+	//Attribute, die darüberhinaus noch ben�tigt werden
 	private static int idZaehler = 10000;
 	private static int antragzaehler = 1;
 	
