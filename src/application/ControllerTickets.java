@@ -477,7 +477,7 @@ public class ControllerTickets implements Initializable{
         	else
         	{
         		labelGr.setVisible(false);
-	    		Antrag.antragBearbeiten(antragsID);//Methode sollte String bekommen
+	    		Antrag.antragBearbeiten(antragsID);
 	    		initialize(null, null);
 	    		
 	    		labelGr.setVisible(true);
@@ -505,12 +505,14 @@ public class ControllerTickets implements Initializable{
     		{
     			labelPr.setVisible(true);
     			labelPr.setText("Bitte Ticket auswählen");
-    			
     		}
     		else
     		{
     			antragsID= tfPrId.getText();
 	    		String kom = taPrKommentar.getText();
+	    		if(kom == null) {
+	    			kom = "";
+	    		}
 	    		Antrag.antragPruefen(antragsID, kom);
 	    		initialize(null, null);
 	    		
