@@ -61,7 +61,7 @@ public class ControllerTickets implements Initializable{
 	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
 	
 	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen,
-							btnETInfo, btnATInfo, btnAbgTInfo;
+							btnETInfo, btnATInfo, btnAbgTInfo, btnLöschen;
 	
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
@@ -70,8 +70,7 @@ public class ControllerTickets implements Initializable{
     private Gruppe gruppe;
     private Date datum, Edatum;
 
-    private static String aid, nameS, kommS, beschrS, statusS, ablehnungS;
-    private static String datumS, EdatumS;
+    private static String aid, nameS, kommS, beschrS, statusS, ablehnungS, datumS, EdatumS;
     
 	public Main main;
     public void setMain(Main main) {
@@ -527,23 +526,40 @@ public class ControllerTickets implements Initializable{
 	    		}
         	}
     	}
+    	
+    	public void handleBtnLöschen() throws SQLException
+    	{
+    		if(status.equals("erstellt"))
+    		{
+    			Antrag.deleteAntragById(antragsID);
+    			initialize(null, null);
+    			labelET.setVisible(true);
+           		labelET.setText("Ticket gelöscht");
+    		}
+    		else
+    		{
+           		labelET.setVisible(true);
+    			labelET.setText("Bitte geeignetes Ticket auswählen");
+    		}
+    	}
 
     	//Öffnet neues Fenster Info.fxml
     	@FXML
-    	public void handleInfo() {
+    	public void handleBtnInfo() {
     		try
     		{
     			if(antragsID == null)
     			{
-    				
+    				labelET.setVisible(true);
+    				labelET.setText("Bitte Ticket auswählen");
     			}
     			else 
     			{
     				aid = antragsID;
     				nameS = name;
     				statusS = status;
-    				setDatumS(date);
-    				setEdatumS(Edate);
+    				datumS = date;
+    				EdatumS = Edate;
     				kommS = komm;
     				beschrS = beschr;
     				ablehnungS = ablehnung;

@@ -199,7 +199,6 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 				label.setText("Benutzer '"+benutzer+"' und Passwort geändert");
 				label.setTextFill(Color.BLACK);
 			}	
-		
 		initialize (null, null);
 		}
 	}
@@ -212,7 +211,6 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		label.setText("Benutzer '"+benutzer+"' gelöscht");
 		label.setTextFill(Color.BLACK);
 		initialize (null, null);
-		
 	}
 	@FXML
 	public void handleClear() throws SQLException {

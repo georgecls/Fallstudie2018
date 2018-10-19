@@ -16,7 +16,7 @@
    <children>
       <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="730.0" style="-fx-background-color: #ffffff;" stylesheets="@application.css" tabMaxHeight="40.0" tabMaxWidth="135.0" tabMinHeight="40.0" tabMinWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab id="PaneTab" fx:id="Gruppentickets" text="Gruppentickets">
+            <Tab id="PaneTab" fx:id="Gruppentickets" text="zu bearbeiten">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="958.0">
                      <children>
@@ -144,8 +144,9 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="200.0" />
-                              <JFXButton buttonType="RAISED" onAction="#handleInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
-                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
+                              <JFXButton buttonType="RAISED" onAction="#handleBtnInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <JFXButton fx:id="btnLöschen" buttonType="RAISED" onAction="#handleBtnLöschen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="löschen" textFill="WHITE" />
+                              <Label fx:id="labelET" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
                      </children>
@@ -172,7 +173,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="200.0" />
-                              <JFXButton buttonType="RAISED" onAction="#handleInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#handleBtnInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
                               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
@@ -256,7 +257,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="200.0" />
-                              <JFXButton buttonType="RAISED" onAction="#handleInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#handleBtnInfo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="details" textFill="WHITE" />
                               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
