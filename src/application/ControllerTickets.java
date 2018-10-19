@@ -23,16 +23,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Die Klasse ControllerTickets ist für das Handling der Tickets zuständig.
+ * Dazu zählen die Tabs 'zu bearbeiten', 'zu prüfen', 'eigene Tickets', 'abgeschlossene Tickets', 'zu genehmigen', 'Alle Tickets'.
+ * Der Controller verwaltet die Tabellen, Buttons und alle weiteren GUI Elemente unter "Tickets".
+ */
 
 public class ControllerTickets implements Initializable{
 	/**
-	 * Deklarierung der Variablen und GUI Elemente 
+	 * Deklarierung der GUI Elemente 
 	 */
-	@FXML private TableView<Antrag> tvGruppentickets, tvEigeneTickets, tvTicketsPrüfen;
-	@FXML private TableView<Antrag> tvTicketsGenehmigen, tvAlleTickets, tvAbgTickets;
+	@FXML private TableView<Antrag> tvGruppentickets, tvEigeneTickets, tvTicketsPrüfen, tvTicketsGenehmigen, tvAlleTickets, tvAbgTickets;
 	
-	@FXML private Tab Gruppentickets, TicketsPrüfen, eigeneTickets;
-	@FXML private Tab abgeschlosseneTickets, TicketsGenehmigen, AlleTickets;
+	@FXML private Tab Gruppentickets, TicketsPrüfen, eigeneTickets, abgeschlosseneTickets, TicketsGenehmigen, AlleTickets;
 		
 	@FXML private TableColumn<Antrag, String> status_ColGr, status_ColP, status_ColGe, status_ColA, status_ColET, status_ColAT;
 	@FXML private TableColumn<Antrag, String> auftragsID_ColGr,auftragsID_ColP, auftragsID_ColGe, auftragsID_ColA, auftragsID_ColET, auftragsID_ColAT;
@@ -41,28 +44,23 @@ public class ControllerTickets implements Initializable{
 	@FXML private TableColumn<Antrag, String> Kommentar_ColGr, Kommentar_ColP, Kommentar_ColGe, Kommentar_ColA, Kommentar_ColET, Kommentar_ColAT;
 	@FXML private TableColumn<Antrag, String> Beschreibung_ColGr, Beschreibung_ColP, Beschreibung_ColGe, Beschreibung_ColET, Beschreibung_ColA, Beschreibung_ColAT;
 	@FXML private TableColumn<Antrag, String> Edatum_ColGr, Edatum_ColP, Edatum_ColGe, Edatum_ColA, Edatum_ColET, Edatum_ColAT;
-	@FXML private TableColumn<Antrag, String> gruppe_ColGr, gruppe_ColP, gruppe_ColGe, gruppe_ColA, gruppe_ColET, gruppe_ColAT;
 	@FXML private TableColumn<Antrag, String> Ablehnung_ColGr, Ablehnung_ColP, Ablehnung_ColGe, Ablehnung_ColA, Ablehnung_ColET, Ablehnung_ColAT;
 
-	@FXML private Label lblGrId, lblPrId, lblGeId; 
-	@FXML private Label lblGrTitel, lblPrTitel, lblGeTitel;
-	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung;
-	@FXML private Label lblGrKommentar, lblPrKommentar, lblGeKommentar;
+	@FXML private Label lblGrId, lblPrId, lblGeId, lblGrTitel, lblPrTitel, lblGeTitel; 
+	@FXML private Label lblGrBeschreibung, lblPrBeschreibung, lblGeBeschreibung, lblGrKommentar, lblPrKommentar, lblGeKommentar;
 	@FXML private Label lblGrFertigstellungsdatum, lblPrFertigstellungsdatum, lblGeFertigstellungsdatum;
-	@FXML private Label labelGr, labelPr, labelGe;
-	@FXML private Label labelET, labelAT, labelAbgT;
+	@FXML private Label labelGr, labelPr, labelGe, labelET, labelAT, labelAbgT;
 	
-	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum;
-	@FXML private JFXTextField tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
+	@FXML private JFXTextField tfGrId,tfGrTitel,tfGrFertigstellungsdatum, tfPrId,tfPrTitel,tfPrFertigstellungsdatum;
 	@FXML private JFXTextField tfGeId,tfGeTitel,tfGeFertigstellungsdatum;
 
-	@FXML private JFXTextArea taGrBeschreibung, taGrKommentar;
-	@FXML private JFXTextArea taPrBeschreibung, taPrKommentar;
-	@FXML private JFXTextArea taGeBeschreibung, taGeKommentar;
+	@FXML private JFXTextArea taGrBeschreibung, taGrKommentar, taPrBeschreibung, taPrKommentar, taGeBeschreibung, taGeKommentar;
 	
-	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen,
-							btnETInfo, btnATInfo, btnAbgTInfo, btnLöschen;
+	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen, btnETInfo, btnATInfo, btnAbgTInfo, btnLöschen;
 	
+	/**
+	 * Deklarierung der Variablen.
+	 */
     private ObservableList<Antrag> data_gr, data_AbgT, data_prüfen, data_genehmigen, data_AlleT, data_EigT;
     private ObservableList<String> cbData;
     
@@ -73,11 +71,15 @@ public class ControllerTickets implements Initializable{
     private static String aid, nameS, kommS, beschrS, statusS, ablehnungS, datumS, EdatumS;
     
 	public Main main;
-    public void setMain(Main main) {
-
-        this.main = main;
-    }
     
+	/**
+	 * Diese Methode wird ausgeführt, sobald auf der GUI der Button 'Tickets' gedrückt wird.
+	 * Sie füllt die Tabellen mit Daten aus der Datenbank und setzt die Felder und Label zurück.
+	 * Weiterführende Beschreibung findet direkt im Code statt.
+	 * 
+	 * @param url, rb
+	 * @return none
+	 */
     @SuppressWarnings("restriction")
 	@Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -86,7 +88,9 @@ public class ControllerTickets implements Initializable{
     	
     	/**
     	 * Die ObservableList Elemente erhalten ihren Inhalt durch die statischen Methoden von der Klasse 'Antrag'.
-    	 * Inhalt der Listen sind die jeweiligen Anträge.  
+    	 * 'ControllerLogin.getUserid()' stellt die ID des aktuell angemeldeten Benutzers dar.
+     	 * 'ControllerLogin.getUser()' stellt den Nutzernamen des aktuell angemeldeten Benutzers dar.
+    	 * Inhalt der Listen sind die jeweiligen Anträge.
     	 */
 		try {
 				data_EigT = Antrag.getEigeneAntraege(ControllerLogin.getUserid());
@@ -94,8 +98,7 @@ public class ControllerTickets implements Initializable{
 				data_gr = Antrag.getGruppenantraege("genehmigt",ControllerLogin.getUser()); 
 				data_genehmigen = Antrag.getAntraegebyStatus("geprüft",ControllerLogin.getUser());
 	    		data_AbgT = Antrag.getAntraegebyStatus("erledigt", ControllerLogin.getUser());
-				data_AlleT = Antrag.getAlleAntraege();
-				
+				data_AlleT = Antrag.getAlleAntraege();	
 		}
 		catch (SQLException e) 
 		{
@@ -103,7 +106,7 @@ public class ControllerTickets implements Initializable{
 		}
 		
 		/**
-		 * mit forEach() wird jedes Element der ObservableList durchgegangen und eine Instanz angelegt. (glaube ich^^)
+		 * mit forEach() wird jedes Element der ObservableList durchgegangen und eine Instanz angelegt.
 		 */
     	data_prüfen.forEach((antrag) -> {
     		Antrag a1 = (Antrag) antrag;
@@ -141,7 +144,8 @@ public class ControllerTickets implements Initializable{
     	
     	/**
     	 * durch die Variablen in den Klammern wird den Tabellenspalten der benötigte Wert zugewiesen.
-    	 * So wird z.B. in Fertigstellungsdatum auch das Fertigstellungsdatum aus der ObservableList angezeigt.
+    	 * So wird z.B. in der Spalte Fertigstellungsdatum auf der Oberfläche auch das Fertigstellungsdatum
+    	 * aus der ObservableList angezeigt.
     	 */
 		auftragsID_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGr.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
@@ -163,7 +167,6 @@ public class ControllerTickets implements Initializable{
 		Kommentar_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		Ablehnung_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
-//		gruppe_ColET.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));
 		
 		status_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("status"));
 		auftragsID_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
@@ -173,7 +176,6 @@ public class ControllerTickets implements Initializable{
 		Kommentar_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		Ablehnung_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
-//		gruppe_ColA.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));
 		
 		auftragsID_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("antragid"));	
 		titel_ColGe.setCellValueFactory(new PropertyValueFactory<Antrag, String>("name"));
@@ -189,11 +191,16 @@ public class ControllerTickets implements Initializable{
 		Kommentar_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("kommentar"));
 		Beschreibung_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("beschreibung"));
 		Ablehnung_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("ablehnungsgrund"));
-//		gruppe_ColAT.setCellValueFactory(new PropertyValueFactory<Antrag, String>("gruppe"));
     }
     
     	/**
+    	 * Die Methode regelt was passiert, wenn ein Mausklick in die Tabelle des Tabs 'zu bearbeiten' erfolgt.
+    	 * Sofern ein Ticket in der Tabelle steht, werden die Daten (z.B. die Antrags-ID) in Variablen gespeichert und
+    	 * in den zugehörigen TextFeldern angezeigt.
+    	 * Bei leerer Tabelle, wird eine Exception abgefangen.
     	 * 
+    	 * @param none
+    	 * @return none
     	 */
     	@FXML
     	public void omcGruppentickets()
@@ -228,7 +235,13 @@ public class ControllerTickets implements Initializable{
     	}
     	
     	/**
+    	 * Die Methode regelt was passiert, wenn ein Mausklick in die Tabelle des Tabs 'zu prüfen' erfolgt.
+    	 * Sofern ein Ticket in der Tabelle steht, werden die Daten (z.B. die Antrags-ID) in Variablen gespeichert und
+    	 * in den zugehörigen TextFeldern angezeigt.
+    	 * Bei leerer Tabelle, wird eine Exception abgefangen.
     	 * 
+    	 * @param none
+    	 * @return none
     	 */
     	@FXML
     	public void omcTicketsPruefen()
@@ -259,7 +272,13 @@ public class ControllerTickets implements Initializable{
     	}
     	
     	/**
+    	 * Die Methode regelt was passiert, wenn ein Mausklick in die Tabelle des Tabs 'zu genehmigen' erfolgt.
+    	 * Sofern ein Ticket in der Tabelle steht, werden die Daten (z.B. die Antrags-ID) in Variablen gespeichert und
+    	 * in den zugehörigen TextFeldern angezeigt.
+    	 * Bei leerer Tabelle, wird eine Exception abgefangen.
     	 * 
+    	 * @param none
+    	 * @return none
     	 */
     	@FXML
     	public void omcTicketsGenehmigen()
@@ -293,123 +312,142 @@ public class ControllerTickets implements Initializable{
     		}	
     	}
     
-    	//Wen Zeile in Tabelle ausgewähl, alle Infos zum Ticket speichern und in neues Fenster bei handleInfo übergeben
-    	// Für Tabellen erledigte Tickets, eigene Tickets und Alle Tickets
     	/**
+    	 * Die Methode regelt was passiert, wenn ein Mausklick in die Tabelle des Tabs 'alle Tickets' erfolgt.
+    	 * Sofern ein Ticket in der Tabelle steht, werden die Daten (z.B. die Antrags-ID) in Variablen gespeichert.
+    	 * Diese werden durch klicken auf den Button 'details' in einem neuen Fenster angezeigt.
+    	 * Bei leerer Tabelle, wird eine Exception abgefangen.
     	 * 
+    	 * @param none
+    	 * @return none
     	 */
     	@FXML
     	public void omcTicketInfoAT()
     	{
     		try {
-    		Antrag aID = tvAlleTickets.getSelectionModel().getSelectedItem();
-			antragsID = Integer.toString(aID.getAntragid());
-		
-			Antrag n = tvAlleTickets.getSelectionModel().getSelectedItem();
-			name = n.getName();
+	    		Antrag aID = tvAlleTickets.getSelectionModel().getSelectedItem();
+				antragsID = Integer.toString(aID.getAntragid());
 			
-//			Antrag gru = tvAlleTickets.getSelectionModel().getSelectedItem();
-//			gruppe = gru.getGruppe();
+				Antrag n = tvAlleTickets.getSelectionModel().getSelectedItem();
+				name = n.getName();
+				
+				Antrag est = tvAlleTickets.getSelectionModel().getSelectedItem();
+				Edatum = est.getAntragsdatum();
+				String pattern = "dd.MM.yyyy";
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+				Edate = simpleDateFormat.format(Edatum);
+				
+				Antrag fst = tvAlleTickets.getSelectionModel().getSelectedItem();
+				datum = fst.getFertigstellungsdatum();
+				SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
+				date = simpleDateFormat1.format(datum);
 			
-			Antrag est = tvAlleTickets.getSelectionModel().getSelectedItem();
-			Edatum = est.getAntragsdatum();
-			String pattern = "dd.MM.yyyy";
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-			Edate = simpleDateFormat.format(Edatum);
+				Antrag beschreibung = tvAlleTickets.getSelectionModel().getSelectedItem();
+				beschr = beschreibung.getBeschreibung();
 			
-			Antrag fst = tvAlleTickets.getSelectionModel().getSelectedItem();
-			datum = fst.getFertigstellungsdatum();
-			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
-			date = simpleDateFormat1.format(datum);
-		
-			Antrag beschreibung = tvAlleTickets.getSelectionModel().getSelectedItem();
-			beschr = beschreibung.getBeschreibung();
-		
-			Antrag kom = tvAlleTickets.getSelectionModel().getSelectedItem();
-			komm = kom.getKommentar();
-			
-			Antrag abl = tvAlleTickets.getSelectionModel().getSelectedItem();
-			ablehnung = abl.getAblehnungsgrund();
-			
-			Antrag stat = tvAlleTickets.getSelectionModel().getSelectedItem();
-			status = stat.getStatus();
+				Antrag kom = tvAlleTickets.getSelectionModel().getSelectedItem();
+				komm = kom.getKommentar();
+				
+				Antrag abl = tvAlleTickets.getSelectionModel().getSelectedItem();
+				ablehnung = abl.getAblehnungsgrund();
+				
+				Antrag stat = tvAlleTickets.getSelectionModel().getSelectedItem();
+				status = stat.getStatus();
     		}
     		catch(NullPointerException npe){
 				npe.printStackTrace();
     		}	
     	}
     	
+    	/**
+    	 * Die Methode regelt was passiert, wenn ein Mausklick in die Tabelle des Tabs 'eigene Tickets' erfolgt.
+    	 * Sofern ein Ticket in der Tabelle steht, werden die Daten (z.B. die Antrags-ID) in Variablen gespeichert.
+    	 * Diese werden durch klicken auf den Button 'details' in einem neuen Fenster angezeigt.
+    	 * Bei leerer Tabelle, wird eine Exception abgefangen.
+    	 * 
+    	 * @param none
+    	 * @return none
+    	 */
     	@FXML
     	public void omcTicketInfoET()
     	{
     		try {
-    		Antrag aID = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			antragsID = Integer.toString(aID.getAntragid());
+    			Antrag aID = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			antragsID = Integer.toString(aID.getAntragid());
 		
-			Antrag n = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			name = n.getName();
+    			Antrag n = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			name = n.getName();
 			
-			Antrag est = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			Edatum = est.getAntragsdatum();
-			String pattern = "dd.MM.yyyy";
-			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
-			Edate = simpleDateFormat1.format(Edatum);
+    			Antrag est = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			Edatum = est.getAntragsdatum();
+    			String pattern = "dd.MM.yyyy";
+    			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
+    			Edate = simpleDateFormat1.format(Edatum);
 			
-			Antrag fst = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			datum = fst.getFertigstellungsdatum();
+    			Antrag fst = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			datum = fst.getFertigstellungsdatum();
 			
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-			date = simpleDateFormat.format(datum);
+    			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    			date = simpleDateFormat.format(datum);
 		
-			Antrag beschreibung = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			beschr = beschreibung.getBeschreibung();
+    			Antrag beschreibung = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			beschr = beschreibung.getBeschreibung();
 		
-			Antrag kom = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			komm = kom.getKommentar();
+    			Antrag kom = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			komm = kom.getKommentar();
 			
-			Antrag abl = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			ablehnung = abl.getAblehnungsgrund();
+    			Antrag abl = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			ablehnung = abl.getAblehnungsgrund();
 			
-			Antrag stat = tvEigeneTickets.getSelectionModel().getSelectedItem();
-			status = stat.getStatus();
+    			Antrag stat = tvEigeneTickets.getSelectionModel().getSelectedItem();
+    			status = stat.getStatus();
     		}
     		catch(NullPointerException npe){
 				npe.printStackTrace();
     		}	
     	}
     	
+    	/**
+    	 * Die Methode regelt was passiert, wenn ein Mausklick in die Tabelle des Tabs 'abgeschlossene Tickets' erfolgt.
+    	 * Sofern ein Ticket in der Tabelle steht, werden die Daten (z.B. die Antrags-ID) in Variablen gespeichert.
+    	 * Diese werden durch klicken auf den Button 'details' in einem neuen Fenster angezeigt.
+    	 * Bei leerer Tabelle, wird eine Exception abgefangen.
+    	 * 
+    	 * @param none
+    	 * @return none
+    	 */
     	@FXML
     	public void omcTicketInfoAbgT()
     	{
     		try {
-    		Antrag aID = tvAbgTickets.getSelectionModel().getSelectedItem();
-			antragsID = Integer.toString(aID.getAntragid());
+    			Antrag aID = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			antragsID = Integer.toString(aID.getAntragid());
 		
-			Antrag n = tvAbgTickets.getSelectionModel().getSelectedItem();
-			name = n.getName();
+    			Antrag n = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			name = n.getName();
 			
-			Antrag est = tvAbgTickets.getSelectionModel().getSelectedItem();
-			Edatum = est.getAntragsdatum();
-			String pattern = "dd.MM.yyyy";
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-			Edate = simpleDateFormat.format(Edatum);
+    			Antrag est = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			Edatum = est.getAntragsdatum();
+    			String pattern = "dd.MM.yyyy";
+    			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    			Edate = simpleDateFormat.format(Edatum);
 			
-			Antrag fst = tvAbgTickets.getSelectionModel().getSelectedItem();
-			datum = fst.getFertigstellungsdatum();
-			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
-			date = simpleDateFormat1.format(datum);
+    			Antrag fst = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			datum = fst.getFertigstellungsdatum();
+    			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(pattern);
+    			date = simpleDateFormat1.format(datum);
 		
-			Antrag beschreibung = tvAbgTickets.getSelectionModel().getSelectedItem();
-			beschr = beschreibung.getBeschreibung();
+    			Antrag beschreibung = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			beschr = beschreibung.getBeschreibung();
 		
-			Antrag kom = tvAbgTickets.getSelectionModel().getSelectedItem();
-			komm = kom.getKommentar();
+    			Antrag kom = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			komm = kom.getKommentar();
 			
-			Antrag abl = tvAbgTickets.getSelectionModel().getSelectedItem();
-			ablehnung = abl.getAblehnungsgrund();
+    			Antrag abl = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			ablehnung = abl.getAblehnungsgrund();
 			
-			Antrag stat = tvAbgTickets.getSelectionModel().getSelectedItem();
-			status = stat.getStatus();
+    			Antrag stat = tvAbgTickets.getSelectionModel().getSelectedItem();
+    			status = stat.getStatus();
     		}
     		catch(NullPointerException npe){
 				npe.printStackTrace();
@@ -418,7 +456,13 @@ public class ControllerTickets implements Initializable{
     	
     	
     	/**
-    	 * Methode definiert, was passiert, wenn der Button bearbeiten auf der GUI gedrückt wird.
+		 * Methode regelt was passiert, wenn der Button 'bearbeite' im Tab 'zu bearbeiten' gedrückt wird.
+    	 * Zuerst wird abgefragt, ob in der Variable antragsID ein Wert enthalten ist.
+    	 * Ist dies nicht der Fall, wurde vom Benutzer kein Antrag aus der Tabelle ausgewählt und
+    	 * ein Label erscheint mit einem Reminder, ein Ticket auszuwählen.
+    	 * Wurde zuvor ein Antrag ausgewählt, so wird die Methode 'antragBearbeiten()' ausgeführt.    	 * 
+    	 * @param none
+    	 * @return none
     	 * @throws SQLException
     	 */
     	@FXML
@@ -442,8 +486,15 @@ public class ControllerTickets implements Initializable{
     	}
     	
     	/**
-    	 * Methode definiert, was passiert, wenn der Button prüfen auf der GUI gedrückt wird.
+    	 * Methode regelt was passiert, wenn der Button 'prüfen' im Tab 'zu prüfen' gedrückt wird.
+    	 * Zuerst wird abgefragt, ob in der Variable antragsID ein Wert enthalten ist.
+    	 * Ist dies nicht der Fall, wurde vom Benutzer kein Antrag aus der Tabelle ausgewählt und
+    	 * ein Label erscheint mit einem Reminder, ein Ticket auszuwählen.
+    	 * Wurde zuvor ein Antrag ausgewählt, so wird die Methode 'antragPruefen()' ausgeführt.
+     	 * Dieser Methode werden die Parameter 'antragsID' und 'kom' mitgegeben.
     	 * 
+    	 * @param none
+    	 * @return none
     	 * @throws SQLException
     	 */
     	@FXML
@@ -469,8 +520,15 @@ public class ControllerTickets implements Initializable{
     	}
     	
     	/**
-    	 * Methode definiert, was passiert, wenn der Button genehmigen auf der GUI gedrückt wird.
+    	 * Methode regelt was passiert, wenn der Button 'genehmigen' im Tab 'zu genehmigen' gedrückt wird.
+    	 * Zuerst wird abgefragt, ob in der Variable antragsID ein Wert enthalten ist.
+    	 * Ist dies nicht der Fall, wurde vom Benutzer kein Antrag aus der Tabelle ausgewählt und
+    	 * ein Label erscheint mit einem Reminder, ein Ticket auszuwählen.
+    	 * Wurde zuvor ein Antrag ausgewählt, so wird die Methode 'antragGenehmigen()' ausgeführt.
+    	 * Dieser Methode werden die Parameter 'antragsID' und 'kom' mitgegeben.
     	 * 
+    	 * @param none
+    	 * @return none
     	 * @throws SQLException 
     	 */
     	@FXML
@@ -485,15 +543,20 @@ public class ControllerTickets implements Initializable{
         	else
     		{
     			String kom = taGeKommentar.getText();
-    			//Methode anpassen
     			Antrag.antragGenehmigen(antragsID, kom);
     			initialize(null, null);
     		}	
     	}
     	
     	/**
-    	 * Methode definiert, was passiert, wenn der Button ablehnen auf der GUI gedrückt wird.
-    	 * Neues Fenster 'Ablehnung.fxml' wird in neuem Fenster geöffnet.
+    	 * Methode regelt was passiert, wenn der Button 'ablehnen' im Tab 'zu genehmigen' gedrückt wird.
+    	 * Zuerst wird abgefragt, ob in der Variable antragsID ein Wert enthalten ist.
+    	 * Ist dies nicht der Fall, wurde vom Benutzer kein Antrag aus der Tabelle ausgewählt und
+    	 * ein Label erscheint mit einem Reminder, ein Ticket auszuwählen.
+    	 * Wurde zuvor ein Antrag ausgewählt, so öffnet sich ein Fenster, in welches der Ablehnungsgrund eingetragen werden muss.
+    	 * 
+    	 * @param none
+    	 * @return none
     	 */
     	@FXML
     	public void handleBtnAblehnen()
@@ -527,6 +590,16 @@ public class ControllerTickets implements Initializable{
         	}
     	}
     	
+    	/**
+    	 * Die Methode regelt was passiert, wenn auf den Button 'löschen' im Tab 'eigene Tickets' gedrückt wird.
+    	 * Zuerst wird geprüft, welchen Status der Antrag inne hat. Sofern der Status 'erstellt' lautet,
+    	 * kann der Antrag noch vom Ersteller gelöscht (mit Übergabe der 'antragsID') werden.
+    	 * Bei anderen Status erscheint ein Label 'Bitte geeignetes Ticket auswählen'.
+    	 * 
+    	 * @param none
+    	 * @return none
+    	 * @throws SQLException
+    	 */
     	public void handleBtnLöschen() throws SQLException
     	{
     		if(status.equals("erstellt"))
@@ -543,7 +616,16 @@ public class ControllerTickets implements Initializable{
     		}
     	}
 
-    	//Öffnet neues Fenster Info.fxml
+    	/**
+    	 * Die Methode regelt was passiert, wenn auf den Button 'details' gedrückt wird.
+    	 * Zuerst wird abgefragt, ob in der Variable antragsID ein Wert enthalten ist.
+    	 * Ist dies nicht der Fall, wurde vom Benutzer kein Antrag aus der Tabelle ausgewählt und
+    	 * ein Label erscheint mit einem Reminder, ein Ticket auszuwählen..
+    	 * Wurde zuvor ein Antrag ausgewählt, so öffnet sich ein Fenster, welches die Details des Antrages anzeigt.
+    	 * 
+    	 * @param none
+    	 * @return none
+    	 */
     	@FXML
     	public void handleBtnInfo() {
     		try
@@ -577,12 +659,24 @@ public class ControllerTickets implements Initializable{
     		}
     	}
     	
+    	 /**
+    	  * Diese Methode enthält die initialize Methode des Controllers.
+    	  * Zweck davon ist, dass die initialize Methode von anderen Controllern aus aufgerufen werden kann.
+    	  *  
+    	  * @param none
+    	  * @return none
+    	  */
 		public void refresh(){
 				initialize(null, null);
 			}
 
     	/**
     	 * Initialisierung der GUI Elemente.
+    	 * Die Textfelder werden geleert und die sichtbaren Label werden auf unsichtbar gestellt.
+    	 * Des Weiteren werden bei Abfrage der Berechtigung einzelne Tabs nicht "anklickbar" gemacht. 
+    	 * 
+    	 * @param berechtigung
+    	 * @return none
     	 */
     	public void initialisiereGUI(int berechtigung)
     	{
@@ -604,10 +698,6 @@ public class ControllerTickets implements Initializable{
         	taGeBeschreibung.setText(null);
         	taGeKommentar.setText(null);
         	
-        	/**
-        	 * Label werden beim initialisieren in der GUI auf unsichtbar gesetzt.
-        	 * Die Tabs werden auf verfügbar gesetzt.
-        	 */
         	labelGr.setVisible(false);
         	labelPr.setVisible(false);
         	labelGe.setVisible(false);
@@ -619,9 +709,6 @@ public class ControllerTickets implements Initializable{
     		TicketsGenehmigen.setDisable(false);
     		AlleTickets.setDisable(false);
     		
-    		/**
-    		 * Je nach Berechtigung kann der angemeldete Nutzer verschiedene Tabs anklicken oder auch nicht.
-    		 */
     		if (berechtigung == 0) {
         		abgeschlosseneTickets.setDisable(true);
     			TicketsGenehmigen.setDisable(true);
@@ -640,10 +727,10 @@ public class ControllerTickets implements Initializable{
     		}
     	}
     	
-    	/**
-    	 * Getter Methode für Antrags-ID
-    	 * @return aid
-    	 */
+/** ***************************************************************************************************************************************************
+* ******************************************************Implementierung der Getter und Setter*********************************************************
+******************************************************************************************************************************************************/
+    	
     	public static String getAID()
     	{
     		return aid;
@@ -736,4 +823,7 @@ public class ControllerTickets implements Initializable{
 		public static void setDatumS(String datumS) {
 			ControllerTickets.datumS = datumS;
 		}
+		public void setMain(Main main){
+	        this.main = main;
+	    }
 }

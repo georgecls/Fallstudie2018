@@ -14,12 +14,25 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * In dieser Klasse wird die Anwendung gestartet und eine Verbindung zur Datenbank hergestellt.
+ * 
+ */
 
 public class Main extends Application {
 	
+	/**
+	 * Deklarierung der Variablen
+	 */
 	public Stage primaryStage;
 	static DBConnector db = null;
 
+	/**
+	 * 
+	 * 
+	 * @param none
+	 * @return none	
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -27,6 +40,12 @@ public class Main extends Application {
 		loginWindow();
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param none
+	 * @return none
+	 */
 	public void loginWindow()
 	{
 		try
@@ -50,6 +69,12 @@ public class Main extends Application {
 		}		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param
+	 * @return
+	 */
 	public void mainWindow() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("MainNeu.fxml"));
@@ -70,10 +95,22 @@ public class Main extends Application {
 		}
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param args
+	 * @return none
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param none
+	 * @return db
+	 */
 	public static DBConnector get_DBConnection()
 	{
 		if(null == db) db = new DBConnector("sql7258916", "sql7258916", "SfSFVG296y");
@@ -102,7 +139,6 @@ public class Main extends Application {
 				System.out.println("Datenbank-Verbindung wurde erfolgreich hergestellt");
 			}
 		}
-
 	return db;
 	}
 }
