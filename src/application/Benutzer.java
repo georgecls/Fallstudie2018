@@ -149,7 +149,8 @@ public class Benutzer {
 				+ " blevel = '%d', ag_fk = '%s' WHERE benutzername = '%s';", passwort, berechtigung, i, name));
 	}
 	
-	/**Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
+	/**
+	 * Methode, um einen Benutzer in der DB zu bearbeiten. Der Übergabewert "name" stellt den Benutzernamen des zu bearbeitenden Benutzers dar.
 	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
 	 * Danach werden die Parameter für das SQL-Statement übergeben und das gesamte SQL-Statement in einem String gespeichert.
 	 *  
@@ -165,9 +166,13 @@ public class Benutzer {
 								+ "WHERE benutzername = '%s';", berechtigung, i, name));
 	}
 	
-	public static void updateInaktiverBenutzer(String name) throws SQLException
+	public static void updateInaktiverBenutzer(String name, String gruppe) throws SQLException
 	{
-			Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'aktiv' WHERE benutzername = '%s';", name));
+		Gruppe g1 = new Gruppe();
+		g1.getGruppeByName(gruppe);
+		String i = g1.getId();
+		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE benutzer SET bstatus = 'aktiv', ag_fk = '%s' "
+				+ "WHERE benutzername = '%s';", i, name));
 	}
 	
 	

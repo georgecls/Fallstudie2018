@@ -221,21 +221,53 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	@FXML
 	public void handleWiederherstellen() throws SQLException {
 		String benutzer = fieldBenutzer.getText().toString();
+		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
+		String passwort = fieldPasswort.getText();
 		
-		//Muss überarbeitet werden, funktioniert noch nicht
-		
-		if(Benutzer.inaktiverBenutzer(benutzer)) 
-		{
-			Benutzer.updateInaktiverBenutzer(benutzer);
-		}
-		else 
-		{
+		if (benutzer.equals("")) {
 			label.setVisible(true);
-			label.setText("Der Benutzer '" + benutzer + "' kann nicht wiederhergestellt werden.");
+			label.setText("Es ist kein Benutzer zum Wiederherstellen ausgewählt!");
 			label.setTextFill(Color.RED);
 		}
-		
-		initialize (null, null);
-		
+		else if(boxGruppe.getValue()==null){
+			label.setVisible(true);
+			label.setText("Name und Gruppe müssen ausgewählt sein!");
+			label.setTextFill(Color.RED);
+		}
+		else if(boxBerechtigung.getValue() != null)
+		{
+			label.setVisible(true);
+			label.setText("Berechtigung kann beim Wiederherstellen nicht geändert werden.");
+			label.setTextFill(Color.RED);
+		}
+
+		else 
+		{
+			if (passwort.equals("")) 
+			{
+				if(Benutzer.inaktiverBenutzer(benutzer)) 
+				{
+				Benutzer.updateInaktiverBenutzer(benutzer, gruppe);
+				initialize (null, null);
+				}
+				else 
+				{
+				label.setVisible(true);
+				label.setText("Benutzer '" + benutzer + "' kann nicht wiederhergestellt werden.");
+				label.setTextFill(Color.RED);
+				initialize (null, null);
+				
+				}	
+			}
+			else 
+			{
+				label.setVisible(true);
+				label.setText("Passwort kann beim Wiederherstellen nicht geändert werden.");
+				label.setTextFill(Color.RED);
+			}
+		}
 	}
+	
+	
+	
 }
