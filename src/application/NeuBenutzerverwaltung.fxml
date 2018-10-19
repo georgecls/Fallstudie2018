@@ -60,13 +60,13 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="346.0" spacing="20.0">
                      <children>
-                        <JFXButton fx:id="btnBenWiederherstellen" buttonType="RAISED" onAction="#handleWiederherstellen" prefWidth="90.0" style="-fx-background-color: #128277;" text="wiederherstellen" textFill="WHITE" />
-                        <JFXButton fx:id="btnClear" buttonType="RAISED" onAction="#handleClear" prefWidth="90.0" style="-fx-background-color: #128277;" text="clear" textFill="WHITE" />
+                        <JFXButton fx:id="btnBenWiederherstellen" buttonType="RAISED" onAction="#handleWiederherstellen" prefWidth="120.0" style="-fx-background-color: #128277;" text="wiederherstellen" textFill="WHITE" />
+                        <JFXButton fx:id="btnClear" buttonType="RAISED" onAction="#handleClear" prefWidth="120.0" style="-fx-background-color: #128277;" text="zurücksetzen" textFill="WHITE" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="346.0" spacing="20.0">
                      <children>
-                        <Label fx:id="label" alignment="CENTER" prefWidth="200.0" />
+                        <Label fx:id="label" alignment="CENTER" prefHeight="40.0" prefWidth="340.0" />
                      </children>
                   </HBox>
                </children>

@@ -155,6 +155,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	           	initialize (null, null);
 	            label.setVisible(true);
 	            label.setText("Benutzer '"+benutzer+"' hinzugefügt");
+	            label.setTextFill(Color.BLACK);
 	        }
 		}
     }
