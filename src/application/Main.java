@@ -16,7 +16,6 @@ import javafx.scene.layout.BorderPane;
 
 /**
  * In dieser Klasse wird die Anwendung gestartet und eine Verbindung zur Datenbank hergestellt.
- * 
  */
 
 public class Main extends Application {

@@ -13,19 +13,30 @@ import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
+/**
+ * Klasse um Auswertungselemente auf der Oberfläche anzuzeigen.
+ */
+
 public class ControllerAuswertung implements Initializable {
 	
-
+	/**
+	 * Deklarierung der GUI Elemente
+	 */
 	@FXML private PieChart pieChartGes, pieChartGr;
 	
-	
+	/**
+	 * Diese Methode ruft 2 Methoden auf, um die Charts mit Daten zu befüllen.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub		
 		loadAuswertungGr();
 		loadAuswertungGes();
 	}
 	
+	/**
+	 * Methode um die 'Auswertung gesamt' mit Daten aus der DB zu füllen.
+	 * countAntraegeByStatus zählt die Anträge je nach Status und gibt dies als double zurück.
+	 */
 	public void loadAuswertungGes()
 	{
 		ObservableList<PieChart.Data> dataChartGes = null;
@@ -44,7 +55,10 @@ public class ControllerAuswertung implements Initializable {
         pieChartGes.setTitle("Auswertung Gesamt");
 	}
 	
-	
+	/**
+	 * Methode um die 'Auswertung Gruppe' mit Daten aus der DB zu füllen.
+	 * countAntraegeByStatus zählt die Anträge je nach Status und gibt dies als double zurück.
+	 */
 	public void loadAuswertungGr()
 	{
 		 ObservableList<PieChart.Data> dataChartGr = null;
@@ -59,9 +73,7 @@ public class ControllerAuswertung implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
-	        
 	    pieChartGr.setData(dataChartGr);
-	    pieChartGr.setTitle("Auswertung Gruppe");
-	        
+	    pieChartGr.setTitle("Auswertung Gruppe");    
 	}
 }

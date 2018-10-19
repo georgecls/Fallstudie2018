@@ -59,7 +59,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXDatePicker fx:id="fieldZieldatum" defaultColor="#128277" prefHeight="26.0" prefWidth="301.0">
+                  <JFXDatePicker fx:id="fieldZieldatum" defaultColor="#128277" prefHeight="26.0" prefWidth="300.0" showWeekNumbers="true">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor></JFXDatePicker>
