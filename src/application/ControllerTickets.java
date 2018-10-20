@@ -56,7 +56,7 @@ public class ControllerTickets implements Initializable{
 
 	@FXML private JFXTextArea taGrBeschreibung, taGrKommentar, taPrBeschreibung, taPrKommentar, taGeBeschreibung, taGeKommentar;
 	
-	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen, btnETInfo, btnATInfo, btnAbgTInfo, btnLöschen;
+	@FXML private JFXButton btnBearbeiten, btnPrüfen, btnGenehmigen, btnAblehnen, btnETInfo, btnATInfo, btnAbgTInfo, btnLöschen, btnAbl;
 	
 	/**
 	 * Deklarierung der Variablen.
@@ -573,6 +573,38 @@ public class ControllerTickets implements Initializable{
         	{
         		labelGe.setVisible(false);
         		labelGe.setText(null);
+	    		aid = antragsID;
+	    		try
+	    		{
+		    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ablehnung.fxml"));
+		    		Parent root1 = (Parent) fxmlLoader.load();
+		    		Stage stage = new Stage();
+		    		stage.setScene(new Scene(root1));
+		    		stage.show();
+
+					ControllerAblehnung ca = fxmlLoader.getController();
+					ca.setControllerTickets(this);
+				}
+	    		catch (IOException e)
+	    		{
+					e.printStackTrace();
+	    		}
+        	}
+    	}
+    	
+    	@FXML
+    	public void handleBtnAbl()
+    	{
+    		antragsID = tfPrId.getText();
+        	if(antragsID == null)
+        	{
+        		labelPr.setVisible(true);
+        		labelPr.setText("Bitte Ticket auswählen");
+        	}
+        	else
+        	{
+        		labelPr.setVisible(false);
+        		labelPr.setText(null);
 	    		aid = antragsID;
 	    		try
 	    		{

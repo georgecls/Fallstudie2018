@@ -117,6 +117,7 @@
                            <children>
                            		<VBox prefHeight="200.0" prefWidth="200.0" />
                               	<JFXButton fx:id="btnPrüfen" buttonType="RAISED" onAction="#handleBtnPrüfen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="prüfen" textFill="WHITE" />
+                              <JFXButton fx:id="btnAbl" buttonType="RAISED" onAction="#handleBtnAbl" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="ablehnen" textFill="WHITE" />
                            		<Label fx:id="labelPr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
                            </children>
                         </HBox>
@@ -228,6 +229,7 @@
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="730.0" spacing="20.0">
                            <children>
+                              <VBox prefHeight="30.0" prefWidth="200.0" />
                               <JFXButton fx:id="btnGenehmigen" buttonType="RAISED" onAction="#handleBtnGenehmigen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="genehmigen" textFill="WHITE" />
                               <JFXButton fx:id="btnAblehnen" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#handleBtnAblehnen" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #128277;" text="ablehnen" textFill="WHITE" />
                            	  <Label fx:id="labelGe" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="200.0" />
