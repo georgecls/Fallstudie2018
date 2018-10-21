@@ -9,6 +9,15 @@ import javafx.collections.ObservableList;
 
 import java.util.Date;
 
+/**
+ *Anträge können folgende Status innehaben: 
+ *erstellt = neues Ticket angelegt -> verschieben in Tickets prüfen,
+ *geprüft = Ticket geprüft -> verschieben in Tickets genehmigen,
+ *genehmigt = Ticket genehmigt -> verschieben in Gruppentickets,
+ *erledigt = Ticket abschließend bearbeitet -> verschieben in abgeschlossene Tickets, 
+ *abgelehnt = Ticket wurde vom genehmiger/prüfer abgelehnt -> anzeige in eigene Tickets, aber nicht in abgesch. Tickets
+ *gelöscht = Ticket gelöscht
+ */
 public class Antrag {
 	
 	//Initialisierung der Attribute nach den Attributen in der DB
@@ -25,14 +34,11 @@ public class Antrag {
 	private Gruppe erstGruppe;
 	private Gruppe bearGruppe;
 	
-	//Attribute, die darÃ¼berhinaus noch benötigt werden
-	private static int idZaehler = 10000;
-	private static int antragzaehler = 1;
-	
+
 	
 	
 	/** ***************************************************************************************************************************************************
-	 * **************************************************Implementierung der statischen Methoden***********************************************************
+	 * ******************************************************Implementierung der Konstruktoren*************************************************************
 	 ******************************************************************************************************************************************************/
 	
 	public Antrag()
@@ -44,40 +50,47 @@ public class Antrag {
 	{	this.getAntragById(pID);	}
 	
 	
+
+	/** ***************************************************************************************************************************************************
+	 * **************************************************Implementierung der statischen Methoden***********************************************************
+	 ******************************************************************************************************************************************************/
+	
 	/**
 	 *Methode, um einen neuen Antrag in die DB zu schreiben.
-	 *Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 *Danach werden die Parameter fÃ¼r das SQL-Statement mit Get-Methoden Ã¼bergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 *Im letzten Schritt wird der String an die Instanzmethode "insert" aus der Klasse "MysqlCon" Ã¼bergeben und damit ein neuer Datensatz in der DB erzeugt.
-	 *  
+	 *!DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 *
 	 * @throws SQLException
+	 * @return none
+	 * @param name, ersteller, erstelldatum, zieldatum, beschreibung, erstellergruppe, bearbeitergruppe
 	 */
 	
 	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum, String text, String erstGruppe, String gruppe) throws SQLException
     {
-         int a = Benutzer.getIdByName(ersteller);
+         int erst = Benutzer.getIdByName(ersteller);
          Gruppe g1 = new Gruppe();
          g1.getGruppeByName(gruppe);
-         String i = g1.getId();  
+         String gr = g1.getId();  
          Main.get_DBConnection().ExecuteTransact(String.format("INSERT INTO antrag (titel, beschreibung, fertigstellungsdatum, antragsdatum, "
                         + "status, ablehnungsgrund, anmerkung, ersteller_fk, bearbeiter_fk, ag_ersteller_fk, ag_bearbeiter_fk) "
-                        + "VALUES('%s', '%s', '%s', '%s', 'erstellt', NULL, NULL, '%d', NULL, '%s', '%s');", name, text, zieldatum, erstelldatum, a, erstGruppe, i));
+                        + "VALUES('%s', '%s', '%s', '%s', 'erstellt', NULL, NULL, '%d', NULL, '%s', '%s');", name, text, 
+                        zieldatum, erstelldatum, erst, erstGruppe, gr));
     }
 
 	
+	//Wird nie verwendet -> LÖSCHEN?
 	/**
-	 * Methode, um einen Antrag aus der DB auszugeben. Der Eingabewert "ersteller" stellt den Antragsersteller des auszugebenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter fuer das SQL-Statement mit Get-Methoden uebergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 *  
-	 * @param benutzer
+	 * Methode, um einen Anträge der Gruppe des aktuell angemeldeten Benutzers aus der DB auszugeben.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
 	 * @throws SQLException
+	 * @return ObservableList
+	 * @param gruppenID
 	 */
-	public static ObservableList<Antrag> getGruppenAntraege(String benutzer) throws SQLException
+	public static ObservableList<Antrag> getGruppenAntraege(String gr) throws SQLException
 	{
 	    ObservableList data = FXCollections.observableArrayList();
 	    try {
-	    	Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE ersteller_fk = '%s';", benutzer));
+	    	Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE ersteller_fk = '%s';", gr));
 	    	ResultSet rs = Main.get_DBConnection().get_last_resultset();
 	    	while(rs.next()) {
 	    		
@@ -92,13 +105,12 @@ public class Antrag {
 	
 	/**
 	 *Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen.
-	 *Im ersten Schritt eine Liste erstellt, in welcher die Daten gespeichert werden.
-	 *Anschließend wird die Datenbankverbindung hergestellt.
-	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
-	 *Diese Daten sind in ObservableList data gespeichert.
-	 *
-	 * @return data
+	 *Es wird eine Liste erstellt, in welcher die Daten gespeichert und später ausgegeben werden.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
 	 * @throws SQLException 
+	 * @return ObservableList
+	 * @param none
 	 */
 	public static ObservableList<Antrag> getAlleAntraege() throws SQLException {
 	    
@@ -121,23 +133,11 @@ public class Antrag {
 	
 	/**
 	 *Methode um alle bestehenden Anräge abhängig vom Status abzufragen.
-	 *Der Eingabewert "status" stellt den Status  der auszugebenden Anträge dar.
-	 *erstellt = neues Ticket angelegt -> verschieben in Tickets prüfen,
-	 *geprüft = Ticket geprüft -> verschieben in Tickets genehmigen,
-	 *genehmigt = Ticket genehmigt -> verschieben in Gruppentickets,
-	 *erledigt = Ticket abschließend bearbeitet -> verschieben in abgeschlossene Tickets, 
-	 *abgelehnt = Ticket wurde vom genehmiger/prüfer abgelehnt -> anzeige in eigene Tickets, aber nicht in abgesch. Tickets
-	 *gelöscht = Ticket gelöscht
+	 *!DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 *
-	 *Im ersten Schritt eine Liste erstellt, in welcher anschließend die Daten gespeichert werden.
-	 *Anschließend wird die Datenbankverbindung hergestellt.
-	 *Danach wird der Parameter "idantrag" abgeholt, in welchem alle weiteren Daten gespeichert sind.
-	 *Diese Daten sind in ObservableList data gespeichert. 
-	 *
-	 *
-	 * @param status, benutzername
-	 * @return data
 	 * @throws SQLException 
+	 * @return data
+	 * @param status, benutzername
 	 */
 	public static ObservableList<Antrag> getAntraegebyStatus(String status, String benutzername) throws SQLException
 	{
@@ -160,7 +160,14 @@ public class Antrag {
         return data;
     }
 	
-	
+	/**
+	 * Methode, um einen Anträge der Gruppe des aktuell angemeldeten Benutzers aus der DB auszugeben.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return ObservableList
+	 * @param status, benutzername
+	 */
 	public static ObservableList<Antrag> getGruppenantraege(String status, String benutzername) throws SQLException
 	{
 		int bGruppe = Benutzer.getGruppeByName(benutzername);
@@ -187,16 +194,11 @@ public class Antrag {
 	/**
 	 * Methode, um die Anträge mit Status 'erstellt' abzufragen.
 	 * Die Ergebnisse erscheinen in der Tabelle 'Tickets prüfen'.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
-	 * Im ersten Schritt wird eine lokale ObservableList erzeugt.
-	 * Im Anschluss wird die DBConnection abgefragt u. ggfs. neu verbunden.
-	 * Dann wird das SQL Statement abgefragt und das Ergebnis in einem ResultSet gespeichert.
-	 * Dieses wird durch die Schleife in die ObservableList eingeftragen.
-	 * Zum Schluss wird die Liste zurückgegeben.
-	 * 
-	 * @param status, benutzername
-	 * @return data
 	 * @throws SQLException
+	 * @return data
+	 * @param benutzername, benutzerID
 	 */
 	public static ObservableList<Antrag> getAntraegezuPruefen (String benutzername, int benutzerid) throws SQLException
 	{
@@ -220,7 +222,15 @@ public class Antrag {
 		return data;
 	}
 	
-	
+	/**
+	 * Methode, um die erstellten Anträge des aktuell angemeldeten Benutzers abzufragen.
+	 * Die Ergebnisse erscheinen in der Tabelle 'eigene Tickets'.
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * 
+	 * @throws SQLException
+	 * @return data
+	 * @param benutzerID
+	 */
 	public static ObservableList<Antrag> getEigeneAntraege (int benutzerid) throws SQLException
 	{
         ObservableList<Antrag> data = FXCollections.observableArrayList();
@@ -252,7 +262,7 @@ public class Antrag {
 	 * Ergebnis wird in PieChart ausgegeben.
 	 * 
 	 * @param status
-	 * @return i
+	 * @return double
 	 * @throws SQLException
 	 */
 	public static Double countAntraegeByStatus(String status) throws SQLException {
@@ -294,15 +304,10 @@ public class Antrag {
 	 * *********************************Veränderung der Status**********************************
 	 *******************************************************************************************/
 	
-	
-	/**
-	 * Methode, um einen Antrag aus der DB zu löschen. Der Ãœbergabewert "id" stellt die AntragsID des zu löschenden Antrags dar.
-	 * Im ersten Schritt wird die Datenbankverbindung hergestellt.
-	 * Danach werden die Parameter für das SQL-Statement mit Get-Methoden Übergeben und das gesamte SQL-Statement in einem String "ps" gespeichert.
-	 * Im letzten Schritt wird der String an die Instanzmethode "update" aus der Klasse "MysqlCon" Übergeben und damit der entsprechende Datensatz gelöscht.
-	 *  
-	 * @throws SQLException
+	/** Diese Methoden dienen allesamt der Veränderung des Status eines Antrags.
 	 */
+	
+	
 	public static void deleteAntragById(String id) throws SQLException
 	{
 		Main.get_DBConnection().ExecuteTransact(String.format("UPDATE antrag SET status = 'gelöscht' WHERE idantrag = '%s'", id));
@@ -335,10 +340,7 @@ public class Antrag {
 	
 	/**
 	 *Methode zieht sich Antrag mit im Parameter angegebener ID.
-	 *Zuerst wird die Datenbankverbindung hergestellt und gleichzeitig der SELECT ausgeführt.
-	 *Im ResultSet wird der ausgeführte SELECT gespeichert.
-	 *in der IF-Abfrage werden die Daten in die jeweiligen Variablen gespeichert und zurückgegeben. 
-	 * 
+	 
 	 * @param pID
 	 * @return Objekt von Antrag
 	 * @throws SQLException
