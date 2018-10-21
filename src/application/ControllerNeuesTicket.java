@@ -41,14 +41,15 @@ public class ControllerNeuesTicket {
 	 * 
 	 */
 	public void initialize() {
-		try {
+		try
+		{
 			cbData = Gruppe.getGruppennamen();
 		}
     	catch (SQLException e1)
     	{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
     	cbGruppeZuweisen.setItems(cbData);
 		
     	fieldErsteller.setText(ControllerLogin.getUser());
@@ -59,7 +60,6 @@ public class ControllerNeuesTicket {
 		}
 		catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

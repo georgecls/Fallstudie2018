@@ -1,37 +1,29 @@
 package application;
 
-//-----------------------------------------------------
-//		----------- Alle Imports -----------
-//(SQL-)Import wird fuer alle SQL-Operationen benoetigt. 
-//-----------------------------------------------------
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
-/// --------------------------------------------------------
-/// Klasse:		DBConnector
-/// Parent: 	-
-/// Funktion:	Herstellen einer Datenbank-Verbindung, 
-///				Ausfuehrung von SQL-Statement und Abfragen 
-///				von Werten aus der Datenbank.
-/// --------------------------------------------------------
+
+/**
+ * Klasse zur Herstellung einer Datenbankverbindung.
+ * Abfragen von Daten aus der Datenbank, sowie die Ausführung
+ * von SQL-Statements.
+ */
 public class DBConnector
 {
-	//* --------------------------------------------------
-	// Temporaer wird der Standard-Username, das Passwort
-	// und der Port in Klartext hart im Code hinterlegt.
-	// -------------------------------------------------*/
+	/**
+	 * Deklarierung der Variablen.
+	 */
 	static String DRIVER_CLASS_INFO = "com.mysql.jdbc.Driver";
 	static String DEFAULT_USERNAME = "root";
 	static String DEFAULT_PWD = "root";
 	static Integer DEFAULT_PORT = 3306;
 	static String DEFAULT_DB_VENDOR = "mysql";
 	static String DEFAULT_CONNECTION_SETTING = "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
-	//* ---------------------------
-	// "Normale" Member-Variablen.
-	// --------------------------*/
+	
 	private String database_name;
 	private String username;
 	private String password;
@@ -41,7 +33,6 @@ public class DBConnector
 	private ResultSet last_resultset;
 	private Vector<String> last_vector;
 
-	
 	//* ------------------------------------
 	// Konstruktor I
 	// Nur Datenbank-Name, fuer den Username 

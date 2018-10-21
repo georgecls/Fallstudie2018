@@ -27,10 +27,9 @@ import javafx.stage.Stage;
 
 public class ControllerBenutzerverwaltung  implements Initializable {
 	
-	private ObservableList<Integer> boxBerechtigungListe = FXCollections.observableArrayList(0,1,2);
-	private ObservableList<String> boxGruppeListe;
-	private ObservableList<Benutzer> data;
-	
+	/**
+	 * Deklarierung der GUI-Elemente.
+	 */
 	@FXML private TableView<Benutzer> tvBenutzerverwaltung;
 	@FXML private TableColumn<Benutzer, String> benutzer_Col, gruppe_Col, berechtigung_Col;
 	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen, btnClear, btnWiederherstellen;
@@ -38,34 +37,42 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	@FXML private JFXComboBox boxGruppe, boxBerechtigung;
 	@FXML private Label label;
 	
+	/**
+	 * Deklarierung der Variablen.
+	 */
+	private ObservableList<Integer> boxBerechtigungListe = FXCollections.observableArrayList(0,1,2);
+	private ObservableList<String> boxGruppeListe;
+	private ObservableList<Benutzer> data;
 	public static String b12, g12;
 	public static int a12;
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void initialize (URL url, ResourceBundle rb){	
-		
-		try {
+		try
+		{
 			data = Benutzer.getBenutzerverwaltung();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 		
 		data.forEach((benutzer) -> {
 			Benutzer b1 = (Benutzer) benutzer;
-
 		});
 		
 //		Übergabe aller aktiven Gruppen
-		try {
-			boxGruppeListe = Gruppe.getGruppennamen();
-			
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+		try
+		{
+			boxGruppeListe = Gruppe.getGruppennamen();	
+		}
+		catch (SQLException e1) 
+		{
 			e1.printStackTrace();
 		}				
-		
 				
 		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
 		gruppe_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("gruppe"));
@@ -80,9 +87,11 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		fieldPasswort.setText("");
 		boxGruppe.setValue(null);
 		boxBerechtigung.setValue(null);
-		
 	}
 	
+	/**
+	 * 
+	 */
 	@FXML
 	public void onMouseClicked () {
 		try {
@@ -103,9 +112,12 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		catch(NullPointerException npe) {
 			npe.printStackTrace();
 		}
-		
 	}
 	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	@FXML
     public void handleHinzufuegen() throws SQLException {
 		
@@ -159,6 +171,10 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		}
     }
 
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleAendern() throws SQLException{
 		String benutzer = fieldBenutzer.getText();
@@ -202,6 +218,11 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		initialize (null, null);
 		}
 	}
+	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleLoeschen() throws SQLException {
 
@@ -212,17 +233,25 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		label.setTextFill(Color.BLACK);
 		initialize (null, null);
 	}
+	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleClear() throws SQLException {
 
 		initialize (null, null);
-		
 	}
+	
+	/**
+	 * 
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleWiederherstellen() throws SQLException {
 		String benutzer = fieldBenutzer.getText().toString();
 		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
-		
 		
 		if (benutzer.equals("")) {
 			label.setVisible(true);
@@ -267,7 +296,4 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			}
 		}
 	}
-	
-	
-	
 }

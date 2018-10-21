@@ -28,8 +28,8 @@ public class ControllerInfo implements Initializable{
 	public void initialize(URL url, ResourceBundle rb) {
 		id.setText(ControllerTickets.getAID());
 		titel.setText(ControllerTickets.getNameS());
-		erstelldatum.setText(ControllerTickets.getDatumS());
-		zieldatum.setText(ControllerTickets.getEdatumS());
+		erstelldatum.setText(ControllerTickets.getEdatumS());
+		zieldatum.setText(ControllerTickets.getDatumS());
 		status.setText(ControllerTickets.getStatusS());
 		beschreibung.setText(ControllerTickets.getBeschrS());
 		kommentar.setText(ControllerTickets.getKommS());
