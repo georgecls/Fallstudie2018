@@ -592,6 +592,16 @@ public class ControllerTickets implements Initializable{
         	}
     	}
     	
+    	/**
+    	 * Methode regelt was passiert, wenn der Button 'ablehnen' im Tab 'zu prüfen' gedrückt wird.
+    	 * Zuerst wird abgefragt, ob in der Variable antragsID ein Wert enthalten ist.
+    	 * Ist dies nicht der Fall, wurde vom Benutzer kein Antrag aus der Tabelle ausgewählt und
+    	 * ein Label erscheint mit einem Reminder, ein Ticket auszuwählen.
+    	 * Wurde zuvor ein Antrag ausgewählt, so öffnet sich ein Fenster, in welches der Ablehnungsgrund eingetragen werden muss.
+    	 * 
+    	 * @param none
+    	 * @return none
+    	 */
     	@FXML
     	public void handleBtnAbl()
     	{

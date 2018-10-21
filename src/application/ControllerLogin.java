@@ -16,13 +16,17 @@ import javafx.scene.paint.Color;
 
 public class ControllerLogin {
 	
-	//View
+	/**
+	 * Deklarierung der GUI-Elemente.
+	 */
 	@FXML private JFXTextField fieldBenutzer;
 	@FXML private JFXPasswordField fieldKennwort;
 	@FXML private Label labelFehler, labelBenutzer, labelPasswort;
 	@FXML private JFXButton btnAnmelden;
 	
-	//Hiermit kann in anderen Fenstern die Visibility gesetzt werden
+	/**
+	 * Deklarierung der Variablen.
+	 */
 	private static String user;
 	private static int userid;
 	private static int berechtigung;
@@ -31,10 +35,16 @@ public class ControllerLogin {
 	
 	public Main main;
 
-	public void setMain(Main main) {
-		this.main = main;
-	}
-	
+	/**
+	 * Diese Methode regelt die Anmeldung im Login-Fenster.
+	 * Zuerst wird der Benutzername und das Kennwort abgefragt.
+	 * Sind die Felder leer oder der Benutzername passt nicht zum Kennwort, so schlägt die Anmeldung fehl.
+	 * Ist die Anmeldung erfolgreich, so wird der benutzer zum Hauptfenster weitergeleitet.
+	 * 
+	 * @param none
+	 * @return none
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleLogin() throws SQLException
 	{
@@ -68,7 +78,6 @@ public class ControllerLogin {
 				main.primaryStage.setHeight(0);
 				main.primaryStage.setWidth(0);
 				main.mainWindow();
-
 			}
 			else
 			{
@@ -78,6 +87,10 @@ public class ControllerLogin {
 		}
 	}
 
+	/** ***************************************************************************************************************************************************
+	 * ******************************************************Implementierung der Getter und Setter*********************************************************
+	 ******************************************************************************************************************************************************/
+	
 	public static int getUserid() {
 		return userid;
 	}
@@ -96,5 +109,9 @@ public class ControllerLogin {
 
 	public static void setBerechtigung(int berechtigung) {
 		ControllerLogin.berechtigung = berechtigung;
+	}
+	
+	public void setMain(Main main) {
+		this.main = main;
 	}
 }

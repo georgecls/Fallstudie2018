@@ -7,11 +7,14 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /**
  * Klasse um Auswertungselemente auf der Oberfläche anzuzeigen.
@@ -25,12 +28,20 @@ public class ControllerAuswertung implements Initializable {
 	@FXML private PieChart pieChartGes, pieChartGr;
 	
 	/**
+	 * Deklarierung der Variablen
+	 */
+	ObservableList<PieChart.Data> dataChartGes = null;
+	ObservableList<PieChart.Data> dataChartGr = null;
+
+
+	
+	/**
 	 * Diese Methode ruft 2 Methoden auf, um die Charts mit Daten zu befüllen.
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		loadAuswertungGr();
-		loadAuswertungGes();
+		loadAuswertungGes();	
 	}
 	
 	/**
@@ -39,7 +50,6 @@ public class ControllerAuswertung implements Initializable {
 	 */
 	public void loadAuswertungGes()
 	{
-		ObservableList<PieChart.Data> dataChartGes = null;
 		try {
 			dataChartGes = FXCollections.observableArrayList(
 					 	new PieChart.Data("erledigt", Antrag.countAntraegeByStatus("erledigt")),
@@ -61,7 +71,6 @@ public class ControllerAuswertung implements Initializable {
 	 */
 	public void loadAuswertungGr()
 	{
-		 ObservableList<PieChart.Data> dataChartGr = null;
 		 try {
 			 dataChartGr = FXCollections.observableArrayList(
 					 new PieChart.Data("erledigt", Antrag.countAntraegeByGruppe(ControllerLogin.getUser(), "erledigt")),

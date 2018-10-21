@@ -21,7 +21,9 @@ import javafx.scene.paint.Color;
 
 public class ControllerNeuesTicket {
 	
-	//View
+	/**
+	 * Deklarierung der GUI-Elemente.
+	 */
 	@FXML private JFXTextField fieldErsteller, fieldTicketart;
 	@FXML private JFXDatePicker fieldZieldatum, fieldErstelldatum;
 	@FXML private JFXTextArea fieldText;
@@ -29,10 +31,15 @@ public class ControllerNeuesTicket {
 	@FXML private Label fieldAntwort;
 	@FXML private JFXComboBox cbGruppeZuweisen;
 	
+	/**
+	 * Deklarierung der Variablen.
+	 */
 	private ObservableList<String> cbData;
-	
 	private String gruppeErsteller;
 	
+	/**
+	 * 
+	 */
 	public void initialize() {
 		try {
 			cbData = Gruppe.getGruppennamen();
@@ -57,6 +64,9 @@ public class ControllerNeuesTicket {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	@FXML
 	public void handleAbschicken() {
 		
