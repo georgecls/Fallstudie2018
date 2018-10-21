@@ -190,7 +190,7 @@ public class Gruppe {
 	 * @return boolean
 	 * @param gruppenname
 	 */
-	public static boolean selberName(String gruppe) throws SQLException {
+	public static Boolean selberName(String gruppe) throws SQLException {
 		
 		int i = 0;
 	    Main.get_DBConnection().Execute(String.format("SELECT * FROM ag WHERE gruppenname = '%s'", gruppe));
