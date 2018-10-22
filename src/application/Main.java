@@ -59,6 +59,7 @@ public class Main extends Application {
 			primaryStage.setMinWidth(370.00);
 			primaryStage.setMaxHeight(290.00);
 			primaryStage.setMaxWidth(370.00);
+			primaryStage.setTitle("Anmeldung");
 			
 			ControllerLogin loginWindowController = loader.getController();
 			loginWindowController.setMain(this);
@@ -76,7 +77,8 @@ public class Main extends Application {
 	 * Erzeugen eines FXMLLoaders, welcher die Inhalte in pane lädt
 	 * Fenstergröße wird auf mindestens Höhe  730 und Breite 1010 gesetzt
 	 * Es wird eine Szene mit den Inhalten von pane erzeugt
-	 * Die neue Szene wird in die primaryStage geladen und angezeigt (Fenster wird geöffnet)
+	 * Die neue Szene wird in die primaryStage geladen und angezeigt (Fenster wird geöffnet).
+	 * 
 	 * @param none
 	 * @return none
 	 */
@@ -86,6 +88,7 @@ public class Main extends Application {
 			BorderPane pane = loader.load();
 			primaryStage.setMinHeight(730);
 			primaryStage.setMinWidth(1010);
+			primaryStage.setTitle("Käpsele - Workspace");
 			
 			ControllerMain mainWindowController = loader.getController();
 			mainWindowController.setMain(this);
@@ -115,7 +118,8 @@ public class Main extends Application {
 	 * Wenn db=null wird der Konstruktor III von DBConnector aufgerufen
 	 * Wenn noch keine Datenbankverbindung besteht, wird ein Verbindungsversuch gestartet
 	 * Mögliche Fehlermeldungen werden abgefangen und in der Konsole ausgegeben
-	 * Rückgabe der db und Anzeige in der Konsole, dass Verbindung erfolgreich war
+	 * Rückgabe der db und Anzeige in der Konsole, dass Verbindung erfolgreich war.
+	 * 
 	 * @param none
 	 * @return db
 	 */
