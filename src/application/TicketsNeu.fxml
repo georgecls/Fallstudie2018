@@ -125,7 +125,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab id="PaneTab" fx:id="eigeneTickets" text="eigene Tickets">
+            <Tab id="PaneTab" fx:id="eigeneTickets" text="eigene Anträge">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
@@ -154,7 +154,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab id="PaneTab" fx:id="abgeschlosseneTickets" text="erl. Tickets">
+            <Tab id="PaneTab" fx:id="abgeschlosseneTickets" text="erl. Anträge">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>
@@ -239,7 +239,7 @@
                   </VBox>
                </content>
             </Tab>
-            <Tab id="PaneTab" fx:id="AlleTickets" text="Alle Tickets">
+            <Tab id="PaneTab" fx:id="AlleTickets" text="Alle Anträge">
                <content>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="730.0">
                      <children>

@@ -32,8 +32,7 @@ public class ControllerAuswertung implements Initializable {
 	 */
 	ObservableList<PieChart.Data> dataChartGes = null;
 	ObservableList<PieChart.Data> dataChartGr = null;
-
-
+	
 	
 	/**
 	 * Diese Methode ruft 2 Methoden auf, um die Charts mit Daten zu befüllen.
@@ -50,7 +49,8 @@ public class ControllerAuswertung implements Initializable {
 	 */
 	public void loadAuswertungGes()
 	{
-		try {
+		try
+		{
 			dataChartGes = FXCollections.observableArrayList(
 					 	new PieChart.Data("erledigt", Antrag.countAntraegeByStatus("erledigt")),
 						new PieChart.Data("offen", Antrag.countAntraegeByStatus("genehmigt"))
@@ -62,7 +62,7 @@ public class ControllerAuswertung implements Initializable {
 			e.printStackTrace();
 		}
 		pieChartGes.setData(dataChartGes);
-        pieChartGes.setTitle("Auswertung Gesamt");
+        pieChartGes.setTitle("Gesamtübersicht");
 	}
 	
 	/**
@@ -83,6 +83,6 @@ public class ControllerAuswertung implements Initializable {
 				e.printStackTrace();
 		}
 	    pieChartGr.setData(dataChartGr);
-	    pieChartGr.setTitle("Auswertung Gruppe");    
+	    pieChartGr.setTitle("Gruppenübersicht");    
 	}
 }
