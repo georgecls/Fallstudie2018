@@ -21,6 +21,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -579,6 +580,7 @@ public class ControllerTickets implements Initializable{
 		    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ablehnung.fxml"));
 		    		Parent root1 = (Parent) fxmlLoader.load();
 		    		Stage stage = new Stage();
+		    		stage.getIcons().add(new Image("/IconmitRing.png"));
 		    		stage.setScene(new Scene(root1));
 		    		stage.show();
 
@@ -693,6 +695,7 @@ public class ControllerTickets implements Initializable{
     				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Info.fxml"));
     				Parent root1 = (Parent) fxmlLoader.load();
     				Stage stage = new Stage();
+    				stage.getIcons().add(new Image("/IconmitRing.png"));
     				stage.setScene(new Scene(root1));
     				stage.show();
     			}
