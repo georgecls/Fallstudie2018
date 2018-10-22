@@ -47,7 +47,12 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	public static int a12;
 	
 	/**
+	 * Diese Methode initialisiert die Oberfläche.
+	 * Die Tabelle Benutzer und die ComboBox werden gefüllt.
+	 * Die Text Felder werden 'null' gesetzt. 
 	 * 
+	 * @param url, rb
+	 * @return none
 	 */
 	@Override
 	public void initialize (URL url, ResourceBundle rb){	
@@ -87,27 +92,32 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		fieldPasswort.setText("");
 		boxGruppe.setValue(null);
 		boxBerechtigung.setValue(null);
+		label.setVisible(false);
 	}
 	
 	/**
+	 * Die Methode regelt was passiert, wenn eine Zeile in der Tabelle ausgewählt wird.
+	 * Die Daten aus der Tabelle werden in Variablen gespeichert und in die TextFelder gesetzt.
 	 * 
+	 * @param none
+	 * @return none
 	 */
 	@FXML
 	public void onMouseClicked () {
 		try {
 			Benutzer b1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
-		b12 = b1.getBenutzername();
+			b12 = b1.getBenutzername();
 								
-		Benutzer g1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
-		g12 = g1.getGruppe();
+			Benutzer g1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
+			g12 = g1.getGruppe();
 						
-		Benutzer a1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
-		a12 = a1.getBerechtigung();
-					
-		fieldBenutzer.setText(b12);
-		boxGruppe.setValue(g12);
-		boxBerechtigung.setValue(a12);	
-		label.setVisible(false);
+			Benutzer a1 = tvBenutzerverwaltung.getSelectionModel().getSelectedItem();
+			a12 = a1.getBerechtigung();
+			
+			fieldBenutzer.setText(b12);
+			boxGruppe.setValue(g12);
+			boxBerechtigung.setValue(a12);	
+			label.setVisible(false);
 		}
 		catch(NullPointerException npe) {
 			npe.printStackTrace();
@@ -115,7 +125,13 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	}
 	
 	/**
+	 * Diese Methode regelt was passiert, wenn der Button 'hinzufügen' gedrückt wird.
+	 * Wenn nicht alle Felder ausgefüllt sind, so kommt eine Meldung.
+	 * Sind alle Felder ausgefüllt, so wird geprüft, ob der Benutzer bereits besteht.
+	 * Ist dies nicht der Fall, so wird der benutzer angelegt.
 	 * 
+	 * @param none
+	 * @return none
 	 * @throws SQLException
 	 */
 	@FXML
@@ -151,8 +167,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		    String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
 		    int berechtigung =  (int) boxBerechtigung.getSelectionModel().getSelectedItem();
 
-            Boolean selberName = Benutzer.selberName(benutzer);
-            
+            Boolean selberName = Benutzer.selberName(benutzer);   
 
 	        if (selberName == true)
 	        {
@@ -172,7 +187,12 @@ public class ControllerBenutzerverwaltung  implements Initializable {
     }
 
 	/**
+	 * Diese Methode regelt was passiert, wenn der Button 'ändern' gedrückt wird.
+	 * Wenn nicht alle Felder ausgefüllt sind, so kommt eine Meldung.
+	 * Sind alle Felder ausgefüllt, so wird der Benutzer geändert, je nachdem was eingetragen wurde.
 	 * 
+	 * @param none
+	 * @return none
 	 * @throws SQLException
 	 */
 	@FXML
@@ -220,22 +240,38 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	}
 	
 	/**
+	 * Diese Methode regelt was passiert, wenn der Button 'löschen' gedrückt wird.
+	 * Wenn die TextFelder leer sind, so kann kein benutzer gelösch werden.
 	 * 
+	 * @param none
+	 * @return none
 	 * @throws SQLException
 	 */
 	@FXML
 	public void handleLoeschen() throws SQLException {
-
+		
 		String benutzer = fieldBenutzer.getText().toString();
-		Benutzer.deleteBenutzer(b12);
-		label.setVisible(true);
-		label.setText("Benutzer '"+benutzer+"' gelöscht");
-		label.setTextFill(Color.BLACK);
-		initialize (null, null);
+
+		if(benutzer.equals(""))
+		{
+			label.setVisible(true);
+			label.setText("Kein Benutzer ausgewählt");
+			label.setTextFill(Color.RED);
+		}
+		else {
+			Benutzer.deleteBenutzer(b12);
+			label.setVisible(true);
+			label.setText("Benutzer '"+benutzer+"' gelöscht");
+			label.setTextFill(Color.BLACK);
+			initialize (null, null);
+		}
 	}
 	
 	/**
+	 * Diese Methode regelt was passiert, wenn der Button 'zurücksetzen' gedrückt wird.
 	 * 
+	 * @param none
+	 * @return none
 	 * @throws SQLException
 	 */
 	@FXML
@@ -245,7 +281,13 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	}
 	
 	/**
+	 * Diese Methode regelt was passiert, wenn der Button 'wiederherstellen' gedrückt wird.
+	 * Wenn das Feld Benutzer, die ComboBox, die ComboBox Berechtigung leer sind, so werden benutzerdefinierte Fehler ausgeworfen.
+	 * Ist dies nicht der Fall, so wird geprüft, ob das PasswortFeld leer ist.
+	 * Ist dies leer, so wird der Benutzer reaktiviert.
 	 * 
+	 * @param none
+	 * @return none
 	 * @throws SQLException
 	 */
 	@FXML
@@ -276,15 +318,15 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			{
 				if(Benutzer.inaktiverBenutzer(benutzer)) 
 				{
-				Benutzer.updateInaktiverBenutzer(benutzer, gruppe);
-				initialize (null, null);
+					Benutzer.updateInaktiverBenutzer(benutzer, gruppe);
+					initialize (null, null);
 				}
 				else 
 				{
-				label.setVisible(true);
-				label.setText("Benutzer '" + benutzer + "' kann nicht wiederhergestellt werden.");
-				label.setTextFill(Color.RED);
-				initialize (null, null);
+					label.setVisible(true);
+					label.setText("Benutzer '" + benutzer + "' kann nicht wiederhergestellt werden.");
+					label.setTextFill(Color.RED);
+					initialize (null, null);
 				}	
 			}
 			else 
