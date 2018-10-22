@@ -314,7 +314,8 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		}
 		else 
 		{
-			if (fieldPasswort.getText()==null) 
+//			if (fieldPasswort.getText()==null) 
+			if(fieldPasswort.getText().equals(""))
 			{
 				if(Benutzer.inaktiverBenutzer(benutzer)) 
 				{

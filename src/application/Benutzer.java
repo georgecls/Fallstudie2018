@@ -357,7 +357,7 @@ public class Benutzer {
 	 * @return boolean
 	 * @param benutzername
 	 */
-	public static Boolean inaktiverBenutzer(String benutzer) throws SQLException {
+	public static boolean inaktiverBenutzer(String benutzer) throws SQLException {
 		int i = 0;
 		Main.get_DBConnection().Execute(
 				String.format("SELECT * FROM benutzer WHERE benutzername = '%s' AND  bstatus = 'inaktiv'", benutzer));
@@ -365,12 +365,14 @@ public class Benutzer {
 
 		if (rs.next()) {
 			i = rs.getInt(1);
+		
+			if (i == 0) {
+				return false;
+			} else {
+				return true;
+			}
 		}
-		if (i == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		else return false;
 	}
 
 	/**
