@@ -36,8 +36,7 @@ public class Antrag {
 
 	/**
 	 * ***************************************************************************************************************************************************
-	 * ******************************************************Implementierung der
-	 * Konstruktoren*************************************************************
+	 * ******************************************************Implementierung der Konstruktoren*************************************************************
 	 ******************************************************************************************************************************************************/
 
 	public Antrag() {
@@ -50,14 +49,12 @@ public class Antrag {
 
 	/**
 	 * ***************************************************************************************************************************************************
-	 * **************************************************Implementierung der
-	 * statischen
-	 * Methoden***********************************************************
+	 * **************************************************Implementierung der statischen Methoden***********************************************************
 	 ******************************************************************************************************************************************************/
 
 	/**
-	 * Methode, um einen neuen Antrag in die DB zu schreiben. !DB-Connection! ->
-	 * Verwendung von Methoden aus der Klasse "DBConnector".
+	 * Methode, um einen neuen Antrag in die DB zu schreiben. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 *
 	 * @throws SQLException
 	 * @return none
@@ -66,7 +63,8 @@ public class Antrag {
 	 */
 
 	public static void insertAntrag(String name, String ersteller, LocalDate erstelldatum, LocalDate zieldatum,
-			String text, String erstGruppe, String gruppe) throws SQLException {
+			String text, String erstGruppe, String gruppe) throws SQLException 
+	{
 		int erst = Benutzer.getIdByName(ersteller);
 		Gruppe g1 = new Gruppe();
 		g1.getGruppeByName(gruppe);
@@ -78,37 +76,11 @@ public class Antrag {
 				name, text, zieldatum, erstelldatum, erst, erstGruppe, gr));
 	}
 
-	// Wird nie verwendet -> LÖSCHEN?
-	/**
-	 * Methode, um einen Anträge der Gruppe des aktuell angemeldeten Benutzers aus
-	 * der DB auszugeben. !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
-	 * 
-	 * @throws SQLException
-	 * @return ObservableList
-	 * @param gruppenID
-	 */
-	public static ObservableList<Antrag> getGruppenAntraege(String gr) throws SQLException {
-		ObservableList data = FXCollections.observableArrayList();
-		try {
-			Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE ersteller_fk = '%s';", gr));
-			ResultSet rs = Main.get_DBConnection().get_last_resultset();
-			while (rs.next()) {
-
-				data.add(new Antrag(rs.getInt("idantrag")));
-
-			}
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-		return data;
-	}
-
 	/**
 	 * Methode um alle bestehenden Anräge unabhängig der Gruppe abzufragen. Es wird
 	 * eine Liste erstellt, in welcher die Daten gespeichert und später ausgegeben
-	 * werden. !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * werden. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return ObservableList
@@ -161,9 +133,8 @@ public class Antrag {
 	}
 
 	/**
-	 * Methode, um einen Anträge der Gruppe des aktuell angemeldeten Benutzers aus
-	 * der DB auszugeben. !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * Methode, um einen Anträge der Gruppe des aktuell angemeldeten Benutzers aus der DB auszugeben. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return ObservableList
@@ -299,8 +270,7 @@ public class Antrag {
 
 	/**
 	 * ****************************************************************************************
-	 * *********************************Veränderung der
-	 * Status**********************************
+	 * *********************************Veränderung der Status**********************************
 	 *******************************************************************************************/
 
 	/**
@@ -334,8 +304,7 @@ public class Antrag {
 
 	/**
 	 * ***************************************************************************************************************************************************
-	 * ***************************************************Implementierung der nicht
-	 * statische Methoden******************************************************
+	 * ***************************************************Implementierung der nicht statische Methoden******************************************************
 	 ******************************************************************************************************************************************************/
 
 	/**
@@ -368,8 +337,7 @@ public class Antrag {
 
 	/**
 	 * ***************************************************************************************************************************************************
-	 * ******************************************************Implementierung der
-	 * Getter und Setter*********************************************************
+	 * ******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
 
 	public int getAntragid() {

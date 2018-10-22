@@ -41,19 +41,6 @@ public class Benutzer {
 	 * *************************************************Implementierung der statischen Methoden************************************************************
 	 ******************************************************************************************************************************************************/
 
-	// Wird nicht aufgerufen -> LÖSCHEN?
-	public static boolean isRightBenutzer(String pBenutzer, String pPasswort) throws SQLException {
-		Main.get_DBConnection().Execute(String
-				.format("SELECT * FROM benutzer WHERE benutzer = '%s' AND passwort = '%s';", pBenutzer, pPasswort));
-		ResultSet rs = Main.get_DBConnection().get_last_resultset();
-
-		if (rs.next()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	/**
 	 * Methode, um die Anmeldung eines vermeintlichen Benutzers abzuwicklen. 
 	 * TRUE: der Benutzer ist in der DB vorhanden, sein Status aktiv und das eingegebene
@@ -176,8 +163,8 @@ public class Benutzer {
 
 	/**
 	 * Methode, um den Status eines Benutzers auf "aktiv" zu setzen und die Gruppe
-	 * eines Benutzers in der DB zu ändern. !DB-Connection! -> Verwendung von
-	 * Methoden aus der Klasse "DBConnector".
+	 * eines Benutzers in der DB zu ändern. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return none
@@ -193,8 +180,8 @@ public class Benutzer {
 
 	/**
 	 * Methode, um den Status eines Benutzers auf "inaktiv" und seine Gruppe auf
-	 * NULL zu setzen. !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * NULL zu setzen. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return none
@@ -208,8 +195,8 @@ public class Benutzer {
 	/**
 	 * Methode, um TableView in Benutzerverwaltung zu befüllen. Es werden alle
 	 * aktiven Benutzer ausgewählt und das Resultset dann in einer ObservableList
-	 * gespeichert und zurückgegeben. !DB-Connection! -> Verwendung von Methoden aus
-	 * der Klasse "DBConnector".
+	 * gespeichert und zurückgegeben. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return ObservableList
@@ -232,8 +219,8 @@ public class Benutzer {
 	 * Methode wird im Konstruktor Benutzer(String) aufgerufen und holt sich alle
 	 * Informationen des entsprechenden Benutzers aus der Datenbank anhand des
 	 * angegebenen Benutzernamen und gibt diese Informationen in einem Objekt der
-	 * Klasse Benutzer zurück. !DB-Connection! -> Verwendung von Methoden aus der
-	 * Klasse "DBConnector".
+	 * Klasse Benutzer zurück. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return Benutzer
@@ -259,8 +246,8 @@ public class Benutzer {
 	 * Methode, um untere TableView in Gruppenverwaltung zu befüllen. Es werden alle
 	 * aktiven Benutzer anhand der übergebene Gruppe ausgewählt, das Resultset dann
 	 * in einer ObservableList gespeichert und zurückgegeben. Die obere TbaleView in
-	 * Gruppenverwaltung wird von der Klasse Gruppe befüllt. !DB-Connection! ->
-	 * Verwendung von Methoden aus der Klasse "DBConnector".
+	 * Gruppenverwaltung wird von der Klasse Gruppe befüllt. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return ObservableList
@@ -281,8 +268,8 @@ public class Benutzer {
 	 * Methode, um zu prüfen, ob Benutzer einer bestimmten Gruppe zugeordnet sind.
 	 * Verwendet wird die Methode in ControllerGruppenverwaltung bei der Prüfung, ob
 	 * eine Gruppe auf "inaktiv" gesetzt werden kann. TRUE: es sind noch Benutzer in
-	 * der Gruppe FALSE: es sind keine Benutzer mehr in der Gruppe !DB-Connection!
-	 * -> Verwendung von Methoden aus der Klasse "DBConnector".
+	 * der Gruppe FALSE: es sind keine Benutzer mehr in der Gruppe 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return boolean
@@ -301,8 +288,8 @@ public class Benutzer {
 
 	/**
 	 * Methode, um die Gruppe des angemeldeten Benutzers herauszufinden und
-	 * zurückzugeben. !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * zurückzugeben. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return String
@@ -326,8 +313,8 @@ public class Benutzer {
 	/**
 	 * Methode, um beim Anlegen eines neuen Benutzers zu prüfen, ob der Benutzername
 	 * schon vergeben ist. TRUE: Benutzername schon vergeben FALSE: Benutzername
-	 * nicht vergeben !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * nicht vergeben 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return boolean
@@ -350,8 +337,8 @@ public class Benutzer {
 
 	/**
 	 * Methode, um herauszufinden, ob ein Benutzer aktiv oder inaktiv ist. TRUE:
-	 * Benutzername inaktiv FALSE: Benutzername aktiv !DB-Connection! -> Verwendung
-	 * von Methoden aus der Klasse "DBConnector".
+	 * Benutzername inaktiv FALSE: Benutzername aktiv 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return boolean
@@ -377,8 +364,8 @@ public class Benutzer {
 
 	/**
 	 * Methode, um die benutzerID zu einem Benutzernamen herauszufinden und
-	 * zurückzugeben. !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * zurückzugeben. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return int
@@ -420,8 +407,7 @@ public class Benutzer {
 	}
 
 	/*****************************************************************************************************************************************************
-	 ******************************************************* Implementierung der Getter und
-	 * Setter*********************************************************
+	 ******************************************************* Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
 
 	public String getBenutzername() {

@@ -16,16 +16,11 @@ public class Gruppe {
 
 	/**
 	 * ***************************************************************************************************************************************************
-	 * ******************************************************Implementierung der
-	 * Konstruktoren*************************************************************
+	 * ******************************************************Implementierung der Konstruktoren*************************************************************
 	 ******************************************************************************************************************************************************/
 
 	public Gruppe() {
 
-	}
-
-	public Gruppe(int agid) throws SQLException {
-		this.getGruppe(agid);
 	}
 
 	public Gruppe(String name) throws SQLException {
@@ -34,14 +29,12 @@ public class Gruppe {
 
 	/**
 	 * ***************************************************************************************************************************************************
-	 * *************************************************Implementierung der
-	 * statischen
-	 * Methoden************************************************************
+	 * *************************************************Implementierung der statischen Methoden************************************************************
 	 ******************************************************************************************************************************************************/
 
 	/**
-	 * Methode, um eine neue Gruppe in die DB zu schreiben. !DB-Connection! ->
-	 * Verwendung von Methoden aus der Klasse "DBConnector".
+	 * Methode, um eine neue Gruppe in die DB zu schreiben. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return none
@@ -85,8 +78,8 @@ public class Gruppe {
 
 	/**
 	 * Methode, um den Status (agstatus) einer Gruppe anhand der GruppenID in der DB
-	 * auf "inaktiv" zu setzen. !DB-Connection! -> Verwendung von Methoden aus der
-	 * Klasse "DBConnector".
+	 * auf "inaktiv" zu setzen. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return none
@@ -101,8 +94,8 @@ public class Gruppe {
 	 * Methode, um obere TableView in Gruppenverwaltung zu befüllen. Es werden alle
 	 * aktiven Gruppen ausgewählt und das Resultset dann in einer ObservableList
 	 * gespeichert und zurückgegeben. Die untere TableView in Gruppenverwaltung wird
-	 * von der Klasse Benutzer befüllt. !DB-Connection! -> Verwendung von Methoden
-	 * aus der Klasse "DBConnector".
+	 * von der Klasse Benutzer befüllt. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return ObservableList
@@ -121,32 +114,12 @@ public class Gruppe {
 		return data;
 	}
 
-	// Wird nicht aufgerufen -> LÖSCHEN?
-	/**
-	 * Methode wird im Konstruktor Gruppe(int) aufgerufen, der Konstruktor wird aber
-	 * nie verwendet. !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
-	 * 
-	 * @throws SQLException
-	 * @return Gruppe
-	 * @param GruppenID als int
-	 */
-	public Gruppe getGruppe(int agid) throws SQLException {
-		Main.get_DBConnection().Execute(String.format("SELECT gruppenname FROM ag WHERE agid = '%s'", agid));
-		ResultSet rs = Main.get_DBConnection().get_last_resultset();
-
-		if (rs.next()) {
-			this.gruppenname = rs.getString("gruppenname");
-		}
-		return this;
-	}
-
 	/**
 	 * Methode wird im Konstruktor Gruppe(String) aufgerufen und holt sich alle
 	 * Informationen der entsprechenden Gruppe aus der Datenbank anhand des
 	 * angegebenen Gruppennamen und gibt diese Informationen in einem Objekt der
-	 * Klasse Gruppe zurück. !DB-Connection! -> Verwendung von Methoden aus der
-	 * Klasse "DBConnector".
+	 * Klasse Gruppe zurück. 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return Gruppe
@@ -188,8 +161,8 @@ public class Gruppe {
 	/**
 	 * Methode, um beim Anlegen einer neuen Gruppe zu prüfen, ob der Gruppenname
 	 * schon vergeben ist. TRUE: Gruppenname schon vergeben FALSE: Gruppenname nicht
-	 * vergeben !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * vergeben 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return boolean
@@ -213,8 +186,8 @@ public class Gruppe {
 
 	/**
 	 * Methode, um den Status der Gruppe abzufragen. TRUE: Gruppe inaktiv FALSE:
-	 * Gruppe aktiv !DB-Connection! -> Verwendung von Methoden aus der Klasse
-	 * "DBConnector".
+	 * Gruppe aktiv 
+	 * !DB-Connection! -> Verwendung von Methoden aus der Klasse "DBConnector".
 	 * 
 	 * @throws SQLException
 	 * @return boolean
@@ -239,8 +212,7 @@ public class Gruppe {
 
 	/**
 	 * ***************************************************************************************************************************************************
-	 * ******************************************************Implementierung der
-	 * Getter und Setter*********************************************************
+	 * ******************************************************Implementierung der Getter und Setter*********************************************************
 	 ******************************************************************************************************************************************************/
 	public String getId() {
 		return agid;
