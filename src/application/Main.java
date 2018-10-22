@@ -27,9 +27,11 @@ public class Main extends Application {
 	static DBConnector db = null;
 
 	/**
-	 * 
-	 * 
-	 * @param none
+	 * Start der Anwendung
+	 * Verwendung der zuvor deklarierten Variable primaryStage (bisher kein Inhalt)
+	 * Laden des Logos in primaryStage
+	 * Aufruf der Methode loginWindow, welche die Stage Inhaltlich füllt
+	 * @param primaryStage
 	 * @return none	
 	 */
 	@Override
@@ -40,8 +42,10 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * 
+	 * Erzeugen eines FXMLLoaders, welcher die Inhalte in pane lädt
+	 * Fenstergröße wird auf Höhe 290.00 und Breite 370.00 gesetzt (größe nicht veränderbar)
+	 * Es wird eine Szene mit den Inhalten von pane erzeugt
+	 * Die neue Szene wird in die primaryStage geladen und angezeigt (Fenster wird geöffnet)
 	 * @param none
 	 * @return none
 	 */
@@ -69,10 +73,12 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * @param
-	 * @return
+	 * Erzeugen eines FXMLLoaders, welcher die Inhalte in pane lädt
+	 * Fenstergröße wird auf mindestens Höhe  730 und Breite 1010 gesetzt
+	 * Es wird eine Szene mit den Inhalten von pane erzeugt
+	 * Die neue Szene wird in die primaryStage geladen und angezeigt (Fenster wird geöffnet)
+	 * @param none
+	 * @return none
 	 */
 	public void mainWindow() {
 		try {
@@ -105,8 +111,11 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * 
-	 * 
+	 * Herstellen einer Datenbankverbindung
+	 * Wenn db=null wird der Konstruktor III von DBConnector aufgerufen
+	 * Wenn noch keine Datenbankverbindung besteht, wird ein Verbindungsversuch gestartet
+	 * Mögliche Fehlermeldungen werden abgefangen und in der Konsole ausgegeben
+	 * Rückgabe der db und Anzeige in der Konsole, dass Verbindung erfolgreich war
 	 * @param none
 	 * @return db
 	 */
