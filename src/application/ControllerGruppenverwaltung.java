@@ -27,6 +27,9 @@ import javafx.stage.Stage;
 
 public class ControllerGruppenverwaltung  implements Initializable {
 	
+	/**
+	 * Deklarierung der GUI-Elemente.
+	 */
 	@FXML private TableView<Gruppe> tvGruppenverwaltung;
 	@FXML private TableView<Benutzer> tvBenutzer;
 	
@@ -34,17 +37,27 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	@FXML private TableColumn<Gruppe, String> gruppe_Col, beschreibung_Col;
 	@FXML private TableColumn<Gruppe, String> id_Col;
 
-	private static String b12, g12, a12;
-	private static String id12;	
-	
-	private ObservableList<Gruppe> gruppe;
-	private ObservableList<Benutzer> benutzer;
-
 	@FXML private JFXButton btnHinzufuegen, btnAendern, btnLoeschen;
 	@FXML private JFXTextField fieldGruppe;
 	@FXML private JFXTextArea fieldBeschreibung;
 	@FXML private Label label;
-
+	
+	/**
+	 * Deklarierung der Variablen.
+	 */
+	private static String b12, g12, a12, id12;
+	private ObservableList<Gruppe> gruppe;
+	private ObservableList<Benutzer> benutzer;
+	
+	/**
+	 * Diese Methode ist für die Initialisierung des Fensters 'Gruppenverwaltung' zuständig.
+	 * Zuerst werden die angelegten Gruppen in einer Liste gespeichert.
+	 * Diese Elemente der Liste werden in der Tabelle angezeigt.
+	 * Die Text Felder Gruppe und Beschreibung werden 'null' gesetzt.
+	 * 
+	 * @param url, rb
+	 * @return none
+	 */
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
 		
@@ -72,36 +85,40 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		fieldBeschreibung.setText("");
 	}
 	
+	/**
+	 * Diese Methode regelt was passiert, wenn eine Zeile in der Tabelle ausgewählt wird.
+	 * Die Textfelder werden mit den Daten der Tabelle gefüllt.
+	 * Gleichzeitig füllt sich die 2. Tabelle mit den zugehörigen Mitgliedern der ausgewählten Gruppe.
+	 * 
+	 * @param none
+	 * @return none
+	 */
 	@FXML
 	public void onMouseClicked () {
 		try {
 			Gruppe id1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
-		id12 = id1.getId();
+			id12 = id1.getId();
 		
-		Gruppe g1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
-		g12 = g1.getGruppenname();
+			Gruppe g1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
+			g12 = g1.getGruppenname();
 		
-		Gruppe a1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
-		a12 = a1.getGruppenbeschr();
+			Gruppe a1 = tvGruppenverwaltung.getSelectionModel().getSelectedItem();
+			a12 = a1.getGruppenbeschr();
 		
-		fieldGruppe.setText(g12);
-		fieldBeschreibung.setText(a12);
-		label.setVisible(false);
+			fieldGruppe.setText(g12);
+			fieldBeschreibung.setText(a12);
+			label.setVisible(false);
 		}
 		catch(NullPointerException npe)
 		{
 			npe.printStackTrace();
 		}
 		
-		
-//		Nachdem eine auf eine Gruppe geklickt wird, soll die 2. Tabelle mit den zugehörigen Benutzern befüllt werden...
-		
 		try {
 			benutzer = Benutzer.getBenutzerByGruppe(id12);
 		}
 		catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 				
@@ -110,10 +127,21 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		});
 				
 		benutzer_Col.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("benutzername"));
-		
 		tvBenutzer.setItems(benutzer);
 	}
 	
+	/**
+	 * Diese Methode beschreibt was passiert, wenn der Button 'hinzufügen' gedrückt wird.
+	 * Die Daten aus den Text Feldern werden in Variablen gespeichert.
+	 * Wenn die Gruppe schon einmal aktiv war, so wird sie reaktiviert. Wenn es sie noch nicht gab,
+	 * so wird eine neue Gruppe angelegt.
+	 * Sind nicht alle Felder ausgefüllt, oder es wird der Name einer aktiven Gruppe eingetragen, so
+	 * wird die Gruppe nicht angelegt und es folgt eine Meldung.
+	 * 
+	 * @param
+	 * @return
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleHinzufuegen() throws SQLException{
 		String gruppe = fieldGruppe.getText();
@@ -166,12 +194,20 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		}
 	}
 	
+	/**
+	 * Diese Methode beschreibt was passiert, wenn der Button 'ändern' gedrückt wird.
+	 * Die Daten aus den Text Feldern werden in Variablen gespeichert und in der DB wird
+	 * ein update gemacht.
+	 * 
+	 * @param none
+	 * @return none
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleAendern() throws SQLException{
 		String gruppe = fieldGruppe.getText().toString();
 		String beschreibung = fieldBeschreibung.getText().toString();
 	
-
 		Gruppe.updateGruppeById(id12, gruppe, beschreibung);
 		initialize(null, null);
 		label.setVisible(true);
@@ -179,6 +215,16 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		label.setTextFill(Color.BLACK);
 	}
 	
+	/**
+	 * Diese Methode beschreibt was passiert, wenn der Button 'löschen' gedrückt wird.
+	 * Die Daten aus den Text Feldern werden in Variablen gespeichert und in der DB wird
+	 * ein update gemacht (Gruppe wird auf inaktiv gesetzt).
+	 * Sind noch Mitarbeiter der Gruppe zugeordnet, so kann die Gruppe nicht gelöscht werden.
+	 * 
+	 * @param none
+	 * @return none
+	 * @throws SQLException
+	 */
 	@FXML
 	public void handleLoeschen() throws SQLException{
 		String gruppe = fieldGruppe.getText().toString();
