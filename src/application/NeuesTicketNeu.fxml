@@ -18,7 +18,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0">
                <children>
-                  <Label prefWidth="150.0" text="Ticketart:*">
+                  <Label prefWidth="150.0" text="Art des Antrages:*">
                      <font>
                         <Font size="14.0" />
                      </font>
