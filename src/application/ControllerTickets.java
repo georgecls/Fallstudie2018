@@ -581,6 +581,7 @@ public class ControllerTickets implements Initializable{
 		    		Parent root1 = (Parent) fxmlLoader.load();
 		    		Stage stage = new Stage();
 		    		stage.getIcons().add(new Image("/IconmitRing.png"));
+		    		stage.setTitle("Ablehnen");
 		    		stage.setScene(new Scene(root1));
 		    		stage.show();
 
@@ -623,6 +624,8 @@ public class ControllerTickets implements Initializable{
 		    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Ablehnung.fxml"));
 		    		Parent root1 = (Parent) fxmlLoader.load();
 		    		Stage stage = new Stage();
+		    		stage.getIcons().add(new Image("/IconmitRing.png"));
+		    		stage.setTitle("Ablehnen");
 		    		stage.setScene(new Scene(root1));
 		    		stage.show();
 
@@ -696,6 +699,7 @@ public class ControllerTickets implements Initializable{
     				Parent root1 = (Parent) fxmlLoader.load();
     				Stage stage = new Stage();
     				stage.getIcons().add(new Image("/IconmitRing.png"));
+    				stage.setTitle("Info");
     				stage.setScene(new Scene(root1));
     				stage.show();
     			}
