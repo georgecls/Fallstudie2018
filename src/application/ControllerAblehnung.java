@@ -32,6 +32,7 @@ public class ControllerAblehnung implements Initializable{
 	ControllerTickets ct;
 
 	/**
+	 * Der ControllerTickets kann angesprochen werden.
 	 * 
 	 * @param ct
 	 * @return none
@@ -55,7 +56,9 @@ public class ControllerAblehnung implements Initializable{
 
 	/**
 	 * Diese Methode regelt was passiert, wenn der Button 'abschicken' gedrückt wird.
-	 * 
+	 * Wenn das Text Feld leer ist, so erscheint ein Label, mit der Meldung es soll ausgefüllt werden.
+	 * Ist es ausgefüllt, so wird der Antrag abgelehnt und das Fenster wird geschlossen.
+	 * Das Fenster Tickets wird aktualisiert.
 	 * 
 	 * @param none
 	 * @return none
@@ -74,6 +77,5 @@ public class ControllerAblehnung implements Initializable{
 			ct.refresh();
 			stage.close();
 		}
-		
 	}
 }

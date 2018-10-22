@@ -38,7 +38,12 @@ public class ControllerNeuesTicket {
 	private String gruppeErsteller;
 	
 	/**
+	 * Die Methode initialisiert das Fenster 'Neues Ticket'. Die ComboBox wird mit Werten aus der DB gefüllt.
+	 * Der Ersteller ist die Person, welche momentan am Programm angemeldet ist.
+	 * Das Erstelldatum ist das aktuelle Datum.
 	 * 
+	 * @param none
+	 * @return none
 	 */
 	public void initialize() {
 		try
@@ -55,7 +60,8 @@ public class ControllerNeuesTicket {
     	fieldErsteller.setText(ControllerLogin.getUser());
 		fieldErstelldatum.setValue(LocalDate.now());
 		fieldAntwort.setText(null);
-		try {
+		try
+		{
 			gruppeErsteller = Benutzer.getBearGruppeByUser(ControllerLogin.getUser());
 		}
 		catch (SQLException e)
@@ -65,7 +71,13 @@ public class ControllerNeuesTicket {
 	}
 	
 	/**
+	 * Die Methode regelt was passiert, wenn der Button 'abschicken' im Fenster 'Neues Ticket' gedrückt wird.
+	 * Hierbei werden alle eingetragenen Werte aus den GUI-Feldern entnommen und in Variablen gespeichert.
+	 * Anschließend wird das Ticket angelegt.
+	 * Ist eines der Felder leer, so erscheint ein Label mit der Anweisung, bitte alle Felder auszufüllen.
 	 * 
+	 * @param none
+	 * @return none
 	 */
 	@FXML
 	public void handleAbschicken() {
