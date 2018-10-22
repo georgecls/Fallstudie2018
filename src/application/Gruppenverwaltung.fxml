@@ -20,8 +20,8 @@
                   <TableView fx:id="tvGruppenverwaltung" onMouseClicked="#onMouseClicked" prefHeight="332.0" prefWidth="280.0">
                     <columns>
                         <TableColumn fx:id="id_Col" prefWidth="58.0" text="ID" />
-                      <TableColumn fx:id="gruppe_Col" prefWidth="138.0" text="Gruppe" />
-                      <TableColumn fx:id="beschreibung_Col" prefWidth="239.0" text="Beschreibung" />
+                      <TableColumn fx:id="gruppe_Col" prefWidth="128.0" text="Gruppe" />
+                      <TableColumn fx:id="beschreibung_Col" prefWidth="249.0" text="Beschreibung" />
                     </columns>
                   </TableView>
                   <TableView fx:id="tvBenutzer" prefHeight="338.0" prefWidth="280.0">
