@@ -225,11 +225,13 @@ public class ControllerGruppenverwaltung  implements Initializable {
 			label.setTextFill(Color.RED);
 		}
 		else {
-		Gruppe.updateGruppeById(id12, gruppe, beschreibung);
-		initialize(null, null);
-		label.setVisible(true);
-		label.setText("Gruppe '"+gruppe+"' geändert");	
-		label.setTextFill(Color.BLACK);
+			gruppe = fieldGruppe.getText().toString();
+			beschreibung = fieldBeschreibung.getText().toString();
+			Gruppe.updateGruppeById(id12, gruppe, beschreibung);
+			initialize(null, null);
+			label.setVisible(true);
+			label.setText("Gruppe '"+gruppe+"' geändert");	
+			label.setTextFill(Color.BLACK);
 		}
 	}
 	

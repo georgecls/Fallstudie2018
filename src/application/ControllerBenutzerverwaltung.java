@@ -215,6 +215,11 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			label.setText("Berechtigung und Gruppe müssen ausgewählt sein!");
 			label.setTextFill(Color.RED);
 		}
+		else if(!benutzer.equals(b12)){
+			label.setVisible(true);
+			label.setText("Der Name darf nicht geändert werden!");
+			label.setTextFill(Color.RED);
+		}
 		else
 		{
 			benutzer = fieldBenutzer.getText().toString();
@@ -224,6 +229,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		
 			if (passwort.equals("")) {
 				Benutzer.updateBenutzer(benutzer, gruppe, berechtigung);
+				initialize (null, null);
 				label.setVisible(true);
 				label.setText("Benutzer '"+benutzer+"' geändert");
 				label.setTextFill(Color.BLACK);
@@ -231,11 +237,11 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 			else
 			{
 				Benutzer.updateBenutzerPw(benutzer,passwort, gruppe, berechtigung);
+				initialize (null, null);
 				label.setVisible(true);
 				label.setText("Benutzer '"+benutzer+"' und Passwort geändert");
 				label.setTextFill(Color.BLACK);
 			}	
-		initialize (null, null);
 		}
 	}
 	
