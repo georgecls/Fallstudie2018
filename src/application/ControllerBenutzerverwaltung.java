@@ -299,6 +299,7 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 	@FXML
 	public void handleWiederherstellen() throws SQLException {
 		String benutzer = fieldBenutzer.getText().toString();
+		String passwort = fieldPasswort.getText();
 		String gruppe = (String) boxGruppe.getSelectionModel().getSelectedItem();
 		
 		if (benutzer.equals("")) {
@@ -321,24 +322,29 @@ public class ControllerBenutzerverwaltung  implements Initializable {
 		else 
 		{
 //			if (fieldPasswort.getText()==null) 
-			if(fieldPasswort.getText().equals(""))
+			if(passwort.equals(""))
 			{
 				if(Benutzer.inaktiverBenutzer(benutzer)) 
 				{
 					Benutzer.updateInaktiverBenutzer(benutzer, gruppe);
 					initialize (null, null);
+					label.setVisible(true);
+					label.setText("Benutzer '" + benutzer + "' wiederhergestellt");
+					label.setTextFill(Color.BLACK);
+					
 				}
 				else 
 				{
+					initialize (null, null);
 					label.setVisible(true);
 					label.setText("Benutzer '" + benutzer + "' kann nicht wiederhergestellt werden.");
 					label.setTextFill(Color.RED);
-					initialize (null, null);
+					
 				}	
 			}
 			else 
 			{
-				fieldPasswort.setText(null);
+				fieldPasswort.setText("");
 				label.setVisible(true);
 				label.setText("Passwort kann beim Wiederherstellen nicht geändert werden.");
 				label.setTextFill(Color.RED);
