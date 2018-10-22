@@ -252,15 +252,23 @@ public class ControllerGruppenverwaltung  implements Initializable {
 		if(Benutzer.pruefeBenutzer(id12)) {
 			label.setVisible(true);
 			label.setText("Es befinden sich noch Benutzer in der Gruppe.");
-			label.setTextFill(Color.BLACK);
+			label.setTextFill(Color.RED);
 		}
 		else
 		{
-			Gruppe.deleteGruppe(id12);
-			initialize (null, null);
-			label.setVisible(true);
-			label.setText("Gruppe '"+gruppe+"' gelöscht");
-			label.setTextFill(Color.BLACK);
+			if (Antrag.antragVorhanden(gruppe)) {
+				label.setVisible(true);
+				label.setText("Es sind noch offene Anträge der Gruppe zugeordnet.");
+				label.setTextFill(Color.RED);
+			}
+			else {
+				Gruppe.deleteGruppe(id12);
+				initialize (null, null);
+				label.setVisible(true);
+				label.setText("Gruppe '"+gruppe+"' gelöscht");
+				label.setTextFill(Color.BLACK);
+			}
+		
 		}
 	}
 }

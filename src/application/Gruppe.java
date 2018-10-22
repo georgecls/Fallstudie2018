@@ -177,9 +177,12 @@ public class Gruppe {
 		if (rs.next())
 			i = rs.getInt(1);
 
-		if (i == 0) {
+		if (i == 0) 
+		{
 			return false;
-		} else {
+		} 
+		else 
+		{
 			return true;
 		}
 	}

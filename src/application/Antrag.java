@@ -219,6 +219,30 @@ public class Antrag {
 
 		return data;
 	}
+	
+	public static Boolean antragVorhanden(String id) throws SQLException {
+
+		Gruppe g1 = new Gruppe();
+		g1.getGruppeByName(id);
+		String gr = g1.getId();
+		int i = 0;
+		
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag WHERE ag_bearbeiter_fk = '%s' "
+				+ "AND (status = 'erstellt' OR status = 'geprüft' OR status = 'genehmigt')", gr));
+		ResultSet rs = Main.get_DBConnection().get_last_resultset();
+
+		if (rs.next()) 
+			i = rs.getInt(1);
+
+		if (i == 0) 
+		{
+			return false;
+		} 
+		else 
+		{
+			return true;
+		}
+	}
 
 	/****************************************************************************************
 	 * *************************************Auswertung***************************************
