@@ -65,7 +65,7 @@ public class Main extends Application {
 			loginWindowController.setMain(this);
 			Scene scene = new Scene(pane);
 			primaryStage.setScene(scene);
-			primaryStage.show();		
+			primaryStage.show();
 		}
 		catch (IOException e)
 		{
@@ -98,7 +98,6 @@ public class Main extends Application {
 			primaryStage.show();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
