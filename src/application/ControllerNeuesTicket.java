@@ -19,6 +19,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
+/**
+ * Die Klasse ControllerNeuesTicket ist für das Handling von neuen Anrägen zuständig.
+ * Hierzu zählt die Funktion 'abschicken'.
+ * Der Controller verwaltet die Buttons und die textFelder in "neuer Antrag".
+ */
+
 public class ControllerNeuesTicket {
 	
 	/**

@@ -24,6 +24,9 @@ public class DBConnector
 	static String DEFAULT_DB_VENDOR = "mysql";
 	static String DEFAULT_CONNECTION_SETTING = "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
 	
+	/**
+	 * Member-variablen.
+	 */
 	private String database_name;
 	private String username;
 	private String password;
@@ -35,9 +38,8 @@ public class DBConnector
 
 	//* ------------------------------------
 	// Konstruktor I
-	// Nur Datenbank-Name, fuer den Username 
-	// und das Passwort werden 
-	// die Standard-Werte gesetzt. 
+	// Nur Datenbank-Name, für den Username 
+	// und das Passwort werden die Standard-Werte gesetzt. 
 	// -----------------------------------*/
 	public DBConnector(String in_database_name)
 	{
@@ -87,12 +89,11 @@ public class DBConnector
 	}
 	
 	public DBConnector() {
-		// TODO Auto-generated constructor stub
 	}
 
-	//* -------------------------------------
-	// Initialisierung der Member-Variablen. 
-	// ------------------------------------*/
+	/**
+	 * Initialisierung der Member-Variablen.
+	 */
 	private void init()
 	{
 		database_name = username = password = "";
@@ -102,9 +103,14 @@ public class DBConnector
 		last_vector = new Vector<String>();
 	}
 	
-	//* -----------------------------------
-	// Verbindung zur Datenbank herstellen. 
-	// ----------------------------------*/
+	/**
+	 * Verbindung zur Datenbank herstellen.
+	 * 
+	 * @param none
+	 * @return boolean
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
 	public Boolean ConnectToDatabase() throws InstantiationException, IllegalAccessException
 	{
 		/* -------------
@@ -145,10 +151,12 @@ public class DBConnector
 		}
 	}
 	
-	
-	/* ------------------------------------
-	// Pruefung ob eine Verbindung besteht.  
-	// ----------------------------------*/
+	/**
+	 * Prüfen ob Verbindung besteht.
+	 * 
+	 * @param none
+	 * @return boolean
+	 */
 	public Boolean is_connected()
 	{
 		try
@@ -164,9 +172,12 @@ public class DBConnector
 		return true;
 	}
 	
-	/* -----------------------------------------
-	// Verbindung trennen und Klasse aufraeumen
-	// ---------------------------------------*/
+	/**
+	 * Verbindung trennen.
+	 * 
+	 * @param none
+	 * @return none
+	 */
 	public void close()
 	{
 		if(connection == null) return;
@@ -184,29 +195,15 @@ public class DBConnector
 		}
 	}
 	
-	/* -------------------------------------
-	// Rueckgabe der letzten, aufgetretenen, 
-	// Fehlermeldung, wenn vorhanden. 
-	// -----------------------------------*/
-	public String get_last_error()
-	{
-		return last_error;
-	}
 	
-	/* ---------------------------------
-	// Rueckgabe des letzten ResultSets. 
-	// -------------------------------*/
-	public ResultSet get_last_resultset()
-	{
-		return last_resultset;
-	}
-	
-	/* -------------------------------------------
-	// Ausfuehrung des uebergebenen SQL-Statements.
-	// Wichtig: Ohne Transaktion!
-	// Also nur "normale" SELECTS. Ansonsten 
-	// die UPDATE-Funktion aufrufen. 
-	// -----------------------------------------*/
+	/**
+	 * Ausfuehrung des uebergebenen SQL-Statements.
+	 * Keine Transaktion!
+	 * Also nur SELECTS. Ansonsten die UPDATE-Funktion aufrufen. 
+	 * 
+	 * @param sql_statement
+	 * @return none
+	 */
 	public void Execute(String sql_statement)
 	{
 		// -------------
@@ -230,15 +227,17 @@ public class DBConnector
 		}
 	}
 	
-	
-	/* -------------------------------------------
-	// Ausfuehrung eines UPDATE-Statements
-	// mit Transaktion. 
-	// -----------------------------------------*/
+	/**
+	 * Ausführung eines UPDATE-Statements mit Transaktion.
+	 * 
+	 * @param sql_statement
+	 * @return ret
+	 * @throws SQLException
+	 */
 	public Integer ExecuteTransact(String sql_statement) throws SQLException
 	{
 		// --------------------
-		// Der Rueckgabe-Wert.
+		// Rückgabe-Wert.
 		// --------------------
 		int ret = -1;
 		// -------------
@@ -283,6 +282,27 @@ public class DBConnector
 	        connection.setAutoCommit(true);
 	    }
         return ret;
+	}
+	
+	/** ***************************************************************************************************************************************************
+	* ******************************************************Implementierung der Getter und Setter*********************************************************
+	******************************************************************************************************************************************************/
+	 
+	/* -------------------------------------
+	// Rueckgabe der letzten, aufgetretenen, 
+	// Fehlermeldung, wenn vorhanden. 
+	// -----------------------------------*/
+	public String get_last_error()
+	{
+		return last_error;
+	}
+	
+	/* ---------------------------------
+	// Rueckgabe des letzten ResultSets. 
+	// -------------------------------*/
+	public ResultSet get_last_resultset()
+	{
+		return last_resultset;
 	}
 }
 	

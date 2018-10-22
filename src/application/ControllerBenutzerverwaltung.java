@@ -25,6 +25,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Die Klasse ControllerBenutzerverwaltung ist für das Handling der Benutzerverwaltung zuständig.
+ * Hierzu zählen die Funktionen 'hinzufügen', 'ändern', 'löschen', 'wiederherstellen', 'zurücksetzen'.
+ * Der Controller verwaltet die Tabellen, Buttons und alle weiteren GUI Elemente unter "Benutzerverwaltung".
+ */
+
 public class ControllerBenutzerverwaltung  implements Initializable {
 	
 	/**

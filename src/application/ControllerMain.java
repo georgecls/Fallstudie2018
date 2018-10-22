@@ -17,17 +17,31 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Klasse für den Haupt-Workspace.
+ * Hier werden die Funktionen hinter den Button implementiert.
+ * Je nachdem welcher Button geklickt wird, wird eine neue Scene geöffnet.
+ */
+
 public class ControllerMain implements Initializable {
 	
-	//View
+	/**
+	 * Deklarierung der GUI-Elemente.
+	 */
 	@FXML private AnchorPane rootPane;
 	@FXML private JFXButton btnBenutzerverwaltung, btnNTicket, btnTickets,
 							btnAuswertung, btnGruppenverwaltung, btnAbmelden;
 	@FXML private Label lblAngemeldet;
 	
+	/**
+	 * Deklarierung der Variablen.
+	 */
 	public Main main;
 	public AnchorPane pane;
 	
+	/**
+	 * Je nach Berechtigung werden die Button 'Gruppenverwaltung' bzw. 'Benutzerverwaltung' ausgeblendet.
+	 */
 	@Override
 	public void initialize (URL url, ResourceBundle rb){
 		
@@ -42,48 +56,44 @@ public class ControllerMain implements Initializable {
 		lblAngemeldet.setText("Käpsele "+ControllerLogin.getUser()+ " ist angemeldet");
 	}
 		
-	public void setMain(Main main) {
-		this.main = main;
-	}
-		
+
+	/**
+	 * Pane wird entfernt. Neues Pane mit entspechender fxml wird geladen.
+	 * Es wird dem MainWindow hinzugefügt.
+	 */
 	@FXML
 	public void handleNeuesTicket() {
 		try {
 			rootPane.getChildren().remove(pane);
 			pane = FXMLLoader.load(getClass().getResource("NeuesTicketNeu.fxml"));
-			rootPane.getChildren().add(pane);
-			//btnNTicket.setStyle("#2eb7bf");
-						
+			rootPane.getChildren().add(pane);			
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Pane wird entfernt. Neues Pane mit entspechender fxml wird geladen.
+	 * Es wird dem MainWindow hinzugefügt.
+	 */
 	@FXML
 	public void handleTickets() {
 		try {
 			rootPane.getChildren().remove(pane);
 			pane = FXMLLoader.load(getClass().getResource("TicketsNeu.fxml"));
 			rootPane.getChildren().add(pane);
-			
-			
-//			Parent root;
-//			Stage window = new Stage();
-//			Scene scene;
-//			root = FXMLLoader.load(getClass().getResource("ticket1234.fxml"));
-//			scene = new Scene(root);
-//			window.setScene(scene);
-//			window.show();
 									
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Pane wird entfernt. Neues Pane mit entspechender fxml wird geladen.
+	 * Es wird dem MainWindow hinzugefügt.
+	 */
 	@FXML
 	public void handleAuswertung() {
 		try {
@@ -91,11 +101,14 @@ public class ControllerMain implements Initializable {
 			pane = FXMLLoader.load(getClass().getResource("Auswertung.fxml"));
 			rootPane.getChildren().add(pane);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Pane wird entfernt. Neues Pane mit entspechender fxml wird geladen.
+	 * Es wird dem MainWindow hinzugefügt.
+	 */
 	@FXML
 	public void handleBenutzerverwaltung() {
 		try {
@@ -105,12 +118,16 @@ public class ControllerMain implements Initializable {
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	@FXML public void handleGruppenverwaltung() {
+	/**
+	 * Pane wird entfernt. Neues Pane mit entspechender fxml wird geladen.
+	 * Es wird dem MainWindow hinzugefügt.
+	 */
+	@FXML
+	public void handleGruppenverwaltung() {
 		try {
 			rootPane.getChildren().remove(pane);
 			pane = FXMLLoader.load(getClass().getResource("Gruppenverwaltung.fxml"));
@@ -118,14 +135,17 @@ public class ControllerMain implements Initializable {
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * DB Verbindung wird getrennt. User und Berechtigung wird zurückgesetzt und das Fenster
+	 * wird geschlossen. AnmeldeFenster wird geöffnet.
+	 */
 	@FXML
-	public void handleAbmelden() {
-//		DBConnector db = new DBConnector();
+	public void handleAbmelden() 
+	{
 		Main.get_DBConnection().close();
 		ControllerLogin.setUser(null);
 		ControllerLogin.setBerechtigung(0);
@@ -133,5 +153,13 @@ public class ControllerMain implements Initializable {
 		main.primaryStage.setHeight(0);
 		main.primaryStage.setWidth(0);
 		main.loginWindow();
+	}
+	
+	/** ***************************************************************************************************************************************************
+	* ******************************************************Implementierung der Getter und Setter*********************************************************
+	******************************************************************************************************************************************************/
+
+	public void setMain(Main main) {
+		this.main = main;
 	}
 }
