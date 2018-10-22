@@ -84,6 +84,8 @@ public class ControllerNeuesTicket {
 		
 		String ticketart = fieldTicketart.getText();
 		String beschreibung = fieldText.getText();
+		LocalDate erstelldatum = fieldErstelldatum.getValue();
+		LocalDate zieldatum = fieldZieldatum.getValue();
 		
 		if(cbGruppeZuweisen.getValue()==null) {
 			fieldAntwort.setText("Bitte alle Felder ausfüllen");
@@ -106,12 +108,15 @@ public class ControllerNeuesTicket {
 			fieldAntwort.setVisible(true);
 			fieldAntwort.setTextFill(Color.RED);
 		}
+		else if(zieldatum.compareTo(erstelldatum)<0) {
+			fieldAntwort.setText("Zieldatum darf nicht in der Vergangenheit liegen");
+			fieldAntwort.setVisible(true);
+			fieldAntwort.setTextFill(Color.RED);
+		}
 		else
 		{
 			ticketart = fieldTicketart.getText();
 			String ersteller = fieldErsteller.getText();
-			LocalDate erstelldatum = fieldErstelldatum.getValue();
-			LocalDate zieldatum = fieldZieldatum.getValue();
 			beschreibung = fieldText.getText();
 			String gru = cbGruppeZuweisen.getValue().toString();
 			

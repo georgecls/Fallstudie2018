@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -90,7 +91,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="20.0">
                <children>
-                  <JFXButton fx:id="btnAbschicken" buttonType="RAISED" onAction="#handleAbschicken" style="-fx-background-color: #128277;" text="abschicken" textFill="WHITE" />
+                  <Pane prefHeight="40.0" prefWidth="282.0" />
+                  <JFXButton fx:id="btnAbschicken" buttonType="RAISED" onAction="#handleAbschicken" prefWidth="150.0" style="-fx-background-color: #128277;" text="abschicken" textFill="WHITE" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="656.0" spacing="20.0">
