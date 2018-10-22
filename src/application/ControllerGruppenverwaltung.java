@@ -180,8 +180,9 @@ public class ControllerGruppenverwaltung  implements Initializable {
 				}
 			}
 			else if(Gruppe.selberName(gruppe)) {
+				label.setVisible(true);
 				label.setText("Die Gruppe existiert bereits!");
-				label.setTextFill(Color.BLACK);
+				label.setTextFill(Color.RED);
 			}
 			else 
 			{
@@ -205,14 +206,31 @@ public class ControllerGruppenverwaltung  implements Initializable {
 	 */
 	@FXML
 	public void handleAendern() throws SQLException{
-		String gruppe = fieldGruppe.getText().toString();
-		String beschreibung = fieldBeschreibung.getText().toString();
+		String gruppe = fieldGruppe.getText();
+		String beschreibung = fieldBeschreibung.getText();
 	
+		if (gruppe.equals("")) {
+			label.setVisible(true);
+			label.setText("Bitte Gruppe auswählen");
+			label.setTextFill(Color.RED);
+		}
+        else if (beschreibung.equals("")){
+			label.setVisible(true);
+			label.setText("Bitte Gruppe auswählen");
+			label.setTextFill(Color.RED);
+		}
+        else if (Gruppe.selberName(gruppe)){
+        	label.setVisible(true);
+        	label.setText("Der Gruppenname existiert bereits!");
+			label.setTextFill(Color.RED);
+		}
+		else {
 		Gruppe.updateGruppeById(id12, gruppe, beschreibung);
 		initialize(null, null);
 		label.setVisible(true);
 		label.setText("Gruppe '"+gruppe+"' geändert");	
 		label.setTextFill(Color.BLACK);
+		}
 	}
 	
 	/**
