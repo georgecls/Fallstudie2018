@@ -309,9 +309,9 @@ public class Antrag {
 				.format("UPDATE antrag SET status = 'genehmigt', anmerkung = '%s' WHERE idantrag = '%s'", text, id));
 	}
 
-	public static void antragBearbeiten(String id) throws SQLException {
+	public static void antragBearbeiten(String id, String text) throws SQLException {
 		Main.get_DBConnection()
-				.ExecuteTransact(String.format("UPDATE antrag SET status = 'erledigt' WHERE idantrag = '%s'", id));
+				.ExecuteTransact(String.format("UPDATE antrag SET status = 'erledigt', anmerkung = '%s' WHERE idantrag = '%s'", text, id));
 	}
 
 	public static void antragAblehnen(String id, String text) throws SQLException {

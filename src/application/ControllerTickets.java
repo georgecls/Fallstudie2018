@@ -470,6 +470,7 @@ public class ControllerTickets implements Initializable{
     	public void handleBtnBearbeiten() throws SQLException
     	{
     		antragsID = tfGrId.getText();
+
         	if(antragsID == null) 
         	{
         		labelGr.setVisible(true);
@@ -478,7 +479,8 @@ public class ControllerTickets implements Initializable{
         	else
         	{
         		labelGr.setVisible(false);
-	    		Antrag.antragBearbeiten(antragsID);
+        		String kom = taGeKommentar.getText();
+	    		Antrag.antragBearbeiten(antragsID, kom);
 	    		initialize(null, null);
 	    		
 	    		labelGr.setVisible(true);
