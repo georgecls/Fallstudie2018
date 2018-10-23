@@ -272,11 +272,11 @@ public class Antrag {
 	 */
 	public static Double countAntraegeByGruppe(String benutzername, String status) throws SQLException {
 		double i = 0.00;
+		String gr = Benutzer.getBearGruppeByUser(benutzername);
 
 		Main.get_DBConnection()
 				.Execute(String.format("SELECT COUNT(idantrag) FROM antrag "
-						+ "INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk "
-						+ "WHERE benutzername = '%s' AND status = '%s';", benutzername, status));
+						+ "WHERE ag_bearbeiter_fk = '%s' AND status = '%s';", gr, status));
 		ResultSet rs = Main.get_DBConnection().get_last_resultset();
 		while (rs.next()) {
 			String is = rs.getString(1);
