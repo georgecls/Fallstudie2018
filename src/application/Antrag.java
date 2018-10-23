@@ -140,24 +140,17 @@ public class Antrag {
 	 * @return ObservableList
 	 * @param status, benutzername
 	 */
-	public static ObservableList<Antrag> getGruppenantraege(String status, String benutzername) throws SQLException {
-		int bGruppe = Benutzer.getGruppeByName(benutzername);
-
+	public static ObservableList<Antrag> getGruppenantraege(String benutzername) throws SQLException {
+		String gr = Benutzer.getBearGruppeByUser(benutzername);
+		
 		ObservableList<Antrag> data = FXCollections.observableArrayList();
-		try {
-			Main.get_DBConnection()
-					.Execute(String.format(
-							"SELECT * FROM antrag " + "INNER JOIN benutzer ON antrag.ag_ersteller_fk = benutzer.ag_fk "
-									+ "WHERE benutzername = '%s' AND status = '%s' AND ag_bearbeiter_fk = '%d';",
-							benutzername, status, bGruppe));
+		Main.get_DBConnection().Execute(String.format("SELECT * FROM antrag "
+				+ "WHERE status = 'genehmigt' AND ag_bearbeiter_fk = '%s';", gr));
 
 			ResultSet rs = Main.get_DBConnection().get_last_resultset();
 			while (rs.next()) {
 				data.add(new Antrag(rs.getInt("idantrag")));
 			}
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
 
 		return data;
 	}
